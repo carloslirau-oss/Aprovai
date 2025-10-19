@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { 
@@ -11,7 +11,8 @@ import {
   Moon,
   LogOut,
   Settings,
-  Clock
+  Clock,
+  Plus
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -23,6 +24,8 @@ interface SidebarProps {
 const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
   const navigate = useNavigate();
   const [selectedTime, setSelectedTime] = React.useState(180); // 3 hours in minutes
+  const [customTime, setCustomTime] = useState({ hours: 3, minutes: 0 });
+  const [showCustomInput, setShowCustomInput] = useState(false);
 
   const menuItems = [
     {
@@ -68,9 +71,30 @@ const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
 
   const handleTimeSelect = (minutes: number) => {
     setSelectedTime(minutes);
+    setShowCustomInput(false);
     if (onTimeChange) {
       onTimeChange(minutes);
     }
+  };
+
+  const handleCustomTime = () => {
+    const totalMinutes = customTime.hours * 60 + customTime.minutes;
+    if (totalMinutes > 0) {
+      setSelectedTime(totalMinutes);
+      setShowCustomInput(false);
+      if (onTimeChange) {
+        onTimeChange(totalMinutes);
+      }
+    }
+  };
+
+  const formatTime = (minutes: number) => {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    if (hours > 0) {
+      return mins > 0 ? `${hours}h ${mins}min` : `${hours}h`;
+    }
+    return `${mins}min`;
   };
 
   return (
@@ -127,6 +151,7 @@ const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
                   <span className="text-sm font-medium text-gray-700">Tempo para Redação</span>
                 </div>
                 
+                {/* Time Options Grid */}
                 <div className="grid grid-cols-2 gap-2">
                   {timeOptions.map((option) => (
                     <button
@@ -142,10 +167,65 @@ const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
                       {option.label}
                     </button>
                   ))}
+                  
+                  {/* Custom Time Button */}
+                  <button
+                    onClick={() => setShowCustomInput(!showCustomInput)}
+                    className={cn(
+                      "px-3 py-2 text-xs font-medium rounded-md transition-colors flex items-center justify-center",
+                      showCustomInput
+                        ? "bg-blue-600 text-white"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    )}
+                  >
+                    <Plus className="h-3 w-3 mr-1" />
+                    Personalizado
+                  </button>
                 </div>
+
+                {/* Custom Time Input */}
+                {showCustomInput && (
+                  <div className="bg-blue-50 p-3 rounded-md space-y-2">
+                    <div className="flex items-center justify-between text-xs text-blue-800 font-medium">
+                      <span>Tempo Personalizado</span>
+                      <span>{formatTime(customTime.hours * 60 + customTime.minutes)}</span>
+                    </div>
+                    <div className="flex space-x-2">
+                      <div className="flex-1">
+                        <label className="block text-xs text-blue-700 mb-1">Horas</label>
+                        <input
+                          type="number"
+                          min="0"
+                          max="12"
+                          value={customTime.hours}
+                          onChange={(e) => setCustomTime(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
+                          className="w-full px-2 py-1 text-sm border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <label className="block text-xs text-blue-700 mb-1">Minutos</label>
+                        <input
+                          type="number"
+                          min="0"
+                          max="59"
+                          value={customTime.minutes}
+                          onChange={(e) => setCustomTime(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
+                          className="w-full px-2 py-1 text-sm border border-blue-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleCustomTime}
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white text-xs py-2 rounded-md transition-colors"
+                    >
+                      Aplicar Tempo
+                    </button>
+                  </div>
+                )}
                 
+                {/* Selected Time Display */}
                 <div className="text-xs text-gray-500 bg-blue-50 p-2 rounded-md">
-                  Tempo selecionado: {Math.floor(selectedTime / 60)}h {selectedTime % 60}min
+                  Tempo selecionado: {formatTime(selectedTime)}
                 </div>
               </div>
             </div>
