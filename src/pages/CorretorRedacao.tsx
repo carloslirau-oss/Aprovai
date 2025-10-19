@@ -86,7 +86,7 @@ const CorretorRedacao = () => {
 
   const analyzeRedacao = async () => {
     if (!redacaoText.trim() && !imageFile) {
-      showError('Por favor, cole sua redação ou envie uma imagem.');
+      showError('Por favor, escreva sua redação ou envie uma imagem.');
       return;
     }
 
@@ -203,8 +203,8 @@ const CorretorRedacao = () => {
         {/* Main Content */}
         <main className="px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h2>
-            <p className="text-gray-600">Cole sua redação ou envie uma imagem para receber feedback detalhado</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
+            <p className="text-gray-600">Escreva sua redação ou envie uma imagem para receber feedback detalhado</p>
           </div>
 
           {/* Professor Carlinhos Tips */}
@@ -249,10 +249,10 @@ const CorretorRedacao = () => {
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                    Cole sua redação
+                    Escreva sua redação aqui
                   </CardTitle>
                   <CardDescription>
-                    Cole o texto completo da sua redação abaixo
+                    Escreva o texto completo da sua redação abaixo
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -260,7 +260,7 @@ const CorretorRedacao = () => {
                     <textarea
                       value={redacaoText}
                       onChange={(e) => setRedacaoText(e.target.value)}
-                      placeholder="Cole sua redação aqui..."
+                      placeholder="Escreva sua redação aqui..."
                       className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     />
                     <Button 
