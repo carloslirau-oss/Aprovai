@@ -326,7 +326,7 @@ const CorretorRedacao = () => {
   const currentTip = tips[currentTipIndex];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Sidebar */}
       <Sidebar 
         isOpen={sidebarOpen} 
@@ -336,7 +336,7 @@ const CorretorRedacao = () => {
       {/* Main Content */}
       <div className="lg:pl-64">
         {/* Header */}
-        <header className="bg-white shadow-sm border-b border-gray-200">
+        <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
@@ -351,14 +351,14 @@ const CorretorRedacao = () => {
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-blue-600 dark:bg-blue-700 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">JD</span>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">João da Silva</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">João da Silva</p>
                   <div className="flex items-center space-x-1">
                     <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">Mestre da Caneta</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">Mestre da Caneta</span>
                   </div>
                 </div>
               </div>
@@ -373,12 +373,12 @@ const CorretorRedacao = () => {
         {/* Main Content */}
         <main className="px-4 sm:px:6 lg:px-8 py-8">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
-            <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Redações</h2>
+            <p className="text-gray-600 dark:text-gray-400">Prepare-se para o ENEM com temas reais e correção inteligente</p>
           </div>
 
           {/* Professor Carlinhos Tips */}
-          <Card className="mb-8">
+          <Card className="mb-8 dark:bg-gray-800 dark:border-gray-700">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -397,14 +397,14 @@ const CorretorRedacao = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="bg-green-50 rounded-lg p-6">
+              <div className="bg-green-50 dark:bg-green-900/20 rounded-lg p-6">
                 <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-green-500 dark:bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-lg font-bold">C</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-green-800 mb-2">{currentTip.title}</h3>
-                    <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
+                    <h3 className="text-lg font-semibold text-green-800 dark:text-green-300 mb-2">{currentTip.title}</h3>
+                    <p className="text-green-700 dark:text-green-400 leading-relaxed">{currentTip.content}</p>
                   </div>
                 </div>
               </div>
@@ -412,7 +412,7 @@ const CorretorRedacao = () => {
           </Card>
 
           {/* Redação Theme Section */}
-          <Card className="mb-8">
+          <Card className="mb-8 dark:bg-gray-800 dark:border-gray-700">
             <CardHeader>
               <CardTitle className="flex items-center justify-between">
                 <div className="flex items-center">
@@ -434,12 +434,12 @@ const CorretorRedacao = () => {
               <div className="space-y-6">
                 {/* Contextualização Inicial */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Contextualização Inicial</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Contextualização Inicial</h3>
                   <div className="space-y-4">
                     {redacaoTheme.contextualizacao.map((item, index) => (
-                      <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
-                        <p className="text-gray-700 mb-2">{item.texto}</p>
-                        <p className="text-sm text-gray-500">Fonte: {item.fonte}</p>
+                      <div key={index} className="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border-l-4 border-blue-500">
+                        <p className="text-gray-700 dark:text-gray-300 mb-2">{item.texto}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">Fonte: {item.fonte}</p>
                       </div>
                     ))}
                   </div>
@@ -447,17 +447,17 @@ const CorretorRedacao = () => {
 
                 {/* Delimitação do Tema */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Tema</h3>
-                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <p className="text-lg font-medium text-blue-900">{redacaoTheme.tema}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Tema</h3>
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-700">
+                    <p className="text-lg font-medium text-blue-900 dark:text-blue-300">{redacaoTheme.tema}</p>
                   </div>
                 </div>
 
                 {/* Instruções Oficiais */}
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Instruções</h3>
-                  <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                    <p className="text-gray-700 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Instruções</h3>
+                  <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-200 dark:border-yellow-700">
+                    <p className="text-gray-700 dark:text-gray-300 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
                   </div>
                 </div>
 
@@ -482,12 +482,12 @@ const CorretorRedacao = () => {
           {hasStartedRedacao && (
             <div className="space-y-8">
               {/* Timer with Time Options */}
-              <Card>
+              <Card className="dark:bg-gray-800 dark:border-gray-700">
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2">
                       <Clock className="h-5 w-5 text-red-600" />
-                      <span className="font-medium text-gray-900">Tempo Restante:</span>
+                      <span className="font-medium text-gray-900 dark:text-white">Tempo Restante:</span>
                       <span className={`font-bold ${timeRemaining < 600 ? 'text-red-600' : 'text-blue-600'}`}>
                         {formatTime(timeRemaining)}
                       </span>
@@ -497,7 +497,7 @@ const CorretorRedacao = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => setShowTimeOptions(!showTimeOptions)}
-                        className="text-gray-600 hover:text-gray-800"
+                        className="text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
                       >
                         <Settings className="h-4 w-4 mr-1" />
                         Personalizar
@@ -508,8 +508,8 @@ const CorretorRedacao = () => {
 
                   {/* Time Options Bar */}
                   {showTimeOptions && (
-                    <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                      <h4 className="text-sm font-medium text-gray-700 mb-3">Escolha o tempo para redação:</h4>
+                    <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                      <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Escolha o tempo para redação:</h4>
                       
                       {/* Quick Time Options */}
                       <div className="grid grid-cols-4 gap-2 mb-4">
@@ -528,7 +528,7 @@ const CorretorRedacao = () => {
 
                       {/* Custom Time Input */}
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-600">Personalizado:</span>
+                        <span className="text-sm text-gray-600 dark:text-gray-400">Personalizado:</span>
                         <div className="flex items-center space-x-1">
                           <Input
                             type="number"
@@ -537,9 +537,9 @@ const CorretorRedacao = () => {
                             value={customTimeInput.hours}
                             onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
                             placeholder="H"
-                            className="w-16 text-center"
+                            className="w-16 text-center dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                           />
-                          <span className="text-sm text-gray-500">h</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">h</span>
                           <Input
                             type="number"
                             min="0"
@@ -547,9 +547,9 @@ const CorretorRedacao = () => {
                             value={customTimeInput.minutes}
                             onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
                             placeholder="M"
-                            className="w-16 text-center"
+                            className="w-16 text-center dark:bg-gray-700 dark:border-gray-600 dark:text-white"
                           />
-                          <span className="text-sm text-gray-500">min</span>
+                          <span className="text-sm text-gray-500 dark:text-gray-400">min</span>
                         </div>
                         <Button
                           size="sm"
@@ -565,7 +565,7 @@ const CorretorRedacao = () => {
               </Card>
 
               {/* Text Input */}
-              <Card>
+              <Card className="dark:bg-gray-800 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <FileText className="h-5 w-5 mr-2 text-blue-600" />
@@ -581,7 +581,7 @@ const CorretorRedacao = () => {
                       value={redacaoText}
                       onChange={(e) => setRedacaoText(e.target.value)}
                       placeholder="Escreva sua redação aqui..."
-                      className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full h-64 p-4 border border-gray-300 dark:border-gray-600 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
                     />
                     <Button 
                       onClick={analyzeRedacao}
@@ -595,7 +595,7 @@ const CorretorRedacao = () => {
               </Card>
 
               {/* Image Upload */}
-              <Card>
+              <Card className="dark:bg-gray-800 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <ImageIcon className="h-5 w-5 mr-2 text-blue-600" />
@@ -607,9 +607,9 @@ const CorretorRedacao = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                      <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600 mb-4">Arraste uma imagem ou clique para selecionar</p>
+                    <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-8 text-center">
+                      <Upload className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+                      <p className="text-gray-600 dark:text-gray-400 mb-4">Arraste uma imagem ou clique para selecionar</p>
                       <input
                         type="file"
                         accept="image/*"
@@ -624,8 +624,8 @@ const CorretorRedacao = () => {
                       </label>
                     </div>
                     {imageFile && (
-                      <div className="bg-green-50 p-4 rounded-lg">
-                        <p className="text-sm text-green-800">
+                      <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                        <p className="text-sm text-green-800 dark:text-green-400">
                           Imagem selecionada: {imageFile.name}
                         </p>
                       </div>
@@ -640,7 +640,7 @@ const CorretorRedacao = () => {
           {analysisResult && (
             <div className="space-y-8">
               {/* Score Summary */}
-              <Card>
+              <Card className="dark:bg-gray-800 dark:border-gray-700">
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <Award className="h-5 w-5 mr-2 text-blue-600" />
@@ -653,16 +653,16 @@ const CorretorRedacao = () => {
                       <div className="text-4xl font-bold text-blue-600 mb-2">
                         {analysisResult.totalScore}
                       </div>
-                      <p className="text-gray-600">Nota Total</p>
+                      <p className="text-gray-600 dark:text-gray-400">Nota Total</p>
                     </div>
                     <div className="space-y-3">
                       {analysisResult.competencies.map((comp: any, index: number) => (
                         <div key={index}>
                           <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-700">{comp.name}</span>
+                            <span className="text-gray-700 dark:text-gray-300">{comp.name}</span>
                             <span className="font-medium">{comp.score}/{comp.max}</span>
                           </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                             <div 
                               className="bg-blue-600 h-2 rounded-full" 
                               style={{ width: `${(comp.score / comp.max) * 100}%` }}
@@ -678,7 +678,7 @@ const CorretorRedacao = () => {
               {/* Competency Details */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {analysisResult.detailedFeedback.map((feedback: any, index: number) => (
-                  <Card key={index}>
+                  <Card key={index} className="dark:bg-gray-800 dark:border-gray-700">
                     <CardHeader>
                       <CardTitle className="text-lg flex items-center">
                         <Star className="h-4 w-4 mr-2 text-yellow-500" />
@@ -686,7 +686,7 @@ const CorretorRedacao = () => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-700">{feedback.feedback}</p>
+                      <p className="text-gray-700 dark:text-gray-300">{feedback.feedback}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -694,7 +694,7 @@ const CorretorRedacao = () => {
 
               {/* Errors and Suggestions */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card>
+                <Card className="dark:bg-gray-800 dark:border-gray-700">
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
@@ -706,14 +706,14 @@ const CorretorRedacao = () => {
                       {analysisResult.errors.map((error: string, index: number) => (
                         <li key={index} className="flex items-start">
                           <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          <span className="text-gray-700">{error}</span>
+                          <span className="text-gray-700 dark:text-gray-300">{error}</span>
                         </li>
                       ))}
                     </ul>
                   </CardContent>
                 </Card>
 
-                <Card>
+                <Card className="dark:bg-gray-800 dark:border-gray-700">
                   <CardHeader>
                     <CardTitle className="flex items-center">
                       <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
@@ -725,7 +725,7 @@ const CorretorRedacao = () => {
                       {analysisResult.suggestions.map((suggestion: string, index: number) => (
                         <li key={index} className="flex items-start">
                           <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          <span className="text-gray-700">{suggestion}</span>
+                          <span className="text-gray-700 dark:text-gray-300">{suggestion}</span>
                         </li>
                       ))}
                     </ul>
