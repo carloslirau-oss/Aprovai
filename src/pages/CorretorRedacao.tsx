@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -36,6 +36,7 @@ const CorretorRedacao = () => {
   const [currentTipIndex, setCurrentTipIndex] = useState(0);
   const [hasStartedRedacao, setHasStartedRedacao] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(180); // 3 hours in seconds
+  const [timerActive, setTimerActive] = useState(false);
 
   const tips = [
     {
@@ -111,16 +112,7 @@ const CorretorRedacao = () => {
 
   const startRedacao = () => {
     setHasStartedRedacao(true);
-    // Start timer
-    const timer = setInterval(() => {
-      setTimeRemaining(prev => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+    setTimerActive(true);
   };
 
   const formatTime = (seconds: number) => {
@@ -203,6 +195,28 @@ const CorretorRedacao = () => {
     setTimeRemaining(minutes * 60); // Convert minutes to seconds
   };
 
+  // Timer effect
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    
+    if (timerActive && timeRemaining > 0) {
+      timer = setInterval(() => {
+        setTimeRemaining(prev => {
+          if (prev <= 1) {
+            clearInterval(timer);
+            setTimerActive(false);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+    
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [timerActive, timeRemaining]);
+
   const currentTip = tips[currentTipIndex];
 
   return (
@@ -218,7 +232,7 @@ const CorretorRedacao = () => {
       <div className="lg:pl-64">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -252,7 +266,7 @@ const CorretorRedacao = () => {
         </header>
 
         {/* Main Content */}
-        <main className="px-4 sm:px:6 lg:px-8 py-8">
+        <main className="px-4 sm:px-6 lg:px-8 py-8">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
             <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
@@ -550,6 +564,8 @@ const CorretorRedacao = () => {
                     setAnalysisResult(null);
                     setRedacaoText('');
                     setImageFile(null);
+                    setHasStartedRedacao(false);
+                    setTimerActive(false);
                   }}
                 >
                   Nova Análise
