@@ -21,7 +21,10 @@ import {
   Bot,
   RefreshCw,
   Pencil,
-  Clock
+  Clock,
+  Settings,
+  Plus,
+  ChevronDown
 } from 'lucide-react';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
@@ -38,6 +41,7 @@ const CorretorRedacao = () => {
   const [timeRemaining, setTimeRemaining] = useState(180); // 3 hours in seconds
   const [timerActive, setTimerActive] = useState(false);
   const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
+  const [showTimeOptions, setShowTimeOptions] = useState(false);
 
   const tips = [
     {
@@ -199,6 +203,17 @@ const CorretorRedacao = () => {
     setTimeRemaining(minutes * 60); // Atualiza o tempo restante imediatamente
   };
 
+  const timeOptions = [
+    { label: '30 minutos', value: 30 },
+    { label: '1 hora', value: 60 },
+    { label: '1h 30min', value: 90 },
+    { label: '2 horas', value: 120 },
+    { label: '2h 30min', value: 150 },
+    { label: '3 horas', value: 180 },
+    { label: '3h 30min', value: 210 },
+    { label: '4 horas', value: 240 }
+  ];
+
   // Timer effect
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -229,15 +244,13 @@ const CorretorRedacao = () => {
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
-        onTimeChange={handleTimeChange}
-        selectedTime={selectedTime}
       />
 
       {/* Main Content */}
       <div className="lg:pl-64">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px:8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -370,7 +383,7 @@ const CorretorRedacao = () => {
           {/* Redação Writing Area (only after clicking "Iniciar Redação") */}
           {hasStartedRedacao && (
             <div className="space-y-8">
-              {/* Timer */}
+              {/* Timer with Time Options */}
               <Card>
                 <CardContent className="pt-6">
                   <div className="flex items-center justify-between">
@@ -381,8 +394,34 @@ const CorretorRedacao = () => {
                         {formatTime(timeRemaining)}
                       </span>
                     </div>
-                    <div className="text-sm text-gray-500">
-                      {timeRemaining < 600 ? '⚠️ Atenção: Tempo acabando!' : 'Boa escrita!'}
+                    <div className="flex items-center space-x-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setShowTimeOptions(!showTimeOptions)}
+                        className="text-gray-600 hover:text-gray-800"
+                      >
+                        <Settings className="h-4 w-4 mr-1" />
+                        Personalizar
+                        <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${showTimeOptions ? 'rotate-180' : ''}`} />
+                      </Button>
+                      {showTimeOptions && (
+                        <div className="absolute right-4 top-16 bg-white border border-gray-200 rounded-lg shadow-lg p-3 z-10">
+                          <div className="grid grid-cols-2 gap-2">
+                            {timeOptions.map((option) => (
+                              <Button
+                                key={option.value}
+                                variant={selectedTime === option.value * 60 ? "default" : "outline"}
+                                size="sm"
+                                onClick={() => handleTimeChange(option.value)}
+                                className="text-xs"
+                              >
+                                {option.label}
+                              </Button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </CardContent>
