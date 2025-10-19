@@ -114,7 +114,7 @@ const CorretorRedacao = () => {
   const startRedacao = () => {
     setHasStartedRedacao(true);
     setTimerActive(true);
-    // Atualiza o tempo restante com o tempo selecionado nas configurações
+    // Usa o tempo selecionado nas configurações
     setTimeRemaining(selectedTime);
   };
 
@@ -196,8 +196,7 @@ const CorretorRedacao = () => {
 
   const handleTimeChange = (minutes: number) => {
     setSelectedTime(minutes * 60); // Convert minutes to seconds
-    // Atualiza o tempo restante imediatamente quando o tempo é alterado nas configurações
-    setTimeRemaining(minutes * 60);
+    setTimeRemaining(minutes * 60); // Atualiza o tempo restante imediatamente
   };
 
   // Timer effect
