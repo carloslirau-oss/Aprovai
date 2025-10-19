@@ -42,6 +42,7 @@ const CorretorRedacao = () => {
   const [timerActive, setTimerActive] = useState(false);
   const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
   const [showTimeOptions, setShowTimeOptions] = useState(false);
+  const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
 
   const tips = [
     {
@@ -201,6 +202,16 @@ const CorretorRedacao = () => {
   const handleTimeChange = (minutes: number) => {
     setSelectedTime(minutes * 60); // Convert minutes to seconds
     setTimeRemaining(minutes * 60); // Atualiza o tempo restante imediatamente
+    setShowTimeOptions(false); // Fecha as opções de tempo
+  };
+
+  const handleCustomTime = () => {
+    const totalMinutes = customTimeInput.hours * 60 + customTimeInput.minutes;
+    if (totalMinutes > 0) {
+      setSelectedTime(totalMinutes * 60);
+      setTimeRemaining(totalMinutes * 60);
+      setShowTimeOptions(false);
+    }
   };
 
   const timeOptions = [
@@ -405,25 +416,64 @@ const CorretorRedacao = () => {
                         Personalizar
                         <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${showTimeOptions ? 'rotate-180' : ''}`} />
                       </Button>
-                      {showTimeOptions && (
-                        <div className="absolute right-4 top-16 bg-white border border-gray-200 rounded-lg shadow-lg p-3 z-10">
-                          <div className="grid grid-cols-2 gap-2">
-                            {timeOptions.map((option) => (
-                              <Button
-                                key={option.value}
-                                variant={selectedTime === option.value * 60 ? "default" : "outline"}
-                                size="sm"
-                                onClick={() => handleTimeChange(option.value)}
-                                className="text-xs"
-                              >
-                                {option.label}
-                              </Button>
-                            ))}
-                          </div>
-                        </div>
-                      )}
                     </div>
                   </div>
+
+                  {/* Time Options Bar */}
+                  {showTimeOptions && (
+                    <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                      <h4 className="text-sm font-medium text-gray-700 mb-3">Escolha o tempo para redação:</h4>
+                      
+                      {/* Quick Time Options */}
+                      <div className="grid grid-cols-4 gap-2 mb-4">
+                        {timeOptions.map((option) => (
+                          <Button
+                            key={option.value}
+                            variant={selectedTime === option.value * 60 ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => handleTimeChange(option.value)}
+                            className="text-xs"
+                          >
+                            {option.label}
+                          </Button>
+                        ))}
+                      </div>
+
+                      {/* Custom Time Input */}
+                      <div className="flex items-center space-x-2">
+                        <span className="text-sm text-gray-600">Personalizado:</span>
+                        <div className="flex items-center space-x-1">
+                          <Input
+                            type="number"
+                            min="0"
+                            max="12"
+                            value={customTimeInput.hours}
+                            onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
+                            placeholder="H"
+                            className="w-16 text-center"
+                          />
+                          <span className="text-sm text-gray-500">h</span>
+                          <Input
+                            type="number"
+                            min="0"
+                            max="59"
+                            value={customTimeInput.minutes}
+                            onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
+                            placeholder="M"
+                            className="w-16 text-center"
+                          />
+                          <span className="text-sm text-gray-500">min</span>
+                        </div>
+                        <Button
+                          size="sm"
+                          onClick={handleCustomTime}
+                          className="bg-blue-600 hover:bg-blue-700 text-white"
+                        >
+                          Aplicar
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
 
