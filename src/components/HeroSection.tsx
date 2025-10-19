@@ -1,10 +1,17 @@
 "use client";
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { BookOpen, GraduationCap } from 'lucide-react';
 
 const HeroSection = () => {
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate('/login');
+  };
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-white">
       <div className="max-w-7xl mx-auto">
@@ -23,7 +30,7 @@ const HeroSection = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-3">
+              <Button size="lg" onClick={handleLogin} className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-3">
                 <BookOpen className="mr-2 h-5 w-5" />
                 Entrar na Plataforma
               </Button>

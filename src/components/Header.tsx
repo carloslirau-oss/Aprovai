@@ -1,14 +1,20 @@
 "use client";
 
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 
 const Header = () => {
+  const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
   };
 
   return (
@@ -23,7 +29,7 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
-              <a href="#" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
+              <a href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 Início
               </a>
               <a href="#" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
@@ -35,7 +41,7 @@ const Header = () => {
               <a href="#" className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors">
                 Entrar
               </a>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              <Button onClick={handleLogin} className="bg-blue-600 hover:bg-blue-700 text-white">
                 Começar Agora
               </Button>
             </div>
@@ -61,7 +67,7 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t border-gray-200">
-            <a href="#" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
+            <a href="/" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
               Início
             </a>
             <a href="#" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
@@ -73,7 +79,7 @@ const Header = () => {
             <a href="#" className="text-gray-700 hover:text-blue-600 block px-3 py-2 text-base font-medium">
               Entrar
             </a>
-            <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white mt-2">
+            <Button onClick={handleLogin} className="w-full bg-blue-600 hover:bg-blue-700 text-white mt-2">
               Começar Agora
             </Button>
           </div>
