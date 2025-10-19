@@ -24,7 +24,8 @@ import {
   Clock,
   Settings,
   Plus,
-  ChevronDown
+  ChevronDown,
+  Shuffle
 } from 'lucide-react';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
@@ -77,26 +78,88 @@ const CorretorRedacao = () => {
     }
   ];
 
-  // Sample ENEM theme
-  const redacaoTheme = {
-    title: "Proposta de Redação",
-    contextualizacao: [
-      {
-        texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia.",
-        fonte: "Fórum Brasileiro de Segurança Pública"
-      },
-      {
-        texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios, como a falta de delegacias especializadas e a subnotificação de casos.",
-        fonte: "ONU Mulheres"
-      },
-      {
-        texto: "A cultura do silêncio perpetua a violência contra as mulheres. Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
-        fonte: "Revista Época"
-      }
-    ],
-    tema: "A persistência da violência contra a mulher na sociedade brasileira.",
-    instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
-  };
+  // Sample ENEM themes
+  const redacaoThemes = [
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia.",
+          fonte: "Fórum Brasileiro de Segurança Pública"
+        },
+        {
+          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios, como a falta de delegacias especializadas e a subnotificação de casos.",
+          fonte: "ONU Mulheres"
+        },
+        {
+          texto: "A cultura do silêncio perpetua a violência contra as mulheres. Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
+          fonte: "Revista Época"
+        }
+      ],
+      tema: "A persistência da violência contra a mulher na sociedade brasileira.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade.",
+          fonte: "Instituto Nacional de Pesquisas Espaciais (INPE)"
+        },
+        {
+          texto: "A economia da região amazônica depende dos recursos naturais, mas o extrativismo sustentável ainda é pouco desenvolvido. Muitas comunidades tradicionais dependem da floresta para sua subsistência.",
+          fonte: "Instituto Socioambiental (ISA)"
+        },
+        {
+          texto: "O Brasil tem compromissos internacionais para reduzir o desmatamento, mas a fiscalização e a implementação de políticas ambientais eficazes ainda enfrentam grandes desafios.",
+          fonte: "Ministério do Meio Ambiente"
+        }
+      ],
+      tema: "O desmatamento da Amazônia e seus impactos socioambientais.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A educação a distância (EaD) expandiu-se significativamente durante a pandemia de COVID-19. Segundo o INEP, o número de matrículas na modalidade cresceu 25% em 2020, mas a desigualdade digital permanece como grande desafio.",
+          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)"
+        },
+        {
+          texto: "Muitos estudantes, especialmente das camadas mais vulneráveis, enfrentam dificuldades de acesso à internet e a dispositivos adequados para o aprendizado online. Essa exclusão digital agrava as desigualdades educacionais.",
+          fonte: "UNESCO"
+        },
+        {
+          texto: "A EaD oferece flexibilidade e acesso a educação de qualidade, mas exige investimento em infraestrutura digital e capacitação de professores para garantir efetividade pedagógica.",
+          fonte: "Ministério da Educação"
+        }
+      ],
+      tema: "A expansão da educação a distância e a inclusão digital no Brasil.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "O mercado de trabalho no Brasil enfrenta grandes desafios estruturais. Segundo o IBGE, a taxa de desemprego entre jovens de 18 a 24 anos é de 25%, quase o dobro da média nacional.",
+          fonte: "Instituto Brasileiro de Geografia e Estatística (IBGE)"
+        },
+        {
+          texto: "A lacuna entre a formação oferecida pelas escolas e as habilidades demandadas pelo mercado de trabalho é um dos principais obstáculos para a empregabilidade dos jovens.",
+          fonte: "Fórum Econômico Mundial"
+        },
+        {
+          texto: "O empreendedorismo e a qualificação profissional são caminhos importantes para a geração de empregos e a melhoria da renda, mas exigem apoio político e investimento em educação.",
+          fonte: "Sebrae"
+        }
+      ],
+      tema: "Desemprego juvenil e a lacuna entre educação e mercado de trabalho.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    }
+  ];
+
+  const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
+  const redacaoTheme = redacaoThemes[currentThemeIndex];
 
   const handleLogout = () => {
     showSuccess('Logout realizado com sucesso!');
@@ -212,6 +275,18 @@ const CorretorRedacao = () => {
       setTimeRemaining(totalMinutes * 60);
       setShowTimeOptions(false);
     }
+  };
+
+  const handleNewTheme = () => {
+    const newIndex = (currentThemeIndex + 1) % redacaoThemes.length;
+    setCurrentThemeIndex(newIndex);
+    // Limpa a redação atual ao mudar de tema
+    setRedacaoText('');
+    setImageFile(null);
+    setAnalysisResult(null);
+    setHasStartedRedacao(false);
+    setTimerActive(false);
+    showSuccess('Novo tema selecionado!');
   };
 
   const timeOptions = [
@@ -338,9 +413,20 @@ const CorretorRedacao = () => {
           {/* Redação Theme Section */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle className="flex items-center">
-                <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                {redacaoTheme.title}
+              <CardTitle className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <FileText className="h-5 w-5 mr-2 text-blue-600" />
+                  {redacaoTheme.title}
+                </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handleNewTheme}
+                  className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
+                >
+                  <Shuffle className="h-4 w-4" />
+                  <span>Novo Tema</span>
+                </Button>
               </CardTitle>
             </CardHeader>
             <CardContent>
