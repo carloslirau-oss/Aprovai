@@ -37,6 +37,7 @@ const CorretorRedacao = () => {
   const [hasStartedRedacao, setHasStartedRedacao] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(180); // 3 hours in seconds
   const [timerActive, setTimerActive] = useState(false);
+  const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
 
   const tips = [
     {
@@ -113,6 +114,8 @@ const CorretorRedacao = () => {
   const startRedacao = () => {
     setHasStartedRedacao(true);
     setTimerActive(true);
+    // Atualiza o tempo restante com o tempo selecionado nas configurações
+    setTimeRemaining(selectedTime);
   };
 
   const formatTime = (seconds: number) => {
@@ -192,7 +195,9 @@ const CorretorRedacao = () => {
   };
 
   const handleTimeChange = (minutes: number) => {
-    setTimeRemaining(minutes * 60); // Convert minutes to seconds
+    setSelectedTime(minutes * 60); // Convert minutes to seconds
+    // Atualiza o tempo restante imediatamente quando o tempo é alterado nas configurações
+    setTimeRemaining(minutes * 60);
   };
 
   // Timer effect
@@ -226,6 +231,7 @@ const CorretorRedacao = () => {
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
         onTimeChange={handleTimeChange}
+        selectedTime={selectedTime}
       />
 
       {/* Main Content */}

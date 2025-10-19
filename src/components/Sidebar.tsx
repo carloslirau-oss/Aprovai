@@ -19,11 +19,11 @@ interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
   onTimeChange?: (minutes: number) => void;
+  selectedTime?: number; // Tempo selecionado em segundos
 }
 
-const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
+const Sidebar = ({ isOpen, onClose, onTimeChange, selectedTime = 180 }: SidebarProps) => {
   const navigate = useNavigate();
-  const [selectedTime, setSelectedTime] = React.useState(180); // 3 hours in minutes
   const [customTime, setCustomTime] = useState({ hours: 3, minutes: 0 });
   const [showCustomInput, setShowCustomInput] = useState(false);
 
@@ -70,22 +70,18 @@ const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
   };
 
   const handleTimeSelect = (minutes: number) => {
-    setSelectedTime(minutes);
-    setShowCustomInput(false);
     if (onTimeChange) {
       onTimeChange(minutes);
     }
+    setShowCustomInput(false);
   };
 
   const handleCustomTime = () => {
     const totalMinutes = customTime.hours * 60 + customTime.minutes;
-    if (totalMinutes > 0) {
-      setSelectedTime(totalMinutes);
-      setShowCustomInput(false);
-      if (onTimeChange) {
-        onTimeChange(totalMinutes);
-      }
+    if (totalMinutes > 0 && onTimeChange) {
+      onTimeChange(totalMinutes);
     }
+    setShowCustomInput(false);
   };
 
   const formatTime = (minutes: number) => {
@@ -159,7 +155,7 @@ const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
                       onClick={() => handleTimeSelect(option.value)}
                       className={cn(
                         "px-3 py-2 text-xs font-medium rounded-md transition-colors",
-                        selectedTime === option.value
+                        selectedTime === option.value * 60
                           ? "bg-blue-600 text-white"
                           : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                       )}
@@ -225,7 +221,7 @@ const Sidebar = ({ isOpen, onClose, onTimeChange }: SidebarProps) => {
                 
                 {/* Selected Time Display */}
                 <div className="text-xs text-gray-500 bg-blue-50 p-2 rounded-md">
-                  Tempo selecionado: {formatTime(selectedTime)}
+                  Tempo selecionado: {formatTime(selectedTime / 60)}
                 </div>
               </div>
             </div>
