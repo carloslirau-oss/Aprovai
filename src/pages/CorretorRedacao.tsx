@@ -17,7 +17,9 @@ import {
   Star,
   Award,
   FileText,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Bot,
+  RefreshCw
 } from 'lucide-react';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
@@ -29,6 +31,40 @@ const CorretorRedacao = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<any>(null);
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [currentTipIndex, setCurrentTipIndex] = useState(0);
+
+  const tips = [
+    {
+      title: "Competências do ENEM",
+      content: "Lembre-se que sua redação será avaliada em 5 competências: Domínio da Modalidade Escrita Formal, Compreensão da Tarefa, Coerência e Coesão, Seleção de Recursos de Linguagem e Proposta de Intervenção. Foque em cada uma delas!",
+      icon: Target
+    },
+    {
+      title: "Repertório Cultural",
+      content: "Não esqueça de incluir repertório! Dados, fatos, citações, obras literárias e exemplos históricos são essenciais para dar sustentação aos seus argumentos. Mas lembre-se: qualidade importa mais que quantidade!",
+      icon: BookOpen
+    },
+    {
+      title: "Estrutura Textual",
+      content: "Sua redação precisa ter uma estrutura clara: introdução com tese, desenvolvimento com argumentos e proposta de intervenção, e conclusão que retoma a tese. Cada parágrafo deve ter uma função específica!",
+      icon: FileText
+    },
+    {
+      title: "Linguagem Formal",
+      content: "Use sempre a norma culta da língua portuguesa. Evite gírias, abreviações e linguagem coloquial. A pontuação correta é fundamental para a clareza do texto. Vamos manter o padrão formal, meu caro aluno!",
+      icon: CheckCircle
+    },
+    {
+      title: "Proposta de Intervenção",
+      content: "Sua proposta precisa ser viável, específica e direcionada ao problema apresentado. Não basta dizer 'o governo deve agir'. Diga COMO, QUANDO e POR QUÊ o governo deve agir. Seja concreto e prático!",
+      icon: Lightbulb
+    },
+    {
+      title: "Tempo de Prova",
+      content: "Na hora da prova, reserve 30 minutos para planejar, 90 minutos para escrever e 30 minutos para revisar. Não se apresse na escrita, mas também não fique preso em um único parágrafo por muito tempo!",
+      icon: TrendingUp
+    }
+  ];
 
   const handleLogout = () => {
     showSuccess('Logout realizado com sucesso!');
@@ -39,9 +75,13 @@ const CorretorRedacao = () => {
     const file = event.target.files?.[0];
     if (file) {
       setImageFile(file);
-      // Aqui você implementaria a OCR para extrair texto da imagem
       console.log('Imagem enviada:', file.name);
     }
+  };
+
+  const getNewTip = () => {
+    const newIndex = (currentTipIndex + 1) % tips.length;
+    setCurrentTipIndex(newIndex);
   };
 
   const analyzeRedacao = async () => {
@@ -53,10 +93,8 @@ const CorretorRedacao = () => {
     setIsAnalyzing(true);
     
     try {
-      // Simulação da chamada à API OpenAI
       await new Promise(resolve => setTimeout(resolve, 3000));
       
-      // Resultado simulado da análise
       const result = {
         totalScore: 820,
         competencies: [
@@ -112,9 +150,10 @@ const CorretorRedacao = () => {
   const saveRedacao = () => {
     if (!analysisResult) return;
     
-    // Aqui você salvaria a redação e o resultado no banco de dados
     showSuccess('Redação salva no seu histórico!');
   };
+
+  const currentTip = tips[currentTipIndex];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -167,6 +206,40 @@ const CorretorRedacao = () => {
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h2>
             <p className="text-gray-600">Cole sua redação ou envie uma imagem para receber feedback detalhado</p>
           </div>
+
+          {/* Professor Carlinhos Tips */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <Bot className="h-5 w-5 mr-2 text-green-600" />
+                  Dicas do Professor Carlinhos
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  onClick={getNewTip}
+                  className="text-green-600 hover:text-green-700"
+                >
+                  <RefreshCw className="h-4 w-4 mr-1" />
+                  Nova Dica
+                </Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="bg-green-50 rounded-lg p-6">
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white text-lg font-bold">C</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-green-800 mb-2">{currentTip.title}</h3>
+                    <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
           {!analysisResult ? (
             /* Input Section */
