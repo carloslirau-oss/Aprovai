@@ -25,7 +25,8 @@ import {
   Settings,
   Plus,
   ChevronDown,
-  Shuffle
+  Shuffle,
+  LogOut
 } from 'lucide-react';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
@@ -336,7 +337,7 @@ const CorretorRedacao = () => {
       <div className="lg:pl-64">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px:8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -363,7 +364,7 @@ const CorretorRedacao = () => {
               </div>
               
               <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <Save className="h-4 w-4" />
+                <LogOut className="h-4 w-4" />
               </Button>
             </div>
           </div>
