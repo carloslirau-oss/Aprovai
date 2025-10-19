@@ -199,6 +199,10 @@ const CorretorRedacao = () => {
     showSuccess('Redação salva no seu histórico!');
   };
 
+  const handleTimeChange = (minutes: number) => {
+    setTimeRemaining(minutes * 60); // Convert minutes to seconds
+  };
+
   const currentTip = tips[currentTipIndex];
 
   return (
@@ -207,13 +211,14 @@ const CorretorRedacao = () => {
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
+        onTimeChange={handleTimeChange}
       />
 
       {/* Main Content */}
       <div className="lg:pl-64">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -247,7 +252,7 @@ const CorretorRedacao = () => {
         </header>
 
         {/* Main Content */}
-        <main className="px-4 sm:px-6 lg:px-8 py-8">
+        <main className="px-4 sm:px:6 lg:px-8 py-8">
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
             <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
