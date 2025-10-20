@@ -36,13 +36,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
     onClose();
   };
 
-  const toggleExpanded = (title: string) => {
-    setExpandedItems(prev => ({
-      ...prev,
-      [title]: !prev[title]
-    }));
-  };
-
   const menuItems: MenuItem[] = [
     {
       title: 'Dashboard',
@@ -60,21 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       title: 'Professor Carlinhos',
       href: '/professor-carlinhos',
       icon: Bot,
-      description: 'Dicas e orientações personalizadas',
-      children: [
-        {
-          title: 'Dicas do Professor',
-          href: '/professor-carlinhos/dicas',
-          icon: Target,
-          description: 'Dicas diárias para melhorar sua redação'
-        },
-        {
-          title: 'Conversar com o Professor',
-          href: '/professor-carlinhos/chat',
-          icon: MessageSquare,
-          description: 'Envie suas dúvidas e receba orientações'
-        }
-      ]
+      description: 'Converse com o Professor Carlinhos'
     },
     {
       title: 'Certificados',
@@ -85,14 +64,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   ];
 
   const renderMenuItem = (item: MenuItem, level = 0) => {
-    const hasChildren = item.children && item.children.length > 0;
-    const isExpanded = expandedItems[item.title];
     const Icon = item.icon;
 
     return (
       <div key={item.title} className="mb-1">
         <button
-          onClick={() => hasChildren ? toggleExpanded(item.title) : handleNavigation(item.href)}
+          onClick={() => handleNavigation(item.href)}
           className={cn(
             "w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
             "hover:bg-gray-100 hover:text-gray-900",
@@ -102,18 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         >
           <Icon className="mr-3 h-5 w-5 flex-shrink-0" />
           <span className="flex-1 text-left">{item.title}</span>
-          {hasChildren && (
-            isExpanded ? 
-              <ChevronDown className="h-4 w-4" /> : 
-              <ChevronRight className="h-4 w-4" />
-          )}
         </button>
-        
-        {hasChildren && isExpanded && (
-          <div className="mt-1">
-            {item.children!.map(child => renderMenuItem(child, level + 1))}
-          </div>
-        )}
       </div>
     );
   };
