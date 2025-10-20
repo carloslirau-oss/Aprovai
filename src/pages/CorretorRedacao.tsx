@@ -136,7 +136,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "A expansão da educação a distância e a inclusão digital no Brasil.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -326,7 +326,7 @@ const CorretorRedacao = () => {
   const currentTip = tips[currentTipIndex];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
       <Sidebar 
         isOpen={sidebarOpen} 
@@ -334,7 +334,7 @@ const CorretorRedacao = () => {
       />
 
       {/* Main Content */}
-      <div className="lg:pl-64">
+      <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
           <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
@@ -371,389 +371,391 @@ const CorretorRedacao = () => {
         </header>
 
         {/* Main Content */}
-        <main className="px-4 sm:px:6 lg:px-8 py-8">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
-            <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
-          </div>
-
-          {/* Professor Carlinhos Tips */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <Bot className="h-5 w-5 mr-2 text-green-600" />
-                  Dicas do Professor Carlinhos
-                </div>
-                <Button 
-                  variant="ghost" 
-                  size="sm" 
-                  onClick={getNewTip}
-                  className="text-green-600 hover:text-green-700"
-                >
-                  <RefreshCw className="h-4 w-4 mr-1" />
-                  Nova Dica
-                </Button>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-green-50 rounded-lg p-6">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-lg font-bold">C</span>
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-green-800 mb-2">{currentTip.title}</h3>
-                    <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
-                  </div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Redação Theme Section */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                  {redacaoTheme.title}
-                </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleNewTheme}
-                  className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
-                >
-                  <Shuffle className="h-4 w-4" />
-                  <span>Novo Tema</span>
-                </Button>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {/* Contextualização Inicial */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Contextualização Inicial</h3>
-                  <div className="space-y-4">
-                    {redacaoTheme.contextualizacao.map((item, index) => (
-                      <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
-                        <p className="text-gray-700 mb-2">{item.texto}</p>
-                        <p className="text-sm text-gray-500">Fonte: {item.fonte}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Delimitação do Tema */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Tema</h3>
-                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <p className="text-lg font-medium text-blue-900">{redacaoTheme.tema}</p>
-                  </div>
-                </div>
-
-                {/* Instruções Oficiais */}
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">Instruções</h3>
-                  <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                    <p className="text-gray-700 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
-                  </div>
-                </div>
-
-                {/* Start Button */}
-                {!hasStartedRedacao && (
-                  <div className="text-center py-6">
-                    <Button 
-                      onClick={startRedacao}
-                      size="lg"
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
-                    >
-                      <Pencil className="h-5 w-5 mr-2" />
-                      Iniciar Redação
-                    </Button>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Redação Writing Area (only after clicking "Iniciar Redação") */}
-          {hasStartedRedacao && (
-            <div className="space-y-8">
-              {/* Timer with Time Options */}
-              <Card>
-                <CardContent className="pt-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="h-5 w-5 text-red-600" />
-                      <span className="font-medium text-gray-900">Tempo Restante:</span>
-                      <span className={`font-bold ${timeRemaining < 600 ? 'text-red-600' : 'text-blue-600'}`}>
-                        {formatTime(timeRemaining)}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setShowTimeOptions(!showTimeOptions)}
-                        className="text-gray-600 hover:text-gray-800"
-                      >
-                        <Settings className="h-4 w-4 mr-1" />
-                        Personalizar
-                        <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${showTimeOptions ? 'rotate-180' : ''}`} />
-                      </Button>
-                    </div>
-                  </div>
-
-                  {/* Time Options Bar */}
-                  {showTimeOptions && (
-                    <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                      <h4 className="text-sm font-medium text-gray-700 mb-3">Escolha o tempo para redação:</h4>
-                      
-                      {/* Quick Time Options */}
-                      <div className="grid grid-cols-4 gap-2 mb-4">
-                        {timeOptions.map((option) => (
-                          <Button
-                            key={option.value}
-                            variant={selectedTime === option.value * 60 ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => handleTimeChange(option.value)}
-                            className="text-xs"
-                          >
-                            {option.label}
-                          </Button>
-                        ))}
-                      </div>
-
-                      {/* Custom Time Input */}
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm text-gray-600">Personalizado:</span>
-                        <div className="flex items-center space-x-1">
-                          <Input
-                            type="number"
-                            min="0"
-                            max="12"
-                            value={customTimeInput.hours}
-                            onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
-                            placeholder="H"
-                            className="w-16 text-center"
-                          />
-                          <span className="text-sm text-gray-500">h</span>
-                          <Input
-                            type="number"
-                            min="0"
-                            max="59"
-                            value={customTimeInput.minutes}
-                            onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
-                            placeholder="M"
-                            className="w-16 text-center"
-                          />
-                          <span className="text-sm text-gray-500">min</span>
-                        </div>
-                        <Button
-                          size="sm"
-                          onClick={handleCustomTime}
-                          className="bg-blue-600 hover:bg-blue-700 text-white"
-                        >
-                          Aplicar
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-
-              {/* Text Input */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                    Escreva sua redação aqui
-                  </CardTitle>
-                  <CardDescription>
-                    Escreva o texto completo da sua redação abaixo
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <textarea
-                      value={redacaoText}
-                      onChange={(e) => setRedacaoText(e.target.value)}
-                      placeholder="Escreva sua redação aqui..."
-                      className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    />
-                    <Button 
-                      onClick={analyzeRedacao}
-                      disabled={isAnalyzing || (!redacaoText.trim() && !imageFile)}
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                    >
-                      {isAnalyzing ? 'Analisando...' : 'Corrigir Redação'}
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Image Upload */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <ImageIcon className="h-5 w-5 mr-2 text-blue-600" />
-                    Envie imagem da redação
-                  </CardTitle>
-                  <CardDescription>
-                    Tire uma foto da sua redação escrita à mão
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                      <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                      <p className="text-gray-600 mb-4">Arraste uma imagem ou clique para selecionar</p>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageUpload}
-                        className="hidden"
-                        id="image-upload"
-                      />
-                      <label htmlFor="image-upload">
-                        <Button variant="outline" className="cursor-pointer">
-                          Selecionar Imagem
-                        </Button>
-                      </label>
-                    </div>
-                    {imageFile && (
-                      <div className="bg-green-50 p-4 rounded-lg">
-                        <p className="text-sm text-green-800">
-                          Imagem selecionada: {imageFile.name}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
+        <main className="flex-1 flex flex-col">
+          <div className="px-4 sm:px:6 lg:px-8 py-8">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
+              <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
             </div>
-          )}
 
-          {/* Analysis Results */}
-          {analysisResult && (
-            <div className="space-y-8">
-              {/* Score Summary */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Award className="h-5 w-5 mr-2 text-blue-600" />
-                    Resultado da Análise
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-blue-600 mb-2">
-                        {analysisResult.totalScore}
-                      </div>
-                      <p className="text-gray-600">Nota Total</p>
+            {/* Professor Carlinhos Tips */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <Bot className="h-5 w-5 mr-2 text-green-600" />
+                    Dicas do Professor Carlinhos
+                  </div>
+                  <Button 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={getNewTip}
+                    className="text-green-600 hover:text-green-700"
+                  >
+                    <RefreshCw className="h-4 w-4 mr-1" />
+                    Nova Dica
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="bg-green-50 rounded-lg p-6">
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-lg font-bold">C</span>
                     </div>
-                    <div className="space-y-3">
-                      {analysisResult.competencies.map((comp: any, index: number) => (
-                        <div key={index}>
-                          <div className="flex justify-between text-sm mb-1">
-                            <span className="text-gray-700">{comp.name}</span>
-                            <span className="font-medium">{comp.score}/{comp.max}</span>
-                          </div>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-blue-600 h-2 rounded-full" 
-                              style={{ width: `${(comp.score / comp.max) * 100}%` }}
-                            ></div>
-                          </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-green-800 mb-2">{currentTip.title}</h3>
+                      <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Redação Theme Section */}
+            <Card className="mb-8">
+              <CardHeader>
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <FileText className="h-5 w-5 mr-2 text-blue-600" />
+                    {redacaoTheme.title}
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleNewTheme}
+                    className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
+                  >
+                    <Shuffle className="h-4 w-4" />
+                    <span>Novo Tema</span>
+                  </Button>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {/* Contextualização Inicial */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Contextualização Inicial</h3>
+                    <div className="space-y-4">
+                      {redacaoTheme.contextualizacao.map((item, index) => (
+                        <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
+                          <p className="text-gray-700 mb-2">{item.texto}</p>
+                          <p className="text-sm text-gray-500">Fonte: {item.fonte}</p>
                         </div>
                       ))}
                     </div>
                   </div>
-                </CardContent>
-              </Card>
 
-              {/* Competency Details */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {analysisResult.detailedFeedback.map((feedback: any, index: number) => (
-                  <Card key={index}>
+                  {/* Delimitação do Tema */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Tema</h3>
+                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                      <p className="text-lg font-medium text-blue-900">{redacaoTheme.tema}</p>
+                    </div>
+                  </div>
+
+                  {/* Instruções Oficiais */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Instruções</h3>
+                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                      <p className="text-gray-700 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
+                    </div>
+                  </div>
+
+                  {/* Start Button */}
+                  {!hasStartedRedacao && (
+                    <div className="text-center py-6">
+                      <Button 
+                        onClick={startRedacao}
+                        size="lg"
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
+                      >
+                        <Pencil className="h-5 w-5 mr-2" />
+                        Iniciar Redação
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Redação Writing Area (only after clicking "Iniciar Redação") */}
+            {hasStartedRedacao && (
+              <div className="space-y-8">
+                {/* Timer with Time Options */}
+                <Card>
+                  <CardContent className="pt-6">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-5 w-5 text-red-600" />
+                        <span className="font-medium text-gray-900">Tempo Restante:</span>
+                        <span className={`font-bold ${timeRemaining < 600 ? 'text-red-600' : 'text-blue-600'}`}>
+                          {formatTime(timeRemaining)}
+                        </span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowTimeOptions(!showTimeOptions)}
+                          className="text-gray-600 hover:text-gray-800"
+                        >
+                          <Settings className="h-4 w-4 mr-1" />
+                          Personalizar
+                          <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${showTimeOptions ? 'rotate-180' : ''}`} />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Time Options Bar */}
+                    {showTimeOptions && (
+                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                        <h4 className="text-sm font-medium text-gray-700 mb-3">Escolha o tempo para redação:</h4>
+                        
+                        {/* Quick Time Options */}
+                        <div className="grid grid-cols-4 gap-2 mb-4">
+                          {timeOptions.map((option) => (
+                            <Button
+                              key={option.value}
+                              variant={selectedTime === option.value * 60 ? "default" : "outline"}
+                              size="sm"
+                              onClick={() => handleTimeChange(option.value)}
+                              className="text-xs"
+                            >
+                              {option.label}
+                            </Button>
+                          ))}
+                        </div>
+
+                        {/* Custom Time Input */}
+                        <div className="flex items-center space-x-2">
+                          <span className="text-sm text-gray-600">Personalizado:</span>
+                          <div className="flex items-center space-x-1">
+                            <Input
+                              type="number"
+                              min="0"
+                              max="12"
+                              value={customTimeInput.hours}
+                              onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
+                              placeholder="H"
+                              className="w-16 text-center"
+                            />
+                            <span className="text-sm text-gray-500">h</span>
+                            <Input
+                              type="number"
+                              min="0"
+                              max="59"
+                              value={customTimeInput.minutes}
+                              onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
+                              placeholder="M"
+                              className="w-16 text-center"
+                            />
+                            <span className="text-sm text-gray-500">min</span>
+                          </div>
+                          <Button
+                            size="sm"
+                            onClick={handleCustomTime}
+                            className="bg-blue-600 hover:bg-blue-700 text-white"
+                          >
+                            Aplicar
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+
+                {/* Text Input */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <FileText className="h-5 w-5 mr-2 text-blue-600" />
+                      Escreva sua redação aqui
+                    </CardTitle>
+                    <CardDescription>
+                      Escreva o texto completo da sua redação abaixo
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <textarea
+                        value={redacaoText}
+                        onChange={(e) => setRedacaoText(e.target.value)}
+                        placeholder="Escreva sua redação aqui..."
+                        className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                      <Button 
+                        onClick={analyzeRedacao}
+                        disabled={isAnalyzing || (!redacaoText.trim() && !imageFile)}
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        {isAnalyzing ? 'Analisando...' : 'Corrigir Redação'}
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Image Upload */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <ImageIcon className="h-5 w-5 mr-2 text-blue-600" />
+                      Envie imagem da redação
+                    </CardTitle>
+                    <CardDescription>
+                      Tire uma foto da sua redação escrita à mão
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                        <p className="text-gray-600 mb-4">Arraste uma imagem ou clique para selecionar</p>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageUpload}
+                          className="hidden"
+                          id="image-upload"
+                        />
+                        <label htmlFor="image-upload">
+                          <Button variant="outline" className="cursor-pointer">
+                            Selecionar Imagem
+                          </Button>
+                        </label>
+                      </div>
+                      {imageFile && (
+                        <div className="bg-green-50 p-4 rounded-lg">
+                          <p className="text-sm text-green-800">
+                            Imagem selecionada: {imageFile.name}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {/* Analysis Results */}
+            {analysisResult && (
+              <div className="space-y-8">
+                {/* Score Summary */}
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Award className="h-5 w-5 mr-2 text-blue-600" />
+                      Resultado da Análise
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="text-center">
+                        <div className="text-4xl font-bold text-blue-600 mb-2">
+                          {analysisResult.totalScore}
+                        </div>
+                        <p className="text-gray-600">Nota Total</p>
+                      </div>
+                      <div className="space-y-3">
+                        {analysisResult.competencies.map((comp: any, index: number) => (
+                          <div key={index}>
+                            <div className="flex justify-between text-sm mb-1">
+                              <span className="text-gray-700">{comp.name}</span>
+                              <span className="font-medium">{comp.score}/{comp.max}</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-blue-600 h-2 rounded-full" 
+                                style={{ width: `${(comp.score / comp.max) * 100}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Competency Details */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  {analysisResult.detailedFeedback.map((feedback: any, index: number) => (
+                    <Card key={index}>
+                      <CardHeader>
+                        <CardTitle className="text-lg flex items-center">
+                          <Star className="h-4 w-4 mr-2 text-yellow-500" />
+                          {feedback.competency}
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-gray-700">{feedback.feedback}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+
+                {/* Errors and Suggestions */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                  <Card>
                     <CardHeader>
-                      <CardTitle className="text-lg flex items-center">
-                        <Star className="h-4 w-4 mr-2 text-yellow-500" />
-                        {feedback.competency}
+                      <CardTitle className="flex items-center">
+                        <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
+                        Principais Erros
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-gray-700">{feedback.feedback}</p>
+                      <ul className="space-y-2">
+                        {analysisResult.errors.map((error: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <span className="text-gray-700">{error}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </CardContent>
                   </Card>
-                ))}
-              </div>
 
-              {/* Errors and Suggestions */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
-                      Principais Erros
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {analysisResult.errors.map((error: string, index: number) => (
-                        <li key={index} className="flex items-start">
-                          <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          <span className="text-gray-700">{error}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
+                        Sugestões de Melhoria
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {analysisResult.suggestions.map((suggestion: string, index: number) => (
+                          <li key={index} className="flex items-start">
+                            <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                            <span className="text-gray-700">{suggestion}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
-                      Sugestões de Melhoria
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      {analysisResult.suggestions.map((suggestion: string, index: number) => (
-                        <li key={index} className="flex items-start">
-                          <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                          <span className="text-gray-700">{suggestion}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
+                {/* Action Buttons */}
+                <div className="flex justify-center space-x-4">
+                  <Button onClick={saveRedacao} className="bg-green-600 hover:bg-green-700 text-white">
+                    <Save className="h-4 w-4 mr-2" />
+                    Salvar Redação
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => {
+                      setAnalysisResult(null);
+                      setRedacaoText('');
+                      setImageFile(null);
+                      setHasStartedRedacao(false);
+                      setTimerActive(false);
+                    }}
+                  >
+                    Nova Análise
+                  </Button>
+                </div>
               </div>
-
-              {/* Action Buttons */}
-              <div className="flex justify-center space-x-4">
-                <Button onClick={saveRedacao} className="bg-green-600 hover:bg-green-700 text-white">
-                  <Save className="h-4 w-4 mr-2" />
-                  Salvar Redação
-                </Button>
-                <Button 
-                  variant="outline" 
-                  onClick={() => {
-                    setAnalysisResult(null);
-                    setRedacaoText('');
-                    setImageFile(null);
-                    setHasStartedRedacao(false);
-                    setTimerActive(false);
-                  }}
-                >
-                  Nova Análise
-                </Button>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </main>
       </div>
     </div>

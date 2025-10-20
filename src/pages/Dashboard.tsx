@@ -149,7 +149,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
       <Sidebar 
         isOpen={sidebarOpen} 
@@ -157,7 +157,7 @@ const Dashboard = () => {
       />
 
       {/* Main Content */}
-      <div className="lg:pl-64">
+      <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
           <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
@@ -198,78 +198,80 @@ const Dashboard = () => {
         </header>
 
         {/* Main Content */}
-        <main className="px-4 sm:px-6 lg:px-8 py-8">
-          <div className="mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, João!</h2>
-            <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
-          </div>
+        <main className="flex-1 flex flex-col">
+          <div className="px-4 sm:px-6 lg:px-8 py-8">
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, João!</h2>
+              <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
+            </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            {stats.map((stat, index) => (
-              <Card key={index}>
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                      <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                    </div>
-                    <div className={`p-3 rounded-lg ${stat.bgColor}`}>
-                      <stat.icon className={`h-6 w-6 ${stat.color}`} />
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          {/* Journey Section */}
-          <div className="mb-8">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">Jornada do Aluno</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {ranks.map((rank) => (
-                <Card key={rank.level} className="relative overflow-hidden">
-                  <div className={`absolute top-0 right-0 w-20 h-20 ${rank.bgColor} rounded-bl-full opacity-20`}></div>
-                  <CardHeader>
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {stats.map((stat, index) => (
+                <Card key={index}>
+                  <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className={`p-2 rounded-lg ${rank.bgColor}`}>
-                        <rank.icon className={`h-6 w-6 ${rank.color}`} />
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium text-gray-500">Patente {rank.level}</div>
-                        <div className="text-lg font-bold text-gray-900">{rank.title}</div>
-                      </div>
-                    </div>
-                    <CardTitle className="text-lg">{rank.subtitle}</CardTitle>
-                    <CardDescription>{rank.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="bg-blue-50 p-4 rounded-lg">
-                        <p className="text-sm text-blue-800 font-medium">{rank.card}</p>
-                      </div>
-                      
                       <div>
-                        <h4 className="text-sm font-medium text-gray-900 mb-2">Próximos passos:</h4>
-                        <ul className="space-y-1">
-                          {rank.nextSteps.map((step, stepIndex) => (
-                            <li key={stepIndex} className="text-sm text-gray-600 flex items-start">
-                              <span className="w-1 h-1 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
-                              {step}
-                            </li>
-                          ))}
-                        </ul>
+                        <p className="text-sm font-medium text-gray-600">{stat.title}</p>
+                        <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                       </div>
-                      
-                      <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-600">
-                        <p className="text-sm text-gray-700 italic">
-                          <span className="font-medium text-blue-600">Professor Carlinhos:</span> {rank.quote}
-                        </p>
+                      <div className={`p-3 rounded-lg ${stat.bgColor}`}>
+                        <stat.icon className={`h-6 w-6 ${stat.color}`} />
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Journey Section */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Jornada do Aluno</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {ranks.map((rank) => (
+                  <Card key={rank.level} className="relative overflow-hidden">
+                    <div className={`absolute top-0 right-0 w-20 h-20 ${rank.bgColor} rounded-bl-full opacity-20`}></div>
+                    <CardHeader>
+                      <div className="flex items-center justify-between">
+                        <div className={`p-2 rounded-lg ${rank.bgColor}`}>
+                          <rank.icon className={`h-6 w-6 ${rank.color}`} />
+                        </div>
+                        <div className="text-right">
+                          <div className="text-sm font-medium text-gray-500">Patente {rank.level}</div>
+                          <div className="text-lg font-bold text-gray-900">{rank.title}</div>
+                        </div>
+                      </div>
+                      <CardTitle className="text-lg">{rank.subtitle}</CardTitle>
+                      <CardDescription>{rank.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-4">
+                        <div className="bg-blue-50 p-4 rounded-lg">
+                          <p className="text-sm text-blue-800 font-medium">{rank.card}</p>
+                        </div>
+                        
+                        <div>
+                          <h4 className="text-sm font-medium text-gray-900 mb-2">Próximos passos:</h4>
+                          <ul className="space-y-1">
+                            {rank.nextSteps.map((step, stepIndex) => (
+                              <li key={stepIndex} className="text-sm text-gray-600 flex items-start">
+                                <span className="w-1 h-1 bg-blue-600 rounded-full mt-2 mr-2 flex-shrink-0"></span>
+                                {step}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-600">
+                          <p className="text-sm text-gray-700 italic">
+                            <span className="font-medium text-blue-600">Professor Carlinhos:</span> {rank.quote}
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </main>
