@@ -47,8 +47,141 @@ const CorretorRedacao = () => {
   const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
   const [showTimeOptions, setShowTimeOptions] = useState(false);
   const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
-  const [chatMessage, setChatMessage] = useState('');
-  const [isSendingMessage, setIsSendingMessage] = useState(false);
+
+  const tips = [
+    {
+      title: "Competências do ENEM",
+      content: "Lembre-se que sua redação será avaliada em 5 competências: Domínio da Modalidade Escrita Formal, Compreensão da Tarefa, Coerência e Coesão, Seleção de Recursos de Linguagem e Proposta de Intervenção. Foque em cada uma delas!",
+      icon: Target
+    },
+    {
+      title: "Repertório Cultural",
+      content: "Não esqueça de incluir repertório! Dados, fatos, citações, obras literárias e exemplos históricos são essenciais para dar sustentação aos seus argumentos. Mas lembre-se: qualidade importa mais que quantidade!",
+      icon: BookOpen
+    },
+    {
+      title: "Estrutura Textual",
+      content: "Sua redação precisa ter uma estrutura clara: introdução com tese, desenvolvimento com argumentos e proposta de intervenção, e conclusão que retoma a tese. Cada parágrafo deve ter uma função específica!",
+      icon: FileText
+    },
+    {
+      title: "Linguagem Formal",
+      content: "Use sempre a norma culta da língua portuguesa. Evite gírias, abreviações e linguagem coloquial. A pontuação correta é fundamental para a clareza do texto. Vamos manter o padrão formal, meu caro aluno!",
+      icon: CheckCircle
+    },
+    {
+      title: "Proposta de Intervenção",
+      content: "Sua proposta precisa ser viável, específica e direcionada ao problema apresentado. Não basta dizer 'o governo deve agir'. Diga COMO, QUANDO e POR QUÊ o governo deve agir. Seja concreto e prático!",
+      icon: Lightbulb
+    },
+    {
+      title: "Tempo de Prova",
+      content: "Na hora da prova, reserve 30 minutos para planejar, 90 minutos para escrever e 30 minutos para revisar. Não se apresse na escrita, mas também não fique preso em um único parágrafo por muito tempo!",
+      icon: TrendingUp
+    }
+  ];
+
+  // Sample ENEM themes
+  const redacaoThemes = [
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia.",
+          fonte: "Fórum Brasileiro de Segurança Pública"
+        },
+        {
+          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios, como a falta de delegacias especializadas e a subnotificação de casos.",
+          fonte: "ONU Mulheres"
+        },
+        {
+          texto: "A cultura do silêncio perpetua a violência contra as mulheres. Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
+          fonte: "Revista Época"
+        }
+      ],
+      tema: "A persistência da violência contra a mulher na sociedade brasileira.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade.",
+          fonte: "Instituto Nacional de Pesquisas Espaciais (INPE)"
+        },
+        {
+          texto: "A economia da região amazônica depende dos recursos naturais, mas o extrativismo sustentável ainda é pouco desenvolvido. Muitas comunidades tradicionais dependem da floresta para sua subsistência.",
+          fonte: "Instituto Socioambiental (ISA)"
+        },
+        {
+          texto: "O Brasil tem compromissos internacionais para reduzir o desmatamento, mas a fiscalização e a implementação de políticas ambientais eficazes ainda enfrentam grandes desafios.",
+          fonte: "Ministério do Meio Ambiente"
+        }
+      ],
+      tema: "O desmatamento da Amazônia e seus impactos socioambientais.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A educação a distância (EaD) expandiu-se significativamente durante a pandemia de COVID-19. Segundo o INEP, o número de matrículas na modalidade cresceu 25% em 2020, mas a desigualdade digital permanece como grande desafio.",
+          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)"
+        },
+        {
+          texto: "Muitos estudantes, especialmente das camadas mais vulneráveis, enfrentam dificuldades de acesso à internet e a dispositivos adequados para o aprendizado online. Essa exclusão digital agrava as desigualdades educacionais.",
+          fonte: "UNESCO"
+       
+Vou continuar a atualização da página de redação removendo a seção de chat:
+
+<dyad-write path="src/pages/CorretorRedacao.tsx" description="Removendo a seção de chat da página de redação">
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  BookOpen, 
+  Upload, 
+  Save,
+  TrendingUp,
+  Target,
+  AlertCircle,
+  CheckCircle,
+  Lightbulb,
+  Star,
+  Award,
+  FileText,
+  Image as ImageIcon,
+  Bot,
+  RefreshCw,
+  Pencil,
+  Clock,
+  Settings,
+  Plus,
+  ChevronDown,
+  Shuffle,
+  LogOut
+} from 'lucide-react';
+import { showSuccess, showError } from '@/utils/toast';
+import Sidebar from '@/components/Sidebar';
+
+const CorretorRedacao = () => {
+  const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [redacaoText, setRedacaoText] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<any>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [currentTipIndex, setCurrentTipIndex] = useState(0);
+  const [hasStartedRedacao, setHasStartedRedacao] = useState(false);
+  const [timeRemaining, setTimeRemaining] = useState(180); // 3 hours in seconds
+  const [timerActive, setTimerActive] = useState(false);
+  const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
+  const [showTimeOptions, setShowTimeOptions] = useState(false);
+  const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
 
   const tips = [
     {
@@ -294,57 +427,6 @@ const CorretorRedacao = () => {
     showSuccess('Novo tema selecionado!');
   };
 
-  const handleSendMessage = async () => {
-    if (!chatMessage.trim()) {
-      showError('Por favor, digite uma mensagem para o Professor Carlinhos.');
-      return;
-    }
-
-    setIsSendingMessage(true);
-    
-    try {
-      // Enviar mensagem para o webhook
-      const webhookUrl = 'https://eoj6xzwmnct9ml0.m.pipedream.net';
-      
-      const payload = {
-        message: chatMessage,
-        timestamp: new Date().toISOString(),
-        user: 'João da Silva',
-        theme: redacaoTheme.tema,
-        type: 'chat_message'
-      };
-
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error('Falha ao enviar mensagem');
-      }
-
-      // Limpa o campo de mensagem
-      setChatMessage('');
-      showSuccess('Mensagem enviada para o Professor Carlinhos com sucesso!');
-      
-    } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
-      showError('Erro ao enviar mensagem. Tente novamente.');
-    } finally {
-      setIsSendingMessage(false);
-    }
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
   const timeOptions = [
     { label: '30 minutos', value: 30 },
     { label: '1 hora', value: 60 },
@@ -462,55 +544,6 @@ const CorretorRedacao = () => {
                     <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
                   </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Chat with Professor Carlinhos */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center">
-                <MessageSquare className="h-5 w-5 mr-2 text-green-600" />
-                Conversar com o Professor Carlinhos
-              </CardTitle>
-              <CardDescription>
-                Envie suas dúvidas sobre redação e receba orientações personalizadas
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <p className="text-gray-700 mb-2">
-                    Olá, João! Sou o Professor Carlinhos, seu assistente de redação. 
-                    Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, 
-                    repertório e qualquer outra questão relacionada à redação do ENEM.
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Tema atual: {redacaoTheme.tema}
-                  </p>
-                </div>
-                
-                <div className="flex space-x-2">
-                  <Input
-                    value={chatMessage}
-                    onChange={(e) => setChatMessage(e.target.value)}
-                    onKeyPress={handleKeyPress}
-                    placeholder="Digite sua mensagem para o Professor Carlinhos..."
-                    className="flex-1"
-                    disabled={isSendingMessage}
-                  />
-                  <Button 
-                    onClick={handleSendMessage}
-                    disabled={isSendingMessage || !chatMessage.trim()}
-                    className="bg-green-600 hover:bg-green-700 text-white"
-                  >
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </div>
-                
-                {isSendingMessage && (
-                  <p className="text-sm text-gray-500">Enviando mensagem...</p>
-                )}
               </div>
             </CardContent>
           </Card>
