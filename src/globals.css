@@ -99,3 +99,172 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Melhorias para modo escuro */
+.dark {
+  /* Fundo suave para modo escuro */
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+.dark .bg-gray-50 {
+  background-color: #1e293b;
+}
+
+.dark .bg-gray-100 {
+  background-color: #334155;
+}
+
+.dark .text-gray-600 {
+  color: #cbd5e1;
+}
+
+.dark .text-gray-500 {
+  color: #94a3b8;
+}
+
+.dark .text-gray-400 {
+  color: #64748b;
+}
+
+.dark .border-gray-200 {
+  border-color: #334155;
+}
+
+.dark .border-gray-300 {
+  border-color: #475569;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: #334155;
+}
+
+.dark .hover\:bg-gray-800:hover {
+  background-color: #1e293b;
+}
+
+/* Melhorias para cards no modo escuro */
+.dark .bg-white {
+  background-color: #1e293b;
+}
+
+.dark .bg-gray-800 {
+  background-color: #0f172a;
+}
+
+.dark .bg-gray-700 {
+  background-color: #1e293b;
+}
+
+.dark .bg-gray-900 {
+  background-color: #0f172a;
+}
+
+/* Melhorias para inputs no modo escuro */
+.dark input,
+.dark textarea {
+  background-color: #1e293b;
+  border-color: #475569;
+  color: #f1f5f9;
+}
+
+.dark input:focus,
+.dark textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Melhorias para botões no modo escuro */
+.dark .bg-blue-600 {
+  background-color: #2563eb;
+}
+
+.dark .bg-blue-700 {
+  background-color: #1d4ed8;
+}
+
+.dark .hover\:bg-blue-700:hover {
+  background-color: #1d4ed8;
+}
+
+.dark .text-blue-600 {
+  color: #3b82f6;
+}
+
+.dark .text-blue-400 {
+  color: #60a5fa;
+}
+
+.dark .border-blue-200 {
+  border-color: #3b82f6;
+}
+
+.dark .border-blue-700 {
+  border-color: #1e40af;
+}
+
+/* Melhorias para cores específicas no modo escuro */
+.dark .bg-green-50 {
+  background-color: #064e3b;
+}
+
+.dark .bg-green-900\/20 {
+  background-color: rgba(6, 78, 59, 0.2);
+}
+
+.dark .text-green-800 {
+  color: #10b981;
+}
+
+.dark .text-green-300 {
+  color: #34d399;
+}
+
+.dark .text-green-400 {
+  color: #6ee7b7;
+}
+
+.dark .bg-green-500 {
+  background-color: #10b981;
+}
+
+.dark .bg-green-600 {
+  background-color: #059669;
+}
+
+.dark .bg-yellow-50 {
+  background-color: #451a03;
+}
+
+.dark .bg-yellow-900\/20 {
+  background-color: rgba(69, 26, 3, 0.2);
+}
+
+.dark .text-yellow-800 {
+  color: #f59e0b;
+}
+
+.dark .text-yellow-400 {
+  color: #fbbf24;
+}
+
+.dark .bg-red-50 {
+  background-color: #450a0a;
+}
+
+.dark .bg-red-900\/20 {
+  background-color: rgba(69, 10, 10, 0.2);
+}
+
+.dark .text-red-800 {
+  color: #ef4444;
+}
+
+.dark .text-red-400 {
+  color: #f87171;
+}
+
+/* Melhorias para transições suaves */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
