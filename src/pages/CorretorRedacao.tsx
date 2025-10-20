@@ -26,7 +26,9 @@ import {
   Plus,
   ChevronDown,
   Shuffle,
-  LogOut
+  LogOut,
+  Send,
+  MessageSquare
 } from 'lucide-react';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
@@ -45,6 +47,8 @@ const CorretorRedacao = () => {
   const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
   const [showTimeOptions, setShowTimeOptions] = useState(false);
   const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
+  const [chatMessage, setChatMessage] = useState('');
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
 
   const tips = [
     {
@@ -290,6 +294,57 @@ const CorretorRedacao = () => {
     showSuccess('Novo tema selecionado!');
   };
 
+  const handleSendMessage = async () => {
+    if (!chatMessage.trim()) {
+      showError('Por favor, digite uma mensagem para o Professor Carlinhos.');
+      return;
+    }
+
+    setIsSendingMessage(true);
+    
+    try {
+      // Enviar mensagem para o webhook
+      const webhookUrl = 'https://eoj6xzwmnct9ml0.m.pipedream.net';
+      
+      const payload = {
+        message: chatMessage,
+        timestamp: new Date().toISOString(),
+        user: 'João da Silva',
+        theme: redacaoTheme.tema,
+        type: 'chat_message'
+      };
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao enviar mensagem');
+      }
+
+      // Limpa o campo de mensagem
+      setChatMessage('');
+      showSuccess('Mensagem enviada para o Professor Carlinhos com sucesso!');
+      
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      showError('Erro ao enviar mensagem. Tente novamente.');
+    } finally {
+      setIsSendingMessage(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
   const timeOptions = [
     { label: '30 minutos', value: 30 },
     { label: '1 hora', value: 60 },
@@ -337,7 +392,7 @@ const CorretorRedacao = () => {
       <div className="lg:pl-64">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px:8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -407,6 +462,55 @@ const CorretorRedacao = () => {
                     <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
                   </div>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Chat with Professor Carlinhos */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <MessageSquare className="h-5 w-5 mr-2 text-green-600" />
+                Conversar com o Professor Carlinhos
+              </CardTitle>
+              <CardDescription>
+                Envie suas dúvidas sobre redação e receba orientações personalizadas
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <p className="text-gray-700 mb-2">
+                    Olá, João! Sou o Professor Carlinhos, seu assistente de redação. 
+                    Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, 
+                    repertório e qualquer outra questão relacionada à redação do ENEM.
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Tema atual: {redacaoTheme.tema}
+                  </p>
+                </div>
+                
+                <div className="flex space-x-2">
+                  <Input
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    onKeyPress={handleKeyPress}
+                    placeholder="Digite sua mensagem para o Professor Carlinhos..."
+                    className="flex-1"
+                    disabled={isSendingMessage}
+                  />
+                  <Button 
+                    onClick={handleSendMessage}
+                    disabled={isSendingMessage || !chatMessage.trim()}
+                    className="bg-green-600 hover:bg-green-700 text-white"
+                  >
+                    <Send className="h-4 w-4" />
+                  </Button>
+                </div>
+                
+                {isSendingMessage && (
+                  <p className="text-sm text-gray-500">Enviando mensagem...</p>
+                )}
               </div>
             </CardContent>
           </Card>
