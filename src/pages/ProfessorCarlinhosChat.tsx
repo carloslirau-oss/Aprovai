@@ -83,11 +83,33 @@ const ProfessorCarlinhosChat = () => {
 
       // Esperar a resposta do webhook
       const responseData = await response.json();
+      console.log('Resposta do webhook:', responseData); // Log para depuração
       
-      // Adicionar resposta do bot (que vem do webhook)
+      // Extrair a resposta do webhook - pode estar em diferentes campos
+      let botResponse = '';
+      
+      // Tenta diferentes campos possíveis para a resposta
+      if (responseData.response) {
+        botResponse = responseData.response;
+      } else if (responseData.message) {
+        botResponse = responseData.message;
+      } else if (responseData.content) {
+        botResponse = responseData.content;
+      } else if (responseData.text) {
+        botResponse = responseData.text;
+      } else if (responseData.data && responseData.data.response) {
+        botResponse = responseData.data.response;
+      } else if (typeof responseData === 'string') {
+        botResponse = responseData;
+      } else {
+        // Se não encontrar resposta, usa uma mensagem padrão
+        botResponse = 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!';
+      }
+      
+      // Adicionar resposta do bot
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        content: responseData.response || 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!',
+        content: botResponse,
         sender: 'bot',
         timestamp: new Date()
       };
