@@ -29,6 +29,7 @@ const ProfessorCarlinhosChat = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [isSendingMessage, setIsSendingMessage] = useState(false);
+  const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -55,6 +56,7 @@ const ProfessorCarlinhosChat = () => {
     setMessages(prev => [...prev, userMessage]);
     setChatMessage('');
     setIsSendingMessage(true);
+    setIsWaitingForResponse(true);
 
     try {
       // Enviar mensagem para o webhook
@@ -79,17 +81,18 @@ const ProfessorCarlinhosChat = () => {
         throw new Error('Falha ao enviar mensagem');
       }
 
-      // Simular resposta do bot (em um app real, você teria uma resposta real aqui)
-      setTimeout(() => {
-        const botMessage: ChatMessage = {
-          id: (Date.now() + 1).toString(),
-          content: 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!',
-          sender: 'bot',
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, botMessage]);
-      }, 2000);
-
+      // Esperar a resposta do webhook
+      const responseData = await response.json();
+      
+      // Adicionar resposta do bot
+      const botMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: responseData.response || 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!',
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, botMessage]);
       showSuccess('Mensagem enviada para o Professor Carlinhos com sucesso!');
       
     } catch (error) {
@@ -106,6 +109,7 @@ const ProfessorCarlinhosChat = () => {
       setMessages(prev => [...prev, errorMessage]);
     } finally {
       setIsSendingMessage(false);
+      setIsWaitingForResponse(false);
     }
   };
 
@@ -224,7 +228,8 @@ const ProfessorCarlinhosChat = () => {
                 </div>
               ))}
               
-              {isSendingMessage && (
+              {/* Loading animation while waiting for response */}
+              {isWaitingForResponse && (
                 <div className="flex justify-start">
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3">
                     <div className="flex items-center space-x-3">
@@ -237,6 +242,7 @@ const ProfessorCarlinhosChat = () => {
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                         </div>
+                        <p className="text-sm text-gray-500 mt-2">Professor Carlinhos está digitando...</p>
                       </div>
                     </div>
                   </div>
@@ -253,11 +259,11 @@ const ProfessorCarlinhosChat = () => {
                   onKeyPress={handleKeyPress}
                   placeholder="Digite sua mensagem para o Professor Carlinhos..."
                   className="flex-1"
-                  disabled={isSendingMessage}
+                  disabled={isSendingMessage || isWaitingForResponse}
                 />
                 <Button 
                   onClick={handleSendMessage}
-                  disabled={isSendingMessage || !chatMessage.trim()}
+                  disabled={isSendingMessage || isWaitingForResponse || !chatMessage.trim()}
                   className="bg-green-600 hover:bg-green-700 text-white"
                 >
                   <Send className="h-4 w-4" />
