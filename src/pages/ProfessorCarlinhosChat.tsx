@@ -59,7 +59,7 @@ const ProfessorCarlinhosChat = () => {
     setIsWaitingForResponse(true);
 
     try {
-      // Enviar mensagem para o novo webhook
+      // Enviar mensagem para o webhook
       const webhookUrl = 'https://eopi4fhg5g3mewf.m.pipedream.net';
       
       const payload = {
@@ -84,7 +84,7 @@ const ProfessorCarlinhosChat = () => {
       // Esperar a resposta do webhook
       const responseData = await response.json();
       
-      // Adicionar resposta do bot
+      // Adicionar resposta do bot (que vem do webhook)
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         content: responseData.response || 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!',
@@ -93,7 +93,6 @@ const ProfessorCarlinhosChat = () => {
       };
       
       setMessages(prev => [...prev, botMessage]);
-      showSuccess('Mensagem enviada para o Professor Carlinhos com sucesso!');
       
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
