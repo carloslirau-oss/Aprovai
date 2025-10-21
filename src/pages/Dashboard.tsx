@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -21,13 +21,35 @@ import {
   Trophy
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUserData } from '@/contexts/UserDataContext';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { userProfile, redacoes, isLoading, updateUserStats } = useUserData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    // Calcular estatísticas se não estiverem disponíveis
+    if (userProfile && redacoes.length > 0) {
+      const totalRedacoes = redacoes.length;
+      const totalXP = redacoes.reduce((sum, redacao) => sum + (redacao.nota_total || 0), 0);
+      const notaMedia = redacoes.reduce((sum, redacao) => sum + (redacao.nota_total || 0), 0) / totalRedacoes;
+      
+      // Atualizar estatísticas se forem diferentes das salvas
+      if (userProfile.redacoes_corrigidas !== totalRedacoes || 
+          userProfile.xp_total !== totalXP || 
+          userProfile.nota_media !== notaMedia) {
+        updateUserStats({
+          redacoes_corrigidas: totalRedacoes,
+          xp_total: totalXP,
+          nota_media: parseFloat(notaMedia.toFixed(2)),
+        });
+      }
+    }
+  }, [userProfile, redacoes, updateUserStats]);
 
   const handleLogout = async () => {
     try {
@@ -39,31 +61,42 @@ const Dashboard = () => {
     }
   };
 
+  // Determinar patente com base no XP
+  const determinarPatente = (xp: number) => {
+    if (xp >= 4500) return { title: 'Nota 1000', level: 5, color: 'text-red-600', bgColor: 'bg-red-50' };
+    if (xp >= 3000) return { title: 'Mestre da Caneta', level: 4, color: 'text-yellow-600', bgColor: 'bg-yellow-50' };
+    if (xp >= 1500) return { title: 'Competente', level: 3, color: 'text-purple-600', bgColor: 'bg-purple-50' };
+    if (xp >= 500) return { title: 'Treineiro', level: 2, color: 'text-green-600', bgColor: 'bg-green-50' };
+    return { title: 'Iniciante', level: 1, color: 'text-blue-600', bgColor: 'bg-blue-50' };
+  };
+
+  const patente = determinarPatente(userProfile?.xp_total || 0);
+
   const stats = [
     {
       title: 'Redações Corrigidas',
-      value: '12',
+      value: userProfile?.redacoes_corrigidas || '0',
       icon: BookOpen,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50'
     },
     {
       title: 'Nota Média',
-      value: '780',
+      value: userProfile?.nota_media || '0.0',
       icon: TrendingUp,
       color: 'text-green-600',
       bgColor: 'bg-green-50'
     },
     {
       title: 'XP Total',
-      value: '2,450',
+      value: userProfile?.xp_total?.toLocaleString() || '0',
       icon: TargetIcon,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50'
     },
     {
       title: 'Dias de Estudo',
-      value: '7',
+      value: userProfile?.dias_estudo || '0',
       icon: Calendar,
       color: 'text-orange-600',
       bgColor: 'bg-orange-50'
@@ -155,6 +188,17 @@ const Dashboard = () => {
     }
   ];
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Carregando dados...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
@@ -192,7 +236,7 @@ const Dashboard = () => {
                   </p>
                   <div className="flex items-center space-x-1">
                     <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">Mestre da Caneta</span>
+                    <span className="text-xs text-gray-500">{patente.title}</span>
                   </div>
                 </div>
               </div>
@@ -240,7 +284,7 @@ const Dashboard = () => {
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Jornada do Aluno</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {ranks.map((rank) => (
-                  <Card key={rank.level} className="relative overflow-hidden">
+                  <Card key={rank.level} className={`relative overflow-hidden ${userProfile?.nivel >= rank.level ? 'ring-2 ring-blue-500' : 'opacity-75'}`}>
                     <div className={`absolute top-0 right-0 w-20 h-20 ${rank.bgColor} rounded-bl-full opacity-20`}></div>
                     <CardHeader>
                       <div className="flex items-center justify-between">

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { UserDataProvider } from "@/contexts/UserDataContext";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import CorretorRedacao from "./pages/CorretorRedacao";
@@ -18,17 +19,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Navigate to="/login" replace />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/redacoes" element={<CorretorRedacao />} />
-            <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
+        <UserDataProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Navigate to="/login" replace />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/redacoes" element={<CorretorRedacao />} />
+              <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </UserDataProvider>
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
