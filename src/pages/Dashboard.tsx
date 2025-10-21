@@ -21,7 +21,11 @@ import {
   Trophy,
   ArrowRight,
   CheckCircle,
-  Clock
+  Clock,
+  BarChart3,
+  PieChart,
+  LineChart,
+  Activity
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -177,6 +181,47 @@ const Dashboard = () => {
     }
   ];
 
+  // Dados para gráficos
+  const notasData = redacoes.map((redacao, index) => ({
+    name: `Redação ${index + 1}`,
+    nota: redacao.nota_total || 0,
+    data: redacao.created_at ? new Date(redacao.created_at).toLocaleDateString() : 'Data não disponível'
+  }));
+
+  const competenciasData = redacoes.length > 0 ? [
+    {
+      name: 'Domínio da Modalidade',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_1 || 0), 0) / redacoes.length,
+      max: 200
+    },
+    {
+      name: 'Compreensão da Tarefa',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_2 || 0), 0) / redacoes.length,
+      max: 200
+    },
+    {
+      name: 'Coerência e Coesão',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_3 || 0), 0) / redacoes.length,
+      max: 200
+    },
+    {
+      name: 'Recursos de Linguagem',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_4 || 0), 0) / redacoes.length,
+      max: 200
+    },
+    {
+      name: 'Proposta de Intervenção',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_5 || 0), 0) / redacoes.length,
+      max: 200
+    }
+  ] : [];
+
+  const evolucaoXP = redacoes.map((redacao, index) => ({
+    redacao: index + 1,
+    xp: redacao.nota_total || 0,
+    acumulado: redacoes.slice(0, index + 1).reduce((sum, r) => sum + (r.nota_total || 0), 0)
+  }));
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -200,7 +245,7 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -266,7 +311,7 @@ const Dashboard = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px-6 lg:px-8 py-8">
+          <div className="px-4 sm:px:6 lg:px-8 py-8">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
               <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
@@ -289,6 +334,187 @@ const Dashboard = () => {
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Gráficos de Desempenho */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* Gráfico de Evolução de Notas */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <LineChart className="h-5 w-5 mr-2 text-blue-600" />
+                    Evolução das Notas
+                  </CardTitle>
+                  <CardDescription>
+                    Sua progressão ao longo das redações
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {notasData.length > 0 ? (
+                      <div className="space-y-2">
+                        {notasData.map((nota, index) => (
+                          <div key={index} className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">{nota.name}</span>
+                            <div className="flex items-center space-x-2">
+                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-blue-600 h-2 rounded-full" 
+                                  style={{ width: `${(nota.nota / 1000) * 100}%` }}
+                                ></div>
+                              </div>
+                              <span className="text-sm font-medium text-blue-600">{nota.nota}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Nenhuma redação corrigida ainda. Comece a praticar!
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Gráfico de Competências */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <BarChart3 className="h-5 w-5 mr-2 text-green-600" />
+                    Desempenho por Competência
+                  </CardTitle>
+                  <CardDescription>
+                    Média de desempenho em cada competência
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {competenciasData.length > 0 ? (
+                      <div className="space-y-3">
+                        {competenciasData.map((competencia, index) => (
+                          <div key={index}>
+                            <div className="flex justify-between text-sm mb-1">
+                              <span className="text-gray-700">{competencia.name}</span>
+                              <span className="font-medium">{Math.round(competencia.media)}/{competencia.max}</span>
+                            </div>
+                            <div className="w-full bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-green-600 h-2 rounded-full" 
+                                style={{ width: `${(competencia.media / competencia.max) * 100}%` }}
+                              ></div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Complete redações para ver seu desempenho por competência.
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Gráfico de XP Acumulado */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Activity className="h-5 w-5 mr-2 text-purple-600" />
+                    XP Acumulado
+                  </CardTitle>
+                  <CardDescription>
+                    Seu progresso de experiência ao longo do tempo
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {evolucaoXP.length > 0 ? (
+                      <div className="space-y-2">
+                        {evolucaoXP.map((item, index) => (
+                          <div key={index} className="flex items-center justify-between">
+                            <span className="text-sm text-gray-600">Redação {item.redacao}</span>
+                            <div className="flex items-center space-x-2">
+                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-purple-600 h-2 rounded-full" 
+                                  style={{ width: `${(item.acumulado / 10000) * 100}%` }}
+                                ></div>
+                              </div>
+                              <span className="text-sm font-medium text-purple-600">{item.acumulado}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Complete redações para ver seu progresso de XP.
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Gráfico de Distribuição de Notas */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <PieChart className="h-5 w-5 mr-2 text-orange-600" />
+                    Distribuição de Notas
+                  </CardTitle>
+                  <CardDescription>
+                    Faixa de notas mais frequentes
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {notasData.length > 0 ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">0-600</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-red-600 h-2 rounded-full" 
+                                style={{ width: `${(notasData.filter(n => n.nota < 600).length / notasData.length) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota < 600).length}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">600-800</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-yellow-600 h-2 rounded-full" 
+                                style={{ width: `${(notasData.filter(n => n.nota >= 600 && n.nota < 800).length / notasData.length) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 600 && n.nota < 800).length}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">800-1000</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-green-600 h-2 rounded-full" 
+                                style={{ width: `${(notasData.filter(n => n.nota >= 800).length / notasData.length) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 800).length}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Complete redações para ver a distribuição de notas.
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Current Rank Section - Simplificado */}
