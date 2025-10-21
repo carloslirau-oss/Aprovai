@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,16 +18,32 @@ import {
   Target as TargetIcon,
   Zap,
   Crown,
-  Trophy
+  Trophy,
+  CreditCard,
+  AlertCircle
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { showSuccess } from '@/utils/toast';
+import { usePayment } from '@/contexts/PaymentContext';
+import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { hasPaid, isLoading, checkPaymentStatus } = usePayment();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    // Verificar status de pagamento quando o componente carregar
+    checkPaymentStatus();
+  }, [checkPaymentStatus]);
+
+  useEffect(() => {
+    // Se o usuário não pagou, redirecionar para página de pagamento
+    if (!isLoading && !hasPaid) {
+      navigate('/payment');
+    }
+  }, [hasPaid, isLoading, navigate]);
 
   const handleLogout = async () => {
     try {
@@ -38,6 +54,21 @@ const Dashboard = () => {
       showError('Erro ao realizar logout. Tente novamente.');
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Verificando acesso...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!hasPaid) {
+    return null; // Será redirecionado para /payment pelo useEffect
+  }
 
   const stats = [
     {

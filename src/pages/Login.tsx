@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,20 +8,35 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { usePayment } from '@/contexts/PaymentContext';
 import { showSuccess, showError } from '@/utils/toast';
 
 const Login = () => {
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
+  const { hasPaid, isLoading, checkPaymentStatus } = usePayment();
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(false);
+
+  useEffect(() => {
+    // Verificar status de pagamento quando o componente carregar
+    checkPaymentStatus();
+  }, [checkPaymentStatus]);
+
+  useEffect(() => {
+    // Se o usuário já fez login e tem acesso, redirecionar para dashboard
+    const token = localStorage.getItem('supabase.auth.token');
+    if (token && hasPaid) {
+      navigate('/dashboard');
+    }
+  }, [hasPaid, navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoadingAuth(true);
 
     try {
       const { data, error } = await signIn(email, password);
@@ -30,18 +45,26 @@ const Login = () => {
         throw error;
       }
       
-      showSuccess('Login realizado com sucesso!');
-      navigate('/dashboard');
+      // Verificar status de pagamento após login
+      await checkPaymentStatus();
+      
+      if (hasPaid) {
+        showSuccess('Login realizado com sucesso!');
+        navigate('/dashboard');
+      } else {
+        showSuccess('Login realizado! Por favor, complete seu pagamento para acessar a plataforma.');
+        navigate('/payment');
+      }
     } catch (error: any) {
       showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
     } finally {
-      setIsLoading(false);
+      setIsLoadingAuth(false);
     }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    setIsLoadingAuth(true);
 
     try {
       const { data, error } = await signUp(email, password, name);
@@ -60,9 +83,20 @@ const Login = () => {
     } catch (error: any) {
       showError(error.message || 'Erro ao criar conta. Tente novamente.');
     } finally {
-      setIsLoading(false);
+      setIsLoadingAuth(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Verificando acesso...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
@@ -139,9 +173,9 @@ const Login = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
-                  disabled={isLoading}
+                  disabled={isLoadingAuth}
                 >
-                  {isLoading ? 'Entrando...' : 'Entrar na Plataforma'}
+                  {isLoadingAuth ? 'Entrando...' : 'Entrar na Plataforma'}
                 </Button>
               </form>
             )}
@@ -204,9 +238,9 @@ const Login = () => {
                 <Button 
                   type="submit" 
                   className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
-                  disabled={isLoading}
+                  disabled={isLoadingAuth}
                 >
-                  {isLoading ? 'Criando Conta...' : 'Criar Conta'}
+                  {isLoadingAuth ? 'Criando Conta...' : 'Criar Conta'}
                 </Button>
               </form>
             )}
