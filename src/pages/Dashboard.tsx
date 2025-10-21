@@ -76,11 +76,6 @@ const Dashboard = () => {
       borderColor: 'border-blue-200',
       icon: Star,
       description: 'Sua jornada começa aqui',
-      requirements: [
-        'Complete sua primeira redação',
-        'Converse com o Professor Carlinhos',
-        'Pratique as cinco competências do ENEM'
-      ],
       professorTip: 'Ninguém nasce pronto, nem eu quando comecei a corrigir. Vamos começar com estilo, futuro 1000.'
     },
     {
@@ -93,11 +88,6 @@ const Dashboard = () => {
       borderColor: 'border-green-200',
       icon: Zap,
       description: 'Você está pegando o ritmo',
-      requirements: [
-        'Corrija 3 redações seguidas',
-        'Mantenha notas acima de 700',
-        'Revise seus erros e explore as dicas'
-      ],
       professorTip: 'Está começando a esquentar! Continua assim que o Inep vai pedir o seu autógrafo.'
     },
     {
@@ -110,11 +100,6 @@ const Dashboard = () => {
       borderColor: 'border-purple-200',
       icon: Award,
       description: 'Você escreve como um verdadeiro competente',
-      requirements: [
-        'Alcance 5 redações com nota acima de 850',
-        'Treine com tempo cronometrado',
-        'Aprimore coesão e argumentação'
-      ],
       professorTip: 'Agora sim, sua introdução está tão boa que eu quase levantei pra aplaudir. Quase.'
     },
     {
@@ -127,11 +112,6 @@ const Dashboard = () => {
       borderColor: 'border-yellow-200',
       icon: Crown,
       description: 'Sua caneta vale ouro',
-      requirements: [
-        'Mantenha média acima de 900 em 3 redações',
-        'Produza redações com tema surpresa',
-        'Revise conectivos e explore modos avançados'
-      ],
       professorTip: 'Se escrever mais bonito que isso, o corretor vai querer emoldurar sua redação.'
     },
     {
@@ -144,11 +124,6 @@ const Dashboard = () => {
       borderColor: 'border-red-200',
       icon: Trophy,
       description: 'Você alcançou o ápice da redação',
-      requirements: [
-        'Continue praticando semanalmente',
-        'Participe dos desafios "Rumo à Nota 1000"',
-        'Contribua com a comunidade'
-      ],
       professorTip: 'Agora você é praticamente uma lenda da caneta. Se Platão visse isso, te chamava pra tomar café.'
     }
   ];
@@ -225,7 +200,7 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -255,20 +230,43 @@ const Dashboard = () => {
                 </div>
               </div>
               
-              <Button variant="ghost" size="sm">
-                <Sun className="h-4 w-4" />
-              </Button>
+              {/* Barra de progresso de patente */}
+              {patenteAtual.level < 5 && patenteProxima && (
+                <div className="flex-1 max-w-xs">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-gray-500">Progresso:</span>
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${progressoProximaPatente}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs font-medium text-blue-600">
+                      {Math.round(progressoProximaPatente)}%
+                    </span>
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    {userProfile?.xp_total?.toLocaleString() || '0'} / {patenteProxima.xpRequired.toLocaleString()} XP
+                  </div>
+                </div>
+              )}
               
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center space-x-2">
+                <Button variant="ghost" size="sm">
+                  <Sun className="h-4 w-4" />
+                </Button>
+                
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px:6 lg:px-8 py-8">
+          <div className="px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
               <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
@@ -293,76 +291,30 @@ const Dashboard = () => {
               ))}
             </div>
 
-            {/* Current Rank Section */}
+            {/* Current Rank Section - Simplificado */}
             <div className="mb-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Sua Patente Atual</h3>
               <Card className={`border-2 ${patenteAtual.borderColor} ${patenteAtual.bgColor}`}>
                 <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className={`p-3 rounded-lg ${patenteAtual.bgColor}`}>
-                        <patenteAtual.icon className={`h-8 w-8 ${patenteAtual.color}`} />
-                      </div>
-                      <div>
-                        <CardTitle className="text-2xl flex items-center">
-                          {patenteAtual.title}
-                          {patenteAtual.level < 5 && (
-                            <span className="ml-2 text-sm text-gray-500">
-                              (Patente {patenteAtual.level} de 5)
-                            </span>
-                          )}
-                        </CardTitle>
-                        <CardDescription className="text-base">{patenteAtual.description}</CardDescription>
-                      </div>
+                  <div className="flex items-center space-x-4">
+                    <div className={`p-3 rounded-lg ${patenteAtual.bgColor}`}>
+                      <patenteAtual.icon className={`h-8 w-8 ${patenteAtual.color}`} />
                     </div>
-                    {patenteAtual.level < 5 && (
-                      <div className="text-right">
-                        <div className="text-sm text-gray-600">XP para próxima patente</div>
-                        <div className="text-lg font-bold text-blue-600">
-                          {patenteProxima?.xpRequired?.toLocaleString() || '0'} XP
-                        </div>
-                      </div>
-                    )}
+                    <div>
+                      <CardTitle className="text-2xl flex items-center">
+                        {patenteAtual.title}
+                        {patenteAtual.level < 5 && (
+                          <span className="ml-2 text-sm text-gray-500">
+                            (Patente {patenteAtual.level} de 5)
+                          </span>
+                        )}
+                      </CardTitle>
+                      <CardDescription className="text-base">{patenteAtual.description}</CardDescription>
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-6">
-                    {/* Progress Bar */}
-                    {patenteAtual.level < 5 && (
-                      <div>
-                        <div className="flex justify-between text-sm mb-2">
-                          <span className="text-gray-600">Progresso para {patenteProxima?.title}</span>
-                          <span className="font-medium text-blue-600">{Math.round(progressoProximaPatente)}%</span>
-                        </div>
-                        <div className="w-full bg-gray-200 rounded-full h-3">
-                          <div 
-                            className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500"
-                            style={{ width: `${progressoProximaPatente}%` }}
-                          ></div>
-                        </div>
-                        <div className="flex justify-between text-xs text-gray-500 mt-1">
-                          <span>{patenteAtual.xpRequired.toLocaleString()} XP</span>
-                          <span>{patenteProxima?.xpRequired?.toLocaleString()} XP</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Requirements */}
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
-                        <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
-                        Requisitos para {patenteAtual.level < 5 ? 'manter esta patente' : 'permanecer no topo'}
-                      </h4>
-                      <ul className="space-y-2">
-                        {patenteAtual.requirements.map((requirement, index) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-blue-600 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{requirement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
+                  <div className="space-y-4">
                     {/* Professor Tip */}
                     <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-600">
                       <div className="flex items-start space-x-3">
@@ -376,27 +328,16 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    {/* Next Rank Info */}
+                    {/* Next Rank Info - Simplificado */}
                     {patenteAtual.level < 5 && patenteProxima && (
                       <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                         <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
                           <ArrowRight className="h-5 w-5 mr-2" />
                           Próxima Patente: {patenteProxima.title}
                         </h4>
-                        <p className="text-yellow-700 mb-3">
-                          Para alcançar a patente <strong>{patenteProxima.title}</strong>, você precisa acumular <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
+                        <p className="text-yellow-700">
+                          Para alcançar a patente <strong>{patenteProxima.title}</strong>, acumule <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
                         </p>
-                        <div className="bg-white p-3 rounded border border-yellow-300">
-                          <h5 className="font-medium text-yellow-800 mb-2">Requisitos específicos:</h5>
-                          <ul className="text-sm text-yellow-700 space-y-1">
-                            {patenteProxima.requirements.map((requirement, index) => (
-                              <li key={index} className="flex items-start">
-                                <Clock className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
-                                {requirement}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
                       </div>
                     )}
                   </div>
