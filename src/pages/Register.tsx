@@ -1,1 +1,0 @@
-// Esta página não é mais necessária pois o cadastro está na página de login
