@@ -108,120 +108,6 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior
-Vou continuar a atualização do CorretorRedação para salvar as redações no Supabase:
-
-<dyad-write path="src/pages/CorretorRedacao.tsx" description="Atualizando CorretorRedação para salvar redações no Supabase">
-"use client";
-
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  BookOpen, 
-  Upload, 
-  Save,
-  TrendingUp,
-  Target,
-  AlertCircle,
-  CheckCircle,
-  Lightbulb,
-  Star,
-  Award,
-  FileText,
-  Image as ImageIcon,
-  Bot,
-  RefreshCw,
-  Pencil,
-  Clock,
-  Settings,
-  Plus,
-  ChevronDown,
-  Shuffle,
-  LogOut
-} from 'lucide-react';
-import { useAuth } from '@/contexts/AuthContext';
-import { useUserData } from '@/contexts/UserDataContext';
-import { showSuccess, showError } from '@/utils/toast';
-import Sidebar from '@/components/Sidebar';
-
-const CorretorRedacao = () => {
-  const navigate = useNavigate();
-  const { user, signOut } = useAuth();
-  const { userProfile, addRedacao } = useUserData();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [redacaoText, setRedacaoText] = useState('');
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [analysisResult, setAnalysisResult] = useState<any>(null);
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [currentTipIndex, setCurrentTipIndex] = useState(0);
-  const [hasStartedRedacao, setHasStartedRedacao] = useState(false);
-  const [timeRemaining, setTimeRemaining] = useState(180); // 3 hours in seconds
-  const [timerActive, setTimerActive] = useState(false);
-  const [selectedTime, setSelectedTime] = useState(180); // Tempo selecionado nas configurações
-  const [showTimeOptions, setShowTimeOptions] = useState(false);
-  const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
-
-  const tips = [
-    {
-      title: "Competências do ENEM",
-      content: "Lembre-se que sua redação será avaliada em 5 competências: Domínio da Modalidade Escrita Formal, Compreensão da Tarefa, Coerência e Coesão, Seleção de Recursos de Linguagem e Proposta de Intervenção. Foque em cada uma delas!",
-      icon: Target
-    },
-    {
-      title: "Repertório Cultural",
-      content: "Não esqueça de incluir repertório! Dados, fatos, citações, obras literárias e exemplos históricos são essenciais para dar sustentação aos seus argumentos. Mas lembre-se: qualidade importa mais que quantidade!",
-      icon: BookOpen
-    },
-    {
-      title: "Estrutura Textual",
-      content: "Sua redação precisa ter uma estrutura clara: introdução com tese, desenvolvimento com argumentos e proposta de intervenção, e conclusão que retoma a tese. Cada parágrafo deve ter uma função específica!",
-      icon: FileText
-    },
-    {
-      title: "Linguagem Formal",
-      content: "Use sempre a norma culta da língua portuguesa. Evite gírias, abreviações e linguagem coloquial. A pontuação correta é fundamental para a clareza do texto. Vamos manter o padrão formal, meu caro aluno!",
-      icon: CheckCircle
-    },
-    {
-      title: "Proposta de Intervenção",
-      content: "Sua proposta precisa ser viável, específica e direcionada ao problema apresentado. Não basta dizer 'o governo deve agir'. Diga COMO, QUANDO e POR QUÊ o governo deve agir. Seja concreto e prático!",
-      icon: Lightbulb
-    },
-    {
-      title: "Tempo de Prova",
-      content: "Na hora da prova, reserve 30 minutos para planejar, 90 minutos para escrever e 30 minutos para revisar. Não se apresse na escrita, mas também não fique preso em um único parágrafo por muito tempo!",
-      icon: TrendingUp
-    }
-  ];
-
-  // Sample ENEM themes
-  const redacaoThemes = [
-    {
-      title: "Proposta de Redação",
-      contextualizacao: [
-        {
-          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia.",
-          fonte: "Fórum Brasileiro de Segurança Pública"
-        },
-        {
-          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios, como a falta de delegacias especializadas e a subnotificação de casos.",
-          fonte: "ONU Mulheres"
-        },
-        {
-          texto: "A cultura do silêncio perpetua a violência contra as mulheres. Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
-          fonte: "Revista Época"
-        }
-      ],
-      tema: "A persistência da violência contra a mulher na sociedade brasileira.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
-    },
-    {
-      title: "Proposta de Redação",
-      contextualizacao: [
-        {
           texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade.",
           fonte: "Instituto Nacional de Pesquisas Espaciais (INPE)"
         },
@@ -478,7 +364,7 @@ const CorretorRedacao = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -517,7 +403,7 @@ const CorretorRedacao = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px:6 lg:px-8 py-8">
+          <div className="px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
               <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
