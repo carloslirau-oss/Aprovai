@@ -15,6 +15,8 @@ export const signUp = async (email: string, password: string, name: string) => {
       data: {
         name,
       },
+      // Não exige verificação de e-mail
+      emailRedirectTo: undefined,
     },
   });
   return { data, error };
@@ -40,4 +42,22 @@ export const getCurrentUser = async () => {
 
 export const onAuthStateChange = (callback: (event: string, session: any) => void) => {
   return supabase.auth.onAuthStateChange(callback);
+};
+
+// Função para atualizar perfil do usuário
+export const updateUserProfile = async (name: string) => {
+  const { error } = await supabase.auth.updateUser({
+    data: {
+      name,
+    },
+  });
+  return { error };
+};
+
+// Função para enviar e-mail de verificação
+export const sendVerificationEmail = async () => {
+  const { error } = await supabase.auth.reauthenticate({
+    emailRedirectTo: undefined,
+  });
+  return { error };
 };

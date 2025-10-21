@@ -63,6 +63,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         data: {
           name,
         },
+        // Não exige verificação de e-mail
+        emailRedirectTo: undefined,
       },
     });
   };

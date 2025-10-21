@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Mail, AlertCircle, CheckCircle } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { usePayment } from '@/contexts/PaymentContext';
 import { showSuccess, showError } from '@/utils/toast';
@@ -20,6 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
+  const [emailVerificationSent, setEmailVerificationSent] = useState(false);
 
   useEffect(() => {
     // Verificar status de pagamento quando o componente carregar
@@ -42,6 +43,11 @@ const Login = () => {
       const { data, error } = await signIn(email, password);
       
       if (error) {
+        // Se for erro de e-mail não verificado, oferecer opção de reenviar
+        if (error.message?.includes('Email not confirmed')) {
+          showError('Por favor, verifique seu e-mail antes de fazer login.');
+          return;
+        }
         throw error;
       }
       
@@ -74,11 +80,13 @@ const Login = () => {
       }
       
       if (data.user) {
+        // Se o usuário foi criado com sucesso, permitir login imediato
         showSuccess('Cadastro realizado com sucesso! Faça login para continuar.');
         setActiveTab('login');
       } else {
-        showSuccess('Verifique seu e-mail para confirmar o cadastro!');
-        setActiveTab('login');
+        // Caso contrário, mostrar mensagem de verificação
+        showSuccess('Cadastro realizado! Verifique seu e-mail para confirmar o cadastro.');
+        setEmailVerificationSent(true);
       }
     } catch (error: any) {
       showError(error.message || 'Erro ao criar conta. Tente novamente.');
@@ -135,6 +143,22 @@ const Login = () => {
           </div>
 
           <CardContent className="p-6">
+            {/* Mensagem de verificação de e-mail */}
+            {emailVerificationSent && (
+              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-center space-x-2 mb-2">
+                  <Mail className="h-5 w-5 text-blue-600" />
+                  <h3 className="font-medium text-blue-900">Verifique seu e-mail</h3>
+                </div>
+                <p className="text-sm text-blue-700 mb-3">
+                  Enviamos um link de confirmação para {email}. Clique no link para ativar sua conta.
+                </p>
+                <p className="text-xs text-blue-600">
+                  Verifique também sua caixa de spam.
+                </p>
+              </div>
+            )}
+
             {/* Formulário de Login */}
             {activeTab === 'login' && (
               <form onSubmit={handleLogin} className="space-y-4">
