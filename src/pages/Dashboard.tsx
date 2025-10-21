@@ -68,7 +68,7 @@ const Dashboard = () => {
     }
   };
 
-  // Sistema de patentes com requisitos
+  // Sistema de patentes com requisitos (agora baseado em XP máximo de 250 por redação)
   const patentes = [
     {
       level: 1,
@@ -181,7 +181,7 @@ const Dashboard = () => {
     }
   ];
 
-  // Dados para gráficos
+  // Dados para gráficos (agora com base em XP máximo de 250)
   const notasData = redacoes.map((redacao, index) => ({
     name: `Redação ${index + 1}`,
     nota: redacao.nota_total || 0,
@@ -192,27 +192,27 @@ const Dashboard = () => {
     {
       name: 'Domínio da Modalidade',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_1 || 0), 0) / redacoes.length,
-      max: 200
+      max: 50 // Agora cada competência vale no máximo 50 pontos
     },
     {
       name: 'Compreensão da Tarefa',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_2 || 0), 0) / redacoes.length,
-      max: 200
+      max: 50
     },
     {
       name: 'Coerência e Coesão',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_3 || 0), 0) / redacoes.length,
-      max: 200
+      max: 50
     },
     {
       name: 'Recursos de Linguagem',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_4 || 0), 0) / redacoes.length,
-      max: 200
+      max: 50
     },
     {
       name: 'Proposta de Intervenção',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_5 || 0), 0) / redacoes.length,
-      max: 200
+      max: 50
     }
   ] : [];
 
@@ -338,15 +338,15 @@ const Dashboard = () => {
 
             {/* Gráficos de Desempenho */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-              {/* Gráfico de Evolução de Notas */}
+              {/* Gráfico de Evolução de Notas (agora com base em 250 pontos) */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <LineChart className="h-5 w-5 mr-2 text-blue-600" />
-                    Evolução das Notas
+                    Evolução das Notas (XP)
                   </CardTitle>
                   <CardDescription>
-                    Sua progressão ao longo das redações
+                    Sua progressão ao longo das redações (máx. 250 XP por redação)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -360,7 +360,7 @@ const Dashboard = () => {
                               <div className="w-20 bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-blue-600 h-2 rounded-full" 
-                                  style={{ width: `${(nota.nota / 1000) * 100}%` }}
+                                  style={{ width: `${(nota.nota / 250) * 100}%` }}
                                 ></div>
                               </div>
                               <span className="text-sm font-medium text-blue-600">{nota.nota}</span>
@@ -377,7 +377,7 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* Gráfico de Competências */}
+              {/* Gráfico de Competências (agora com base em 50 pontos) */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -385,7 +385,7 @@ const Dashboard = () => {
                     Desempenho por Competência
                   </CardTitle>
                   <CardDescription>
-                    Média de desempenho em cada competência
+                    Média de desempenho em cada competência (máx. 50 XP por competência)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -416,7 +416,7 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* Gráfico de XP Acumulado */}
+              {/* Gráfico de XP Acumulado (agora com base em 250) */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
@@ -455,15 +455,15 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* Gráfico de Distribuição de Notas */}
+              {/* Gráfico de Distribuição de Notas (agora com base em 250) */}
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center">
                     <PieChart className="h-5 w-5 mr-2 text-orange-600" />
-                    Distribuição de Notas
+                    Distribuição de Notas (XP)
                   </CardTitle>
                   <CardDescription>
-                    Faixa de notas mais frequentes
+                    Faixa de notas mais frequentes (máx. 250 XP por redação)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -471,39 +471,39 @@ const Dashboard = () => {
                     {notasData.length > 0 ? (
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">0-600</span>
+                          <span className="text-sm text-gray-600">0-150 XP</span>
                           <div className="flex items-center space-x-2">
                             <div className="w-20 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-red-600 h-2 rounded-full" 
-                                style={{ width: `${(notasData.filter(n => n.nota < 600).length / notasData.length) * 100}%` }}
+                                style={{ width: `${(notasData.filter(n => n.nota < 150).length / notasData.length) * 100}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm font-medium">{notasData.filter(n => n.nota < 600).length}</span>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota < 150).length}</span>
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">600-800</span>
+                          <span className="text-sm text-gray-600">150-200 XP</span>
                           <div className="flex items-center space-x-2">
                             <div className="w-20 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-yellow-600 h-2 rounded-full" 
-                                style={{ width: `${(notasData.filter(n => n.nota >= 600 && n.nota < 800).length / notasData.length) * 100}%` }}
+                                style={{ width: `${(notasData.filter(n => n.nota >= 150 && n.nota < 200).length / notasData.length) * 100}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 600 && n.nota < 800).length}</span>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 150 && n.nota < 200).length}</span>
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">800-1000</span>
+                          <span className="text-sm text-gray-600">200-250 XP</span>
                           <div className="flex items-center space-x-2">
                             <div className="w-20 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-green-600 h-2 rounded-full" 
-                                style={{ width: `${(notasData.filter(n => n.nota >= 800).length / notasData.length) * 100}%` }}
+                                style={{ width: `${(notasData.filter(n => n.nota >= 200).length / notasData.length) * 100}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 800).length}</span>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 200).length}</span>
                           </div>
                         </div>
                       </div>
@@ -563,6 +563,9 @@ const Dashboard = () => {
                         </h4>
                         <p className="text-yellow-700">
                           Para alcançar a patente <strong>{patenteProxima.title}</strong>, acumule <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
+                        </p>
+                        <p className="text-yellow-600 text-sm mt-2">
+                          Cada redação vale até 250 XP (50 XP por competência). Continue praticando para melhorar seu desempenho!
                         </p>
                       </div>
                     )}
