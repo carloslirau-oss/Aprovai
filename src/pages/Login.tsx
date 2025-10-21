@@ -6,34 +6,26 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BookOpen, Mail, AlertCircle, CheckCircle } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { usePayment } from '@/contexts/PaymentContext';
 import { showSuccess, showError } from '@/utils/toast';
 
 const Login = () => {
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
-  const { hasPaid, isLoading, checkPaymentStatus } = usePayment();
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
-  const [emailVerificationSent, setEmailVerificationSent] = useState(false);
 
   useEffect(() => {
-    // Verificar status de pagamento quando o componente carregar
-    checkPaymentStatus();
-  }, [checkPaymentStatus]);
-
-  useEffect(() => {
-    // Se o usuário já fez login e tem acesso, redirecionar para dashboard
+    // Verificar se usuário já está logado
     const token = localStorage.getItem('supabase.auth.token');
-    if (token && hasPaid) {
+    if (token) {
       navigate('/dashboard');
     }
-  }, [hasPaid, navigate]);
+  }, [navigate]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,24 +35,11 @@ const Login = () => {
       const { data, error } = await signIn(email, password);
       
       if (error) {
-        // Se for erro de e-mail não verificado, oferecer opção de reenviar
-        if (error.message?.includes('Email not confirmed')) {
-          showError('Por favor, verifique seu e-mail antes de fazer login.');
-          return;
-        }
         throw error;
       }
       
-      // Verificar status de pagamento após login
-      await checkPaymentStatus();
-      
-      if (hasPaid) {
-        showSuccess('Login realizado com sucesso!');
-        navigate('/dashboard');
-      } else {
-        showSuccess('Login realizado! Por favor, complete seu pagamento para acessar a plataforma.');
-        navigate('/payment');
-      }
+      showSuccess('Login realizado com sucesso!');
+      navigate('/dashboard');
     } catch (error: any) {
       showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
     } finally {
@@ -80,13 +59,11 @@ const Login = () => {
       }
       
       if (data.user) {
-        // Se o usuário foi criado com sucesso, permitir login imediato
         showSuccess('Cadastro realizado com sucesso! Faça login para continuar.');
         setActiveTab('login');
       } else {
-        // Caso contrário, mostrar mensagem de verificação
-        showSuccess('Cadastro realizado! Verifique seu e-mail para confirmar o cadastro.');
-        setEmailVerificationSent(true);
+        showSuccess('Cadastro realizado! Faça login para continuar.');
+        setActiveTab('login');
       }
     } catch (error: any) {
       showError(error.message || 'Erro ao criar conta. Tente novamente.');
@@ -94,17 +71,6 @@ const Login = () => {
       setIsLoadingAuth(false);
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Verificando acesso...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
@@ -143,22 +109,6 @@ const Login = () => {
           </div>
 
           <CardContent className="p-6">
-            {/* Mensagem de verificação de e-mail */}
-            {emailVerificationSent && (
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <div className="flex items-center space-x-2 mb-2">
-                  <Mail className="h-5 w-5 text-blue-600" />
-                  <h3 className="font-medium text-blue-900">Verifique seu e-mail</h3>
-                </div>
-                <p className="text-sm text-blue-700 mb-3">
-                  Enviamos um link de confirmação para {email}. Clique no link para ativar sua conta.
-                </p>
-                <p className="text-xs text-blue-600">
-                  Verifique também sua caixa de spam.
-                </p>
-              </div>
-            )}
-
             {/* Formulário de Login */}
             {activeTab === 'login' && (
               <form onSubmit={handleLogin} className="space-y-4">

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -18,32 +18,16 @@ import {
   Target as TargetIcon,
   Zap,
   Crown,
-  Trophy,
-  CreditCard,
-  AlertCircle
+  Trophy
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { usePayment } from '@/contexts/PaymentContext';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-  const { hasPaid, isLoading, checkPaymentStatus } = usePayment();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    // Verificar status de pagamento quando o componente carregar
-    checkPaymentStatus();
-  }, [checkPaymentStatus]);
-
-  useEffect(() => {
-    // Se o usuário não pagou, redirecionar para página de pagamento
-    if (!isLoading && !hasPaid) {
-      navigate('/payment');
-    }
-  }, [hasPaid, isLoading, navigate]);
 
   const handleLogout = async () => {
     try {
@@ -54,21 +38,6 @@ const Dashboard = () => {
       showError('Erro ao realizar logout. Tente novamente.');
     }
   };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Verificando acesso...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!hasPaid) {
-    return null; // Será redirecionado para /payment pelo useEffect
-  }
 
   const stats = [
     {
@@ -198,7 +167,7 @@ const Dashboard = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -241,7 +210,7 @@ const Dashboard = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px-6 lg:px-8 py-8">
+          <div className="px-4 sm:px:6 lg:px-8 py-8">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
               <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
