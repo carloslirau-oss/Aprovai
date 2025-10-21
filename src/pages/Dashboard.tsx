@@ -25,7 +25,8 @@ import {
   BarChart3,
   PieChart,
   LineChart,
-  Activity
+  Activity,
+  RefreshCw
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -35,8 +36,23 @@ import Sidebar from '@/components/Sidebar';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
-  const { userProfile, redacoes, isLoading, updateUserStats } = useUserData();
+  const { userProfile, redacoes, isLoading, updateUserStats, fetchUserProfile, fetchRedacoes } = useUserData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Função para atualizar os dados manualmente
+  const handleRefreshData = async () => {
+    setIsRefreshing(true);
+    try {
+      await fetchUserProfile();
+      await fetchRedacoes();
+      showSuccess('Dados atualizados com sucesso!');
+    } catch (error) {
+      showError('Erro ao atualizar dados. Tente novamente.');
+    } finally {
+      setIsRefreshing(false);
+    }
+  };
 
   useEffect(() => {
     // Calcular estatísticas se não estiverem disponíveis
@@ -313,8 +329,21 @@ const Dashboard = () => {
         <main className="flex-1 flex flex-col">
           <div className="px-4 sm:px:6 lg:px-8 py-8">
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
-              <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
+                  <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
+                </div>
+                <Button
+                  onClick={handleRefreshData}
+                  disabled={isRefreshing}
+                  variant="outline"
+                  className="flex items-center space-x-2"
+                >
+                  <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                  <span>{isRefreshing ? 'Atualizando...' : 'Atualizar Dados'}</span>
+                </Button>
+              </div>
             </div>
 
             {/* Stats Grid */}
@@ -350,20 +379,20 @@ const Dashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-4 overflow-x-auto">
                     {notasData.length > 0 ? (
-                      <div className="space-y-2">
+                      <div className="min-w-max space-y-2">
                         {notasData.map((nota, index) => (
-                          <div key={index} className="flex items-center justify-between">
-                            <span className="text-sm text-gray-600">{nota.name}</span>
-                            <div className="flex items-center space-x-2">
+                          <div key={index} className="flex items-center justify-between min-w-max">
+                            <span className="text-sm text-gray-600 whitespace-nowrap">{nota.name}</span>
+                            <div className="flex items-center space-x-2 min-w-max">
                               <div className="w-20 bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-blue-600 h-2 rounded-full" 
                                   style={{ width: `${(nota.nota / 250) * 100}%` }}
                                 ></div>
                               </div>
-                              <span className="text-sm font-medium text-blue-600">{nota.nota}</span>
+                              <span className="text-sm font-medium text-blue-600 whitespace-nowrap">{nota.nota}</span>
                             </div>
                           </div>
                         ))}
@@ -428,20 +457,20 @@ const Dashboard = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-4 overflow-x-auto">
                     {evolucaoXP.length > 0 ? (
-                      <div className="space-y-2">
+                      <div className="min-w-max space-y-2">
                         {evolucaoXP.map((item, index) => (
-                          <div key={index} className="flex items-center justify-between">
-                            <span className="text-sm text-gray-600">Redação {item.redacao}</span>
-                            <div className="flex items-center space-x-2">
+                          <div key={index} className="flex items-center justify-between min-w-max">
+                            <span className="text-sm text-gray-600 whitespace-nowrap">Redação {item.redacao}</span>
+                            <div className="flex items-center space-x-2 min-w-max">
                               <div className="w-20 bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-purple-600 h-2 rounded-full" 
                                   style={{ width: `${(item.acumulado / 10000) * 100}%` }}
                                 ></div>
                               </div>
-                              <span className="text-sm font-medium text-purple-600">{item.acumulado}</span>
+                              <span className="text-sm font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
                             </div>
                           </div>
                         ))}
