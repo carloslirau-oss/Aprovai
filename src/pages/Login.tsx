@@ -7,10 +7,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { showSuccess, showError } from '@/utils/toast';
 
 const Login = () => {
   const navigate = useNavigate();
+  const { signIn, signUp } = useAuth();
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -22,14 +24,16 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // Aqui você integrará com o Supabase para autenticação
-      // Por enquanto, vamos simular um login bem-sucedido
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { data, error } = await signIn(email, password);
+      
+      if (error) {
+        throw error;
+      }
       
       showSuccess('Login realizado com sucesso!');
       navigate('/dashboard');
-    } catch (error) {
-      showError('E-mail ou senha incorretos. Tente novamente.');
+    } catch (error: any) {
+      showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
     } finally {
       setIsLoading(false);
     }
@@ -40,14 +44,21 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      // Aqui você integrará com o Supabase para cadastro
-      // Por enquanto, vamos simular um cadastro bem-sucedido
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const { data, error } = await signUp(email, password, name);
       
-      showSuccess('Cadastro realizado com sucesso! Faça login para continuar.');
-      setActiveTab('login');
-    } catch (error) {
-      showError('Erro ao criar conta. Tente novamente.');
+      if (error) {
+        throw error;
+      }
+      
+      if (data.user) {
+        showSuccess('Cadastro realizado com sucesso! Faça login para continuar.');
+        setActiveTab('login');
+      } else {
+        showSuccess('Verifique seu e-mail para confirmar o cadastro!');
+        setActiveTab('login');
+      }
+    } catch (error: any) {
+      showError(error.message || 'Erro ao criar conta. Tente novamente.');
     } finally {
       setIsLoading(false);
     }

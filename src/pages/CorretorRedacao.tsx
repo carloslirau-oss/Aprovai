@@ -28,11 +28,13 @@ import {
   Shuffle,
   LogOut
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
 const CorretorRedacao = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [redacaoText, setRedacaoText] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
@@ -162,9 +164,14 @@ const CorretorRedacao = () => {
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const redacaoTheme = redacaoThemes[currentThemeIndex];
 
-  const handleLogout = () => {
-    showSuccess('Logout realizado com sucesso!');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      showSuccess('Logout realizado com sucesso!');
+      navigate('/login');
+    } catch (error) {
+      showError('Erro ao realizar logout. Tente novamente.');
+    }
   };
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -337,7 +344,7 @@ const CorretorRedacao = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px:8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -352,10 +359,14 @@ const CorretorRedacao = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">JD</span>
+                  <span className="text-white text-sm font-medium">
+                    {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'JD'}
+                  </span>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">João da Silva</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    {user?.user_metadata?.name || 'João da Silva'}
+                  </p>
                   <div className="flex items-center space-x-1">
                     <Award className="h-4 w-4 text-yellow-500" />
                     <span className="text-xs text-gray-500">Mestre da Caneta</span>

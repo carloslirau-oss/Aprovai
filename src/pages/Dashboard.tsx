@@ -20,16 +20,23 @@ import {
   Crown,
   Trophy
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { showSuccess } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const handleLogout = () => {
-    showSuccess('Logout realizado com sucesso!');
-    navigate('/login');
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      showSuccess('Logout realizado com sucesso!');
+      navigate('/login');
+    } catch (error) {
+      showError('Erro ao realizar logout. Tente novamente.');
+    }
   };
 
   const stats = [
@@ -175,10 +182,14 @@ const Dashboard = () => {
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">JD</span>
+                  <span className="text-white text-sm font-medium">
+                    {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'JD'}
+                  </span>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-gray-900">João da Silva</p>
+                  <p className="text-sm font-medium text-gray-900">
+                    {user?.user_metadata?.name || 'João da Silva'}
+                  </p>
                   <div className="flex items-center space-x-1">
                     <Award className="h-4 w-4 text-yellow-500" />
                     <span className="text-xs text-gray-500">Mestre da Caneta</span>
@@ -201,7 +212,7 @@ const Dashboard = () => {
         <main className="flex-1 flex flex-col">
           <div className="px-4 sm:px-6 lg:px-8 py-8">
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, João!</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
               <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
             </div>
 
