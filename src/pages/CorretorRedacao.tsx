@@ -154,7 +154,7 @@ const CorretorRedacao = () => {
           tamanho: "medio"
         },
         {
-          texto: "A falta de acesso à internet de qualidade afeta diretivamente o desempenho dos estudantes, especialmente aqueles de baixa renda. Muitos precisam compartilhar dispositivos com outros membros da família ou dependem de redes Wi-Fi públicas, o que compromete a regularidade e a qualidade do aprendizado. A digitalização da educação sem políticas públicas que garantam acesso universal à tecnologia perpetua as desigualdades sociais.",
+          texto: "A falta de acesso à internet de qualidade afeta diretamente o desempenho dos estudantes, especialmente aqueles de baixa renda. Muitos precisam compartilhar dispositivos com outros membros da família ou dependem de redes Wi-Fi públicas, o que compromete a regularidade e a qualidade do aprendizado. A digitalização da educação sem políticas públicas que garantam acesso universal à tecnologia perpetua as desigualdades sociais.",
           fonte: "UNESCO",
           tamanho: "pequeno"
         },
@@ -165,7 +165,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "A expansão da educação a distância e a inclusão digital no Brasil.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -176,7 +176,7 @@ const CorretorRedacao = () => {
           tamanho: "grande"
         },
         {
-          texto: "A lacuna entre formação e habilidades demandadas é um obstáculo para a empregabilidade. Muitos cursos superiores ainda focam em teorias e conceitos, sem preparar os alunos para as necessidades práticas do mercado de trabalho. A falta de estágios, programas de capacitação e parcerias entre instituições de ensino e empresas agrava esse problema, deixando os jovens despreparados para os desafios do mundo profissional.",
+          texto: "A lacuna entre a formação oferecida pelas escolas e as habilidades demandadas pelo mercado de trabalho é um dos principais obstáculos para a empregabilidade dos jovens. Muitos cursos superiores ainda focam em teorias e conceitos, sem preparar os alunos para as necessidades práticas do mercado de trabalho. A falta de estágios, programas de capacitação e parcerias entre instituições de ensino e empresas agrava esse problema, deixando os jovens despreparados para os desafios do mundo profissional.",
           fonte: "Fórum Econômico Mundial",
           tamanho: "medio"
         },
@@ -192,7 +192,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Desemprego juvenil e a lacuna entre educação e mercado de trabalho.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -219,7 +219,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Saúde mental dos jovens brasileiros: desafios e soluções.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -246,7 +246,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Racismo estrutural no Brasil: combate e promoção da igualdade racial.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -273,7 +273,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Crise hídrica no Brasil: sustentabilidade e gestão dos recursos hídricos.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -300,7 +300,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Evasão escolar no Brasil: causas e estratégias de permanência.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -327,7 +327,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Violência urbana no Brasil: prevenção e políticas de segurança.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -354,7 +354,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Corrupção no Brasil: combate e fortalecimento da ética pública.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     }
   ];
 
@@ -429,6 +429,262 @@ const CorretorRedacao = () => {
     return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
+  // Função para analisar a qualidade da redação baseado nos critérios do ENEM
+  const analyzeRedacaoQuality = (text: string) => {
+    const analysis = {
+      competencia1: { score: 0, max: 200, feedback: "", errors: [] },
+      competencia2: { score: 0, max: 200, feedback: "", errors: [] },
+      competencia3: { score: 0, max: 200, feedback: "", errors: [] },
+      competencia4: { score: 0, max: 200, feedback: "", errors: [] },
+      competencia5: { score: 0, max: 200, feedback: "", errors: [] }
+    };
+
+    // Competência 1: Domínio da Modalidade Escrita Formal
+    const formalErrors = [];
+    let c1Score = 200;
+
+    // Verificar erros gramaticais comuns
+    const commonErrors = [
+      /(\w+)\s+e\s+(\w+)\s+foi/gi, // Erro de concordância
+      /(\w+)\s+tem\s+muito/gi, // Erro de concordância
+      /(\w+)\s+faz\s+que/gi, // Erro de regência
+      /\b(?:vc|td|pq|blz|mt|obg|kd|flw)\b/gi, // Abreviações informais
+      /\b(?:tipo|assim|então|aí|né|mano)\b/gi, // Gírias
+      /[!?]{2,}/g, // Pontuação excessiva
+      /[.]{3,}/g, // Reticências excessivas
+    ];
+
+    commonErrors.forEach(error => {
+      if (error.test(text)) {
+        formalErrors.push("Uso de linguagem informal ou erro gramatical");
+        c1Score -= 40;
+      }
+    });
+
+    // Verificar vocabulário repetitivo
+    const words = text.toLowerCase().split(/\s+/);
+    const wordFreq = {};
+    words.forEach(word => {
+      if (word.length > 3) {
+        wordFreq[word] = (wordFreq[word] || 0) + 1;
+      }
+    });
+
+    const repetitiveWords = Object.entries(wordFreq).filter(([word, freq]) => freq > 5);
+    if (repetitiveWords.length > 2) {
+      formalErrors.push("Vocabulário repetitivo");
+      c1Score -= 30;
+    }
+
+    // Verificar frases muito curtas
+    const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+    const shortSentences = sentences.filter(s => s.trim().split(/\s+/).length < 5);
+    if (shortSentences.length > sentences.length * 0.5) {
+      formalErrors.push("Predomínio de frases muito curtas");
+      c1Score -= 25;
+    }
+
+    analysis.competencia1.score = Math.max(0, c1Score);
+    analysis.competencia1.errors = formalErrors;
+    analysis.competencia1.feedback = c1Score >= 160 ? 
+      "Excelente domínio da norma culta! Sua escrita demonstra correção gramatical e vocabulário adequado." :
+      c1Score >= 120 ? 
+      "Bom domínio da norma culta, mas com alguns erros que podem ser melhorados." :
+      "Precisa melhorar o domínio da norma culta. Há erros gramaticais e uso de linguagem informal.";
+
+    // Competência 2: Compreensão da Tarefa
+    let c2Score = 200;
+    const themeErrors = [];
+
+    // Verificar se o texto aborda o tema
+    const themeKeywords = redacaoTheme.tema.toLowerCase().split(/\s+/);
+    const textLower = text.toLowerCase();
+    const themeMatches = themeKeywords.filter(keyword => keyword.length > 3 && textLower.includes(keyword));
+
+    if (themeMatches.length < themeKeywords.length * 0.5) {
+      themeErrors.push("Pouca conexão com o tema proposto");
+      c2Score -= 80;
+    } else if (themeMatches.length < themeKeywords.length * 0.7) {
+      themeErrors.push("Conexão parcial com o tema");
+      c2Score -= 40;
+    }
+
+    // Verificar estrutura dissertativa
+    const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
+    if (paragraphs.length < 3) {
+      themeErrors.push("Estrutura dissertativa incompleta");
+      c2Score -= 50;
+    }
+
+    // Verificar presença de tese
+    const hasThesis = /(?:é|trata-se de|consiste em|refere-se a|diz respeito a)/gi.test(text);
+    if (!hasThesis) {
+      themeErrors.push("Tese não clara ou ausente");
+      c2Score -= 30;
+    }
+
+    analysis.competencia2.score = Math.max(0, c2Score);
+    analysis.competencia2.errors = themeErrors;
+    analysis.competencia2.feedback = c2Score >= 160 ? 
+      "Perfeita compreensão do tema! Sua redação aborda diretamente o assunto com tese clara." :
+      c2Score >= 120 ? 
+      "Boa compreensão do tema, mas poderia aprofundar mais a análise." :
+      "Necessidade de melhor compreensão do tema. O texto foge ou tangencia o assunto.";
+
+    // Competência 3: Seleção e Organização de Argumentos
+    let c3Score = 200;
+    const argumentErrors = [];
+
+    // Verificar presença de argumentos
+    const argumentMarkers = /(?:porque|já que|visto que|pois|uma vez que|devido a|como|segundo|conforme|dados|pesquisas|estudos|exemplos|casos)/gi;
+    const argumentCount = (text.match(argumentMarkers) || []).length;
+
+    if (argumentCount < 2) {
+      argumentErrors.push("Poucos argumentos apresentados");
+      c3Score -= 60;
+    } else if (argumentCount < 4) {
+      argumentErrors.push("Argumentos insuficientes ou pouco desenvolvidos");
+      c3Score -= 30;
+    }
+
+    // Verificar argumentos genéricos
+    const genericPhrases = [
+      /o governo deve agir/gi,
+      /a sociedade precisa conscientizar/gi,
+      /é preciso fazer algo/gi,
+      /todos devem colaborar/gi
+    ];
+
+    genericPhrases.forEach(phrase => {
+      if (phrase.test(text)) {
+        argumentErrors.push("Argumentos genéricos sem especificação");
+        c3Score -= 25;
+      }
+    });
+
+    // Verificar profundidade dos argumentos
+    const hasData = /\d{4}|\d+%|\d+\.\d+/.test(text);
+    const hasExamples = /(?:por exemplo|como|caso de|exemplo de)/gi.test(text);
+    
+    if (!hasData && !hasExamples) {
+      argumentErrors.push("Falta de dados ou exemplos concretos");
+      c3Score -= 35;
+    }
+
+    analysis.competencia3.score = Math.max(0, c3Score);
+    analysis.competencia3.errors = argumentErrors;
+    analysis.competencia3.feedback = c3Score >= 160 ? 
+      "Argumentos excelentes! Bem selecionados, organizados e com exemplos concretos." :
+      c3Score >= 120 ? 
+      "Argumentos bons, mas poderiam ser mais específicos e melhor desenvolvidos." :
+      "Argumentos fracos ou insuficientes. Precisa de mais dados e exemplos.";
+
+    // Competência 4: Coesão Textual
+    let c4Score = 200;
+    const cohesionErrors = [];
+
+    // Verificar uso de conectivos
+    const connectives = {
+      addition: /(?:além disso|também|ademais|ainda|outrossim|somado a)/gi,
+      cause: /(?:porque|já que|visto que|pois|uma vez que|devido a|em virtude de)/gi,
+      consequence: /(?:portanto|assim|dessa forma|por conseguinte|logo|então|consequentemente)/gi,
+      opposition: /(?:porém|contudo|no entanto|entretanto|todavia|mas|senão)/gi
+    };
+
+    let connectiveCount = 0;
+    Object.values(connectives).forEach(pattern => {
+      const matches = text.match(pattern);
+      if (matches) connectiveCount += matches.length;
+    });
+
+    if (connectiveCount < 3) {
+      cohesionErrors.push("Poucos conectivos, prejudicando a fluidez");
+      c4Score -= 50;
+    } else if (connectiveCount < 6) {
+      cohesionErrors.push("Uso insuficiente de conectivos");
+      c4Score -= 25;
+    }
+
+    // Verificar repetição de conectivos
+    const allConnectives = text.match(/(?:além disso|também|porém|contudo|no entanto|porque|já que|portanto|assim|dessa forma)/gi) || [];
+    const uniqueConnectives = [...new Set(allConnectives)];
+    
+    if (uniqueConnectives.length < allConnectives.length * 0.7) {
+      cohesionErrors.push("Repetição excessiva dos mesmos conectivos");
+      c4Score -= 20;
+    }
+
+    // Verificar parágrafos bem conectados
+    const paragraphTransitions = paragraphs.slice(1).filter((p, i) => {
+      const prevParagraph = paragraphs[i];
+      return !/(?:além disso|também|porém|contudo|no entanto|portanto|assim|dessa forma)/gi.test(p.substring(0, 50));
+    });
+
+    if (paragraphTransitions.length > paragraphs.length * 0.5) {
+      cohesionErrors.push("Falta de transição adequada entre parágrafos");
+      c4Score -= 30;
+    }
+
+    analysis.competencia4.score = Math.max(0, c4Score);
+    analysis.competencia4.errors = cohesionErrors;
+    analysis.competencia4.feedback = c4Score >= 160 ? 
+      "Excelente coesão! Uso variado e adequado de conectivos, com transições fluidas." :
+      c4Score >= 120 ? 
+      "Boa coesão, mas poderia variar mais os conectivos e melhorar transições." :
+      "Coesão fraca. Precisa usar mais conectivos e melhorar a ligação entre ideias.";
+
+    // Competência 5: Proposta de Intervenção
+    let c5Score = 200;
+    const proposalErrors = [];
+
+    // Verificar presença de proposta
+    const hasProposal = /(?:deve-se|precisa|é necessário|sugere-se|recomenda-se|propõe-se)/gi.test(text);
+    if (!hasProposal) {
+      proposalErrors.push("Proposta de intervenção ausente");
+      c5Score -= 100;
+    } else {
+      // Verificar elementos da proposta
+      const hasAgent = /(?:governo|estado|sociedade|escola|família|mídia|instituições)/gi.test(text);
+      const hasAction = /(?:criar|implementar|desenvolver|promover|incentivar|investir|fomentar)/gi.test(text);
+      const hasMeans = /(?:através de|mediante|por meio de|com|utilizando|via)/gi.test(text);
+      const hasPurpose = /(?:para|com objetivo de|a fim de|visando|buscando)/gi.test(text);
+
+      if (!hasAgent) {
+        proposalErrors.push("Agente da intervenção não especificado");
+        c5Score -= 25;
+      }
+      if (!hasAction) {
+        proposalErrors.push("Ação da intervenção não clara");
+        c5Score -= 25;
+      }
+      if (!hasMeans) {
+        proposalErrors.push("Meio de execução não detalhado");
+        c5Score -= 20;
+      }
+      if (!hasPurpose) {
+        proposalErrors.push("Finalidade da intervenção não explicitada");
+        c5Score -= 15;
+      }
+
+      // Verificar se a proposta é detalhada
+      const proposalSection = text.match(/(?:deve-se|precisa|é necessário|sugere-se)[^.!?]*[.!?]/gi);
+      if (proposalSection && proposalSection[0].length < 100) {
+        proposalErrors.push("Proposta muito genérica ou pouco detalhada");
+        c5Score -= 30;
+      }
+    }
+
+    analysis.competencia5.score = Math.max(0, c5Score);
+    analysis.competencia5.errors = proposalErrors;
+    analysis.competencia5.feedback = c5Score >= 160 ? 
+      "Proposta de intervenção excelente! Completa, detalhada e com todos os elementos necessários." :
+      c5Score >= 120 ? 
+      "Boa proposta, mas precisa de mais detalhamento e especificação." :
+      "Proposta fraca ou ausente. Precisa ser mais concreta e detalhada.";
+
+    return analysis;
+  };
+
   const analyzeRedacao = async () => {
     if (!redacaoText.trim() && !imageFile) {
       showError('Por favor, escreva sua redação ou envie uma imagem.');
@@ -440,45 +696,54 @@ const CorretorRedacao = () => {
     try {
       await new Promise(resolve => setTimeout(resolve, 3000));
       
+      // Analisar a qualidade da redação
+      const qualityAnalysis = analyzeRedacaoQuality(redacaoText);
+      
+      const totalScore = Object.values(qualityAnalysis).reduce((sum, comp: any) => sum + comp.score, 0);
+      
       const result = {
-        totalScore: 820,
+        totalScore: totalScore,
         competencies: [
-          { name: 'Domínio da Modalidade Escrita Formal', score: 180, max: 200 },
-          { name: 'Compreensão da Tarefa', score: 170, max: 200 },
-          { name: 'Coerência e Coesão', score: 160, max: 200 },
-          { name: 'Seleção de Recursos de Linguagem', score: 150, max: 200 },
-          { name: 'Proposta de Intervenção', score: 160, max: 200 }
+          { name: 'Domínio da Modalidade Escrita Formal', score: qualityAnalysis.competencia1.score, max: 200 },
+          { name: 'Compreensão da Tarefa', score: qualityAnalysis.competencia2.score, max: 200 },
+          { name: 'Seleção e Organização de Argumentos', score: qualityAnalysis.competencia3.score, max: 200 },
+          { name: 'Coesão Textual', score: qualityAnalysis.competencia4.score, max: 200 },
+          { name: 'Proposta de Intervenção', score: qualityAnalysis.competencia5.score, max: 200 }
         ],
         errors: [
-          'Falta de conectivos entre os parágrafos',
-          'Uso incorreto de pontuação em alguns períodos',
-          'Falta de exemplos concretos para sustentar argumentos'
+          ...qualityAnalysis.competencia1.errors,
+          ...qualityAnalysis.competencia2.errors,
+          ...qualityAnalysis.competencia3.errors,
+          ...qualityAnalysis.competencia4.errors,
+          ...qualityAnalysis.competencia5.errors
         ],
         suggestions: [
-          'Incluir mais dados estatísticos sobre o tema',
-          'Utilizar conectivos como "além disso", "por outro lado" para melhorar a coesão',
-          'Adicionar citações de autores renomados para dar mais credibilidade'
+          'Revise a pontuação e a concordância verbal e nominal',
+          'Utilize conectivos variados para melhorar a coesão',
+          'Inclua dados estatísticos e exemplos concretos',
+          'Detalhe melhor a proposta de intervenção com agente, ação e meio',
+          'Aprofunde a análise do tema com argumentos mais específicos'
         ],
         detailedFeedback: [
           {
             competency: 'Domínio da Modalidade Escrita Formal',
-            feedback: 'Sua redação demonstra excelente domínio da norma culta! A gramática está impecável e o vocabulário rico. Continue assim que você vai virar o novo Machado de Assis! 😎'
+            feedback: qualityAnalysis.competencia1.feedback
           },
           {
             competency: 'Compreensão da Tarefa',
-            feedback: 'Você entendeu perfeitamente o tema e a proposta de intervenção. A abordagem está direcionada corretamente. Professor Carlinhos aprova! 👏'
+            feedback: qualityAnalysis.competencia2.feedback
           },
           {
-            competency: 'Coerência e Coesão',
-            feedback: 'A estrutura está boa, mas poderia melhorar a conexão entre os parágrafos. Tente usar mais conectivos para criar um fluxo mais natural.'
+            competency: 'Seleção e Organização de Argumentos',
+            feedback: qualityAnalysis.competencia3.feedback
           },
           {
-            competency: 'Seleção de Recursos de Linguagem',
-            feedback: 'Seu estilo é único e cativante! A variedade de estruturas sintáticas enriquece o texto. Só faltou um pouquinho mais de figuras de retórica.'
+            competency: 'Coesão Textual',
+            feedback: qualityAnalysis.competencia4.feedback
           },
           {
             competency: 'Proposta de Intervenção',
-            feedback: 'Sua proposta é viável e bem fundamentada. Que tal incluir um cronograma de implementação para deixar ainda mais completo?'
+            feedback: qualityAnalysis.competencia5.feedback
           }
         ]
       };
@@ -924,21 +1189,46 @@ const CorretorRedacao = () => {
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-600 mb-2">
+                        <div className={`text-4xl font-bold mb-2 ${
+                          analysisResult.totalScore >= 800 ? 'text-green-600' :
+                          analysisResult.totalScore >= 600 ? 'text-blue-600' :
+                          analysisResult.totalScore >= 400 ? 'text-yellow-600' : 'text-red-600'
+                        }`}>
                           {analysisResult.totalScore}
                         </div>
                         <p className="text-gray-600">Nota Total</p>
+                        <div className="mt-2">
+                          <span className={`text-sm px-2 py-1 rounded-full ${
+                            analysisResult.totalScore >= 800 ? 'bg-green-100 text-green-800' :
+                            analysisResult.totalScore >= 600 ? 'bg-blue-100 text-blue-800' :
+                            analysisResult.totalScore >= 400 ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'
+                          }`}>
+                            {analysisResult.totalScore >= 800 ? 'Excelente' :
+                             analysisResult.totalScore >= 600 ? 'Bom' :
+                             analysisResult.totalScore >= 400 ? 'Regular' : 'Precisa Melhorar'}
+                          </span>
+                        </div>
                       </div>
                       <div className="space-y-3">
                         {analysisResult.competencies.map((comp: any, index: number) => (
                           <div key={index}>
                             <div className="flex justify-between text-sm mb-1">
                               <span className="text-gray-700">{comp.name}</span>
-                              <span className="font-medium">{comp.score}/{comp.max}</span>
+                              <span className={`font-medium ${
+                                comp.score >= 160 ? 'text-green-600' :
+                                comp.score >= 120 ? 'text-blue-600' :
+                                comp.score >= 80 ? 'text-yellow-600' : 'text-red-600'
+                              }`}>
+                                {comp.score}/{comp.max}
+                              </span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                               <div 
-                                className="bg-blue-600 h-2 rounded-full" 
+                                className={`h-2 rounded-full ${
+                                  comp.score >= 160 ? 'bg-green-600' :
+                                  comp.score >= 120 ? 'bg-blue-600' :
+                                  comp.score >= 80 ? 'bg-yellow-600' : 'bg-red-600'
+                                }`} 
                                 style={{ width: `${(comp.score / comp.max) * 100}%` }}
                               ></div>
                             </div>
@@ -970,63 +1260,68 @@ const CorretorRedacao = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <Card>
                     <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
-                        Principais Erros
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2">
-                        {analysisResult.errors.map((error: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{error}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
+                      <CardTitle
+Vou continuar a implementação do sistema de análise realista baseado nos critérios do ENEM:
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
-                        Sugestões de Melhoria
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2">
-                        {analysisResult.suggestions.map((suggestion: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{suggestion}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
+<dyad-write path="src/pages/CorretorRedacao.tsx" description="Implementando sistema de análise realista baseado nos critérios do ENEM (continuação)">
+                        className="flex items-center">
+                          <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
+                          Principais Erros
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2">
+                          {analysisResult.errors.map((error: string, index: number) => (
+                            <li key={index} className="flex items-start">
+                              <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                              <span className="text-gray-700">{error}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
 
-                {/* Action Buttons */}
-                <div className="flex justify-center space-x-4">
-                  <Button onClick={saveRedacao} className="bg-green-600 hover:bg-green-700 text-white">
-                    <Save className="h-4 w-4 mr-2" />
-                    Salvar Redação
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => {
-                      setAnalysisResult(null);
-                      setRedacaoText('');
-                      setImageFile(null);
-                      setHasStartedRedacao(false);
-                      setTimerActive(false);
-                      // Gera um novo tema automaticamente
-                      goToRandomTheme();
-                    }}
-                  >
-                    Nova Redação
-                  </Button>
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center">
+                          <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
+                          Sugestões de Melhoria
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2">
+                          {analysisResult.suggestions.map((suggestion: string, index: number) => (
+                            <li key={index} className="flex items-start">
+                              <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                              <span className="text-gray-700">{suggestion}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex justify-center space-x-4">
+                    <Button onClick={saveRedacao} className="bg-green-600 hover:bg-green-700 text-white">
+                      <Save className="h-4 w-4 mr-2" />
+                      Salvar Redação
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => {
+                        setAnalysisResult(null);
+                        setRedacaoText('');
+                        setImageFile(null);
+                        setHasStartedRedacao(false);
+                        setTimerActive(false);
+                        // Gera um novo tema automaticamente
+                        goToRandomTheme();
+                      }}
+                    >
+                      Nova Redação
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}
