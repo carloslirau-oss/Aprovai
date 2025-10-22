@@ -84,29 +84,29 @@ const CorretorRedacao = () => {
     }
   ];
 
-  // Sample ENEM themes - com contextualização padronizada
+  // Sample ENEM themes - com contextualização expandida
   const redacaoThemes = [
     {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia. Esse cenário reflete uma crise social profunda que exige ações urgentes e efetivas por parte do Estado e da sociedade. A violência de gênero não é apenas um problema individual, mas uma questão estrutural que permeia todas as esferas da vida das mulheres, desde o ambiente doméstico até o espaço público.",
+          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia. Esse cenário reflete uma crise social profunda que exige ações urgentes e efetivas por parte do Estado e da sociedade. A violência de gênero não é apenas um problema individual, mas uma questão estrutural que permeia todas as esferas da vida das mulheres, desde o ambiente doméstico até o espaço público. A cultura do silêncio e a normalização da violência perpetuam esse ciclo de opressão, tornando difícil para as vítimas buscarem ajuda e justiça.",
           fonte: "Fórum Brasileiro de Segurança Pública",
           tamanho: "grande"
         },
         {
-          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios significativos, como a falta de delegacias especializadas e a subnotificação de casos.",
+          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica e familiar. No entanto, sua implementação ainda enfrenta desafios significativos, como a falta de delegacias especializadas, a subnotificação de casos e a morosidade da justiça. Muitas mulheres ainda enfrentam barreiras para denunciar seus agressores, medo de represálias e falta de apoio institucional. A necessidade de políticas públicas mais eficientes e de uma mudança cultural que desestimule a violência de gênero é cada vez mais evidente.",
           fonte: "ONU Mulheres",
           tamanho: "medio"
         },
         {
-          texto: "A cultura do silêncio perpetua a violência contra as mulheres.",
-          fonte: "Revista Época",
+          texto: "A desigualdade de gênero persiste em todas as esferas da sociedade brasileira, desde o mercado de trabalho até a política. Mulheres ainda ganham menos que homens por igual trabalho, enfrentam dificuldades de ascensão profissional e são subrepresentadas em cargos de decisão. Essa desigualdade estrutural contribui para a perpetuação da violência, pois reforça a ideia de que as mulheres são inferiores e podem ser submetidas a abusos.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada",
           tamanho: "pequeno"
         },
         {
-          texto: "Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
-          fonte: "Instituto de Pesquisa Econômica Aplicada",
+          texto: "A educação para a igualdade de gênero e o respeito aos direitos humanos são fundamentais para combater a violência contra as mulheres. Programas que promovem a conscientização desde a infância e que ensinam sobre consentimento, respeito e relações saudáveis são essenciais para construir uma sociedade mais justa e igualitária para todos.",
+          fonte: "Ministério da Educação",
           tamanho: "pequeno"
         }
       ],
@@ -117,22 +117,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade, comprometendo não apenas o ecossistema amazônico, mas também o equilíbrio climático mundial. A Amazônia, conhecida como o pulmão do mundo, está sofrendo uma destruição acelerada que ameaça a vida de milhões de pessoas e a sobrevivência de inúmeras espécies.",
+          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade, comprometendo não apenas o ecossistema amazônico, mas também o equilíbrio climático mundial. A Amazônia, conhecida como o pulmão do mundo, está sofrendo uma destruição acelerada que ameaça a vida de milhões de pessoas e a sobrevivência de inúmeras espécies. A exploração predatória de recursos naturais, associada à expansão da agropecuária e à grilagem de terras, são os principais responsáveis por esse cenário alarmante.",
           fonte: "Instituto Nacional de Pesquisas Espaciais (INPE)",
           tamanho: "grande"
         },
         {
-          texto: "A economia da região amazônica depende dos recursos naturais, mas o extrativismo sustentável ainda é pouco desenvolvido.",
+          texto: "A economia da região amazônica depende dos recursos naturais, mas o extrativismo sustentável ainda é pouco desenvolvido. Muitas comunidades tradicionais, como indígenas e ribeirinhos, dependem da floresta para sua subsistência, mas enfrentam pressões constantes de grileiros e madeireiros. A falta de políticas públicas que valorizem o conhecimento tradicional e promovam o uso sustentável dos recursos naturais agrava o conflito entre desenvolvimento econômico e conservação ambiental.",
           fonte: "Instituto Socioambiental (ISA)",
           tamanho: "medio"
         },
         {
-          texto: "Muitas comunidades tradicionais dependem da floresta para sua subsistência.",
+          texto: "O Brasil tem compromissos internacionais para reduzir o desmatamento, mas a fiscalização e a implementação de políticas ambientais eficazes ainda enfrentam grandes desafios. A falta de recursos para o Ibama e a Polícia Ambiental, associada à impunidade dos crimes ambientais, permite que a destruição da floresta continue avançando sem maiores consequências para os responsáveis.",
           fonte: "Ministério do Meio Ambiente",
           tamanho: "pequeno"
         },
         {
-          texto: "O Brasil tem compromissos internacionais para reduzir o desmatamento.",
+          texto: "A conscientização da população sobre a importância da Amazônia para o planeta e a pressão internacional por ações concretas são fundamentais para reverter esse quadro. A transição para uma economia verde, que valorize a conservação e o uso sustentável dos recursos naturais, é o caminho mais promissor para garantir o futuro da região e do planeta.",
           fonte: "ONU Meio Ambiente",
           tamanho: "pequeno"
         }
@@ -144,22 +144,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A educação a distância (EaD) expandiu-se significativamente durante a pandemia de COVID-19. Segundo o INEP, o número de matrículas na modalidade cresceu 25% em 2020, mas a desigualdade digital permanece como grande desafio. Milhões de estudantes, especialmente das camadas mais vulneráveis, enfrentam dificuldades de acesso à internet e a dispositivos adequados para o aprendizado online. Essa exclusão digital agrava as desigualdades educacionais e sociais, criando um fosso entre aqueles que têm acesso à tecnologia e aqueles que não têm.",
+          texto: "A educação a distância (EaD) expandiu-se significativamente durante a pandemia de COVID-19. Segundo o INEP, o número de matrículas na modalidade cresceu 25% em 2020, mas a desigualdade digital permanece como grande desafio. Milhões de estudantes, especialmente das camadas mais vulneráveis, enfrentam dificuldades de acesso à internet e a dispositivos adequados para o aprendizado online. Essa exclusão digital agrava as desigualdades educacionais e sociais, criando um fosso entre aqueles que têm acesso à tecnologia e aqueles que não têm. A pandemia expôs as fragilidades do sistema educacional brasileiro e a necessidade de investimentos urgentes em infraestrutura digital.",
           fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)",
           tamanho: "grande"
         },
         {
-          texto: "A EaD oferece flexibilidade e acesso a educação de qualidade, mas exige investimento em infraestrutura digital.",
+          texto: "A EaD oferece flexibilidade e acesso a educação de qualidade, mas exige investimento em infraestrutura digital e capacitação de professores. Muitas instituições de ensino não estavam preparadas para a transição para o modelo remoto, enfrentando problemas com plataformas tecnológicas, falta de treinamento docente e dificuldades de adaptação metodológica. A qualidade do ensino online depende de recursos adequados e de profissionais preparados para utilizar as ferramentas digitais de forma eficaz.",
           fonte: "Ministério da Educação",
           tamanho: "medio"
         },
         {
-          texto: "Capacitação de professores é essencial para garantir efetividade pedagógica.",
+          texto: "A falta de acesso à internet de qualidade afeta diretivamente o desempenho dos estudantes, especialmente aqueles de baixa renda. Muitos precisam compartilhar dispositivos com outros membros da família ou dependem de redes Wi-Fi públicas, o que compromete a regularidade e a qualidade do aprendizado. A digitalização da educação sem políticas públicas que garantam acesso universal à tecnologia perpetua as desigualdades sociais.",
           fonte: "UNESCO",
           tamanho: "pequeno"
         },
         {
-          texto: "A inclusão digital é fundamental para a democratização do conhecimento.",
+          texto: "A inclusão digital é fundamental para a democratização do conhecimento e para a redução das desigualdades sociais. Programas que fornecem dispositivos e acesso à internet para estudantes de baixa renda, associados à capacitação digital de professores e alunos, são essenciais para construir um sistema educacional mais justo e inclusivo para todos.",
           fonte: "Fórum Econômico Mundial",
           tamanho: "pequeno"
         }
@@ -171,22 +171,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "O mercado de trabalho no Brasil enfrenta grandes desafios estruturais. Segundo o IBGE, a taxa de desemprego entre jovens de 18 a 24 anos é de 25%, quase o dobro da média nacional. Essa situação reflete uma lacuna significativa entre a formação oferecida pelas escolas e as habilidades demandadas pelo mercado de trabalho. Jovens saem da educação básica e superior sem as competências necessárias para se inserirem no mercado de trabalho formal, o que resulta em subemprego, informalidade e frustração profissional.",
+          texto: "O mercado de trabalho no Brasil enfrenta grandes desafios estruturais. Segundo o IBGE, a taxa de desemprego entre jovens de 18 a 24 anos é de 25%, quase o dobro da média nacional. Essa situação reflete uma lacuna significativa entre a formação oferecida pelas escolas e as habilidades demandadas pelo mercado de trabalho. Jovens saem da educação básica e superior sem as competências necessárias para se inserirem no mercado de trabalho formal, o que resulta em subemprego, informalidade e frustração profissional. A falta de oportunidades adequadas para os jovens compromete não apenas seu desenvolvimento individual, mas também o crescimento econômico do país.",
           fonte: "Instituto Brasileiro de Geografia e Estatística (IBGE)",
           tamanho: "grande"
         },
         {
-          texto: "A lacuna entre formação e habilidades demandadas é um obstáculo para a empregabilidade.",
+          texto: "A lacuna entre formação e habilidades demandadas é um obstáculo para a empregabilidade. Muitos cursos superiores ainda focam em teorias e conceitos, sem preparar os alunos para as necessidades práticas do mercado de trabalho. A falta de estágios, programas de capacitação e parcerias entre instituições de ensino e empresas agrava esse problema, deixando os jovens despreparados para os desafios do mundo profissional.",
           fonte: "Fórum Econômico Mundial",
           tamanho: "medio"
         },
         {
-          texto: "O empreendedorismo é uma alternativa para a geração de empregos.",
+          texto: "O empreendedorismo é uma alternativa para a geração de empregos e para a melhoria da renda, mas exige apoio político e investimento em educação. Muitos jovens optam por empreender por falta de oportunidades no mercado formal, mas enfrentam dificuldades de acesso a crédito, capacitação e redes de apoio. Programas que incentivam o empreendedorismo juvenil, associados à educação financeira e ao desenvolvimento de habilidades de negócios, são essenciais para fomentar a criação de novas empresas e empregos.",
           fonte: "Sebrae",
           tamanho: "pequeno"
         },
         {
-          texto: "Investimento em educação é fundamental para a melhoria da renda.",
+          texto: "Investimento em educação é fundamental para a melhoria da renda e para a redução das desigualdades sociais. Cursos técnicos e profissionalizantes que atendam às demandas do mercado de trabalho, associados a programas de qualificação e reciclagem profissional, são essenciais para preparar os jovens para os desafios do mundo contemporâneo e para promover o desenvolvimento sustentável do país.",
           fonte: "Banco Mundial",
           tamanho: "pequeno"
         }
@@ -198,22 +198,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A saúde mental dos jovens brasileiros tem se deteriorado significativamente. Segundo dados da OMS, 20% dos adolescentes sofrem de algum transtorno mental, mas apenas 30% recebem tratamento adequado. A pandemia de COVID-19 agravou ainda mais essa crise, com aumento de casos de ansiedade, depressão e isolamento social entre jovens. O estigma associado aos problemas de saúde mental continua sendo um grande obstáculo para que os jovens busquem ajuda, muitas vezes por medo de julgamento ou por falta de acesso a serviços especializados.",
+          texto: "A saúde mental dos jovens brasileiros tem se deteriorado significativamente. Segundo dados da OMS, 20% dos adolescentes sofrem de algum transtorno mental, mas apenas 30% recebem tratamento adequado. A pandemia de COVID-19 agravou ainda mais essa crise, com aumento de casos de ansiedade, depressão e isolamento social entre jovens. O estigma associado aos problemas de saúde mental continua sendo um grande obstáculo para que os jovens busquem ajuda, muitas vezes por medo de julgamento ou por falta de acesso a serviços especializados. A falta de políticas públicas de saúde mental e a precariedade dos serviços disponíveis deixam milhões de jovens desassistidos.",
           fonte: "Organização Mundial da Saúde (OMS)",
           tamanho: "grande"
         },
         {
-          texto: "O estigma associado aos problemas de saúde mental ainda é um grande obstáculo para a busca por ajuda.",
+          texto: "O estigma associado aos problemas de saúde mental ainda é um grande obstáculo para a busca por ajuda. Muitos jovens sentem-se envergonhados ou medo de serem julgados por seus pares ou pela sociedade. A falta de informação sobre saúde mental e a normalização do sofrimento psicológico contribuem para que os problemas se agravem sem intervenção adequada. A necessidade de campanhas de conscientização e de desestigmatização da saúde mental é cada vez mais evidente.",
           fonte: "Ministério da Saúde",
           tamanho: "medio"
         },
         {
-          texto: "A pandemia agravou os problemas de saúde mental.",
+          texto: "A pandemia agravou os problemas de saúde mental entre os jovens. O isolamento social, a incerteza sobre o futuro, as dificuldades escolares e a perda de entes queridos impactaram profundamente o bem-estar psicológico dos adolescentes e jovens adultos. A falta de apoio emocional e de acesso a serviços de saúde mental durante a pandemia deixou muitos jovens em situação de vulnerabilidade.",
           fonte: "Instituto de Pesquisa Econômica Aplicada",
           tamanho: "pequeno"
         },
         {
-          texto: "Ações preventivas são essenciais para a promoção da saúde mental.",
+          texto: "Ações preventivas são essenciais para a promoção da saúde mental. Programas que promovem o bem-estar emocional, o desenvolvimento de habilidades socioemocionais e o acesso a apoio psicológico precoce são fundamentais para prevenir problemas mais graves. A integração da saúde mental nas políticas públicas de saúde e educação é essencial para construir uma sociedade mais saudável e resiliente.",
           fonte: "UNICEF",
           tamanho: "pequeno"
         }
@@ -230,17 +230,17 @@ const CorretorRedacao = () => {
           tamanho: "grande"
         },
         {
-          texto: "As cotas raciais são uma ferramenta importante para promover igualdade de oportunidades.",
+          texto: "As cotas raciais são uma ferramenta importante para promover igualdade de oportunidades, mas precisam ser acompanhadas de políticas de qualidade na educação básica. A falta de investimento em escolas públicas de qualidade, especialmente em áreas predominantemente negras, perpetua a desigualdade de acesso ao ensino superior. A necessidade de ações afirmativas que garantam não apenas o acesso, mas também a permanência e o sucesso de estudantes negros nas instituições de ensino é cada vez mais evidente.",
           fonte: "Ministério da Educação",
           tamanho: "medio"
         },
         {
-          texto: "A representação negra na mídia é insuficiente.",
+          texto: "A representação negra na mídia e nos cargos de poder ainda é insuficiente. A falta de diversidade nos meios de comunicação e na política perpetua estereótipos e limita a visibilidade das contribuições da população negra para a sociedade brasileira. A necessidade de políticas que incentivem a representação equitativa em todos os espaços de poder é fundamental para construir uma sociedade mais justa e inclusiva.",
           fonte: "Fundação Joaquim Nabuco",
           tamanho: "pequeno"
         },
         {
-          texto: "A diversidade é essencial para uma sociedade justa.",
+          texto: "A diversidade é essencial para uma sociedade justa e para o desenvolvimento pleno do país. A valorização da cultura negra, o combate ao racismo estrutural e a promoção da igualdade racial são fundamentais para construir uma nação que respeite e valorize todas as suas raízes e contribuições.",
           fonte: "ONU",
           tamanho: "pequeno"
         }
@@ -252,22 +252,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A crise hídrica no Sudeste brasileiro tem se agravado nos últimos anos. Segundo a ANA, 60% das regiões metropolitanas enfrentam racionamento de água, afetando milhões de pessoas. O desperdício de água no Brasil é alarmante, com o brasileiro consome 200 litros por dia, enquanto a média mundial é de 100 litros. A poluição dos rios e reservatórios compromete a qualidade da água disponível, tornando-a imprópria para o consumo humano e para a agricultura. Essa crise reflete uma gestão inadequada dos recursos hídricos e a necessidade de políticas públicas mais eficientes.",
+          texto: "A crise hídrica no Sudeste brasileiro tem se agravado nos últimos anos. Segundo a ANA, 60% das regiões metropolitanas enfrentam racionamento de água, afetando milhões de pessoas. O desperdício de água no Brasil é alarmante, com o brasileiro consome 200 litros por dia, enquanto a média mundial é de 100 litros. A poluição dos rios e reservatórios compromete a qualidade da água disponível, tornando-a imprópria para o consumo humano e para a agricultura. Essa crise reflete uma gestão inadequada dos recursos hídricos e a necessidade de políticas públicas mais eficientes. A falta de investimentos em infraestrutura hídrica, associada à má distribuição dos recursos e ao desperdício, agrava a escassez de água em muitas regiões do país.",
           fonte: "Agência Nacional de Águas (ANA)",
           tamanho: "grande"
         },
         {
-          texto: "A falta de conscientização sobre o uso da água é um grande problema.",
+          texto: "A falta de conscientização sobre o uso da água é um grande problema. Muitas pessoas ainda não compreendem a importância da conservação dos recursos hídricos e continuam a desperdiçar água em atividades não essenciais. A necessidade de campanhas educativas que promovam a cultura do uso racional da água, associadas a tarifas que incentivem a economia, é fundamental para mudar esse cenário.",
           fonte: "Organização das Nações Unidas para a Alimentação e a Agricultura",
           tamanho: "medio"
         },
         {
-          texto: "A gestão dos recursos hídricos precisa ser mais eficiente.",
+          texto: "A gestão dos recursos hídricos precisa ser mais eficiente. A falta de planejamento adequado, a ausência de políticas públicas integradas e a corrupção na gestão dos recursos hídricos comprometem a disponibilidade de água para as atuais e futuras gerações. A necessidade de um modelo de gestão participativa e transparente, que envolva a sociedade civil e os diferentes setores da economia, é essencial para garantir a sustentabilidade dos recursos hídricos.",
           fonte: "Ministério do Meio Ambiente",
           tamanho: "pequeno"
         },
         {
-          texto: "A sustentabilidade é essencial para a preservação da água.",
+          texto: "A sustentabilidade é essencial para a preservação da água e para o desenvolvimento sustentável do país. A transição para uma economia verde, que valorize a conservação dos recursos naturais e promova o uso sustentável da água, é o caminho mais promissor para garantir a segurança hídrica para as futuras gerações.",
           fonte: "WWF",
           tamanho: "pequeno"
         }
@@ -279,22 +279,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A evasão escolar no Brasil atingiu níveis preocupantes. Segundo o INEP, 1,5 milhão de jovens abandonaram a escola em 2022, principalmente por dificuldades financeiras e falta de motivação. A pandemia de COVID-19 agravou ainda mais esse problema, com o ensino remoto não sendo acessível a todos os estudantes, especialmente os de baixa renda. Programas de inclusão social e bolsas de estudo têm ajudado a reduzir a evasão, mas ainda são insuficientes para cobrir todas as necessidades. A evasão escolar não apenas compromete o futuro individual dos jovens, mas também o desenvolvimento socioeconômico do país.",
+          texto: "A evasão escolar no Brasil atingiu níveis preocupantes. Segundo o INEP, 1,5 milhão de jovens abandonaram a escola em 2022, principalmente por dificuldades financeiras e falta de motivação. A pandemia de COVID-19 agravou ainda mais esse problema, com o ensino remoto não sendo acessível a todos os estudantes, especialmente os de baixa renda. Programas de inclusão social e bolsas de estudo têm ajudado a reduzir a evasão, mas ainda são insuficientes para cobrir todas as necessidades. A evasão escolar não apenas compromete o futuro individual dos jovens, mas também o desenvolvimento socioeconômico do país, pois reduz a qualificação da força de trabalho e limita as oportunidades de crescimento econômico.",
           fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)",
           tamanho: "grande"
         },
         {
-          texto: "A pandemia agravou o problema da evasão escolar.",
+          texto: "A pandemia agravou o problema da evasão escolar. O ensino remoto exigiu acesso à internet e a dispositivos tecnológicos, recursos que muitos estudantes não possuíam. A falta de apoio familiar para acompanhar as atividades online e a dificuldade de adaptação ao novo modelo de ensino contribuíram para o aumento da evasão, especialmente entre os mais vulneráveis.",
           fonte: "UNESCO",
           tamanho: "medio"
         },
         {
-          texto: "Programas de inclusão social ajudam a reduzir a evasão.",
+          texto: "Programas de inclusão social ajudam a reduzir a evasão, mas precisam ser ampliados e melhorados. A Bolsa Família e outros programas de transferência de renda são importantes, mas não são suficientes para garantir a permanência dos jovens na escola. A necessidade de políticas que abordem as múltiplas causas da evasão, incluindo a qualidade do ensino, a relevância curricular e o apoio psicopedagógico, é cada vez mais evidente.",
           fonte: "Ministério da Educação",
           tamanho: "pequeno"
         },
         {
-          texto: "A educação é um direito fundamental de todos.",
+          texto: "A educação é um direito fundamental de todos e é essencial para o desenvolvimento do indivíduo e da sociedade. A garantia de acesso universal à educação de qualidade, associada a políticas que combatam as desigualdades sociais e que valorizem a permanência dos jovens na escola, é fundamental para construir um país mais justo e desenvolvido.",
           fonte: "Constituição Federal",
           tamanho: "pequeno"
         }
@@ -306,22 +306,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A violência urbana nas grandes cidades brasileiras continua sendo um grave problema. Segundo o Fórum Brasileiro de Segurança Pública, o Brasil registrou mais de 43 mil homicídios dolosos em 2022. A desigualdade social é um dos principais fatores que contribuem para a violência, com jovens de baixa renda sendo as maiores vítimas e, muitas vezes, os autores de crimes. Políticas de prevenção da violência, como programas de inclusão social e esporte, têm mostrado resultados positivos, mas ainda são pouco implementadas em larga escala. A segurança pública é um direito fundamental que precisa ser garantido a todos os cidadãos.",
+          texto: "A violência urbana nas grandes cidades brasileiras continua sendo um grave problema. Segundo o Fórum Brasileiro de Segurança Pública, o Brasil registrou mais de 43 mil homicídios dolosos em 2022. A desigualdade social é um dos principais fatores que contribuem para a violência, com jovens de baixa renda sendo as maiores vítimas e, muitas vezes, os autores de crimes. Políticas de prevenção da violência, como programas de inclusão social e esporte, têm mostrado resultados positivos, mas ainda são pouco implementadas em larga escala. A segurança pública é um direito fundamental que precisa ser garantido a todos os cidadãos, independentemente de sua condição social ou local de moradia.",
           fonte: "Fórum Brasileiro de Segurança Pública",
           tamanho: "grande"
         },
         {
-          texto: "A desigualdade social contribui significativamente para a violência urbana.",
+          texto: "A desigualdade social contribui significativamente para a violência urbana. A falta de oportunidades para os jovens, associada à exclusão social e à precarização do trabalho, cria um ambiente propício à violência. A necessidade de políticas que promovam a inclusão social, a geração de empregos de qualidade e o acesso a serviços básicos é fundamental para reduzir a violência nas cidades.",
           fonte: "Instituto de Pesquisa Econômica Aplicada",
           tamanho: "medio"
         },
         {
-          texto: "Programas de inclusão social reduzem a violência.",
+          texto: "Programas de inclusão social reduzem a violência, mas precisam ser ampliados e melhorados. Programas como o Favela-Bairro e o Minha Casa, Minha Vida trouxeram benefícios para muitas comunidades, mas ainda são insuficientes para atender a toda a demanda. A necessidade de políticas que abordem as causas estruturais da violência, incluindo a desigualdade social e a falta de oportunidades, é cada vez mais evidente.",
           fonte: "Ministério da Justiça",
           tamanho: "pequeno"
         },
         {
-          texto: "A segurança pública é um direito fundamental.",
+          texto: "A segurança pública é um direito fundamental e é essencial para a convivência pacífica e para o desenvolvimento das cidades. A garantia de segurança para todos os cidadãos, independentemente de sua condição social ou local de moradia, é fundamental para construir uma sociedade mais justa e democrática.",
           fonte: "Constituição Federal",
           tamanho: "pequeno"
         }
@@ -333,22 +333,22 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A corrupção no Brasil continua sendo um desafio estrutural. Segundo a Transparência Internacional, o Brasil ocupa a 94ª posição no Índice de Percepção de Corrupção 2023. Operações como a Lava Jato mostraram a dimensão da corrupção no país, mas a cultura da impunidade ainda persiste em muitos setores. A educação para a cidadania e a ética são fundamentais para combater a corrupção, precisando ser trabalhadas desde a educação básica. A corrupção não apenas desvia recursos públicos essenciais para a população, mas também mina a confiança nas instituições democráticas e prejudica o desenvolvimento do país.",
+          texto: "A corrupção no Brasil continua sendo um desafio estrutural. Segundo a Transparência Internacional, o Brasil ocupa a 94ª posição no Índice de Percepção de Corrupção 2023. Operações como a Lava Jato mostraram a dimensão da corrupção no país, mas a cultura da impunidade ainda persiste em muitos setores. A educação para a cidadania e a ética são fundamentais para combater a corrupção, precisando ser trabalhadas desde a educação básica. A corrupção não apenas desvia recursos públicos essenciais para a população, mas também mina a confiança nas instituições democráticas e prejudica o desenvolvimento do país. A falta de transparência na gestão pública e a impunidade dos corruptos perpetuam esse ciclo de desconfiança e descrédito nas instituições.",
           fonte: "Transparência Internacional",
           tamanho: "grande"
         },
         {
-          texto: "Operações como a Lava Jato mostraram a dimensão da corrupção no país.",
+          texto: "Operações como a Lava Jato mostraram a dimensão da corrupção no país, mas a cultura da impunidade ainda persiste. Muitos casos de corrupção não são investigados ou não resultam em punição efetiva, o que desestimula a denúncia e perpetua a prática de atos ilícitos. A necessidade de um sistema de justiça mais eficiente e de políticas que garantam a transparência e a accountability é fundamental para combater a corrupção.",
           fonte: "Ministério da Justiça",
           tamanho: "medio"
         },
         {
-          texto: "A educação para a cidadania é essencial para combater a corrupção.",
+          texto: "A educação para a cidadania e a ética são fundamentais para combater a corrupção, mas precisam ser trabalhadas desde a educação básica. A formação de cidadãos conscientes de seus direitos e deveres, que valorizam a ética e a transparência, é essencial para construir uma sociedade menos propensa à corrupção. A necessidade de incluir a temática da ética e da cidadania nos currículos escolares é cada vez mais evidente.",
           fonte: "Ministério da Educação",
           tamanho: "pequeno"
         },
         {
-          texto: "A ética deve ser trabalhada desde a educação básica.",
+          texto: "A ética deve ser trabalhada desde a educação básica e deve ser valorizada em todos os setores da sociedade. A necessidade de políticas que promovam a transparência na gestão pública, que garantam o acesso à informação e que punam severamente os atos de corrupção é fundamental para construir uma sociedade mais justa e desenvolvida.",
           fonte: "Conselho Federal de Educação",
           tamanho: "pequeno"
         }
