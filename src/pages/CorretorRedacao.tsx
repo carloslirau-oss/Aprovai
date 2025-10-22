@@ -26,7 +26,8 @@ import {
   Plus,
   ChevronDown,
   Shuffle,
-  LogOut
+  LogOut,
+  ArrowLeft
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -235,7 +236,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Evasão escolar no Brasil: causas e estratégias de permanência.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construidos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
@@ -277,9 +278,39 @@ const CorretorRedacao = () => {
     }
   ];
 
-  // Estado para controlar o tema atual
+  // Estados para controle de temas
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
+  const [themeHistory, setThemeHistory] = useState<number[]>([]);
   const redacaoTheme = redacaoThemes[currentThemeIndex];
+
+  // Função para gerar um tema aleatório
+  const generateRandomTheme = () => {
+    const newIndex = Math.floor(Math.random() * redacaoThemes.length);
+    setCurrentThemeIndex(newIndex);
+    setThemeHistory(prev => [...prev, newIndex]);
+    return newIndex;
+  };
+
+  // Função para voltar ao tema anterior
+  const goToPreviousTheme = () => {
+    if (themeHistory.length > 0) {
+      const previousIndex = themeHistory[themeHistory.length - 1];
+      setCurrentThemeIndex(previousIndex);
+      setThemeHistory(prev => prev.slice(0, -1));
+    }
+  };
+
+  // Função para mudar para um tema aleatório
+  const goToRandomTheme = () => {
+    const newIndex = Math.floor(Math.random() * redacaoThemes.length);
+    setCurrentThemeIndex(newIndex);
+    setThemeHistory(prev => [...prev, newIndex]);
+  };
+
+  // Gerar tema aleatório ao carregar a página
+  useEffect(() => {
+    generateRandomTheme();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -420,23 +451,6 @@ const CorretorRedacao = () => {
     }
   };
 
-  const handleNewTheme = () => {
-    // Pega um índice aleatório diferente do atual
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * redacaoThemes.length);
-    } while (newIndex === currentThemeIndex && redacaoThemes.length > 1);
-    
-    setCurrentThemeIndex(newIndex);
-    // Limpa a redação atual ao mudar de tema
-    setRedacaoText('');
-    setImageFile(null);
-    setAnalysisResult(null);
-    setHasStartedRedacao(false);
-    setTimerActive(false);
-    showSuccess('Novo tema selecionado!');
-  };
-
   const timeOptions = [
     { label: '30 minutos', value: 30 },
     { label: '1 hora', value: 60 },
@@ -571,15 +585,29 @@ const CorretorRedacao = () => {
                     <FileText className="h-5 w-5 mr-2 text-blue-600" />
                     {redacaoTheme.title}
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleNewTheme}
-                    className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
-                  >
-                    <Shuffle className="h-4 w-4" />
-                    <span>Novo Tema</span>
-                  </Button>
+                  <div className="flex items-center space-x-2">
+                    {/* Botão para voltar ao tema anterior */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={goToPreviousTheme}
+                      disabled={themeHistory.length === 0}
+                      className="flex items-center space-x-1 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                      <span>Anterior</span>
+                    </Button>
+                    {/* Botão para mudar para tema aleatório */}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={goToRandomTheme}
+                      className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
+                    >
+                      <Shuffle className="h-4 w-4" />
+                      <span>Novo Tema</span>
+                    </Button>
+                  </div>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -900,7 +928,7 @@ const CorretorRedacao = () => {
                       setHasStartedRedacao(false);
                       setTimerActive(false);
                       // Gera um novo tema automaticamente
-                      handleNewTheme();
+                      goToRandomTheme();
                     }}
                   >
                     Nova Redação
