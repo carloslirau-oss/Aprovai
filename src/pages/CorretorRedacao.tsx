@@ -83,7 +83,7 @@ const CorretorRedacao = () => {
     }
   ];
 
-  // Sample ENEM themes
+  // Sample ENEM themes - expandido com mais temas
   const redacaoThemes = [
     {
       title: "Proposta de Redação",
@@ -160,9 +160,124 @@ const CorretorRedacao = () => {
       ],
       tema: "Desemprego juvenil e a lacuna entre educação e mercado de trabalho.",
       instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A saúde mental dos jovens brasileiros tem se deteriorado significativamente. Segundo dados da OMS, 20% dos adolescentes sofrem de algum transtorno mental, mas apenas 30% recebem tratamento adequado.",
+          fonte: "Organização Mundial da Saúde (OMS)"
+        },
+        {
+          texto: "O estigma associado aos problemas de saúde mental ainda é um grande obstáculo para que os jovens busquem ajuda. Muitos sentem-se envergonhados ou medo de julgamento.",
+          fonte: "Ministério da Saúde"
+        },
+        {
+          texto: "A pandemia de COVID-19 agravou os problemas de saúde mental, com aumento de casos de ansiedade, depressão e isolamento social entre jovens.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)"
+        }
+      ],
+      tema: "Saúde mental dos jovens brasileiros: desafios e soluções.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A discriminação racial no Brasil persiste de forma estrutural. Segundo dados do IPEA, negros têm 74% menos chances de chegar ao ensino superior que brancos, mesmo com mesma escolaridade.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)"
+        },
+        {
+          texto: "As cotas raciais nas universidades têm sido uma ferramenta importante para promover a igualdade de oportunidades, mas ainda enfrentam resistência e desafios de implementação.",
+          fonte: "Ministério da Educação"
+        },
+        {
+          texto: "A representação negra na mídia e nos cargos de poder ainda é insuficiente, perpetuando estereótipos e limitando a visibilidade da população negra.",
+          fonte: "Fundação Joaquim Nabuco"
+        }
+      ],
+      tema: "Racismo estrutural no Brasil: combate e promoção da igualdade racial.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A crise hídrica no Sudeste brasileiro tem se agravado nos últimos anos. Segundo a ANA, 60% das regiões metropolitanas enfrentam racionamento de água, afetando milhões de pessoas.",
+          fonte: "Agência Nacional de Águas (ANA)"
+        },
+        {
+          texto: "O desperdício de água no Brasil é alarmante. O brasileiro consome 200 litros por dia, enquanto a média mundial é de 100 litros. A falta de conscientização é um grande problema.",
+          fonte: "Organização das Nações Unidas para a Alimentação e a Agricultura (FAO)"
+        },
+        {
+          texto: "A poluição dos rios e reservatórios compromete a qualidade da água disponível, tornando-a imprópria para o consumo humano e para a agricultura.",
+          fonte: "Ministério do Meio Ambiente"
+        }
+      ],
+      tema: "Crise hídrica no Brasil: sustentabilidade e gestão dos recursos hídricos.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A evasão escolar no Brasil atingiu níveis preocupantes. Segundo o INEP, 1,5 milhão de jovens abandonaram a escola em 2022, principalmente por dificuldades financeiras e falta de motivação.",
+          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)"
+        },
+        {
+          texto: "A pandemia agravou o problema, com o ensino remoto não sendo acessível a todos os estudantes, especialmente os de baixa renda.",
+          fonte: "UNESCO"
+        },
+        {
+          texto: "Programas de inclusão social e bolsas de estudo têm ajudado a reduzir a evasão, mas ainda são insuficientes para cobrir todas as necessidades.",
+          fonte: "Ministério da Educação"
+        }
+      ],
+      tema: "Evasão escolar no Brasil: causas e estratégias de permanência.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A violência urbana nas grandes cidades brasileiras continua sendo um grave problema. Segundo o Fórum Brasileiro de Segurança Pública, o Brasil registrou mais de 43 mil homicídios dolosos em 2022.",
+          fonte: "Fórum Brasileiro de Segurança Pública"
+        },
+        {
+          texto: "A desigualdade social é um dos principais fatores que contribuem para a violência. Jovens de baixa renda são as maiores vítimas e, muitas vezes, os autores de crimes.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)"
+        },
+        {
+          texto: "Políticas de prevenção da violência, como programas de inclusão social e esporte, têm mostrado resultados positivos, mas ainda são pouco implementadas em larga escala.",
+          fonte: "Ministério da Justiça"
+        }
+      ],
+      tema: "Violência urbana no Brasil: prevenção e políticas de segurança.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+    },
+    {
+      title: "Proposta de Redação",
+      contextualizacao: [
+        {
+          texto: "A corrupção no Brasil continua sendo um desafio estrutural. Segundo a Transparência Internacional, o Brasil ocupa a 94ª posição no Índice de Percepção de Corrupção 2023.",
+          fonte: "Transparência Internacional"
+        },
+        {
+          texto: "Operações como a Lava Jato mostraram a dimensão da corrupno país, mas a cultura da impunidade ainda persiste em muitos setores.",
+          fonte: "Ministério da Justiça"
+        },
+        {
+          texto: "A educação para a cidadania e a ética são fundamentais para combater a corrupção, precisando ser trabalhadas desde a educação básica.",
+          fonte: "Ministério da Educação"
+        }
+      ],
+      tema: "Corrupção no Brasil: combate e fortalecimento da ética pública.",
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     }
   ];
 
+  // Estado para controlar o tema atual
   const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
   const redacaoTheme = redacaoThemes[currentThemeIndex];
 
@@ -306,7 +421,12 @@ const CorretorRedacao = () => {
   };
 
   const handleNewTheme = () => {
-    const newIndex = (currentThemeIndex + 1) % redacaoThemes.length;
+    // Pega um índice aleatório diferente do atual
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * redacaoThemes.length);
+    } while (newIndex === currentThemeIndex && redacaoThemes.length > 1);
+    
     setCurrentThemeIndex(newIndex);
     // Limpa a redação atual ao mudar de tema
     setRedacaoText('');
@@ -364,7 +484,7 @@ const CorretorRedacao = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -403,7 +523,7 @@ const CorretorRedacao = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px-6 lg:px-8 py-8">
+          <div className="px-4 sm:px:6 lg:px-8 py-8">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
               <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
@@ -779,9 +899,11 @@ const CorretorRedacao = () => {
                       setImageFile(null);
                       setHasStartedRedacao(false);
                       setTimerActive(false);
+                      // Gera um novo tema automaticamente
+                      handleNewTheme();
                     }}
                   >
-                    Nova Análise
+                    Nova Redação
                   </Button>
                 </div>
               </div>
