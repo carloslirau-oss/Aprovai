@@ -84,22 +84,30 @@ const CorretorRedacao = () => {
     }
   ];
 
-  // Sample ENEM themes - expandido com mais temas
+  // Sample ENEM themes - com contextualização padronizada
   const redacaoThemes = [
     {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia.",
-          fonte: "Fórum Brasileiro de Segurança Pública"
+          texto: "A violência contra a mulher no Brasil atingiu níveis alarmantes. Segundo dados do Fórum Brasileiro de Segurança Pública, em 2022, 1.311 mulheres foram assassinadas no país, o que representa uma média de 3,6 mulheres por dia. Esse cenário reflete uma crise social profunda que exige ações urgentes e efetivas por parte do Estado e da sociedade. A violência de gênero não é apenas um problema individual, mas uma questão estrutural que permeia todas as esferas da vida das mulheres, desde o ambiente doméstico até o espaço público.",
+          fonte: "Fórum Brasileiro de Segurança Pública",
+          tamanho: "grande"
         },
         {
-          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios, como a falta de delegacias especializadas e a subnotificação de casos.",
-          fonte: "ONU Mulheres"
+          texto: "A Lei Maria da Penha, sancionada em 2006, foi um marco na legislação brasileira para combater a violência doméstica. No entanto, sua implementação ainda enfrenta desafios significativos, como a falta de delegacias especializadas e a subnotificação de casos.",
+          fonte: "ONU Mulheres",
+          tamanho: "medio"
         },
         {
-          texto: "A cultura do silêncio perpetua a violência contra as mulheres. Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
-          fonte: "Revista Época"
+          texto: "A cultura do silêncio perpetua a violência contra as mulheres.",
+          fonte: "Revista Época",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "Muitas vítimas não denunciam por medo, vergonha ou falta de confiança no sistema de justiça.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada",
+          tamanho: "pequeno"
         }
       ],
       tema: "A persistência da violência contra a mulher na sociedade brasileira.",
@@ -109,16 +117,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade.",
-          fonte: "Instituto Nacional de Pesquisas Espaciais (INPE)"
+          texto: "O desmatamento na Amazônia atingiu níveis recordes em 2022. Segundo dados do INPE, foram perdidos 11.568 km² de floresta, o maior valor desde 2006. Essa perda impacta diretamente o clima global e a biodiversidade, comprometendo não apenas o ecossistema amazônico, mas também o equilíbrio climático mundial. A Amazônia, conhecida como o pulmão do mundo, está sofrendo uma destruição acelerada que ameaça a vida de milhões de pessoas e a sobrevivência de inúmeras espécies.",
+          fonte: "Instituto Nacional de Pesquisas Espaciais (INPE)",
+          tamanho: "grande"
         },
         {
-          texto: "A economia da região amazônica depende dos recursos naturais, mas o extrativismo sustentável ainda é pouco desenvolvido. Muitas comunidades tradicionais dependem da floresta para sua subsistência.",
-          fonte: "Instituto Socioambiental (ISA)"
+          texto: "A economia da região amazônica depende dos recursos naturais, mas o extrativismo sustentável ainda é pouco desenvolvido.",
+          fonte: "Instituto Socioambiental (ISA)",
+          tamanho: "medio"
         },
         {
-          texto: "O Brasil tem compromissos internacionais para reduzir o desmatamento, mas a fiscalização e a implementação de políticas ambientais eficazes ainda enfrentam grandes desafios.",
-          fonte: "Ministério do Meio Ambiente"
+          texto: "Muitas comunidades tradicionais dependem da floresta para sua subsistência.",
+          fonte: "Ministério do Meio Ambiente",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "O Brasil tem compromissos internacionais para reduzir o desmatamento.",
+          fonte: "ONU Meio Ambiente",
+          tamanho: "pequeno"
         }
       ],
       tema: "O desmatamento da Amazônia e seus impactos socioambientais.",
@@ -128,16 +144,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A educação a distância (EaD) expandiu-se significativamente durante a pandemia de COVID-19. Segundo o INEP, o número de matrículas na modalidade cresceu 25% em 2020, mas a desigualdade digital permanece como grande desafio.",
-          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)"
+          texto: "A educação a distância (EaD) expandiu-se significativamente durante a pandemia de COVID-19. Segundo o INEP, o número de matrículas na modalidade cresceu 25% em 2020, mas a desigualdade digital permanece como grande desafio. Milhões de estudantes, especialmente das camadas mais vulneráveis, enfrentam dificuldades de acesso à internet e a dispositivos adequados para o aprendizado online. Essa exclusão digital agrava as desigualdades educacionais e sociais, criando um fosso entre aqueles que têm acesso à tecnologia e aqueles que não têm.",
+          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)",
+          tamanho: "grande"
         },
         {
-          texto: "Muitos estudantes, especialmente das camadas mais vulneráveis, enfrentam dificuldades de acesso à internet e a dispositivos adequados para o aprendizado online. Essa exclusão digital agrava as desigualdades educacionais.",
-          fonte: "UNESCO"
+          texto: "A EaD oferece flexibilidade e acesso a educação de qualidade, mas exige investimento em infraestrutura digital.",
+          fonte: "Ministério da Educação",
+          tamanho: "medio"
         },
         {
-          texto: "A EaD oferece flexibilidade e acesso a educação de qualidade, mas exige investimento em infraestrutura digital e capacitação de professores para garantir efetividade pedagógica.",
-          fonte: "Ministério da Educação"
+          texto: "Capacitação de professores é essencial para garantir efetividade pedagógica.",
+          fonte: "UNESCO",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "A inclusão digital é fundamental para a democratização do conhecimento.",
+          fonte: "Fórum Econômico Mundial",
+          tamanho: "pequeno"
         }
       ],
       tema: "A expansão da educação a distância e a inclusão digital no Brasil.",
@@ -147,16 +171,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "O mercado de trabalho no Brasil enfrenta grandes desafios estruturais. Segundo o IBGE, a taxa de desemprego entre jovens de 18 a 24 anos é de 25%, quase o dobro da média nacional.",
-          fonte: "Instituto Brasileiro de Geografia e Estatística (IBGE)"
+          texto: "O mercado de trabalho no Brasil enfrenta grandes desafios estruturais. Segundo o IBGE, a taxa de desemprego entre jovens de 18 a 24 anos é de 25%, quase o dobro da média nacional. Essa situação reflete uma lacuna significativa entre a formação oferecida pelas escolas e as habilidades demandadas pelo mercado de trabalho. Jovens saem da educação básica e superior sem as competências necessárias para se inserirem no mercado de trabalho formal, o que resulta em subemprego, informalidade e frustração profissional.",
+          fonte: "Instituto Brasileiro de Geografia e Estatística (IBGE)",
+          tamanho: "grande"
         },
         {
-          texto: "A lacuna entre a formação oferecida pelas escolas e as habilidades demandadas pelo mercado de trabalho é um dos principais obstáculos para a empregabilidade dos jovens.",
-          fonte: "Fórum Econômico Mundial"
+          texto: "A lacuna entre formação e habilidades demandadas é um obstáculo para a empregabilidade.",
+          fonte: "Fórum Econômico Mundial",
+          tamanho: "medio"
         },
         {
-          texto: "O empreendedorismo e a qualificação profissional são caminhos importantes para a geração de empregos e a melhoria da renda, mas exigem apoio político e investimento em educação.",
-          fonte: "Sebrae"
+          texto: "O empreendedorismo é uma alternativa para a geração de empregos.",
+          fonte: "Sebrae",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "Investimento em educação é fundamental para a melhoria da renda.",
+          fonte: "Banco Mundial",
+          tamanho: "pequeno"
         }
       ],
       tema: "Desemprego juvenil e a lacuna entre educação e mercado de trabalho.",
@@ -166,16 +198,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A saúde mental dos jovens brasileiros tem se deteriorado significativamente. Segundo dados da OMS, 20% dos adolescentes sofrem de algum transtorno mental, mas apenas 30% recebem tratamento adequado.",
-          fonte: "Organização Mundial da Saúde (OMS)"
+          texto: "A saúde mental dos jovens brasileiros tem se deteriorado significativamente. Segundo dados da OMS, 20% dos adolescentes sofrem de algum transtorno mental, mas apenas 30% recebem tratamento adequado. A pandemia de COVID-19 agravou ainda mais essa crise, com aumento de casos de ansiedade, depressão e isolamento social entre jovens. O estigma associado aos problemas de saúde mental continua sendo um grande obstáculo para que os jovens busquem ajuda, muitas vezes por medo de julgamento ou por falta de acesso a serviços especializados.",
+          fonte: "Organização Mundial da Saúde (OMS)",
+          tamanho: "grande"
         },
         {
-          texto: "O estigma associado aos problemas de saúde mental ainda é um grande obstáculo para que os jovens busquem ajuda. Muitos sentem-se envergonhados ou medo de julgamento.",
-          fonte: "Ministério da Saúde"
+          texto: "O estigma associado aos problemas de saúde mental ainda é um grande obstáculo para a busca por ajuda.",
+          fonte: "Ministério da Saúde",
+          tamanho: "medio"
         },
         {
-          texto: "A pandemia de COVID-19 agravou os problemas de saúde mental, com aumento de casos de ansiedade, depressão e isolamento social entre jovens.",
-          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)"
+          texto: "A pandemia agravou os problemas de saúde mental.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "Ações preventivas são essenciais para a promoção da saúde mental.",
+          fonte: "UNICEF",
+          tamanho: "pequeno"
         }
       ],
       tema: "Saúde mental dos jovens brasileiros: desafios e soluções.",
@@ -185,16 +225,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A discriminação racial no Brasil persiste de forma estrutural. Segundo dados do IPEA, negros têm 74% menos chances de chegar ao ensino superior que brancos, mesmo com mesma escolaridade.",
-          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)"
+          texto: "A discriminação racial no Brasil persiste de forma estrutural. Segundo dados do IPEA, negros têm 74% menos chances de chegar ao ensino superior que brancos, mesmo com mesma escolaridade. Essa desigualdade reflete um histórico de exclusão que se perpetua ao longo das gerações. As cotas raciais nas universidades têm sido uma ferramenta importante para promover a igualdade de oportunidades, mas ainda enfrentam resistência e desafios de implementação. A representação negra na mídia e nos cargos de poder ainda é insuficiente, perpetuando estereótipos e limitando a visibilidade da população negra.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)",
+          tamanho: "grande"
         },
         {
-          texto: "As cotas raciais nas universidades têm sido uma ferramenta importante para promover a igualdade de oportunidades, mas ainda enfrentam resistência e desafios de implementação.",
-          fonte: "Ministério da Educação"
+          texto: "As cotas raciais são uma ferramenta importante para promover igualdade de oportunidades.",
+          fonte: "Ministério da Educação",
+          tamanho: "medio"
         },
         {
-          texto: "A representação negra na mídia e nos cargos de poder ainda é insuficiente, perpetuando estereótipos e limitando a visibilidade da população negra.",
-          fonte: "Fundação Joaquim Nabuco"
+          texto: "A representação negra na mídia é insuficiente.",
+          fonte: "Fundação Joaquim Nabuco",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "A diversidade é essencial para uma sociedade justa.",
+          fonte: "ONU",
+          tamanho: "pequeno"
         }
       ],
       tema: "Racismo estrutural no Brasil: combate e promoção da igualdade racial.",
@@ -204,16 +252,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A crise hídrica no Sudeste brasileiro tem se agravado nos últimos anos. Segundo a ANA, 60% das regiões metropolitanas enfrentam racionamento de água, afetando milhões de pessoas.",
-          fonte: "Agência Nacional de Águas (ANA)"
+          texto: "A crise hídrica no Sudeste brasileiro tem se agravado nos últimos anos. Segundo a ANA, 60% das regiões metropolitanas enfrentam racionamento de água, afetando milhões de pessoas. O desperdício de água no Brasil é alarmante, com o brasileiro consome 200 litros por dia, enquanto a média mundial é de 100 litros. A poluição dos rios e reservatórios compromete a qualidade da água disponível, tornando-a imprópria para o consumo humano e para a agricultura. Essa crise reflete uma gestão inadequada dos recursos hídricos e a necessidade de políticas públicas mais eficientes.",
+          fonte: "Agência Nacional de Águas (ANA)",
+          tamanho: "grande"
         },
         {
-          texto: "O desperdício de água no Brasil é alarmante. O brasileiro consome 200 litros por dia, enquanto a média mundial é de 100 litros. A falta de conscientização é um grande problema.",
-          fonte: "Organização das Nações Unidas para a Alimentação e a Agricultura (FAO)"
+          texto: "A falta de conscientização sobre o uso da água é um grande problema.",
+          fonte: "Organização das Nações Unidas para a Alimentação e a Agricultura",
+          tamanho: "medio"
         },
         {
-          texto: "A poluição dos rios e reservatórios compromete a qualidade da água disponível, tornando-a imprópria para o consumo humano e para a agricultura.",
-          fonte: "Ministério do Meio Ambiente"
+          texto: "A gestão dos recursos hídricos precisa ser mais eficiente.",
+          fonte: "Ministério do Meio Ambiente",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "A sustentabilidade é essencial para a preservação da água.",
+          fonte: "WWF",
+          tamanho: "pequeno"
         }
       ],
       tema: "Crise hídrica no Brasil: sustentabilidade e gestão dos recursos hídricos.",
@@ -223,35 +279,51 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A evasão escolar no Brasil atingiu níveis preocupantes. Segundo o INEP, 1,5 milhão de jovens abandonaram a escola em 2022, principalmente por dificuldades financeiras e falta de motivação.",
-          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)"
+          texto: "A evasão escolar no Brasil atingiu níveis preocupantes. Segundo o INEP, 1,5 milhão de jovens abandonaram a escola em 2022, principalmente por dificuldades financeiras e falta de motivação. A pandemia de COVID-19 agravou ainda mais esse problema, com o ensino remoto não sendo acessível a todos os estudantes, especialmente os de baixa renda. Programas de inclusão social e bolsas de estudo têm ajudado a reduzir a evasão, mas ainda são insuficientes para cobrir todas as necessidades. A evasão escolar não apenas compromete o futuro individual dos jovens, mas também o desenvolvimento socioeconômico do país.",
+          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)",
+          tamanho: "grande"
         },
         {
-          texto: "A pandemia agravou o problema, com o ensino remoto não sendo acessível a todos os estudantes, especialmente os de baixa renda.",
-          fonte: "UNESCO"
+          texto: "A pandemia agravou o problema da evasão escolar.",
+          fonte: "UNESCO",
+          tamanho: "medio"
         },
         {
-          texto: "Programas de inclusão social e bolsas de estudo têm ajudado a reduzir a evasão, mas ainda são insuficientes para cobrir todas as necessidades.",
-          fonte: "Ministério da Educação"
+          texto: "Programas de inclusão social ajudam a reduzir a evasão.",
+          fonte: "Ministério da Educação",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "A educação é um direito fundamental de todos.",
+          fonte: "Constituição Federal",
+          tamanho: "pequeno"
         }
       ],
       tema: "Evasão escolar no Brasil: causas e estratégias de permanência.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construidos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     },
     {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A violência urbana nas grandes cidades brasileiras continua sendo um grave problema. Segundo o Fórum Brasileiro de Segurança Pública, o Brasil registrou mais de 43 mil homicídios dolosos em 2022.",
-          fonte: "Fórum Brasileiro de Segurança Pública"
+          texto: "A violência urbana nas grandes cidades brasileiras continua sendo um grave problema. Segundo o Fórum Brasileiro de Segurança Pública, o Brasil registrou mais de 43 mil homicídios dolosos em 2022. A desigualdade social é um dos principais fatores que contribuem para a violência, com jovens de baixa renda sendo as maiores vítimas e, muitas vezes, os autores de crimes. Políticas de prevenção da violência, como programas de inclusão social e esporte, têm mostrado resultados positivos, mas ainda são pouco implementadas em larga escala. A segurança pública é um direito fundamental que precisa ser garantido a todos os cidadãos.",
+          fonte: "Fórum Brasileiro de Segurança Pública",
+          tamanho: "grande"
         },
         {
-          texto: "A desigualdade social é um dos principais fatores que contribuem para a violência. Jovens de baixa renda são as maiores vítimas e, muitas vezes, os autores de crimes.",
-          fonte: "Instituto de Pesquisa Econômica Aplicada (IPEA)"
+          texto: "A desigualdade social contribui significativamente para a violência urbana.",
+          fonte: "Instituto de Pesquisa Econômica Aplicada",
+          tamanho: "medio"
         },
         {
-          texto: "Políticas de prevenção da violência, como programas de inclusão social e esporte, têm mostrado resultados positivos, mas ainda são pouco implementadas em larga escala.",
-          fonte: "Ministério da Justiça"
+          texto: "Programas de inclusão social reduzem a violência.",
+          fonte: "Ministério da Justiça",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "A segurança pública é um direito fundamental.",
+          fonte: "Constituição Federal",
+          tamanho: "pequeno"
         }
       ],
       tema: "Violência urbana no Brasil: prevenção e políticas de segurança.",
@@ -261,16 +333,24 @@ const CorretorRedacao = () => {
       title: "Proposta de Redação",
       contextualizacao: [
         {
-          texto: "A corrupção no Brasil continua sendo um desafio estrutural. Segundo a Transparência Internacional, o Brasil ocupa a 94ª posição no Índice de Percepção de Corrupção 2023.",
-          fonte: "Transparência Internacional"
+          texto: "A corrupção no Brasil continua sendo um desafio estrutural. Segundo a Transparência Internacional, o Brasil ocupa a 94ª posição no Índice de Percepção de Corrupção 2023. Operações como a Lava Jato mostraram a dimensão da corrupção no país, mas a cultura da impunidade ainda persiste em muitos setores. A educação para a cidadania e a ética são fundamentais para combater a corrupção, precisando ser trabalhadas desde a educação básica. A corrupção não apenas desvia recursos públicos essenciais para a população, mas também mina a confiança nas instituições democráticas e prejudica o desenvolvimento do país.",
+          fonte: "Transparência Internacional",
+          tamanho: "grande"
         },
         {
-          texto: "Operações como a Lava Jato mostraram a dimensão da corrupno país, mas a cultura da impunidade ainda persiste em muitos setores.",
-          fonte: "Ministério da Justiça"
+          texto: "Operações como a Lava Jato mostraram a dimensão da corrupção no país.",
+          fonte: "Ministério da Justiça",
+          tamanho: "medio"
         },
         {
-          texto: "A educação para a cidadania e a ética são fundamentais para combater a corrupção, precisando ser trabalhadas desde a educação básica.",
-          fonte: "Ministério da Educação"
+          texto: "A educação para a cidadania é essencial para combater a corrupção.",
+          fonte: "Ministério da Educação",
+          tamanho: "pequeno"
+        },
+        {
+          texto: "A ética deve ser trabalhada desde a educação básica.",
+          fonte: "Conselho Federal de Educação",
+          tamanho: "pequeno"
         }
       ],
       tema: "Corrupção no Brasil: combate e fortalecimento da ética pública.",
@@ -486,6 +566,20 @@ const CorretorRedacao = () => {
 
   const currentTip = tips[currentTipIndex];
 
+  // Função para obter classes de estilo baseado no tamanho do texto
+  const getTextSizeClass = (tamanho: string) => {
+    switch (tamanho) {
+      case 'grande':
+        return 'border-l-4 border-blue-500';
+      case 'medio':
+        return 'border-l-4 border-green-500';
+      case 'pequeno':
+        return 'border-l-4 border-yellow-500';
+      default:
+        return 'border-l-4 border-gray-500';
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
@@ -617,7 +711,7 @@ const CorretorRedacao = () => {
                     <h3 className="text-lg font-semibold text-gray-900 mb-4">Contextualização Inicial</h3>
                     <div className="space-y-4">
                       {redacaoTheme.contextualizacao.map((item, index) => (
-                        <div key={index} className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
+                        <div key={index} className={`bg-gray-50 p-4 rounded-lg ${getTextSizeClass(item.tamanho)}`}>
                           <p className="text-gray-700 mb-2">{item.texto}</p>
                           <p className="text-sm text-gray-500">Fonte: {item.fonte}</p>
                         </div>
