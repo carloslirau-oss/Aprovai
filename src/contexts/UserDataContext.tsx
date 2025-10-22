@@ -8,6 +8,8 @@ interface UserDataContextType {
   updateUserProfile: (data: any) => Promise<void>;
   addRedacao: (redacao: any) => Promise<void>;
   updateUserStats: (stats: any) => Promise<void>;
+  saveUserDataToStorage: (data: any) => void;
+  loadUserDataFromStorage: () => void;
 }
 
 const UserDataContext = createContext<UserDataContextType | undefined>(undefined);
@@ -25,11 +27,65 @@ export const UserDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [redacoes, setRedacoes] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Chave para localStorage
+  const STORAGE_KEY = 'aprimorai_user_data';
+
+  // Função para salvar dados no localStorage
+  const saveUserDataToStorage = (data: any) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (error) {
+      console.error('Error saving user data to localStorage:', error);
+    }
+  };
+
+  // Função para carregar dados do localStorage
+  const loadUserDataFromStorage = () => {
+    try {
+      const storedData = localStorage.getItem(STORAGE_KEY);
+      if (storedData) {
+        const data = JSON.parse(storedData);
+        setUserProfile(data.userProfile);
+        setRedacoes(data.redacoes);
+        setIsLoading(false);
+        return true;
+      }
+    } catch (error) {
+      console.error('Error loading user data from localStorage:', error);
+    }
+    return false;
+  };
+
+  // Função para limpar dados do localStorage (logout)
+  const clearUserDataFromStorage = () => {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      console.error('Error clearing user data from localStorage:', error);
+    }
+  };
+
+  // Carregar dados do localStorage ao iniciar
   useEffect(() => {
-    fetchUserProfile();
-    fetchRedacoes();
+    const hasStoredData = loadUserDataFromStorage();
+    if (!hasStoredData) {
+      setIsLoading(false);
+    }
   }, []);
 
+  // Salvar dados sempre que mudarem
+  useEffect(() => {
+    if (userProfile || redacoes.length > 0) {
+      const dataToSave = {
+        userProfile,
+        redacoes,
+        lastUpdated: new Date().toISOString()
+      };
+      saveUserDataToStorage(dataToSave);
+    }
+  }, [userProfile, redacoes]);
+
+  // Função para buscar dados do Supabase
   const fetchUserProfile = async () => {
     try {
       const { data: { user } } = await supabase.auth.getUser();
@@ -196,6 +252,30 @@ export const UserDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   };
 
+  // Função para sincronizar dados do localStorage com o Supabase
+  const syncDataWithSupabase = async () => {
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return;
+
+      // Sincronizar perfil
+      if (userProfile) {
+        await updateUserProfile(userProfile);
+      }
+
+      // Sincronizar redações
+      if (redacoes.length > 0) {
+        for (const redacao of redacoes) {
+          if (!redacao.id) { // Se a redação não tem ID, significa que ainda não foi salva no Supabase
+            await addRedacao(redacao);
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Error syncing data with Supabase:', error);
+    }
+  };
+
   const value = {
     userProfile,
     redacoes,
@@ -203,6 +283,10 @@ export const UserDataProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     updateUserProfile,
     addRedacao,
     updateUserStats,
+    saveUserDataToStorage,
+    loadUserDataFromStorage,
+    syncDataWithSupabase,
+    clearUserDataFromStorage,
   };
 
   return <UserDataContext.Provider value={value}>{children}</UserDataContext.Provider>;

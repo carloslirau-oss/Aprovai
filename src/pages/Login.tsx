@@ -8,11 +8,13 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useUserData } from '@/contexts/UserDataContext';
 import { showSuccess, showError } from '@/utils/toast';
 
 const Login = () => {
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
+  const { clearUserDataFromStorage } = useUserData();
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,12 +22,15 @@ const Login = () => {
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
 
   useEffect(() => {
+    // Limpar dados de usuário antigos ao acessar a página de login
+    clearUserDataFromStorage();
+    
     // Verificar se usuário já está logado
     const token = localStorage.getItem('supabase.auth.token');
     if (token) {
       navigate('/dashboard');
     }
-  }, [navigate]);
+  }, [navigate, clearUserDataFromStorage]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
