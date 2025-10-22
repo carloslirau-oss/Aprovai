@@ -274,52 +274,62 @@ const Dashboard = () => {
             </div>
             
             <div className="flex items-center space-x-4">
+              {/* Logo - substitua pelo seu logo */}
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">
-                    {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'JD'}
-                  </span>
+                  <BookOpen className="h-5 w-5 text-white" />
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {user?.user_metadata?.name || 'João da Silva'}
-                  </p>
-                  <div className="flex items-center space-x-1">
-                    <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">{patenteAtual.title}</span>
-                  </div>
-                </div>
+                <span className="text-lg font-semibold text-gray-900">Redação ENEM</span>
               </div>
               
-              {/* Barra de progresso de patente */}
-              {patenteAtual.level < 5 && patenteProxima && (
-                <div className="flex-1 max-w-xs">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs text-gray-500">Progresso:</span>
-                    <div className="flex-1 bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${progressoProximaPatente}%` }}
-                      ></div>
-                    </div>
-                    <span className="text-xs font-medium text-blue-600">
-                      {Math.round(progressoProximaPatente)}%
+              <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-2">
+                  <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                    <span className="text-white text-sm font-medium">
+                      {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'JD'}
                     </span>
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">
-                    {userProfile?.xp_total?.toLocaleString() || '0'} / {patenteProxima.xpRequired.toLocaleString()} XP
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {user?.user_metadata?.name || 'João da Silva'}
+                    </p>
+                    <div className="flex items-center space-x-1">
+                      <Award className="h-4 w-4 text-yellow-500" />
+                      <span className="text-xs text-gray-500">{patenteAtual.title}</span>
+                    </div>
                   </div>
                 </div>
-              )}
-              
-              <div className="flex items-center space-x-2">
-                <Button variant="ghost" size="sm">
-                  <Sun className="h-4 w-4" />
-                </Button>
                 
-                <Button variant="ghost" size="sm" onClick={handleLogout}>
-                  <LogOut className="h-4 w-4" />
-                </Button>
+                {/* Barra de progresso de patente */}
+                {patenteAtual.level < 5 && patenteProxima && (
+                  <div className="flex-1 max-w-xs">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-xs text-gray-500">Progresso:</span>
+                      <div className="flex-1 bg-gray-200 rounded-full h-2">
+                        <div 
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
+                          style={{ width: `${progressoProximaPatente}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-xs font-medium text-blue-600">
+                        {Math.round(progressoProximaPatente)}%
+                      </span>
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      {userProfile?.xp_total?.toLocaleString() || '0'} / {patenteProxima.xpRequired.toLocaleString()} XP
+                    </div>
+                  </div>
+                )}
+                
+                <div className="flex items-center space-x-2">
+                  <Button variant="ghost" size="sm">
+                    <Sun className="h-4 w-4" />
+                  </Button>
+                  
+                  <Button variant="ghost" size="sm" onClick={handleLogout}>
+                    <LogOut className="h-4 w-4" />
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
