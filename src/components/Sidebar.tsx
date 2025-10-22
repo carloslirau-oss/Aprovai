@@ -105,8 +105,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           {/* Header */}
           <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
             <div className="flex items-center">
-              {/* Logo - substitua pelo seu logo */}
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center mr-2">
+              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
                 <BookOpen className="h-5 w-5 text-white" />
               </div>
               <span className="ml-2 text-lg font-semibold text-gray-900">Redação ENEM</span>
