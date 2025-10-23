@@ -109,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               <img 
                 src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
                 alt="Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-40 h-10 object-contain"
                 onError={(e) => {
                   // Fallback para SVG se a imagem não carregar
                   e.currentTarget.outerHTML = `
