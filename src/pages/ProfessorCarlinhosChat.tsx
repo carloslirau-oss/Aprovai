@@ -162,7 +162,7 @@ const ProfessorCarlinhosChat = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -186,9 +186,15 @@ const ProfessorCarlinhosChat = () => {
               </Button>
               
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
-                  <Bot className="h-5 w-5 text-white" />
-                </div>
+                {/* Logo do Supabase */}
+                <img 
+                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  alt="Logo" 
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
+                  }}
+                />
                 <div>
                   <p className="text-sm font-medium text-gray-900">Professor Carlinhos</p>
                   <div className="flex items-center space-x-1">

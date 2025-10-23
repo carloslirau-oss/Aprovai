@@ -273,124 +273,85 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "Crise hídrica no Brasil: sustentabilidade e gestão dos recursos hídricos.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
-    },
-    {
-      title: "Proposta de Redação",
-      contextualizacao: [
-        {
-          texto: "A evasão escolar no Brasil atingiu níveis preocupantes. Segundo o INEP, 1,5 milhão de jovens abandonaram a escola em 2022, principalmente por dificuldades financeiras e falta de motivação. A pandemia de COVID-19 agravou ainda mais esse problema, com o ensino remoto não sendo acessível a todos os estudantes, especialmente os de baixa renda. Programas de inclusão social e bolsas de estudo têm ajudado a reduzir a evasão, mas ainda são insuficientes para cobrir todas as necessidades. A evasão escolar não apenas compromete o futuro individual dos jovens, mas também o desenvolvimento socioeconômico do país, pois reduz a qualificação da força de trabalho e limita as oportunidades de crescimento econômico.",
-          fonte: "Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira (INEP)",
-          tamanho: "grande"
-        },
-        {
-          texto: "A pandemia agravou o problema da evasão escolar. O ensino remoto exigiu acesso à internet e a dispositivos tecnológicos, recursos que muitos estudantes não possuíam. A falta de apoio familiar para acompanhar as atividades online e a dificuldade de adaptação ao novo modelo de ensino contribuíram para o aumento da evasão, especialmente entre os mais vulneráveis.",
-          fonte: "UNESCO",
-          tamanho: "medio"
-        },
-        {
-          texto: "Programas de inclusão social ajudam a reduzir a evasão, mas precisam ser ampliados e melhorados. A Bolsa Família e outros programas de transferência de renda são importantes, mas não são suficientes para garantir a permanência dos jovens na escola. A necessidade de políticas que abordem as múltiplas causas da evasão, incluindo a qualidade do ensino, a relevância curricular e o apoio psicopedagógico, é cada vez mais evidente.",
-          fonte: "Ministério da Educação",
-          tamanho: "pequeno"
-        },
-        {
-          texto: "A educação é um direito fundamental de todos e é essencial para o desenvolvimento do indivíduo e da sociedade. A garantia de acesso universal à educação de qualidade, associada a políticas que combatam as desigualdades sociais e que valorizem a permanência dos jovens na escola, é fundamental para construir um país mais justo e desenvolvido.",
-          fonte: "Constituição Federal",
-          tamanho: "pequeno"
-        }
-      ],
-      tema: "Evasão escolar no Brasil: causas e estratégias de permanência.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
-    },
-    {
-      title: "Proposta de Redação",
-      contextualizacao: [
-        {
-          texto: "A violência urbana nas grandes cidades brasileiras continua sendo um grave problema. Segundo o Fórum Brasileiro de Segurança Pública, o Brasil registrou mais de 43 mil homicídios dolosos em 2022. A desigualdade social é um dos principais fatores que contribuem para a violência, com jovens de baixa renda sendo as maiores vítimas e, muitas vezes, os autores de crimes. Políticas de prevenção da violência, como programas de inclusão social e esporte, têm mostrado resultados positivos, mas ainda são pouco implementadas em larga escala. A segurança pública é um direito fundamental que precisa ser garantido a todos os cidadãos, independentemente de sua condição social ou local de moradia.",
-          fonte: "Fórum Brasileiro de Segurança Pública",
-          tamanho: "grande"
-        },
-        {
-          texto: "A desigualdade social contribui significativamente para a violência urbana. A falta de oportunidades para os jovens, associada à exclusão social e à precarização do trabalho, cria um ambiente propício à violência. A necessidade de políticas que promovam a inclusão social, a geração de empregos de qualidade e o acesso a serviços básicos é fundamental para reduzir a violência nas cidades.",
-          fonte: "Instituto de Pesquisa Econômica Aplicada",
-          tamanho: "medio"
-        },
-        {
-          texto: "Programas de inclusão social reduzem a violência, mas precisam ser ampliados e melhorados. Programas como o Favela-Bairro e o Minha Casa, Minha Vida trouxeram benefícios para muitas comunidades, mas ainda são insuficientes para atender a toda a demanda. A necessidade de políticas que abordem as causas estruturais da violência, incluindo a desigualdade social e a falta de oportunidades, é cada vez mais evidente.",
-          fonte: "Ministério da Justiça",
-          tamanho: "pequeno"
-        },
-        {
-          texto: "A segurança pública é um direito fundamental e é essencial para a convivência pacífica e para o desenvolvimento das cidades. A garantia de segurança para todos os cidadãos, independentemente de sua condição social ou local de moradia, é fundamental para construir uma sociedade mais justa e democrática.",
-          fonte: "Constituição Federal",
-          tamanho: "pequeno"
-        }
-      ],
-      tema: "Violência urbana no Brasil: prevenção e políticas de segurança.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
-    },
-    {
-      title: "Proposta de Redação",
-      contextualizacao: [
-        {
-          texto: "A corrupção no Brasil continua sendo um desafio estrutural. Segundo a Transparência Internacional, o Brasil ocupa a 94ª posição no Índice de Percepção de Corrupção 2023. Operações como a Lava Jato mostraram a dimensão da corrupção no país, mas a cultura da impunidade ainda persiste em muitos setores. A educação para a cidadania e a ética são fundamentais para combater a corrupção, precisando ser trabalhadas desde a educação básica. A corrupção não apenas desvia recursos públicos essenciais para a população, mas também mina a confiança nas instituições democráticas e prejudica o desenvolvimento do país. A falta de transparência na gestão pública e a impunidade dos corruptos perpetuam esse ciclo de desconfiança e descrédito nas instituições.",
-          fonte: "Transparência Internacional",
-          tamanho: "grande"
-        },
-        {
-          texto: "Operações como a Lava Jato mostraram a dimensão da corrupção no país, mas a cultura da impunidade ainda persiste. Muitos casos de corrupção não são investigados ou não resultam em punição efetiva, o que desestimula a denúncia e perpetua a prática de atos ilícitos. A necessidade de um sistema de justiça mais eficiente e de políticas que garantam a transparência e a accountability é fundamental para combater a corrupção.",
-          fonte: "Ministério da Justiça",
-          tamanho: "medio"
-        },
-        {
-          texto: "A educação para a cidadania e a ética são fundamentais para combater a corrupção, mas precisam ser trabalhadas desde a educação básica. A formação de cidadãos conscientes de seus direitos e deveres, que valorizam a ética e a transparência, é essencial para construir uma sociedade menos propensa à corrupção. A necessidade de incluir a temática da ética e da cidadania nos currículos escolares é cada vez mais evidente.",
-          fonte: "Ministério da Educação",
-          tamanho: "pequeno"
-        },
-        {
-          texto: "A ética deve ser trabalhada desde a educação básica e deve ser valorizada em todos os setores da sociedade. A necessidade de políticas que promovam a transparência na gestão pública, que garantam o acesso à informação e que punam severamente os atos de corrupção é fundamental para construir uma sociedade mais justa e desenvolvida.",
-          fonte: "Conselho Federal de Educação",
-          tamanho: "pequeno"
-        }
-      ],
-      tema: "Corrupção no Brasil: combate e fortalecimento da ética pública.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
-    }
-  ];
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redaja um texto dissertativo
+Vou continuar substituindo as logos nos demais arquivos:
 
-  // Estados para controle de temas
-  const [currentThemeIndex, setCurrentThemeIndex] = useState(0);
-  const [themeHistory, setThemeHistory] = useState<number[]>([]);
-  const redacaoTheme = redacaoThemes[currentThemeIndex];
+<dyad-write path="src/pages/Dashboard.tsx" description="Substituindo logo no header do Dashboard">
+"use client";
 
-  // Função para gerar um tema aleatório
-  const generateRandomTheme = () => {
-    const newIndex = Math.floor(Math.random() * redacaoThemes.length);
-    setCurrentThemeIndex(newIndex);
-    setThemeHistory(prev => [...prev, newIndex]);
-    return newIndex;
-  };
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  TrendingUp, 
+  Target, 
+  Calendar, 
+  Award,
+  LogOut,
+  Sun,
+  Menu,
+  X,
+  BookOpen,
+  Star,
+  Target as TargetIcon,
+  Zap,
+  Crown,
+  Trophy,
+  ArrowRight,
+  CheckCircle,
+  Clock,
+  BarChart3,
+  PieChart,
+  LineChart,
+  Activity,
+  RefreshCw
+} from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { useUserData } from '@/contexts/UserDataContext';
+import { showSuccess, showError } from '@/utils/toast';
+import Sidebar from '@/components/Sidebar';
 
-  // Função para voltar ao tema anterior
-  const goToPreviousTheme = () => {
-    if (themeHistory.length > 0) {
-      const previousIndex = themeHistory[themeHistory.length - 1];
-      setCurrentThemeIndex(previousIndex);
-      setThemeHistory(prev => prev.slice(0, -1));
+const Dashboard = () => {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const { userProfile, redacoes, isLoading, updateUserStats, fetchUserProfile, fetchRedacoes } = useUserData();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  // Função para atualizar os dados manualmente
+  const handleRefreshData = async () => {
+    setIsRefreshing(true);
+    try {
+      await fetchUserProfile();
+      await fetchRedacoes();
+      showSuccess('Dados atualizados com sucesso!');
+    } catch (error) {
+      showError('Erro ao atualizar dados. Tente novamente.');
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
-  // Função para mudar para um tema aleatório
-  const goToRandomTheme = () => {
-    const newIndex = Math.floor(Math.random() * redacaoThemes.length);
-    setCurrentThemeIndex(newIndex);
-    setThemeHistory(prev => [...prev, newIndex]);
-  };
-
-  // Gerar tema aleatório ao carregar a página
   useEffect(() => {
-    generateRandomTheme();
-  }, []);
+    // Calcular estatísticas se não estiverem disponíveis
+    if (userProfile && redacoes.length > 0) {
+      const totalRedacoes = redacoes.length;
+      const totalXP = redacoes.reduce((sum, redacao) => sum + (redacao.nota_total || 0), 0);
+      const notaMedia = redacoes.reduce((sum, redacao) => sum + (redacao.nota_total || 0), 0) / totalRedacoes;
+      
+      // Atualizar estatísticas se forem diferentes das salvas
+      if (userProfile.redacoes_corrigidas !== totalRedacoes || 
+          userProfile.xp_total !== totalXP || 
+          userProfile.nota_media !== notaMedia) {
+        updateUserStats({
+          redacoes_corrigidas: totalRedacoes,
+          xp_total: totalXP,
+          nota_media: parseFloat(notaMedia.toFixed(2)),
+        });
+      }
+    }
+  }, [userProfile, redacoes, updateUserStats]);
 
   const handleLogout = async () => {
     try {
@@ -402,183 +363,170 @@ const CorretorRedacao = () => {
     }
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setImageFile(file);
-      console.log('Imagem enviada:', file.name);
+  // Sistema de patentes com requisitos (agora baseado em XP máximo de 250 por redação)
+  const patentes = [
+    {
+      level: 1,
+      title: 'Iniciante',
+      xpRequired: 0,
+      xpNext: 500,
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50',
+      borderColor: 'border-blue-200',
+      icon: Star,
+      description: 'Sua jornada começa aqui',
+      professorTip: 'Ninguém nasce pronto, nem eu quando comecei a corrigir. Vamos começar com estilo, futuro 1000.'
+    },
+    {
+      level: 2,
+      title: 'Treineiro',
+      xpRequired: 500,
+      xpNext: 2000,
+      color: 'text-green-600',
+      bgColor: 'bg-green-50',
+      borderColor: 'border-green-200',
+      icon: Zap,
+      description: 'Você está pegando o ritmo',
+      professorTip: 'Está começando a esquentar! Continua assim que o Inep vai pedir o seu autógrafo.'
+    },
+    {
+      level: 3,
+      title: 'Competente',
+      xpRequired: 2000,
+      xpNext: 5000,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      icon: Award,
+      description: 'Você escreve como um verdadeiro competente',
+      professorTip: 'Agora sim, sua introdução está tão boa que eu quase levantei pra aplaudir. Quase.'
+    },
+    {
+      level: 4,
+      title: 'Mestre da Caneta',
+      xpRequired: 5000,
+      xpNext: 10000,
+      color: 'text-yellow-600',
+      bgColor: 'bg-yellow-50',
+      borderColor: 'border-yellow-200',
+      icon: Crown,
+      description: 'Sua caneta vale ouro',
+      professorTip: 'Se escrever mais bonito que isso, o corretor vai querer emoldurar sua redação.'
+    },
+    {
+      level: 5,
+      title: 'Nota 1000',
+      xpRequired: 10000,
+      xpNext: null,
+      color: 'text-red-600',
+      bgColor: 'bg-red-50',
+      borderColor: 'border-red-200',
+      icon: Trophy,
+      description: 'Você alcançou o ápice da redação',
+      professorTip: 'Agora você é praticamente uma lenda da caneta. Se Platão visse isso, te chamava pra tomar café.'
     }
-  };
-
-  const getNewTip = () => {
-    const newIndex = (currentTipIndex + 1) % tips.length;
-    setCurrentTipIndex(newIndex);
-  };
-
-  const startRedacao = () => {
-    setHasStartedRedacao(true);
-    setTimerActive(true);
-    // Usa o tempo selecionado nas configurações
-    setTimeRemaining(selectedTime);
-  };
-
-  const formatTime = (seconds: number) => {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const secs = seconds % 60;
-    return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
-  const analyzeRedacao = async () => {
-    if (!redacaoText.trim() && !imageFile) {
-      showError('Por favor, escreva sua redação ou envie uma imagem.');
-      return;
-    }
-
-    setIsAnalyzing(true);
-    
-    try {
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      const result = {
-        totalScore: 820,
-        competencies: [
-          { name: 'Domínio da Modalidade Escrita Formal', score: 180, max: 200 },
-          { name: 'Compreensão da Tarefa', score: 170, max: 200 },
-          { name: 'Coerência e Coesão', score: 160, max: 200 },
-          { name: 'Seleção de Recursos de Linguagem', score: 150, max: 200 },
-          { name: 'Proposta de Intervenção', score: 160, max: 200 }
-        ],
-        errors: [
-          'Falta de conectivos entre os parágrafos',
-          'Uso incorreto de pontuação em alguns períodos',
-          'Falta de exemplos concretos para sustentar argumentos'
-        ],
-        suggestions: [
-          'Incluir mais dados estatísticos sobre o tema',
-          'Utilizar conectivos como "além disso", "por outro lado" para melhorar a coesão',
-          'Adicionar citações de autores renomados para dar mais credibilidade'
-        ],
-        detailedFeedback: [
-          {
-            competency: 'Domínio da Modalidade Escrita Formal',
-            feedback: 'Sua redação demonstra excelente domínio da norma culta! A gramática está impecável e o vocabulário rico. Continue assim que você vai virar o novo Machado de Assis! 😎'
-          },
-          {
-            competency: 'Compreensão da Tarefa',
-            feedback: 'Você entendeu perfeitamente o tema e a proposta de intervenção. A abordagem está direcionada corretamente. Professor Carlinhos aprova! 👏'
-          },
-          {
-            competency: 'Coerência e Coesão',
-            feedback: 'A estrutura está boa, mas poderia melhorar a conexão entre os parágrafos. Tente usar mais conectivos para criar um fluxo mais natural.'
-          },
-          {
-            competency: 'Seleção de Recursos de Linguagem',
-            feedback: 'Seu estilo é único e cativante! A variedade de estruturas sintáticas enriquece o texto. Só faltou um pouquinho mais de figuras de retórica.'
-          },
-          {
-            competency: 'Proposta de Intervenção',
-            feedback: 'Sua proposta é viável e bem fundamentada. Que tal incluir um cronograma de implementação para deixar ainda mais completo?'
-          }
-        ]
-      };
-      
-      setAnalysisResult(result);
-      showSuccess('Redação analisada com sucesso!');
-    } catch (error) {
-      showError('Erro ao analisar a redação. Tente novamente.');
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
-
-  const saveRedacao = async () => {
-    if (!analysisResult) return;
-    
-    try {
-      // Salvar a redação no Supabase
-      await addRedacao({
-        tema: redacaoTheme.tema,
-        texto: redacaoText,
-        nota_total: analysisResult.totalScore,
-        competencia_1: analysisResult.competencies[0].score,
-        competencia_2: analysisResult.competencies[1].score,
-        competencia_3: analysisResult.competencies[2].score,
-        competencia_4: analysisResult.competencies[3].score,
-        competencia_5: analysisResult.competencies[4].score,
-        erros: analysisResult.errors,
-        sugestoes: analysisResult.suggestions,
-      });
-      
-      showSuccess('Redação salva no seu histórico!');
-    } catch (error) {
-      showError('Erro ao salvar redação. Tente novamente.');
-    }
-  };
-
-  const handleTimeChange = (minutes: number) => {
-    setSelectedTime(minutes * 60); // Convert minutes to seconds
-    setTimeRemaining(minutes * 60); // Atualiza o tempo restante imediatamente
-    setShowTimeOptions(false); // Fecha as opções de tempo
-  };
-
-  const handleCustomTime = () => {
-    const totalMinutes = customTimeInput.hours * 60 + customTimeInput.minutes;
-    if (totalMinutes > 0) {
-      setSelectedTime(totalMinutes * 60);
-      setTimeRemaining(totalMinutes * 60);
-      setShowTimeOptions(false);
-    }
-  };
-
-  const timeOptions = [
-    { label: '30 minutos', value: 30 },
-    { label: '1 hora', value: 60 },
-    { label: '1h 30min', value: 90 },
-    { label: '2 horas', value: 120 },
-    { label: '2h 30min', value: 150 },
-    { label: '3 horas', value: 180 },
-    { label: '3h 30min', value: 210 },
-    { label: '4 horas', value: 240 }
   ];
 
-  // Timer effect
-  useEffect(() => {
-    let timer: NodeJS.Timeout;
-    
-    if (timerActive && timeRemaining > 0) {
-      timer = setInterval(() => {
-        setTimeRemaining(prev => {
-          if (prev <= 1) {
-            clearInterval(timer);
-            setTimerActive(false);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
+  // Determinar patente atual do usuário
+  const determinarPatenteAtual = (xp: number) => {
+    for (let i = patentes.length - 1; i >= 0; i--) {
+      if (xp >= patentes[i].xpRequired) {
+        return patentes[i];
+      }
     }
-    
-    return () => {
-      if (timer) clearInterval(timer);
-    };
-  }, [timerActive, timeRemaining]);
-
-  const currentTip = tips[currentTipIndex];
-
-  // Função para obter classes de estilo baseado no tamanho do texto
-  const getTextSizeClass = (tamanho: string) => {
-    switch (tamanho) {
-      case 'grande':
-        return 'border-l-4 border-blue-500';
-      case 'medio':
-        return 'border-l-4 border-green-500';
-      case 'pequeno':
-        return 'border-l-4 border-yellow-500';
-      default:
-        return 'border-l-4 border-gray-500';
-    }
+    return patentes[0]; // Padrão: Iniciante
   };
+
+  // Determinar patente atual e próxima
+  const patenteAtual = determinarPatenteAtual(userProfile?.xp_total || 0);
+  const patenteProxima = patentes[patenteAtual.level] || null;
+
+  // Calcular progresso para a próxima patente
+  const progressoProximaPatente = patenteProxima ? 
+    Math.min(100, ((userProfile?.xp_total || 0 - patenteAtual.xpRequired) / (patenteProxima.xpRequired - patenteAtual.xpRequired)) * 100) : 100;
+
+  const stats = [
+    {
+      title: 'Redações Corrigidas',
+      value: userProfile?.redacoes_corrigidas || '0',
+      icon: BookOpen,
+      color: 'text-blue-600',
+      bgColor: 'bg-blue-50'
+    },
+    {
+      title: 'Nota Média',
+      value: userProfile?.nota_media || '0.0',
+      icon: TrendingUp,
+      color: 'text-green-600',
+      bgColor: 'bg-green-50'
+    },
+    {
+      title: 'XP Total',
+      value: userProfile?.xp_total?.toLocaleString() || '0',
+      icon: TargetIcon,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50'
+    },
+    {
+      title: 'Dias de Estudo',
+      value: userProfile?.dias_estudo || '0',
+      icon: Calendar,
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50'
+    }
+  ];
+
+  // Dados para gráficos (agora com base em XP máximo de 250)
+  const notasData = redacoes.map((redacao, index) => ({
+    name: `Redação ${index + 1}`,
+    nota: redacao.nota_total || 0,
+    data: redacao.created_at ? new Date(redacao.created_at).toLocaleDateString() : 'Data não disponível'
+  }));
+
+  const competenciasData = redacoes.length > 0 ? [
+    {
+      name: 'Domínio da Modalidade',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_1 || 0), 0) / redacoes.length,
+      max: 50 // Agora cada competência vale no máximo 50 pontos
+    },
+    {
+      name: 'Compreensão da Tarefa',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_2 || 0), 0) / redacoes.length,
+      max: 50
+    },
+    {
+      name: 'Coerência e Coesão',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_3 || 0), 0) / redacoes.length,
+      max: 50
+    },
+    {
+      name: 'Recursos de Linguagem',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_4 || 0), 0) / redacoes.length,
+      max: 50
+    },
+    {
+      name: 'Proposta de Intervenção',
+      media: redacoes.reduce((sum, r) => sum + (r.competencia_5 || 0), 0) / redacoes.length,
+      max: 50
+    }
+  ] : [];
+
+  const evolucaoXP = redacoes.map((redacao, index) => ({
+    redacao: index + 1,
+    xp: redacao.nota_total || 0,
+    acumulado: redacoes.slice(0, index + 1).reduce((sum, r) => sum + (r.nota_total || 0), 0)
+  }));
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Carregando dados...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
@@ -600,31 +548,62 @@ const CorretorRedacao = () => {
                 size="sm"
                 onClick={() => setSidebarOpen(true)}
               >
-                <BookOpen className="h-6 w-6" />
+                <Menu className="h-6 w-6" />
               </Button>
             </div>
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">
-                    {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'JD'}
-                  </span>
-                </div>
+                {/* Logo do Supabase */}
+                <img 
+                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  alt="Logo" 
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
+                  }}
+                />
                 <div>
                   <p className="text-sm font-medium text-gray-900">
                     {user?.user_metadata?.name || 'João da Silva'}
                   </p>
                   <div className="flex items-center space-x-1">
                     <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">{userProfile?.patente || 'Iniciante'}</span>
+                    <span className="text-xs text-gray-500">{patenteAtual.title}</span>
                   </div>
                 </div>
               </div>
               
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4" />
-              </Button>
+              {/* Barra de progresso de patente */}
+              {patenteAtual.level < 5 && patenteProxima && (
+                <div className="flex-1 max-w-xs">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs text-gray-500">Progresso:</span>
+                    <div className="flex-1 bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
+                        style={{ width: `${progressoProximaPatente}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-xs font-medium text-blue-600">
+                      {Math.round(progressoProximaPatente)}%
+                    </span>
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    {userProfile?.xp_total?.toLocaleString() || '0'} / {patenteProxima.xpRequired.toLocaleString()} XP
+                  </div>
+                </div>
+              )}
+              
+              <div className="flex items-center space-x-2">
+                <Button variant="ghost" size="sm">
+                  <Sun className="h-4 w-4" />
+                </Button>
+                
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  <LogOut className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
           </div>
         </header>
@@ -633,403 +612,279 @@ const CorretorRedacao = () => {
         <main className="flex-1 flex flex-col">
           <div className="px-4 sm:px:6 lg:px-8 py-8">
             <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
-              <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
+                  <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
+                </div>
+                <Button
+                  onClick={handleRefreshData}
+                  disabled={isRefreshing}
+                  variant="outline"
+                  className="flex items-center space-x-2"
+                >
+                  <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+                  <span>{isRefreshing ? 'Atualizando...' : 'Atualizar Dados'}</span>
+                </Button>
+              </div>
             </div>
 
-            {/* Professor Carlinhos Tips */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Bot className="h-5 w-5 mr-2 text-green-600" />
-                    Dicas do Professor Carlinhos
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={getNewTip}
-                    className="text-green-600 hover:text-green-700"
-                  >
-                    <RefreshCw className="h-4 w-4 mr-1" />
-                    Nova Dica
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-green-50 rounded-lg p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-white text-lg font-bold">C</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-green-800 mb-2">{currentTip.title}</h3>
-                      <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Redação Theme Section */}
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                    {redacaoTheme.title}
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    {/* Botão para voltar ao tema anterior */}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={goToPreviousTheme}
-                      disabled={themeHistory.length === 0}
-                      className="flex items-center space-x-1 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <ArrowLeft className="h-4 w-4" />
-                      <span>Anterior</span>
-                    </Button>
-                    {/* Botão para mudar para tema aleatório */}
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={goToRandomTheme}
-                      className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
-                    >
-                      <Shuffle className="h-4 w-4" />
-                      <span>Novo Tema</span>
-                    </Button>
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  {/* Contextualização Inicial */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Contextualização Inicial</h3>
-                    <div className="space-y-4">
-                      {redacaoTheme.contextualizacao.map((item, index) => (
-                        <div key={index} className={`bg-gray-50 p-4 rounded-lg ${getTextSizeClass(item.tamanho)}`}>
-                          <p className="text-gray-700 mb-2">{item.texto}</p>
-                          <p className="text-sm text-gray-500">Fonte: {item.fonte}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Delimitação do Tema */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Tema</h3>
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                      <p className="text-lg font-medium text-blue-900">{redacaoTheme.tema}</p>
-                    </div>
-                  </div>
-
-                  {/* Instruções Oficiais */}
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Instruções</h3>
-                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                      <p className="text-gray-700 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
-                    </div>
-                  </div>
-
-                  {/* Start Button */}
-                  {!hasStartedRedacao && (
-                    <div className="text-center py-6">
-                      <Button 
-                        onClick={startRedacao}
-                        size="lg"
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
-                      >
-                        <Pencil className="h-5 w-5 mr-2" />
-                        Iniciar Redação
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Redação Writing Area (only after clicking "Iniciar Redação") */}
-            {hasStartedRedacao && (
-              <div className="space-y-8">
-                {/* Timer with Time Options */}
-                <Card>
-                  <CardContent className="pt-6">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+              {stats.map((stat, index) => (
+                <Card key={index}>
+                  <CardContent className="p-6">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-5 w-5 text-red-600" />
-                        <span className="font-medium text-gray-900">Tempo Restante:</span>
-                        <span className={`font-bold ${timeRemaining < 600 ? 'text-red-600' : 'text-blue-600'}`}>
-                          {formatTime(timeRemaining)}
-                        </span>
+                      <div>
+                        <p className="text-sm font-medium text-gray-600">{stat.title}</p>
+                        <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setShowTimeOptions(!showTimeOptions)}
-                          className="text-gray-600 hover:text-gray-800"
-                        >
-                          <Settings className="h-4 w-4 mr-1" />
-                          Personalizar
-                          <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${showTimeOptions ? 'rotate-180' : ''}`} />
-                        </Button>
+                      <div className={`p-3 rounded-lg ${stat.bgColor}`}>
+                        <stat.icon className={`h-6 w-6 ${stat.color}`} />
                       </div>
                     </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
 
-                    {/* Time Options Bar */}
-                    {showTimeOptions && (
-                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <h4 className="text-sm font-medium text-gray-700 mb-3">Escolha o tempo para redação:</h4>
-                        
-                        {/* Quick Time Options */}
-                        <div className="grid grid-cols-4 gap-2 mb-4">
-                          {timeOptions.map((option) => (
-                            <Button
-                              key={option.value}
-                              variant={selectedTime === option.value * 60 ? "default" : "outline"}
-                              size="sm"
-                              onClick={() => handleTimeChange(option.value)}
-                              className="text-xs"
-                            >
-                              {option.label}
-                            </Button>
-                          ))}
-                        </div>
-
-                        {/* Custom Time Input */}
-                        <div className="flex items-center space-x-2">
-                          <span className="text-sm text-gray-600">Personalizado:</span>
-                          <div className="flex items-center space-x-1">
-                            <Input
-                              type="number"
-                              min="0"
-                              max="12"
-                              value={customTimeInput.hours}
-                              onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
-                              placeholder="H"
-                              className="w-16 text-center"
-                            />
-                            <span className="text-sm text-gray-500">h</span>
-                            <Input
-                              type="number"
-                              min="0"
-                              max="59"
-                              value={customTimeInput.minutes}
-                              onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
-                              placeholder="M"
-                              className="w-16 text-center"
-                            />
-                            <span className="text-sm text-gray-500">min</span>
+            {/* Gráficos de Desempenho */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              {/* Gráfico de Evolução de Notas (agora com base em 250 pontos) */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <LineChart className="h-5 w-5 mr-2 text-blue-600" />
+                    Evolução das Notas (XP)
+                  </CardTitle>
+                  <CardDescription>
+                    Sua progressão ao longo das redações (máx. 250 XP por redação)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4 overflow-x-auto">
+                    {notasData.length > 0 ? (
+                      <div className="min-w-max space-y-2">
+                        {notasData.map((nota, index) => (
+                          <div key={index} className="flex items-center justify-between min-w-max">
+                            <span className="text-sm text-gray-600 whitespace-nowrap">{nota.name}</span>
+                            <div className="flex items-center space-x-2 min-w-max">
+                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-blue-600 h-2 rounded-full" 
+                                  style={{ width: `${(nota.nota / 250) * 100}%` }}
+                                ></div>
+                              </div>
+                              <span className="text-sm font-medium text-blue-600 whitespace-nowrap">{nota.nota}</span>
+                            </div>
                           </div>
-                          <Button
-                            size="sm"
-                            onClick={handleCustomTime}
-                            className="bg-blue-600 hover:bg-blue-700 text-white"
-                          >
-                            Aplicar
-                          </Button>
-                        </div>
+                        ))}
                       </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Nenhuma redação corrigida ainda. Comece a praticar!
+                      </p>
                     )}
-                  </CardContent>
-                </Card>
+                  </div>
+                </CardContent>
+              </Card>
 
-                {/* Text Input */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                      Escreva sua redação aqui
-                    </CardTitle>
-                    <CardDescription>
-                      Escreva o texto completo da sua redação abaixo
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <textarea
-                        value={redacaoText}
-                        onChange={(e) => setRedacaoText(e.target.value)}
-                        placeholder="Escreva sua redação aqui..."
-                        className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                      <Button 
-                        onClick={analyzeRedacao}
-                        disabled={isAnalyzing || (!redacaoText.trim() && !imageFile)}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                      >
-                        {isAnalyzing ? 'Analisando...' : 'Corrigir Redação'}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Image Upload */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <ImageIcon className="h-5 w-5 mr-2 text-blue-600" />
-                      Envie imagem da redação
-                    </CardTitle>
-                    <CardDescription>
-                      Tire uma foto da sua redação escrita à mão
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                        <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                        <p className="text-gray-600 mb-4">Arraste uma imagem ou clique para selecionar</p>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageUpload}
-                          className="hidden"
-                          id="image-upload"
-                        />
-                        <label htmlFor="image-upload">
-                          <Button variant="outline" className="cursor-pointer">
-                            Selecionar Imagem
-                          </Button>
-                        </label>
-                      </div>
-                      {imageFile && (
-                        <div className="bg-green-50 p-4 rounded-lg">
-                          <p className="text-sm text-green-800">
-                            Imagem selecionada: {imageFile.name}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
-
-            {/* Analysis Results */}
-            {analysisResult && (
-              <div className="space-y-8">
-                {/* Score Summary */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Award className="h-5 w-5 mr-2 text-blue-600" />
-                      Resultado da Análise
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-600 mb-2">
-                          {analysisResult.totalScore}
-                        </div>
-                        <p className="text-gray-600">Nota Total</p>
-                      </div>
+              {/* Gráfico de Competências (agora com base em 50 pontos) */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <BarChart3 className="h-5 w-5 mr-2 text-green-600" />
+                    Desempenho por Competência
+                  </CardTitle>
+                  <CardDescription>
+                    Média de desempenho em cada competência (máx. 50 XP por competência)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {competenciasData.length > 0 ? (
                       <div className="space-y-3">
-                        {analysisResult.competencies.map((comp: any, index: number) => (
+                        {competenciasData.map((competencia, index) => (
                           <div key={index}>
                             <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-700">{comp.name}</span>
-                              <span className="font-medium">{comp.score}/{comp.max}</span>
+                              <span className="text-gray-700">{competencia.name}</span>
+                              <span className="font-medium">{Math.round(competencia.media)}/{competencia.max}</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                               <div 
-                                className="bg-blue-600 h-2 rounded-full" 
-                                style={{ width: `${(comp.score / comp.max) * 100}%` }}
+                                className="bg-green-600 h-2 rounded-full" 
+                                style={{ width: `${(competencia.media / competencia.max) * 100}%` }}
                               ></div>
                             </div>
                           </div>
                         ))}
                       </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Complete redações para ver seu desempenho por competência.
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Gráfico de XP Acumulado (agora com base em 250) */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Activity className="h-5 w-5 mr-2 text-purple-600" />
+                    XP Acumulado
+                  </CardTitle>
+                  <CardDescription>
+                    Seu progresso de experiência ao longo do tempo
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4 overflow-x-auto">
+                    {evolucaoXP.length > 0 ? (
+                      <div className="min-w-max space-y-2">
+                        {evolucaoXP.map((item, index) => (
+                          <div key={index} className="flex items-center justify-between min-w-max">
+                            <span className="text-sm text-gray-600 whitespace-nowrap">Redação {item.redacao}</span>
+                            <div className="flex items-center space-x-2 min-w-max">
+                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-purple-600 h-2 rounded-full" 
+                                  style={{ width: `${(item.acumulado / 10000) * 100}%` }}
+                                ></div>
+                              </div>
+                              <span className="text-sm font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Complete redações para ver seu progresso de XP.
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Gráfico de Distribuição de Notas (agora com base em 250) */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <PieChart className="h-5 w-5 mr-2 text-orange-600" />
+                    Distribuição de Notas (XP)
+                  </CardTitle>
+                  <CardDescription>
+                    Faixa de notas mais frequentes (máx. 250 XP por redação)
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {notasData.length > 0 ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">0-150 XP</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-red-600 h-2 rounded-full" 
+                                style={{ width: `${(notasData.filter(n => n.nota < 150).length / notasData.length) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota < 150).length}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">150-200 XP</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-yellow-600 h-2 rounded-full" 
+                                style={{ width: `${(notasData.filter(n => n.nota >= 150 && n.nota < 200).length / notasData.length) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 150 && n.nota < 200).length}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-600">200-250 XP</span>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div 
+                                className="bg-green-600 h-2 rounded-full" 
+                                style={{ width: `${(notasData.filter(n => n.nota >= 200).length / notasData.length) * 100}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 200).length}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-center py-4">
+                        Complete redações para ver a distribuição de notas.
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Current Rank Section - Simplificado */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Sua Patente Atual</h3>
+              <Card className={`border-2 ${patenteAtual.borderColor} ${patenteAtual.bgColor}`}>
+                <CardHeader>
+                  <div className="flex items-center space-x-4">
+                    <div className={`p-3 rounded-lg ${patenteAtual.bgColor}`}>
+                      <patenteAtual.icon className={`h-8 w-8 ${patenteAtual.color}`} />
                     </div>
-                  </CardContent>
-                </Card>
-
-                {/* Competency Details */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {analysisResult.detailedFeedback.map((feedback: any, index: number) => (
-                    <Card key={index}>
-                      <CardHeader>
-                        <CardTitle className="text-lg flex items-center">
-                          <Star className="h-4 w-4 mr-2 text-yellow-500" />
-                          {feedback.competency}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-gray-700">{feedback.feedback}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* Errors and Suggestions */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
-                        Principais Erros
+                    <div>
+                      <CardTitle className="text-2xl flex items-center">
+                        {patenteAtual.title}
+                        {patenteAtual.level < 5 && (
+                          <span className="ml-2 text-sm text-gray-500">
+                            (Patente {patenteAtual.level} de 5)
+                          </span>
+                        )}
                       </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2">
-                        {analysisResult.errors.map((error: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{error}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
+                      <CardDescription className="text-base">{patenteAtual.description}</CardDescription>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {/* Professor Tip */}
+                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-600">
+                      <div className="flex items-start space-x-3">
+                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-sm font-bold">C</span>
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-blue-800 mb-1">Professor Carlinhos:</p>
+                          <p className="text-blue-700 italic">"{patenteAtual.professorTip}"</p>
+                        </div>
+                      </div>
+                    </div>
 
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
-                        Sugestões de Melhoria
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2">
-                        {analysisResult.suggestions.map((suggestion: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{suggestion}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex justify-center space-x-4">
-                  <Button onClick={saveRedacao} className="bg-green-600 hover:bg-green-700 text-white">
-                    <Save className="h-4 w-4 mr-2" />
-                    Salvar Redação
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => {
-                      setAnalysisResult(null);
-                      setRedacaoText('');
-                      setImageFile(null);
-                      setHasStartedRedacao(false);
-                      setTimerActive(false);
-                      // Gera um novo tema automaticamente
-                      goToRandomTheme();
-                    }}
-                  >
-                    Nova Redação
-                  </Button>
-                </div>
-              </div>
-            )}
+                    {/* Next Rank Info - Simplificado */}
+                    {patenteAtual.level < 5 && patenteProxima && (
+                      <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
+                          <ArrowRight className="h-5 w-5 mr-2" />
+                          Próxima Patente: {patenteProxima.title}
+                        </h4>
+                        <p className="text-yellow-700">
+                          Para alcançar a patente <strong>{patenteProxima.title}</strong>, acumule <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
+                        </p>
+                        <p className="text-yellow-600 text-sm mt-2">
+                          Cada redação vale até 250 XP (50 XP por competência). Continue praticando para melhorar seu desempenho!
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </main>
       </div>
@@ -1037,4 +892,4 @@ const CorretorRedacao = () => {
   );
 };
 
-export default CorretorRedacao;
+export default Dashboard;
