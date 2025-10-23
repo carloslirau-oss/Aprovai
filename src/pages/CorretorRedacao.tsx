@@ -572,11 +572,6 @@ const CorretorRedacao = () => {
       case 'grande':
         return 'border-l-4 border-blue-500';
       case 'medio':
-       
-Vou continuar o arquivo a partir do ponto onde ele foi cortado:
-
-<dyad-write path="src/pages/CorretorRedacao.tsx" description="Continuando arquivo após erro de sintaxe">
-        case 'medio':
         return 'border-l-4 border-green-500';
       case 'pequeno':
         return 'border-l-4 border-yellow-500';
@@ -611,29 +606,35 @@ Vou continuar o arquivo a partir do ponto onde ele foi cortado:
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                {/* Logo do Supabase */}
-                <img 
-                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
-                  alt="Logo" 
-                  className="w-8 h-8 rounded-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
-                  }}
-                />
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {user?.user_metadata?.name || 'João da Silva'}
-                  </p>
-                  <div className="flex items-center space-x-1">
-                    <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">{userProfile?.patente || 'Iniciante'}</span>
+
+Vou continuar o arquivo a partir do ponto onde ele foi cortado:
+
+<dyad-write path="src/pages/CorretorRedacao.tsx" description="Continuando arquivo após erro de sintaxe">
+                <div className="flex items-center space-x-2">
+                  {/* Logo do Supabase */}
+                  <img 
+                    src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                    alt="Logo" 
+                    className="w-8 h-8 rounded-full object-cover"
+                    onError={(e) => {
+                      e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
+                    }}
+                  />
+                  <div>
+                    <p className="text-sm font-medium text-gray-900">
+                      {user?.user_metadata?.name || 'João da Silva'}
+                    </p>
+                    <div className="flex items-center space-x-1">
+                      <Award className="h-4 w-4 text-yellow-500" />
+                      <span className="text-xs text-gray-500">{userProfile?.patente || 'Iniciante'}</span>
+                    </div>
                   </div>
                 </div>
+                
+                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                  <LogOut className="h-4 w-4" />
+                </Button>
               </div>
-              
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4" />
-              </Button>
             </div>
           </div>
         </header>
