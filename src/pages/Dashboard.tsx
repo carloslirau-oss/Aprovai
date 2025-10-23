@@ -45,6 +45,31 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
           if (userError) throw userError;
           
           setUserData(userData);
+          
+          // Inicializar patente atual com dados padrão
+          if (userData) {
+            setPatenteAtual({
+              level: userData.nivel || 1,
+              title: userData.patente || 'Iniciante',
+              redacoes_para_proxima: 5,
+              xp_para_proxima: 1000
+            });
+            
+            // Definir próxima patente
+            setPatenteProxima({
+              level: (userData.nivel || 1) + 1,
+              title: 'Aprendiz',
+              redacoes_para_proxima: 10,
+              xp_para_proxima: 2000
+            });
+            
+            // Atualizar estatísticas
+            setRedacoesConcluidas(userData.redacoes_corrigidas || 0);
+            setRedacoesCorrigidas(userData.redacoes_corrigidas || 0);
+            setXpTotal(userData.xp_total || 0);
+            setDiasEstudo(userData.dias_estudo || 0);
+            setNotaMedia(userData.nota_media || 0);
+          }
         }
       } catch (error) {
         showError('Erro ao carregar dados do usuário');
@@ -192,7 +217,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-gray-600">XP Restante</span>
                     <span className="font-medium text-gray-900">
-                      {patenteAtual?.xp_para_proxima - xpTotal} XP
+                      {patenteAtual?.xp_para_proxima - xpTotal || 0} XP
                     </span>
                   </div>
                 </div>
@@ -200,7 +225,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
             </div>
 
             {/* Próxima Patente */}
-            {patenteAtual.level < 5 && patenteProxima && (
+            {patenteAtual && patenteAtual.level < 5 && patenteProxima && (
               <div className="bg-yellow-100 p-4 rounded-lg border border-yellow-300">
                 <h4 className="text-lg font-semibold text-yellow-900 mb-2 flex items-center">
                   <ArrowRight className="h-5 w-5 mr-2" />
