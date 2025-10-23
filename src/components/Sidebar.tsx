@@ -107,8 +107,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             <div className="flex items-center">
               {/* Logo real do Supabase */}
               <img 
-                src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
-                alt="Redação ENEM" 
+                src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
+                alt="AprimorAi" 
                 className="w-8 h-8 rounded-full object-cover"
                 onError={(e) => {
                   // Fallback para SVG se a imagem não carregar
@@ -119,7 +119,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   `;
                 }}
               />
-              <span className="ml-2 text-lg font-semibold text-gray-900">Redação ENEM</span>
+              <span className="ml-2 text-lg font-semibold text-gray-900">AprimorAi</span>
             </div>
             <Button
               variant="ghost"

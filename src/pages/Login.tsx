@@ -84,7 +84,7 @@ const Login = () => {
           {/* Logo real do Supabase */}
           <div className="flex items-center justify-center mb-4">
             <img 
-              src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+              src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
               alt="AprimorAi" 
               className="w-16 h-16 rounded-full object-cover"
               onError={(e) => {
