@@ -85,12 +85,12 @@ const Login = () => {
           <div className="flex items-center justify-center mb-4">
             <img 
               src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
-              alt="AprimorAi" 
-              className="w-16 h-16 rounded-full object-cover"
+              alt="Logo" 
+              className="w-20 h-20 object-contain"
               onError={(e) => {
                 // Fallback para SVG se a imagem não carregar
                 e.currentTarget.outerHTML = `
-                  <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                  <div class="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center">
                     <span class="text-white text-xl font-bold">A</span>
                   </div>
                 `;

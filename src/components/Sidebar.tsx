@@ -108,18 +108,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               {/* Logo real do Supabase */}
               <img 
                 src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
-                alt="AprimorAi" 
-                className="w-8 h-8 rounded-full object-cover"
+                alt="Logo" 
+                className="w-10 h-10 object-contain"
                 onError={(e) => {
                   // Fallback para SVG se a imagem não carregar
                   e.currentTarget.outerHTML = `
-                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                      <span class="text-white text-sm font-bold">A</span>
+                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                      <span class="text-white text-lg font-bold">A</span>
                     </div>
                   `;
                 }}
               />
-              <span className="ml-2 text-lg font-semibold text-gray-900">AprimorAi</span>
             </div>
             <Button
               variant="ghost"
