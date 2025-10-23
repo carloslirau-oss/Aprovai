@@ -7,13 +7,15 @@ import {
   BookOpen, 
   TrendingUp, 
   Target, 
-  Award, 
   Bot,
   MessageSquare,
   ChevronDown,
   ChevronRight,
-  LogOut
+  LogOut,
+  Sun,
+  Moon
 } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -30,6 +32,7 @@ interface MenuItem {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({});
+  const { theme, toggleTheme } = useTheme();
 
   const handleNavigation = (href: string) => {
     window.location.href = href;
@@ -54,12 +57,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       href: '/professor-carlinhos',
       icon: Bot,
       description: 'Converse com o Professor Carlinhos'
-    },
-    {
-      title: 'Certificados',
-      href: '/certificados',
-      icon: Award,
-      description: 'Seus certificados de conclusão'
     }
   ];
 
@@ -113,7 +110,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 onError={(e) => {
                   // Fallback para SVG se a imagem não carregar
                   e.currentTarget.outerHTML = `
-                    <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                    <div class="w-40 h-10 bg-blue-600 rounded flex items-center justify-center">
                       <span class="text-white text-lg font-bold">A</span>
                     </div>
                   `;
@@ -137,6 +134,26 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
           {/* Footer */}
           <div className="p-4 border-t border-gray-200">
+            {/* Botão de troca de tema */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
+              className="w-full justify-start text-gray-600 hover:text-gray-900 mb-2"
+            >
+              {theme === 'light' ? (
+                <>
+                  <Moon className="mr-3 h-4 w-4" />
+                  Modo Escuro
+                </>
+              ) : (
+                <>
+                  <Sun className="mr-3 h-4 w-4" />
+                  Modo Claro
+                </>
+              )}
+            </Button>
+            
             <Button
               variant="ghost"
               size="sm"
