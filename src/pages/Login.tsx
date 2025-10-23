@@ -80,7 +80,7 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-4">
+        <div className="text-center mb-8">
           {/* Logo real do Supabase */}
           <div className="flex items-center justify-center mb-4">
             <img 
