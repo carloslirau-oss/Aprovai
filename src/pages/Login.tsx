@@ -97,7 +97,7 @@ const Login = () => {
               }}
             />
           </div>
-          <h1 className="text-3xl font-bold text-blue-600">AprimorAi</h1>
+          <h1 className="text-3xl font-bold text-blue-600"></h1>
           <p className="text-gray-600 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
 
