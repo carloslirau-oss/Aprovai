@@ -82,7 +82,7 @@ const Login = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-2">
           {/* Logo real do Supabase */}
-          <div className="flex items-center justify-center mb-2">
+          <div className="flex items-center justify-center mb-1">
             <img 
               src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
               alt="Logo" 
@@ -97,7 +97,6 @@ const Login = () => {
               }}
             />
           </div>
-          <h1 className="text-3xl font-bold text-blue-600">AprimorAi</h1>
           <p className="text-gray-600 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
 
