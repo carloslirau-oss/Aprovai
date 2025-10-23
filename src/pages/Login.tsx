@@ -81,16 +81,11 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          {/* Logo do Supabase */}
+          {/* Logo fixa */}
           <div className="flex items-center justify-center mb-4">
-            <img 
-              src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
-              alt="Logo" 
-              className="w-16 h-16 object-cover rounded-lg"
-              onError={(e) => {
-                e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
-              }}
-            />
+            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+              <span className="text-white text-xl font-bold">A</span>
+            </div>
           </div>
           <h1 className="text-3xl font-bold text-blue-600">AprimorAi</h1>
           <p className="text-gray-600 mt-1">Entre na sua conta e comece a treinar redação</p>
