@@ -105,10 +105,20 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           {/* Header */}
           <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
             <div className="flex items-center">
-              {/* Logo fixa */}
-              <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                <span className="text-white text-sm font-bold">A</span>
-              </div>
+              {/* Logo real do Supabase */}
+              <img 
+                src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                alt="Redação ENEM" 
+                className="w-8 h-8 rounded-full object-cover"
+                onError={(e) => {
+                  // Fallback para SVG se a imagem não carregar
+                  e.currentTarget.outerHTML = `
+                    <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                      <span class="text-white text-sm font-bold">A</span>
+                    </div>
+                  `;
+                }}
+              />
               <span className="ml-2 text-lg font-semibold text-gray-900">Redação ENEM</span>
             </div>
             <Button

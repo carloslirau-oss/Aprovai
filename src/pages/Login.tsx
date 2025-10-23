@@ -81,11 +81,21 @@ const Login = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          {/* Logo fixa */}
+          {/* Logo real do Supabase */}
           <div className="flex items-center justify-center mb-4">
-            <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
-              <span className="text-white text-xl font-bold">A</span>
-            </div>
+            <img 
+              src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+              alt="AprimorAi" 
+              className="w-16 h-16 rounded-full object-cover"
+              onError={(e) => {
+                // Fallback para SVG se a imagem não carregar
+                e.currentTarget.outerHTML = `
+                  <div class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center">
+                    <span class="text-white text-xl font-bold">A</span>
+                  </div>
+                `;
+              }}
+            />
           </div>
           <h1 className="text-3xl font-bold text-blue-600">AprimorAi</h1>
           <p className="text-gray-600 mt-1">Entre na sua conta e comece a treinar redação</p>

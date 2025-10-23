@@ -349,10 +349,20 @@ const CorretorRedacao = () => {
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                {/* Logo fixa com fallback */}
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-bold">A</span>
-                </div>
+                {/* Logo real do Supabase */}
+                <img 
+                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  alt="Logo" 
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    // Fallback para SVG se a imagem não carregar
+                    e.currentTarget.outerHTML = `
+                      <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-sm font-bold">A</span>
+                      </div>
+                    `;
+                  }}
+                />
                 <div>
                   <p className="text-sm font-medium text-gray-900">
                     {user?.user_metadata?.name || 'João da Silva'}
