@@ -585,12 +585,12 @@ const Dashboard = () => {
 
                     {/* Next Rank Info - Simplificado */}
                     {patenteAtual.level < 5 && patenteProxima && (
-                      <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
+                      <div className="bg-yellow-150 p-4 rounded-lg border border-yellow-400">
+                        <h4 className="text-lg font-semibold text-yellow-600 mb-2 flex items-center">
                           <ArrowRight className="h-5 w-5 mr-2" />
                           Próxima Patente: {patenteProxima.title}
                         </h4>
-                        <p className="text-yellow-700">
+                        <p className="text-yellow-600">
                           Para alcançar a patente <strong>{patenteProxima.title}</strong>, acumule <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
                         </p>
                         <p className="text-yellow-600 text-sm mt-2">
