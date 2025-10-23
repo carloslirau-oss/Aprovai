@@ -80,9 +80,9 @@ const Login = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-md">
-        <div className="text-center mb-8">
+        <div className="text-center mb-2">
           {/* Logo real do Supabase */}
-          <div className="flex items-center justify-center mb-4">
+          <div className="flex items-center justify-center mb-2">
             <img 
               src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
               alt="Logo" 
@@ -91,13 +91,13 @@ const Login = () => {
                 // Fallback para SVG se a imagem não carregar
                 e.currentTarget.outerHTML = `
                   <div class="w-60 h-60 bg-blue-600 rounded-full flex items-center justify-center">
-                    <span class="text-white text-xl font-bold">A</span>
+                    <span class="text-white text-3xl font-bold">A</span>
                   </div>
                 `;
               }}
             />
           </div>
-          <h1 className="text-3xl font-bold text-blue-600"></h1>
+          <h1 className="text-3xl font-bold text-blue-600">AprimorAi</h1>
           <p className="text-gray-600 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
 
