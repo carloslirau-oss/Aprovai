@@ -22,10 +22,8 @@ const Login = () => {
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
 
   useEffect(() => {
-    // Limpar dados de usuário antigos ao acessar a página de login
     clearUserDataFromStorage();
     
-    // Verificar se usuário já está logado
     const token = localStorage.getItem('supabase.auth.token');
     if (token) {
       navigate('/dashboard');
@@ -78,17 +76,15 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-2">
-          {/* Logo real do Supabase */}
           <div className="flex items-center justify-center mb-1">
             <img 
               src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
               alt="Logo" 
               className="w-60 h-20 object-contain"
               onError={(e) => {
-                // Fallback para SVG se a imagem não carregar
                 e.currentTarget.outerHTML = `
                   <div class="w-60 h-20 bg-blue-600 rounded-full flex items-center justify-center">
                     <span class="text-white text-3xl font-bold">A</span>
@@ -97,18 +93,17 @@ const Login = () => {
               }}
             />
           </div>
-          <p className="text-gray-600 mt-1">Entre na sua conta e comece a treinar redação</p>
+          <p className="text-gray-300 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
 
-        <Card className="shadow-lg">
-          {/* Abas */}
-          <div className="flex border-b border-gray-200">
+        <Card className="shadow-lg bg-slate-800 border-slate-700">
+          <div className="flex border-b border-slate-700">
             <button
               onClick={() => setActiveTab('login')}
               className={`flex-1 py-3 px-4 text-center font-medium text-sm transition-colors ${
                 activeTab === 'login'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'text-blue-400 border-b-2 border-blue-400 bg-slate-700'
+                  : 'text-gray-400 hover:text-gray-300'
               }`}
             >
               Entrar
@@ -117,8 +112,8 @@ const Login = () => {
               onClick={() => setActiveTab('register')}
               className={`flex-1 py-3 px-4 text-center font-medium text-sm transition-colors ${
                 activeTab === 'register'
-                  ? 'text-blue-600 border-b-2 border-blue-600'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'text-blue-400 border-b-2 border-blue-400 bg-slate-700'
+                  : 'text-gray-400 hover:text-gray-300'
               }`}
             >
               Cadastre-se
@@ -126,11 +121,10 @@ const Login = () => {
           </div>
 
           <CardContent className="p-6">
-            {/* Formulário de Login */}
             {activeTab === 'login' && (
               <form onSubmit={handleLogin} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">E-mail</Label>
+                  <Label htmlFor="email" className="text-gray-300">E-mail</Label>
                   <Input
                     id="email"
                     type="email"
@@ -138,12 +132,12 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full"
+                    className="w-full bg-slate-700 border-slate-600 text-white placeholder-gray-400"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="password">Senha</Label>
+                  <Label htmlFor="password" className="text-gray-300">Senha</Label>
                   <Input
                     id="password"
                     type="password"
@@ -151,19 +145,19 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full"
+                    className="w-full bg-slate-700 border-slate-600 text-white placeholder-gray-400"
                   />
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <a href="#" className="text-sm text-blue-600 hover:text-blue-700">
+                  <a href="#" className="text-sm text-blue-400 hover:text-blue-300">
                     Esqueci minha senha
                   </a>
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+                  className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3"
                   disabled={isLoadingAuth}
                 >
                   {isLoadingAuth ? 'Entrando...' : 'Entrar na Plataforma'}
@@ -171,11 +165,10 @@ const Login = () => {
               </form>
             )}
 
-            {/* Formulário de Cadastro */}
             {activeTab === 'register' && (
               <form onSubmit={handleRegister} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Nome Completo</Label>
+                  <Label htmlFor="name" className="text-gray-300">Nome Completo</Label>
                   <Input
                     id="name"
                     type="text"
@@ -183,12 +176,12 @@ const Login = () => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
-                    className="w-full"
+                    className="w-full bg-slate-700 border-slate-600 text-white placeholder-gray-400"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="register-email">E-mail</Label>
+                  <Label htmlFor="register-email" className="text-gray-300">E-mail</Label>
                   <Input
                     id="register-email"
                     type="email"
@@ -196,12 +189,12 @@ const Login = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full"
+                    className="w-full bg-slate-700 border-slate-600 text-white placeholder-gray-400"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="register-password">Senha</Label>
+                  <Label htmlFor="register-password" className="text-gray-300">Senha</Label>
                   <Input
                     id="register-password"
                     type="password"
@@ -209,12 +202,12 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full"
+                    className="w-full bg-slate-700 border-slate-600 text-white placeholder-gray-400"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirm-password">Confirmar Senha</Label>
+                  <Label htmlFor="confirm-password" className="text-gray-300">Confirmar Senha</Label>
                   <Input
                     id="confirm-password"
                     type="password"
@@ -222,13 +215,13 @@ const Login = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    className="w-full"
+                    className="w-full bg-slate-700 border-slate-600 text-white placeholder-gray-400"
                   />
                 </div>
 
                 <Button 
                   type="submit" 
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3"
+                  className="w-full bg-blue-600 hover:bg-blue-500 text-white py-3"
                   disabled={isLoadingAuth}
                 >
                   {isLoadingAuth ? 'Criando Conta...' : 'Criar Conta'}
@@ -236,24 +229,23 @@ const Login = () => {
               </form>
             )}
 
-            {/* Mensagem de link entre as abas */}
             <div className="mt-6 text-center">
               {activeTab === 'login' ? (
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-400">
                   Não tem uma conta?{' '}
                   <button 
                     onClick={() => setActiveTab('register')}
-                    className="text-blue-600 hover:text-blue-700 font-medium"
+                    className="text-blue-400 hover:text-blue-300 font-medium"
                   >
                     Cadastre-se
                   </button>
                 </p>
               ) : (
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-400">
                   Já tem uma conta?{' '}
                   <button 
                     onClick={() => setActiveTab('login')}
-                    className="text-blue-600 hover:text-blue-700 font-medium"
+                    className="text-blue-400 hover:text-blue-300 font-medium"
                   >
                     Faça login
                   </button>
