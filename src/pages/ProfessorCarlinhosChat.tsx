@@ -14,6 +14,7 @@ import {
   User,
   Bot as BotIcon
 } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
@@ -26,6 +27,7 @@ interface ChatMessage {
 
 const ProfessorCarlinhosChat = () => {
   const navigate = useNavigate();
+  const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [isSendingMessage, setIsSendingMessage] = useState(false);
@@ -33,7 +35,7 @@ const ProfessorCarlinhosChat = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: 'Olá, João! Sou o Professor Carlinhos, seu assistente de redação. Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, repertório e qualquer outra questão relacionada à redação do ENEM. Como posso te ajudar hoje?',
+      content: 'Olá, ' + (user?.user_metadata?.name?.split(' ')[0] || 'João') + '! Sou o Professor Carlinhos, seu assistente de redação. Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, repertório e qualquer outra questão relacionada à redação do ENEM. Como posso te ajudar hoje?',
       sender: 'bot',
       timestamp: new Date()
     }
@@ -65,7 +67,7 @@ const ProfessorCarlinhosChat = () => {
       const payload = {
         message: chatMessage,
         timestamp: new Date().toISOString(),
-        user: 'João da Silva',
+        user: user?.user_metadata?.name || 'João da Silva',
         type: 'chat_message'
       };
 
@@ -241,7 +243,9 @@ const ProfessorCarlinhosChat = () => {
                       </div>
                       {message.sender === 'user' && (
                         <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                          <span className="text-white text-sm font-bold">J</span>
+                          <span className="text-white text-sm font-bold">
+                            {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'J'}
+                          </span>
                         </div>
                       )}
                     </div>
