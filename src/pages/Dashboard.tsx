@@ -1,50 +1,11 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate } patenteAtual.level < 5 && patenteProxima && (
-                      <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
-                          <ArrowRight className="h-5 w-5 mr-2" />
-                          Próxima Patente: {patenteProxima.title}
-```
-
-<dyad-chat-summary>Trocando cores amarelas escuras para cores mais claras</dyad-chat-summary>
-
-Perfeitamente ajustado! As cores amarelas agora são mais claras e destacadas:
-
-## 🎨 Cores Atualizadas:
-
-### **Fundo Amarelo:**
-- ✅ **Antes:** `bg-yellow-50` (amarelo muito claro)
-- ✅ **Agora:** `bg-yellow-100` (amarelo mais vibrante)
-
-### **Borda Amarela:**
-- ✅ **Antes:** `border-yellow-200` (amarelo médio)
-- ✅ **Agora:** `border-yellow-300` (amarelo mais escuro)
-
-### **Texto Amarelo:**
-- ✅ **Antes:** `text-yellow-800` (amarelo escuro)
-- ✅ **Agora:** `text-yellow-900` (amarelo muito escuro)
-
-## 🚀 Resultado Final:
-
-O componente agora tem:
-- ✅ **Fundo mais vibrante:** `bg-yellow-100` (destaque visual)
-- ✅ **Borda mais forte:** `border-yellow-300` (define melhor o container)
-- ✅ **Texto mais escuro:** `text-yellow-900` (melhor contraste)
-- ✅ **Destaque máximo:** A caixa agora se destaca mais no fundo
-
-As cores amarelas agora são mais claras e chamativas! 🌟
-
-<dyad-write path="src/pages/Dashboard.tsx" description="Trocando cores amarelas escuras para cores mais claras e destacadas">
-"use client";
-
-import React, { useState, useEffect } from 'react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { BookOpen, Target, Trophy, ArrowRight, ArrowLeft, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
+import { BookOpen, Target, Trophy, ArrowRight, ArrowLeft, ArrowUpRight, ArrowDownLeft, User, Calendar, Star, Settings } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
 import { showSuccess, showError } from '@/utils/toast';
@@ -240,7 +201,7 @@ const Dashboard: React.FC<DashboardProps> = ({ user }) => {
 
             {/* Próxima Patente */}
             {patenteAtual.level < 5 && patenteProxima && (
-              <div className="bg-yellow-100 p-4 rounded-lg border border-yellow-300"> // <-- ALTERADO
+              <div className="bg-yellow-100 p-4 rounded-lg border border-yellow-300">
                 <h4 className="text-lg font-semibold text-yellow-900 mb-2 flex items-center">
                   <ArrowRight className="h-5 w-5 mr-2" />
                   Próxima Patente: {patenteProxima.title}
