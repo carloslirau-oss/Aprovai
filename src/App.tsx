@@ -3,6 +3,7 @@
 import React from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { UserDataProvider } from '@/contexts/UserDataContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
@@ -51,9 +52,11 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <Router>
-          <AppContent />
-        </Router>
+        <UserDataProvider>
+          <Router>
+            <AppContent />
+          </Router>
+        </UserDataProvider>
       </AuthProvider>
     </ThemeProvider>
   );
