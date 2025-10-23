@@ -100,7 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           <div className="flex items-center justify-between h-16 px-4 border-b border-slate-700">
             <div className="flex items-center">
               <img 
-                src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
+                src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%202.png" 
                 alt="Logo" 
                 className="w-40 h-10 object-contain"
                 onError={(e) => {
