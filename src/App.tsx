@@ -3,9 +3,15 @@
 import React from 'react';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import CorretorRedacao from './pages/CorretorRedacao';
+import ProfessorCarlinhosChat from './pages/ProfessorCarlinhosChat';
+import NotFound from './pages/NotFound';
 
 function AppContent() {
   const { user, isLoading } = useAuth();
@@ -13,18 +19,14 @@ function AppContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   if (!user) {
-    return (
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-        {/* O redirecionamento para login será feito pelo componente de login */}
-      </div>
-    );
+    return <Login />;
   }
 
   return (
@@ -32,16 +34,13 @@ function AppContent() {
       <div className="flex">
         <Sidebar />
         <main className="flex-1 lg:ml-64">
-          <div className="p-6">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-              Dashboard
-            </h1>
-            <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-6">
-              <p className="text-gray-600 dark:text-gray-300">
-                Bem-vindo ao seu dashboard! Aqui você pode acompanhar seu progresso e acessar todas as ferramentas de aprendizado.
-              </p>
-            </div>
-          </div>
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/redacoes" element={<CorretorRedacao />} />
+            <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </main>
       </div>
     </div>
@@ -52,7 +51,9 @@ function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <AppContent />
+        <Router>
+          <AppContent />
+        </Router>
       </AuthProvider>
     </ThemeProvider>
   );
