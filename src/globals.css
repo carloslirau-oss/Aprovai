@@ -4,44 +4,44 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 84% 4.9%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 84% 4.9%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 217.2 91.2% 59.8%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
 
     --radius: 0.5rem;
 
-    --sidebar-background: 217.2 32.6% 17.5%;
-    --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217.2 91.2% 59.8%;
-    --sidebar-primary-foreground: 222.2 84% 4.9%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
-    --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222.2 84% 4.9%;
+    --sidebar-primary: 221.2 83.2% 53.3%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222.2 84% 4.9%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 221.2 83.2% 53.3%;
   }
 
   .dark {
@@ -72,6 +72,7 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 217.2 91.2% 59.8%;
+
     --sidebar-background: 217.2 32.6% 17.5%;
     --sidebar-foreground: 210 40% 98%;
     --sidebar-primary: 217.2 91.2% 59.8%;
@@ -90,6 +91,188 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Estilos específicos para modo claro */
+:root {
+  /* Fundo principal - branco padrão */
+  background-color: #ffffff;
+  
+  /* Textos escuros */
+  color: #1f2937;
+  
+  /* Cards com fundo branco */
+  .card {
+    background-color: #ffffff;
+    border-color: #e5e7eb;
+  }
+  
+  /* Sidebar com fundo branco */
+  .sidebar {
+    background-color: #ffffff;
+    border-color: #e5e7eb;
+  }
+  
+  /* Botões com fundo azul */
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Inputs com fundo branco */
+  .input {
+    background-color: #ffffff;
+    border-color: #d1d5db;
+    color: #1f2937;
+  }
+  
+  /* Hover states */
+  .hover\:bg-gray-100:hover {
+    background-color: #f3f4f6;
+  }
+  
+  .hover\:bg-gray-200:hover {
+    background-color: #e5e7eb;
+  }
+  
+  /* Backgrounds específicos */
+  .bg-gray-50 {
+    background-color: #f9fafb;
+  }
+  
+  .bg-white {
+    background-color: #ffffff;
+  }
+  
+  .bg-gray-100 {
+    background-color: #f3f4f6;
+  }
+  
+  .bg-blue-50 {
+    background-color: #eff6ff;
+  }
+  
+  .bg-green-50 {
+    background-color: #f0fdf4;
+  }
+  
+  .bg-yellow-50 {
+    background-color: #fefce8;
+  }
+  
+  .bg-purple-50 {
+    background-color: #faf5ff;
+  }
+  
+  .bg-orange-50 {
+    background-color: #fff7ed;
+  }
+  
+  .bg-red-50 {
+    background-color: #fef2f2;
+  }
+  
+  /* Textos específicos */
+  .text-gray-600 {
+    color: #4b5563;
+  }
+  
+  .text-gray-700 {
+    color: #374151;
+  }
+  
+  .text-gray-800 {
+    color: #1f2937;
+  }
+  
+  .text-gray-900 {
+    color: #111827;
+  }
+  
+  .text-blue-600 {
+    color: #2563eb;
+  }
+  
+  .text-green-600 {
+    color: #16a34a;
+  }
+  
+  .text-purple-600 {
+    color: #9333ea;
+  }
+  
+  .text-orange-600 {
+    color: #ea580c;
+  }
+  
+  .text-red-600 {
+    color: #dc2626;
+  }
+  
+  .text-yellow-600 {
+    color: #ca8a04;
+  }
+  
+  /* Border específicos */
+  .border-gray-200 {
+    border-color: #e5e7eb;
+  }
+  
+  .border-gray-300 {
+    border-color: #d1d5db;
+  }
+  
+  .border-blue-200 {
+    border-color: #93c5fd;
+  }
+  
+  .border-green-200 {
+    border-color: #86efac;
+  }
+  
+  .border-purple-200 {
+    border-color: #c4b5fd;
+  }
+  
+  .border-yellow-200 {
+    border-color: #fde047;
+  }
+  
+  .border-red-200 {
+    border-color: #fca5a5;
+  }
+  
+  .border-orange-200 {
+    border-color: #fdba74;
+  }
+  
+  /* Placeholder */
+  .placeholder-gray-400::placeholder {
+    color: #9ca3af;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
   }
 }
 
