@@ -30,7 +30,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-const SidebarComponent: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({});
   const { theme, toggleTheme } = useTheme();
 
@@ -164,4 +164,4 @@ const SidebarComponent: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   );
 };
 
-export { SidebarComponent as Sidebar };
+export default Sidebar;
