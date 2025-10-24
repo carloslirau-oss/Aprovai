@@ -51,6 +51,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
       description: 'Visão geral do seu progresso'
     },
     {
+      title: 'Redações',
+      href: '/redacoes',
+      icon: BookOpen,
+      description: 'Pratique com temas reais do ENEM'
+    },
+    {
       title: 'Professor Carlinhos',
       href: '/professor-carlinhos',
       icon: Bot,
