@@ -34,7 +34,7 @@ function AppContent() {
     <div className={`min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 lg:ml-64">
+        <main className="flex-1 lg:ml-0">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/redacoes" element={<CorretorRedacao />} />
