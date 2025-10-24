@@ -12,6 +12,7 @@ import Dashboard from './pages/Dashboard';
 import CorretorRedacao from './pages/CorretorRedacao';
 import ProfessorCarlinhosChat from './pages/ProfessorCarlinhosChat';
 import NotFound from './pages/NotFound';
+import Sidebar from './components/Sidebar';
 
 function AppContent() {
   const { user, isLoading } = useAuth();
@@ -37,13 +38,9 @@ function AppContent() {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/redacoes" element={<CorretorRedacao />} />
-            <main className="flex-1">
-              <Routes>
-                <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
-                <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
+            <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </div>
