@@ -276,90 +276,90 @@
   }
 }
 
-/* Estilos específicos para modo escuro - ajustados para cores mais claras */
+/* Estilos específicos para modo escuro */
 .dark {
-  /* Fundo principal - cinza escuro mais claro */
-  background-color: #1e293b;
+  /* Fundo principal - azul escuro profundo */
+  background-color: #0f172a;
   
-  /* Textos brancos mais claros */
+  /* Textos brancos */
   color: #f8fafc;
   
-  /* Cards com fundo cinza escuro mais claro */
+  /* Cards com fundo azul escuro */
   .card {
-    background-color: #334155;
-    border-color: #475569;
+    background-color: #1e293b;
+    border-color: #334155;
   }
   
-  /* Sidebar com fundo cinza escuro mais claro */
+  /* Sidebar com fundo azul escuro */
   .sidebar {
-    background-color: #334155;
-    border-color: #475569;
+    background-color: #1e293b;
+    border-color: #334155;
   }
   
-  /* Botões com fundo azul mais claro */
+  /* Botões com fundo azul escuro */
   .btn-primary {
-    background-color: #60a5fa;
+    background-color: #3b82f6;
     color: white;
   }
   
   .btn-primary:hover {
-    background-color: #3b82f6;
+    background-color: #2563eb;
   }
   
-  /* Inputs com fundo cinza escuro mais claro */
+  /* Inputs com fundo azul escuro */
   .input {
-    background-color: #334155;
-    border-color: #475569;
+    background-color: #1e293b;
+    border-color: #334155;
     color: #f8fafc;
   }
   
-  /* Hover states - mais claros */
+  /* Hover states */
   .hover\:bg-gray-100:hover {
-    background-color: #475569;
+    background-color: #334155;
   }
   
   .hover\:bg-gray-200:hover {
-    background-color: #64748b;
+    background-color: #475569;
   }
   
-  /* Backgrounds específicos - mais claros */
+  /* Backgrounds específicos */
   .bg-gray-50 {
-    background-color: #334155;
+    background-color: #1e293b;
   }
   
   .bg-white {
-    background-color: #334155;
+    background-color: #1e293b;
   }
   
   .bg-gray-100 {
-    background-color: #334155;
+    background-color: #1e293b;
   }
   
   .bg-blue-50 {
-    background-color: #1e40af;
+    background-color: #1e293b;
   }
   
   .bg-green-50 {
-    background-color: #166534;
+    background-color: #1e293b;
   }
   
   .bg-yellow-50 {
-    background-color: #a16207;
+    background-color: #1e293b;
   }
   
   .bg-purple-50 {
-    background-color: #6b21a8;
+    background-color: #1e293b;
   }
   
   .bg-orange-50 {
-    background-color: #c2410c;
+    background-color: #1e293b;
   }
   
   .bg-red-50 {
-    background-color: #991b1b;
+    background-color: #1e293b;
   }
   
-  /* Textos específicos - mais claros e vibrantes */
+  /* Textos específicos */
   .text-gray-600 {
     color: #cbd5e1;
   }
@@ -377,7 +377,7 @@
   }
   
   .text-blue-600 {
-    color: #93c5fd;
+    color: #60a5fa;
   }
   
   .text-green-600 {
@@ -400,17 +400,17 @@
     color: #facc15;
   }
   
-  /* Border específicos - mais claros */
+  /* Border específicos */
   .border-gray-200 {
-    border-color: #475569;
+    border-color: #334155;
   }
   
   .border-gray-300 {
-    border-color: #64748b;
+    border-color: #475569;
   }
   
   .border-blue-200 {
-    border-color: #93c5fd;
+    border-color: #60a5fa;
   }
   
   .border-green-200 {
@@ -433,27 +433,27 @@
     border-color: #fb923c;
   }
   
-  /* Placeholder - mais claro */
+  /* Placeholder */
   .placeholder-gray-400::placeholder {
     color: #94a3b8;
   }
   
-  /* Scrollbar - mais claro */
+  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   
   ::-webkit-scrollbar-track {
-    background: #334155;
+    background: #1e293b;
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #64748b;
+    background: #475569;
     border-radius: 4px;
   }
   
-  ::webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+  ::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
   }
 }
