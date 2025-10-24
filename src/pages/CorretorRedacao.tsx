@@ -694,7 +694,7 @@ const CorretorRedacao = () => {
                     <Card>
                       <CardHeader>
                         <CardTitle className="flex items-center">
-                          <Star className="h-5 w-5 mr-2 text-yellow-200" />
+                          <Star className="h-5 w-5 mr-2 text-yellow-100" />
                           Sugestões de Melhoria
                         </CardTitle>
                       </CardHeader>
