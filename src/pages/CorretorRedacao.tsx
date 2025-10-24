@@ -307,9 +307,103 @@ const CorretorRedacao = () => {
             return 0;
           }
           return prev - 1;
-       
+        });
+      }, 1000);
+    }
+    
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [timerActive, timeRemaining]);
 
-<dyad-write path="src/pages/CorretorRedacao.tsx" description="Restaurando a página de Redações com o layout original completo">
+  const currentTip = tips[currentTipIndex];
+
+  const getTextSizeClass = (tamanho: string) => {
+    switch (tamanho) {
+      case 'grande':
+        return 'border-l-4 border-blue-500';
+      case 'medio':
+        return 'border-l-4 border-green-500';
+      case 'pequeno':
+        return 'border-l-4 border-yellow-500';
+      default:
+        return 'border-l-4 border-gray-500';
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <Sidebar 
+        isOpen={sidebarOpen} 
+        onClose={() => setSidebarOpen(false)} 
+        onToggle={() => setSidebarExpanded(!sidebarExpanded)}
+        isDesktop={true}
+      />
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="bg-white shadow-sm border-b border-gray-200">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/redacoes')}
+                className="flex items-center space-x-2"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Voltar</span>
+              </Button>
+              
+              <div className="flex items-center space-x-2">
+                {/* Logo do Supabase */}
+                <img 
+                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  alt="Logo" 
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
+                  }}
+                />
+                <div>
+                  <p className="text-sm font-medium text-gray-900">Corretor de Redação</p>
+                  <div className="flex items-center space-x-1">
+                    <Clock className="h-3 w-3 text-green-500" />
+                    <span className="text-xs text-gray-500">Online</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main className="flex-1 flex flex-col">
+          <div className="flex-1 overflow-y-auto">
+            <div className="px-4 sm:px:6 lg:px-8 py-8">
+              <div className="mb-8">
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h1>
+                <p className="text-gray-600">Pratique redações e receba feedback instantâneo</p>
+              </div>
+
+              {/* Theme Selection */}
+              <div className="mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-semibold text-gray-900">Tema da
+<dyad-write path="src/pages/CorretorRedacao.tsx" description="Corrigindo o arquivo removendo o tag dyad-write duplicado e completando o código">
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -705,7 +799,7 @@ const CorretorRedacao = () => {
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="px-4 sm:px-6 lg:px-8 py-8">
+            <div className="px-4 sm:px:6 lg:px-8 py-8">
               <div className="mb-8">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h1>
                 <p className="text-gray-600">Pratique redações e receba feedback instantâneo</p>
