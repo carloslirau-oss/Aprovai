@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { BookOpen, MessageSquare, ChevronDown, ChevronRight, LogOut, Sun, Moon } from 'lucide-react';
+import { BookOpen, MessageSquare, ChevronDown, ChevronRight, LogOut, Sun, Moon, Menu, Bell, User2, Trophy, Star, Calendar } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 import Sidebar from '@/components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
