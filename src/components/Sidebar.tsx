@@ -126,7 +126,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
                 onClick={onToggle}
                 className="text-gray-400 hover:text-white"
               >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                <Menu className="h-5 w-5" />
               </Button>
             )}
             
@@ -143,18 +143,18 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
             )}
           </div>
 
-          {/* Conteúdo da sidebar */}
+          {/* Conteúdo da sidebar - sempre visível no desktop */}
           <nav className={cn(
-            "flex-1 px-4 py-6 space-y-1 overflow-y-auto transition-all duration-300",
-            isDesktop && !isOpen && "opacity-0 pointer-events-none"
+            "flex-1 px-4 py-6 space-y-1 overflow-y-auto",
+            isDesktop && "hidden" // Esconde no desktop quando minimizada
           )}>
             {menuItems.map(renderMenuItem)}
           </nav>
 
-          {/* Rodapé com botões */}
+          {/* Rodapé com botões - sempre visível no desktop */}
           <div className={cn(
-            "p-4 border-t border-slate-700 transition-all duration-300",
-            isDesktop && !isOpen && "opacity-0 pointer-events-none"
+            "p-4 border-t border-slate-700",
+            isDesktop && "hidden" // Esconde no desktop quando minimizada
           )}>
             <Button
               variant="ghost"
