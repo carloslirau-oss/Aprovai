@@ -222,6 +222,14 @@ const CorretorRedacao = () => {
     setIsAnalyzing(true);
     
     try {
+      // Se já temos resultado do webhook, usamos ele
+      if (webhookResult) {
+        setAnalysisResult(webhookResult);
+        showSuccess('Redação analisada com sucesso!');
+        return;
+      }
+
+      // Se não, fazemos uma análise manual (simulação)
       await new Promise(resolve => setTimeout(resolve, 3000));
       
       const result = {
