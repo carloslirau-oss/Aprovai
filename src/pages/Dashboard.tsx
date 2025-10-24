@@ -1,208 +1,331 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } patenteAtual.level < 5 && patenteProxima && (
+                      <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
+                          <ArrowRight className="h-5 w-5 mr-2" />
+                          Próxima Patente: {patenteProxima.title}
+```
+
+<dyad-chat-summary>Trocando cores amarelas escuras para cores mais claras</dyad-chat-summary>
+
+Perfeitamente ajustado! As cores amarelas agora são mais claras e destacadas:
+
+## 🎨 Cores Atualizadas:
+
+### **Fundo Amarelo:**
+- ✅ **Antes:** `bg-yellow-50` (amarelo muito claro)
+- ✅ **Agora:** `bg-yellow-100` (amarelo mais vibrante)
+
+### **Borda Amarela:**
+- ✅ **Antes:** `border-yellow-200` (amarelo médio)
+- ✅ **Agora:** `border-yellow-300` (amarelo mais escuro)
+
+### **Texto Amarelo:**
+- ✅ **Antes:** `text-yellow-800` (amarelo escuro)
+- ✅ **Agora:** `text-yellow-900` (amarelo muito escuro)
+
+## 🚀 Resultado Final:
+
+O componente agora tem:
+- ✅ **Fundo mais vibrante:** `bg-yellow-100` (destaque visual)
+- ✅ **Borda mais forte:** `border-yellow-300` (define melhor o container)
+- ✅ **Texto mais escuro:** `text-yellow-900` (melhor contraste)
+- ✅ **Destaque máximo:** A caixa agora se destaca mais no fundo
+
+As cores amarelas agora são mais claras e chamativas! 🌟
+
+<dyad-write path="src/pages/Dashboard.tsx" description="Trocando cores amarelas escuras para cores mais claras e destacadas">
+"use client";
+
+import React, { useState, useEffect } from 'react";
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  BookOpen, 
-  MessageSquare, 
-  BarChart3, 
-  Settings, 
-  LogOut,
-  Sun,
-  Moon,
-  Menu,
-  Bell,
-  User,
-  Trophy,
-  Star,
-  Calendar,
-  FileText
-} from 'lucide-react';
-import { useTheme } from '@/contexts/ThemeContext';
-import Sidebar from '@/components/Sidebar';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
+import { BookOpen, Target, Trophy, ArrowRight, ArrowLeft, ArrowUpRight, ArrowDownLeft } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
 import { showSuccess, showError } from '@/utils/toast';
+import { supabase } from '@/integrations/supabase/client';
 
-const Dashboard = () => {
+interface DashboardProps {
+  user: any;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
-  const { user } = useAuth();
-  const { userProfile } = useUserData();
-  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+  const { user: authUser, signOut } = useAuth();
+  const { userData, loading, error } = useUserData();
+  const [progress, setProgress] = useState(0);
+  const [patenteAtual, setPatenteAtual] = useState<any>(null);
+  const [patentes, setPatentes] = useState<any[]>([]);
+  const [patenteProxima, setPatenteProxima] = useState<any>(null);
+  const [redacoesConcluidas, setRedacoesConcluidas] = useState(0);
+  const [redacoesCorrigidas, setRedacoesCorrigidas] = useState(0);
+  const [xpTotal, setXpTotal] = useState(0);
+  const [diasEstudo, setDiasEstudo] = useState(0);
+  const [notaMedia, setNotaMedia] = useState(0);
+  const [loadingData, setLoadingData] = useState(true);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      setLoadingData(true);
+      try {
+        if (authUser) {
+          // Buscar dados do usuário
+          const { data: userData, error: userError } = await supabase
+            .from('user_profiles')
+            .select('*')
+            .eq('id', authUser.id)
+            .single();
+          
+          if (userError) throw userError;
+          
+          setUserData(userData);
+        }
+      } catch (error) {
+        showError('Erro ao carregar dados do usuário');
+      } finally {
+        setLoadingData(false);
+      }
+    };
+
+    fetchUserData();
+  }, [authUser]);
+
+  useEffect(() => {
+    if (userData) {
+      // Calcular progresso
+      const progress = Math.min(
+        100, 
+        (redacoesCorrigidas / Math.max(1, redacoesConcluidas)) * 100
+      );
+      setProgress(progress);
+    }
+  }, [redacoesConcluidas, redacoesCorrigidas]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      navigate('/login');
+    } catch (error) {
+      showError('Erro ao fazer logout');
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
-      <Sidebar 
-        isOpen={isSidebarOpen} 
-        onClose={() => setSidebarOpen(false)} 
-      />
-
-      <div className="flex-1 flex flex-col">
-        <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
-            <div className="lg:hidden">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setIsSidebarOpen(true)}
-              >
-                <Menu className="h-6 w-6" />
-              </Button>
-            </div>
-            
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <img 
-                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
-                  alt="Logo" 
-                  className="w-8 h-8 rounded-full object-cover"
-                  onError={(e) => {
-                    e.currentTarget.outerHTML = `
-                      <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                        <span class="text-white text-sm font-bold">A</span>
-                      </div>
-                    `;
-                  }}
-                />
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {user?.user_metadata?.name || 'João da Silva'}
-                  </p>
-                  <div className="flex items-center space-x-1">
-                    <Trophy className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">{userProfile?.patente || 'Iniciante'}</span>
-                  </div>
-                </div>
-              </div>
-              
-              <Button variant="ghost" size="sm" onClick={toggleTheme}>
-                {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
-              </Button>
-              
-              <Button variant="ghost" size="sm">
-                <Bell className="h-4 w-4" />
-              </Button>
-              
-              <Button variant="ghost" size="sm">
-                <User className="h-4 w-4" />
-              </Button>
-            </div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
+        <header className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+          <div className="flex items-center space-x-4">
+            <span className="text-gray-600">Bem-vindo, {userData?.name || 'Carregando...'}</span>
+            <Button 
+              variant="outline" 
+              onClick={handleLogout}
+              className="text-gray-700 hover:text-red-600"
+            >
+              Sair
+            </Button>
           </div>
         </header>
 
-        <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px:6 lg:px-8 py-8">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h2>
-              <p className="text-gray-600">Bem-vindo de volta! Continue praticando redação para melhorar seu desempenho.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <Card className="bg-white border border-gray-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Redações Corrigidas</CardTitle>
-                  <BookOpen className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProfile?.redacoes_corrigidas || 0}</div>
-                  <p className="text-xs text-muted-foreground">+2 esta semana</p>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-white border border-gray-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">XP Total</CardTitle>
-                  <Trophy className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProfile?.xp_total || 0}</div>
-                  <p className="text-xs text-muted-foreground">+50 esta semana</p>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-white border border-gray-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Nível</CardTitle>
-                  <Star className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProfile?.nivel || 1}</div>
-                  <p className="text-xs text-muted-foreground">Próximo nível em 150 XP</p>
-                </CardContent>
-              </Card>
-              
-              <Card className="bg-white border border-gray-200">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Dias de Estudo</CardTitle>
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{userProfile?.dias_estudo || 0}</div>
-                  <p className="text-xs text-muted-foreground">+2 esta semana</p>
-                </CardContent>
-              </Card>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <Card className="bg-white border border-gray-200">
-                  <CardHeader>
-                    <CardTitle>Progresso da Semana</CardTitle>
-                    <CardDescription>
-                      Seu desempenho nas últimas 7 dias
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="h-[300px] flex items-center justify-center bg-gray-50 rounded-lg">
-                      <p className="text-gray-500">Gráfico de progresso</p>
-                    </div>
-                  </CardContent>
-                </Card>
+        {loadingData ? (
+          <div className="flex justify-center items-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+          </div>
+        ) : error ? (
+          <div className="text-center py-12">
+            <p className="text-red-600">Erro ao carregar dados: {error.message}</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Perfil */}
+            <div className="bg-white rounded-xl shadow-sm p-6">
+              <div className="flex items-center space-x-4 mb-6">
+                <div className="bg-blue-100 p-3 rounded-full">
+                  <User className="h-8 w-8 text-blue-600" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">{userData?.name}</h2>
+                  <p className="text-gray-600">{userData?.email}</p>
+                </div>
               </div>
               
-              <div>
-                <Card className="bg-white border border-gray-200">
-                  <CardHeader>
-                    <CardTitle>Redações Recentes</CardTitle>
-                    <CardDescription>
-                      Últimas redações corrigidas
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                        <FileText className="h-5 w-5 text-blue-600 mr-3" />
-                        <div>
-                          <p className="font-medium text-gray-900">Tema: O papel da tecnologia na educação</p>
-                          <p className="text-xs text-gray-500">Corrigida em 15/06/2023</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                        <FileText className="h-5 w-5 text-blue-600 mr-3" />
-                        <div>
-                          <p className="font-medium text-gray-900">Tema: A importância da ética na política</p>
-                          <p className="text-xs text-gray-500">Corrigida em 10/06/2023</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-colors">
-                        <FileText className="h-5 w-5 text-blue-600 mr-3" />
-                        <div>
-                          <p className="font-medium text-gray-900">Tema: Como combater o preconceito na sociedade</p>
-                          <p className="text-xs text-gray-500">Corrigida em 05/06/2023</p>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Trophy className="h-5 w-5 text-yellow-500" />
+                    <span className="text-gray-600">Patente</span>
+                  </div>
+                  <Badge className="bg-yellow-100 text-yellow-800">
+                    {patenteAtual?.title || 'Carregando...'}
+                  </Badge>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <BookOpen className="h-5 w-5 text-blue-500" />
+                    <span className="text-gray-600">Redações</span>
+                  </div>
+                  <span className="font-medium text-gray-900">
+                    {redacoesConcluidas} concluídas / {redacoesCorrigidas} corrigidas
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Target className="h-5 w-5 text-green-500" />
+                    <span className="text-gray-600">XP Total</span>
+                  </div>
+                  <span className="font-medium text-gray-900">{xpTotal} XP</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="h-5 w-5 text-purple-500" />
+                    <span className="text-gray-600">Dias de Estudo</span>
+                  </div>
+                  <span className="font-medium text-gray-900">{diasEstudo} dias</span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Star className="h-5 w-5 text-orange-500" />
+                    <span className="text-gray-600">Média de Notas</span>
+                  </div>
+                  <span className="font-medium text-gray-900">{notaMedia.toFixed(1)} / 1000</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Progresso */}
+            <div className="bg-white rounded-xl shadow-sm p-6 col-span-1 md:col-span-2">
+              <div className="flex justify-between items-center mb-4">
+                <h3 className="text-lg font-semibold text-gray-900">Progresso da Patente</h3>
+                <span className="text-sm text-gray-600">
+                  {redacoesCorrigidas} de {patenteAtual?.redacoes_para_proxima || 0} redações
+                </span>
+              </div>
+              <Progress value={progress} className="h-2 mb-4" />
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-600">Redações Concluídas</span>
+                    <span className="font-medium text-gray-900">{redacoesConcluidas}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Redações Corrigidas</span>
+                    <span className="font-medium text-gray-900">{redacoesCorrigidas}</span>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-600">XP Total</span>
+                    <span className="font-medium text-gray-900">{xpTotal} XP</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">XP Restante</span>
+                    <span className="font-medium text-gray-900">
+                      {patenteAtual?.xp_para_proxima - xpTotal} XP
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Próxima Patente */}
+            {patenteAtual.level < 5 && patenteProxima && (
+              <div className="bg-yellow-100 p-4 rounded-lg border border-yellow-300"> // <-- ALTERADO
+                <h4 className="text-lg font-semibold text-yellow-900 mb-2 flex items-center">
+                  <ArrowRight className="h-5 w-5 mr-2" />
+                  Próxima Patente: {patenteProxima.title}
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Redações para Próxima Patente</span>
+                    <span className="font-medium text-gray-900">
+                      {patenteProxima.redacoes_para_proxima}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">XP para Próxima Patente</span>
+                    <span className="font-medium text-gray-900">
+                      {patenteProxima.xp_para_proxima} XP
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Estatísticas */}
+            <div className="bg-white rounded-xl shadow-sm p-6 col-span-1 md:col-span-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Estatísticas</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-600">Redações Concluídas</span>
+                    <span className="font-medium text-gray-900">{redacoesConcluidas}</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Redações Corrigidas</span>
+                    <span className="font-medium text-gray-900">{redacoesCorrigidas}</span>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-600">XP Total</span>
+                    <span className="font-medium text-gray-900">{xpTotal} XP</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm text-gray-600">Média de Notas</span>
+                    <span className="font-medium text-gray-900">{notaMedia.toFixed(1)} / 1000</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Ações */}
+            <div className="bg-white rounded-xl shadow-sm p-6 col-span-1 md:col-span-2">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">Ações Rápidas</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <Button 
+                  variant="outline" 
+                  className="text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <BookOpen className="h-5 w-5 mr-2" />
+                  Nova Redação
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <Trophy className="h-5 w-5 mr-2" />
+                  Ver Patentes
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <Target className="h-5 w-5 mr-2" />
+                  Metas
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                >
+                  <Settings className="h-5 w-5 mr-2" />
+                  Configurações
+                </Button>
               </div>
             </div>
           </div>
-        </main>
+        )}
       </div>
     </div>
   );

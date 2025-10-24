@@ -349,11 +349,13 @@ const CorretorRedacao = () => {
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
+                {/* Logo real do Supabase */}
                 <img 
                   src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
                   alt="Logo" 
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {
+                    // Fallback para SVG se a imagem não carregar
                     e.currentTarget.outerHTML = `
                       <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
                         <span class="text-white text-sm font-bold">A</span>
@@ -750,6 +752,7 @@ const CorretorRedacao = () => {
                       setImageFile(null);
                       setHasStartedRedacao(false);
                       setTimerActive(false);
+                      goToRandomTheme();
                     }}
                   >
                     Nova Redação
