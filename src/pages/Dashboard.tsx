@@ -29,6 +29,8 @@ import { showSuccess, showError } from '@/utils/toast';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const { user } = useAuth();
+  const { userProfile } = useUserData();
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   return (
@@ -92,7 +94,7 @@ const Dashboard = () => {
         </header>
 
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px-6 lg:px-8 py-8">
+          <div className="px-4 sm:px:6 lg:px-8 py-8">
             <div className="mb-8">
               <h2 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h2>
               <p className="text-gray-600">Bem-vindo de volta! Continue praticando redação para melhorar seu desempenho.</p>
