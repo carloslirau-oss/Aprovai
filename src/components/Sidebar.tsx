@@ -57,10 +57,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
       description: 'Pratique com temas reais do ENEM'
     },
     {
-      title: 'Professor Dudu',
-      href: '/professor-dudu',
+      title: 'Professor Carlinhos',
+      href: '/professor-carlinhos',
       icon: Bot,
-      description: 'Converse com o Professor Dudu'
+      description: 'Converse com o Professor Carlinhos'
     }
   ];
 

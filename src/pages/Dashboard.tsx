@@ -577,10 +577,10 @@ const Dashboard = () => {
                     <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-600">
                       <div className="flex items-start space-x-3">
                         <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                          <span className="text-white text-sm font-bold">D</span>
+                          <span className="text-white text-sm font-bold">C</span>
                         </div>
                         <div>
-                          <p className="text-sm font-medium text-blue-800 mb-1">Professor Dudu:</p>
+                          <p className="text-sm font-medium text-blue-800 mb-1">Professor Carlinhos:</p>
                           <p className="text-blue-700 italic">"{patenteAtual.professorTip}"</p>
                         </div>
                       </div>
