@@ -5,7 +5,6 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { UserDataProvider } from '@/contexts/UserDataContext';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Sidebar from './components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import Login from './pages/Login';
@@ -38,9 +37,13 @@ function AppContent() {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/redacoes" element={<CorretorRedacao />} />
-            <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="*" element={<NotFound />} />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
           </Routes>
         </main>
       </div>
