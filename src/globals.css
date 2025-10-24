@@ -82,7 +82,6 @@
     --sidebar-border: 217.2 32.6% 17.5%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
 @layer base {
   * {
@@ -276,90 +275,90 @@
   }
 }
 
-/* Estilos específicos para modo escuro */
+/* Estilos específicos para modo escuro - ajustados para cores mais claras */
 .dark {
-  /* Fundo principal - azul escuro profundo */
-  background-color: #0f172a;
+  /* Fundo principal - cinza escuro mais claro */
+  background-color: #1e293b;
   
-  /* Textos brancos */
+  /* Textos brancos mais claros */
   color: #f8fafc;
   
-  /* Cards com fundo azul escuro */
+  /* Cards com fundo cinza escuro mais claro */
   .card {
-    background-color: #1e293b;
-    border-color: #334155;
+    background-color: #334155;
+    border-color: #475569;
   }
   
-  /* Sidebar com fundo azul escuro */
+  /* Sidebar com fundo cinza escuro mais claro */
   .sidebar {
-    background-color: #1e293b;
-    border-color: #334155;
+    background-color: #334155;
+    border-color: #475569;
   }
   
-  /* Botões com fundo azul escuro */
+  /* Botões com fundo azul mais claro */
   .btn-primary {
-    background-color: #3b82f6;
+    background-color: #60a5fa;
     color: white;
   }
   
   .btn-primary:hover {
-    background-color: #2563eb;
+    background-color: #3b82f6;
   }
   
-  /* Inputs com fundo azul escuro */
+  /* Inputs com fundo cinza escuro mais claro */
   .input {
-    background-color: #1e293b;
-    border-color: #334155;
+    background-color: #334155;
+    border-color: #475569;
     color: #f8fafc;
   }
   
-  /* Hover states */
+  /* Hover states - mais claros */
   .hover\:bg-gray-100:hover {
-    background-color: #334155;
-  }
-  
-  .hover\:bg-gray-200:hover {
     background-color: #475569;
   }
   
-  /* Backgrounds específicos */
+  .hover\:bg-gray-200:hover {
+    background-color: #64748b;
+  }
+  
+  /* Backgrounds específicos - mais claros */
   .bg-gray-50 {
-    background-color: #1e293b;
+    background-color: #334155;
   }
   
   .bg-white {
-    background-color: #1e293b;
+    background-color: #334155;
   }
   
   .bg-gray-100 {
-    background-color: #1e293b;
+    background-color: #334155;
   }
   
   .bg-blue-50 {
-    background-color: #1e293b;
+    background-color: #1e40af;
   }
   
   .bg-green-50 {
-    background-color: #1e293b;
+    background-color: #166534;
   }
   
   .bg-yellow-50 {
-    background-color: #1e293b;
+    background-color: #a16207;
   }
   
   .bg-purple-50 {
-    background-color: #1e293b;
+    background-color: #6b21a8;
   }
   
   .bg-orange-50 {
-    background-color: #1e293b;
+    background-color: #c2410c;
   }
   
   .bg-red-50 {
-    background-color: #1e293b;
+    background-color: #991b1b;
   }
   
-  /* Textos específicos */
+  /* Textos específicos - mais claros e vibrantes */
   .text-gray-600 {
     color: #cbd5e1;
   }
@@ -377,7 +376,7 @@
   }
   
   .text-blue-600 {
-    color: #60a5fa;
+    color: #93c5fd;
   }
   
   .text-green-600 {
@@ -400,17 +399,17 @@
     color: #facc15;
   }
   
-  /* Border específicos */
+  /* Border específicos - mais claros */
   .border-gray-200 {
-    border-color: #334155;
-  }
-  
-  .border-gray-300 {
     border-color: #475569;
   }
   
+  .border-gray-300 {
+    border-color: #64748b;
+  }
+  
   .border-blue-200 {
-    border-color: #60a5fa;
+    border-color: #93c5fd;
   }
   
   .border-green-200 {
@@ -433,27 +432,27 @@
     border-color: #fb923c;
   }
   
-  /* Placeholder */
+  /* Placeholder - mais claro */
   .placeholder-gray-400::placeholder {
     color: #94a3b8;
   }
   
-  /* Scrollbar */
+  /* Scrollbar - mais claro */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
   
   ::-webkit-scrollbar-track {
-    background: #1e293b;
+    background: #334155;
   }
   
   ::-webkit-scrollbar-thumb {
-    background: #475569;
+    background: #64748b;
     border-radius: 4px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: #64748b;
+    background: #94a3b8;
   }
 }
