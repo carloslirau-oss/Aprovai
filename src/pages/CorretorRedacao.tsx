@@ -702,7 +702,7 @@ const CorretorRedacao = () => {
                         <ul className="space-y-2">
                           {analysisResult.suggestions.map((suggestion: string, index: number) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <Award className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                              <Award className="h-4 w-4 text-yellow-200 mt-0.5 flex-shrink-0" />
                               <span className="text-sm text-gray-700">{suggestion}</span>
                             </li>
                           ))}
