@@ -10,7 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import CorretorRedacao from './pages/CorretorRedacao';
+import CorretorRedacao from './pages/CorretorChat';
 import ProfessorCarlinhosChat from './pages/ProfessorCarlinhosChat';
 import NotFound from './pages/NotFound';
 
@@ -34,7 +34,7 @@ function AppContent() {
     <div className={`min-h-screen ${theme === 'dark' ? 'dark' : ''}`}>
       <div className="flex">
         <Sidebar />
-        <main className="flex-1 lg:ml-0">
+        <main className="flex-1">
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/redacoes" element={<CorretorRedacao />} />
