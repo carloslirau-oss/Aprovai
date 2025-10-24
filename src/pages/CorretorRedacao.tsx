@@ -30,7 +30,8 @@ import {
   ArrowLeft,
   Menu,
   X,
-  Play
+  Play,
+  Loader2
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -54,6 +55,8 @@ const CorretorRedacao = () => {
   const [selectedTime, setSelectedTime] = useState(180);
   const [showTimeOptions, setShowTimeOptions] = useState(false);
   const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
+  const [isProcessingImage, setIsProcessingImage] = useState(false);
+  const [webhookResult, setWebhookResult] = useState<any>(null);
 
   const tips = [
     {
@@ -157,11 +160,38 @@ const CorretorRedacao = () => {
     }
   };
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setImageFile(file);
+      setIsProcessingImage(true);
       console.log('Imagem enviada:', file.name);
+      
+      try {
+        // Enviar imagem para o webhook
+        const formData = new FormData();
+        formData.append('image', file);
+        formData.append('theme', redacaoTheme.tema);
+        formData.append('instructions', redacaoTheme.instrucoes);
+        
+        const response = await fetch('https://eoyl3slmtzbe81s.m.pipedream.net', {
+          method: 'POST',
+          body: formData,
+        });
+        
+        if (!response.ok) {
+          throw new Error('Erro ao processar imagem');
+        }
+        
+        const result = await response.json();
+        setWebhookResult(result);
+        showSuccess('Redação processada com sucesso!');
+      } catch (error) {
+        console.error('Erro ao enviar imagem para webhook:', error);
+        showError('Erro ao processar a imagem. Tente novamente.');
+      } finally {
+        setIsProcessingImage(false);
+      }
     }
   };
 
@@ -247,20 +277,21 @@ const CorretorRedacao = () => {
   };
 
   const saveRedacao = async () => {
-    if (!analysisResult) return;
+    if (!analysisResult && !webhookResult) return;
     
     try {
+      const result = webhookResult || analysisResult;
       await addRedacao({
         tema: redacaoTheme.tema,
-        texto: redacaoText,
-        nota_total: analysisResult.totalScore,
-        competencia_1: analysisResult.competencies[0].score,
-        competencia_2: analysisResult.competencies[1].score,
-        competencia_3: analysisResult.competencies[2].score,
-        competencia_4: analysisResult.competencies[3].score,
-        competencia_5: analysisResult.competencies[4].score,
-        erros: analysisResult.errors,
-        sugestoes: analysisResult.suggestions,
+        texto: webhookResult ? webhookResult.corrected_text : redacaoText,
+        nota_total: result.totalScore,
+        competencia_1: result.competencies[0].score,
+        competencia_2: result.competencies[1].score,
+        competencia_3: result.competencies[2].score,
+        competencia_4: result.competencies[3].score,
+        competencia_5: result.competencies[4].score,
+        erros: result.errors,
+        sugestoes: result.suggestions,
       });
       
       showSuccess('Redação salva no seu histórico!');
@@ -345,7 +376,7 @@ const CorretorRedacao = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -393,7 +424,7 @@ const CorretorRedacao = () => {
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="px-4 sm:px-6 lg:px-8 py-8">
+            <div className="px-4 sm:px:6 lg:px-8 py-8">
               <div className="mb-8">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h1>
                 <p className="text-gray-600">Pratique redações e receba feedback instantâneo</p>
@@ -585,7 +616,7 @@ const CorretorRedacao = () => {
                       <CardHeader>
                         <CardTitle className="flex items-center">
                           <ImageIcon className="h-5 w-5 mr-2 text-purple-600" />
-                          Enviar Imagem
+                          Enviar Imagem para Correção IA
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
@@ -602,12 +633,18 @@ const CorretorRedacao = () => {
                             className="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-colors"
                           >
                             <div className="text-center">
-                              <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
-                              <p className="text-sm text-gray-600">Clique para enviar imagem</p>
+                              {isProcessingImage ? (
+                                <Loader2 className="h-8 w-8 mx-auto text-blue-500 mb-2 animate-spin" />
+                              ) : (
+                                <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
+                              )}
+                              <p className="text-sm text-gray-600">
+                                {isProcessingImage ? 'Processando...' : 'Clique para enviar imagem'}
+                              </p>
                               <p className="text-xs text-gray-500">PNG, JPG, GIF até 10MB</p>
                             </div>
                           </label>
-                          {imageFile && (
+                          {imageFile && !isProcessingImage && (
                             <div className="p-3 bg-green-50 rounded-lg">
                               <p className="text-sm text-green-800">
                                 Imagem enviada: {imageFile.name}
@@ -621,8 +658,116 @@ const CorretorRedacao = () => {
                 </div>
               </div>
 
+              {/* Webhook Results */}
+              {webhookResult && (
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold text-gray-900 mb-4">Resultado da Correção IA</h2>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center">
+                          <TrendingUp className="h-5 w-5 mr-2 text-blue-600" />
+                          Nota Final
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-center">
+                          <div className="text-4xl font-bold text-blue-600 mb-2">
+                            {webhookResult.total_score}
+                          </div>
+                          <p className="text-gray-600">Nota total da redação</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center">
+                          <Target className="h-5 w-5 mr-2 text-green-600" />
+                          Desempenho por Competência
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          {webhookResult.competencies.map((competencia: any, index: number) => (
+                            <div key={index}>
+                              <div className="flex justify-between text-sm mb-1">
+                                <span className="text-gray-700">{competencia.name}</span>
+                                <span className="font-medium">{competencia.score}/{competencia.max}</span>
+                              </div>
+                              <div className="w-full bg-gray-200 rounded-full h-2">
+                                <div 
+                                  className="bg-green-600 h-2 rounded-full" 
+                                  style={{ width: `${(competencia.score / competencia.max) * 100}%` }}
+                                ></div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center">
+                          <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
+                          Pontos a Melhorar
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2">
+                          {webhookResult.errors.map((error: string, index: number) => (
+                            <li key={index} className="flex items-start space-x-2">
+                              <CheckCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-sm text-gray-700">{error}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="flex items-center">
+                          <Star className="h-5 w-5 mr-2 text-yellow-600" />
+                          Sugestões de Melhoria
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2">
+                          {webhookResult.suggestions.map((suggestion: string, index: number) => (
+                            <li key={index} className="flex items-start space-x-2">
+                              <Award className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-sm text-gray-700">{suggestion}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <Card className="mt-6">
+                    <CardHeader>
+                      <CardTitle className="flex items-center">
+                        <FileText className="h-5 w-5 mr-2 text-purple-600" />
+                        Redação Corrigida
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="p-4 bg-purple-50 rounded-lg">
+                        <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                          {webhookResult.corrected_text}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              )}
+
               {/* Analysis Results */}
-              {analysisResult && (
+              {analysisResult && !webhookResult && (
                 <div className="mb-8">
                   <h2 className="text-xl font-semibold text-gray-900 mb-4">Resultado da Análise</h2>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -694,7 +839,7 @@ const CorretorRedacao = () => {
                     <Card>
                       <CardHeader>
                         <CardTitle className="flex items-center">
-                          <Star className="h-5 w-5 mr-2 text-yellow-100" />
+                          <Star className="h-5 w-5 mr-2 text-yellow-600" />
                           Sugestões de Melhoria
                         </CardTitle>
                       </CardHeader>
@@ -702,7 +847,7 @@ const CorretorRedacao = () => {
                         <ul className="space-y-2">
                           {analysisResult.suggestions.map((suggestion: string, index: number) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <Award className="h-4 w-4 text-yellow-200 mt-0.5 flex-shrink-0" />
+                              <Award className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
                               <span className="text-sm text-gray-700">{suggestion}</span>
                             </li>
                           ))}
@@ -733,7 +878,7 @@ const CorretorRedacao = () => {
                   )}
                 </Button>
 
-                {analysisResult && (
+                {(analysisResult || webhookResult) && (
                   <Button
                     onClick={saveRedacao}
                     className="bg-green-600 hover:bg-green-700 text-white"
