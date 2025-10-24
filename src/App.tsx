@@ -10,7 +10,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useTheme } from '@/contexts/ThemeContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import CorretorRedacao from './pages/CorretorChat';
+import CorretorRedacao from './pages/CorretorRedacao';
 import ProfessorCarlinhosChat from './pages/ProfessorCarlinhosChat';
 import NotFound from './pages/NotFound';
 
