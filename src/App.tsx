@@ -10,7 +10,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CorretorRedacao from './pages/CorretorRedacao';
-import ProfessorCarlinhosChat from './pages/ProfessorCarlinhosChat';
+import ProfessorDuduChat from './pages/ProfessorDuduChat';
 import NotFound from './pages/NotFound';
 
 function AppContent() {
@@ -35,7 +35,7 @@ function AppContent() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/redacoes" element={<CorretorRedacao />} />
-          <Route path="/professor-carlinhos" element={<ProfessorCarlinhosChat />} />
+          <Route path="/professor-dudu" element={<ProfessorDuduChat />} />
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="*" element={<NotFound />} />
         </Routes>

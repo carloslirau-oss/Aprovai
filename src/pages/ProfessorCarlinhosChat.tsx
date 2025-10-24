@@ -25,7 +25,7 @@ interface ChatMessage {
   timestamp: Date;
 }
 
-const ProfessorCarlinhosChat = () => {
+const ProfessorDuduChat = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -35,7 +35,7 @@ const ProfessorCarlinhosChat = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: '1',
-      content: 'Olá, ' + (user?.user_metadata?.name?.split(' ')[0] || 'João') + '! Sou o Professor Carlinhos, seu assistente de redação. Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, repertório e qualquer outra questão relacionada à redação do ENEM. Como posso te ajudar hoje?',
+      content: 'Olá, ' + (user?.user_metadata?.name?.split(' ')[0] || 'João') + '! Sou o Professor Dudu, seu assistente de redação. Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, repertório e qualquer outra questão relacionada à redação do ENEM. Como posso te ajudar hoje?',
       sender: 'bot',
       timestamp: new Date()
     }
@@ -43,7 +43,7 @@ const ProfessorCarlinhosChat = () => {
 
   const handleSendMessage = async () => {
     if (!chatMessage.trim()) {
-      showError('Por favor, digite uma mensagem para o Professor Carlinhos.');
+      showError('Por favor, digite uma mensagem para o Professor Dudu.');
       return;
     }
 
@@ -196,7 +196,7 @@ const ProfessorCarlinhosChat = () => {
                   }}
                 />
                 <div>
-                  <p className="text-sm font-medium text-gray-900">Professor Carlinhos</p>
+                  <p className="text-sm font-medium text-gray-900">Professor Dudu</p>
                   <div className="flex items-center space-x-1">
                     <Clock className="h-3 w-3 text-green-500" />
                     <span className="text-xs text-gray-500">Online</span>
@@ -213,7 +213,7 @@ const ProfessorCarlinhosChat = () => {
           <div className="flex-1 flex flex-col">
             {/* Chat Header */}
             <div className="bg-white border-b border-gray-200 px-6 py-4">
-              <h1 className="text-xl font-semibold text-gray-900">Conversar com o Professor Carlinhos</h1>
+              <h1 className="text-xl font-semibold text-gray-900">Conversar com o Professor Dudu</h1>
               <p className="text-sm text-gray-600 mt-1">
                 Envie suas dúvidas sobre redação e receba orientações personalizadas
               </p>
@@ -236,7 +236,7 @@ const ProfessorCarlinhosChat = () => {
                     <div className="flex items-start space-x-3">
                       {message.sender === 'bot' && (
                         <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                          <span className="text-white text-sm font-bold">C</span>
+                          <span className="text-white text-sm font-bold">D</span>
                         </div>
                       )}
                       <div className="flex-1">
@@ -265,7 +265,7 @@ const ProfessorCarlinhosChat = () => {
                   <div className="bg-white border border-gray-200 rounded-lg px-4 py-3">
                     <div className="flex items-center space-x-3">
                       <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-white text-sm font-bold">C</span>
+                        <span className="text-white text-sm font-bold">D</span>
                       </div>
                       <div className="flex-1">
                         <div className="flex space-x-1">
@@ -273,7 +273,7 @@ const ProfessorCarlinhosChat = () => {
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
                           <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                         </div>
-                        <p className="text-sm text-gray-500 mt-2">Professor Carlinhos está digitando...</p>
+                        <p className="text-sm text-gray-500 mt-2">Professor Dudu está digitando...</p>
                       </div>
                     </div>
                   </div>
@@ -288,7 +288,7 @@ const ProfessorCarlinhosChat = () => {
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Digite sua mensagem para o Professor Carlinhos..."
+                  placeholder="Digite sua mensagem para o Professor Dudu..."
                   className="flex-1"
                   disabled={isSendingMessage || isWaitingForResponse}
                 />
@@ -308,4 +308,4 @@ const ProfessorCarlinhosChat = () => {
   );
 };
 
-export default ProfessorCarlinhosChat;
+export default ProfessorDuduChat;
