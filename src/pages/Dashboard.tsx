@@ -38,6 +38,7 @@ const Dashboard = () => {
   const { user, signOut } = useAuth();
   const { userProfile, redacoes, isLoading, updateUserStats, fetchUserProfile, fetchRedacoes } = useUserData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Função para atualizar os dados manualmente
@@ -255,6 +256,8 @@ const Dashboard = () => {
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
+        onToggle={() => setSidebarExpanded(!sidebarExpanded)}
+        isDesktop={true}
       />
 
       {/* Main Content */}

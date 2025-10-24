@@ -13,13 +13,17 @@ import {
   ChevronRight,
   LogOut,
   Sun,
-  Moon
+  Moon,
+  Menu,
+  X
 } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
+  onToggle?: () => void;
+  isDesktop?: boolean;
 }
 
 interface MenuItem {
@@ -30,7 +34,7 @@ interface MenuItem {
   children?: MenuItem[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop = false }) => {
   const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({});
   const { theme, toggleTheme } = useTheme();
 
@@ -97,6 +101,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         )}
       >
         <div className="flex flex-col h-full">
+          {/* Header com botão de toggle para desktop */}
           <div className="flex items-center justify-between h-16 px-4 border-b border-slate-700">
             <div className="flex items-center">
               <img 
@@ -112,21 +117,45 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 }}
               />
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="lg:hidden text-gray-400 hover:text-white"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </Button>
+            
+            {/* Botão de toggle apenas para desktop */}
+            {isDesktop && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onToggle}
+                className="text-gray-400 hover:text-white"
+              >
+                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              </Button>
+            )}
+            
+            {/* Botão de fechar apenas para mobile */}
+            {!isDesktop && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={onClose}
+                className="text-gray-400 hover:text-white"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            )}
           </div>
 
-          <nav className="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+          {/* Conteúdo da sidebar */}
+          <nav className={cn(
+            "flex-1 px-4 py-6 space-y-1 overflow-y-auto transition-all duration-300",
+            isDesktop && !isOpen && "opacity-0 pointer-events-none"
+          )}>
             {menuItems.map(renderMenuItem)}
           </nav>
 
-          <div className="p-4 border-t border-slate-700">
+          {/* Rodapé com botões */}
+          <div className={cn(
+            "p-4 border-t border-slate-700 transition-all duration-300",
+            isDesktop && !isOpen && "opacity-0 pointer-events-none"
+          )}>
             <Button
               variant="ghost"
               size="sm"

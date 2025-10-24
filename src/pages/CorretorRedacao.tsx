@@ -27,7 +27,9 @@ import {
   ChevronDown,
   Shuffle,
   LogOut,
-  ArrowLeft
+  ArrowLeft,
+  Menu,
+  X
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -39,6 +41,7 @@ const CorretorRedacao = () => {
   const { user, signOut } = useAuth();
   const { userProfile, addRedacao } = useUserData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [redacaoText, setRedacaoText] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<any>(null);
@@ -329,437 +332,358 @@ const CorretorRedacao = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)} 
+        onToggle={() => setSidebarExpanded(!sidebarExpanded)}
+        isDesktop={true}
       />
 
+      {/* Main Content */}
       <div className="flex-1 flex flex-col">
+        {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
           <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+            {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSidebarOpen(true)}
               >
-                <BookOpen className="h-6 w-6" />
+                <Menu className="h-6 w-6" />
               </Button>
             </div>
             
             <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/redacoes')}
+                className="flex items-center space-x-2"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Voltar</span>
+              </Button>
+              
               <div className="flex items-center space-x-2">
-                {/* Logo real do Supabase */}
+                {/* Logo do Supabase */}
                 <img 
                   src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
                   alt="Logo" 
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {
-                    // Fallback para SVG se a imagem não carregar
-                    e.currentTarget.outerHTML = `
-                      <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                        <span class="text-white text-sm font-bold">A</span>
-                      </div>
-                    `;
+                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo
+<dyad-write path="src/pages/ProfessorCarlinhosChat.tsx" description="Adicionando controle de sidebar maximizada/minimizada no ProfessorCarlinhosChat">
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { 
+  Bot,
+  MessageSquare,
+  Send,
+  ArrowLeft,
+  Clock,
+  User,
+  Bot as BotIcon,
+  Menu,
+  X
+} from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { showSuccess, showError } from '@/utils/toast';
+import Sidebar from '@/components/Sidebar';
+
+interface ChatMessage {
+  id: string;
+  content: string;
+  sender: 'user' | 'bot';
+  timestamp: Date;
+}
+
+const ProfessorCarlinhosChat = () => {
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarExpanded, setSidebarExpanded] = useState(true);
+  const [chatMessage, setChatMessage] = useState('');
+  const [isSendingMessage, setIsSendingMessage] = useState(false);
+  const [isWaitingForResponse, setIsWaitingForResponse] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      content: 'Olá, ' + (user?.user_metadata?.name?.split(' ')[0] || 'João') + '! Sou o Professor Carlinhos, seu assistente de redação. Estou aqui para ajudar com dúvidas sobre estrutura, argumentação, repertório e qualquer outra questão relacionada à redação do ENEM. Como posso te ajudar hoje?',
+      sender: 'bot',
+      timestamp: new Date()
+    }
+  ]);
+
+  const handleSendMessage = async () => {
+    if (!chatMessage.trim()) {
+      showError('Por favor, digite uma mensagem para o Professor Carlinhos.');
+      return;
+    }
+
+    // Adicionar mensagem do usuário
+    const userMessage: ChatMessage = {
+      id: Date.now().toString(),
+      content: chatMessage,
+      sender: 'user',
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setChatMessage('');
+    setIsSendingMessage(true);
+    setIsWaitingForResponse(true);
+
+    try {
+      // Enviar mensagem para o webhook
+      const webhookUrl = 'https://eopi4fhg5g3mewf.m.pipedream.net';
+      
+      const payload = {
+        message: chatMessage,
+        timestamp: new Date().toISOString(),
+        user: user?.user_metadata?.name || 'João da Silva',
+        type: 'chat_message'
+      };
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Falha ao enviar mensagem');
+      }
+
+      // Esperar a resposta do webhook
+      const responseData = await response.json();
+      console.log('Resposta do webhook:', responseData); // Log para depuração
+      
+      // Extrair a resposta do webhook - pode estar em diferentes campos
+      let botResponse = '';
+      
+      // Tenta diferentes campos possíveis para a resposta
+      if (responseData.response) {
+        botResponse = responseData.response;
+      } else if (responseData.message) {
+        botResponse = responseData.message;
+      } else if (responseData.content) {
+        botResponse = responseData.content;
+      } else if (responseData.text) {
+        botResponse = responseData.text;
+      } else if (responseData.data && responseData.data.response) {
+        botResponse = responseData.data.response;
+      } else if (typeof responseData === 'string') {
+        botResponse = responseData;
+      } else {
+        // Se não encontrar resposta, usa uma mensagem padrão
+        botResponse = 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!';
+      }
+      
+      // Adicionar resposta do bot
+      const botMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: botResponse,
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, botMessage]);
+      
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      showError('Erro ao enviar mensagem. Tente novamente.');
+      
+      // Adicionar mensagem de erro
+      const errorMessage: ChatMessage = {
+        id: (Date.now() + 1).toString(),
+        content: 'Desculpe, ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente.',
+        sender: 'bot',
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    } finally {
+      setIsSendingMessage(false);
+      setIsWaitingForResponse(false);
+    }
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage();
+    }
+  };
+
+  const formatTime = (date: Date) => {
+    return date.toLocaleTimeString('pt-BR', { 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    });
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
+      <Sidebar 
+        isOpen={sidebarOpen} 
+        onClose={() => setSidebarOpen(false)} 
+        onToggle={() => setSidebarExpanded(!sidebarExpanded)}
+        isDesktop={true}
+      />
+
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col">
+        {/* Header */}
+        <header className="bg-white shadow-sm border-b border-gray-200">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+            {/* Mobile menu button */}
+            <div className="lg:hidden">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(true)}
+              >
+                <Menu className="h-6 w-6" />
+              </Button>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/redacoes')}
+                className="flex items-center space-x-2"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Voltar</span>
+              </Button>
+              
+              <div className="flex items-center space-x-2">
+                {/* Logo do Supabase */}
+                <img 
+                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  alt="Logo" 
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
                   }}
                 />
                 <div>
-                  <p className="text-sm font-medium text-gray-900">
-                    {user?.user_metadata?.name || 'João da Silva'}
-                  </p>
+                  <p className="text-sm font-medium text-gray-900">Professor Carlinhos</p>
                   <div className="flex items-center space-x-1">
-                    <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">{userProfile?.patente || 'Iniciante'}</span>
+                    <Clock className="h-3 w-3 text-green-500" />
+                    <span className="text-xs text-gray-500">Online</span>
                   </div>
                 </div>
               </div>
-              
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4" />
-              </Button>
             </div>
           </div>
         </header>
 
+        {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px:6 lg:px-8 py-8">
-            <div className="mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Redações</h2>
-              <p className="text-gray-600">Prepare-se para o ENEM com temas reais e correção inteligente</p>
+          {/* Chat Container */}
+          <div className="flex-1 flex flex-col">
+            {/* Chat Header */}
+            <div className="bg-white border-b border-gray-200 px-6 py-4">
+              <h1 className="text-xl font-semibold text-gray-900">Conversar com o Professor Carlinhos</h1>
+              <p className="text-sm text-gray-600 mt-1">
+                Envie suas dúvidas sobre redação e receba orientações personalizadas
+              </p>
             </div>
 
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <Bot className="h-5 w-5 mr-2 text-green-600" />
-                    Dicas do Professor Carlinhos
-                  </div>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
-                    onClick={getNewTip}
-                    className="text-green-600 hover:text-green-700"
+            {/* Messages Area */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
+              {messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                >
+                  <div
+                    className={`max-w-md lg:max-w-lg rounded-lg px-4 py-3 ${
+                      message.sender === 'user'
+                        ? 'bg-blue-600 text-white'
+                        : 'bg-white border border-gray-200'
+                    }`}
                   >
-                    <RefreshCw className="h-4 w-4 mr-1" />
-                    Nova Dica
-                  </Button>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="bg-green-50 rounded-lg p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
-                      <span className="text-white text-lg font-bold">C</span>
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-green-800 mb-2">{currentTip.title}</h3>
-                      <p className="text-green-700 leading-relaxed">{currentTip.content}</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="mb-8">
-              <CardHeader>
-                <CardTitle className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                    {redacaoTheme.title}
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={goToPreviousTheme}
-                      disabled={themeHistory.length === 0}
-                      className="flex items-center space-x-1 text-gray-600 hover:text-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      <ArrowLeft className="h-4 w-4" />
-                      <span>Anterior</span>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={goToRandomTheme}
-                      className="flex items-center space-x-1 text-blue-600 hover:text-blue-700"
-                    >
-                      <Shuffle className="h-4 w-4" />
-                      <span>Novo Tema</span>
-                    </Button>
-                  </div>
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-4">Contextualização Inicial</h3>
-                    <div className="space-y-4">
-                      {redacaoTheme.contextualizacao.map((item, index) => (
-                        <div key={index} className={`bg-gray-50 p-4 rounded-lg ${getTextSizeClass(item.tamanho)}`}>
-                          <p className="text-gray-700 mb-2">{item.texto}</p>
-                          <p className="text-sm text-gray-500">Fonte: {item.fonte}</p>
+                    <div className="flex items-start space-x-3">
+                      {message.sender === 'bot' && (
+                        <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-sm font-bold">C</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Tema</h3>
-                    <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                      <p className="text-lg font-medium text-blue-900">{redacaoTheme.tema}</p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Instruções</h3>
-                    <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                      <p className="text-gray-700 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
-                    </div>
-                  </div>
-
-                  {!hasStartedRedacao && (
-                    <div className="text-center py-6">
-                      <Button 
-                        onClick={startRedacao}
-                        size="lg"
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3"
-                      >
-                        <Pencil className="h-5 w-5 mr-2" />
-                        Iniciar Redação
-                      </Button>
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </Card>
-
-            {hasStartedRedacao && (
-              <div className="space-y-8">
-                <Card>
-                  <CardContent className="pt-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-2">
-                        <Clock className="h-5 w-5 text-red-600" />
-                        <span className="font-medium text-gray-900">Tempo Restante:</span>
-                        <span className={`font-bold ${timeRemaining < 600 ? 'text-red-600' : 'text-blue-600'}`}>
-                          {formatTime(timeRemaining)}
-                        </span>
+                      )}
+                      <div className="flex-1">
+                        <p className="text-sm leading-relaxed">{message.content}</p>
+                        <p className={`text-xs mt-2 ${
+                          message.sender === 'user' ? 'text-blue-100' : 'text-gray-500'
+                        }`}>
+                          {formatTime(message.timestamp)}
+                        </p>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => setShowTimeOptions(!showTimeOptions)}
-                          className="text-gray-600 hover:text-gray-800"
-                        >
-                          <Settings className="h-4 w-4 mr-1" />
-                          Personalizar
-                          <ChevronDown className={`h-4 w-4 ml-1 transition-transform ${showTimeOptions ? 'rotate-180' : ''}`} />
-                        </Button>
-                      </div>
-                    </div>
-
-                    {showTimeOptions && (
-                      <div className="mt-4 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <h4 className="text-sm font-medium text-gray-700 mb-3">Escolha o tempo para redação:</h4>
-                        
-                        <div className="grid grid-cols-4 gap-2 mb-4">
-                          {timeOptions.map((option) => (
-                            <Button
-                              key={option.value}
-                              variant={selectedTime === option.value * 60 ? "default" : "outline"}
-                              size="sm"
-                              onClick={() => handleTimeChange(option.value)}
-                              className="text-xs"
-                            >
-                              {option.label}
-                            </Button>
-                          ))}
-                        </div>
-
-                        <div className="flex items-center space-x-2">
-                          <span className="text-sm text-gray-600">Personalizado:</span>
-                          <div className="flex items-center space-x-1">
-                            <Input
-                              type="number"
-                              min="0"
-                              max="12"
-                              value={customTimeInput.hours}
-                              onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
-                              placeholder="H"
-                              className="w-16 text-center"
-                            />
-                            <span className="text-sm text-gray-500">h</span>
-                            <Input
-                              type="number"
-                              min="0"
-                              max="59"
-                              value={customTimeInput.minutes}
-                              onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
-                              placeholder="M"
-                              className="w-16 text-center"
-                            />
-                            <span className="text-sm text-gray-500">min</span>
-                          </div>
-                          <Button
-                            size="sm"
-                            onClick={handleCustomTime}
-                            className="bg-blue-600 hover:bg-blue-700 text-white"
-                          >
-                            Aplicar
-                          </Button>
-                        </div>
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <FileText className="h-5 w-5 mr-2 text-blue-600" />
-                      Escreva sua redação aqui
-                    </CardTitle>
-                    <CardDescription>
-                      Escreva o texto completo da sua redação abaixo
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <textarea
-                        value={redacaoText}
-                        onChange={(e) => setRedacaoText(e.target.value)}
-                        placeholder="Escreva sua redação aqui..."
-                        className="w-full h-64 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      />
-                      <Button 
-                        onClick={analyzeRedacao}
-                        disabled={isAnalyzing || (!redacaoText.trim() && !imageFile)}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                      >
-                        {isAnalyzing ? 'Analisando...' : 'Corrigir Redação'}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <ImageIcon className="h-5 w-5 mr-2 text-blue-600" />
-                      Envie imagem da redação
-                    </CardTitle>
-                    <CardDescription>
-                      Tire uma foto da sua redação escrita à mão
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                        <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                        <p className="text-gray-600 mb-4">Arraste uma imagem ou clique para selecionar</p>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleImageUpload}
-                          className="hidden"
-                          id="image-upload"
-                        />
-                        <label htmlFor="image-upload">
-                          <Button variant="outline" className="cursor-pointer">
-                            Selecionar Imagem
-                          </Button>
-                        </label>
-                      </div>
-                      {imageFile && (
-                        <div className="bg-green-50 p-4 rounded-lg">
-                          <p className="text-sm text-green-800">
-                            Imagem selecionada: {imageFile.name}
-                          </p>
+                      {message.sender === 'user' && (
+                        <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-white text-sm font-bold">
+                            {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'J'}
+                          </span>
                         </div>
                       )}
                     </div>
-                  </CardContent>
-                </Card>
-              </div>
-            )}
-
-            {analysisResult && (
-              <div className="space-y-8">
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Award className="h-5 w-5 mr-2 text-blue-600" />
-                      Resultado da Análise
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="text-center">
-                        <div className="text-4xl font-bold text-blue-600 mb-2">
-                          {analysisResult.totalScore}
-                        </div>
-                        <p className="text-gray-600">Nota Total</p>
+                  </div>
+                </div>
+              ))}
+              
+              {/* Loading animation while waiting for response */}
+              {isWaitingForResponse && (
+                <div className="flex justify-start">
+                  <div className="bg-white border border-gray-200 rounded-lg px-4 py-3">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-sm font-bold">C</span>
                       </div>
-                      <div className="space-y-3">
-                        {analysisResult.competencies.map((comp: any, index: number) => (
-                          <div key={index}>
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-700">{comp.name}</span>
-                              <span className="font-medium">{comp.score}/{comp.max}</span>
-                            </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
-                              <div 
-                                className="bg-blue-600 h-2 rounded-full" 
-                                style={{ width: `${(comp.score / comp.max) * 100}%` }}
-                              ></div>
-                            </div>
-                          </div>
-                        ))}
+                      <div className="flex-1">
+                        <div className="flex space-x-1">
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                          <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-2">Professor Carlinhos está digitando...</p>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  {analysisResult.detailedFeedback.map((feedback: any, index: number) => (
-                    <Card key={index}>
-                      <CardHeader>
-                        <CardTitle className="text-lg flex items-center">
-                          <Star className="h-4 w-4 mr-2 text-yellow-500" />
-                          {feedback.competency}
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-gray-700">{feedback.feedback}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  </div>
                 </div>
+              )}
+            </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
-                        Principais Erros
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2">
-                        {analysisResult.errors.map((error: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-red-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{error}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
-                        Sugestões de Melhoria
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <ul className="space-y-2">
-                        {analysisResult.suggestions.map((suggestion: string, index: number) => (
-                          <li key={index} className="flex items-start">
-                            <span className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                            <span className="text-gray-700">{suggestion}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                <div className="flex justify-center space-x-4">
-                  <Button onClick={saveRedacao} className="bg-green-600 hover:bg-green-700 text-white">
-                    <Save className="h-4 w-4 mr-2" />
-                    Salvar Redação
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    onClick={() => {
-                      setAnalysisResult(null);
-                      setRedacaoText('');
-                      setImageFile(null);
-                      setHasStartedRedacao(false);
-                      setTimerActive(false);
-                      goToRandomTheme();
-                    }}
-                  >
-                    Nova Redação
-                  </Button>
-                </div>
+            {/* Input Area */}
+            <div className="bg-white border-t border-gray-200 p-4">
+              <div className="flex space-x-2">
+                <Input
+                  value={chatMessage}
+                  onChange={(e) => setChatMessage(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Digite sua mensagem para o Professor Carlinhos..."
+                  className="flex-1"
+                  disabled={isSendingMessage || isWaitingForResponse}
+                />
+                <Button 
+                  onClick={handleSendMessage}
+                  disabled={isSendingMessage || isWaitingForResponse || !chatMessage.trim()}
+                  className="bg-green-600 hover:bg-green-700 text-white"
+                >
+                  <Send className="h-4 w-4" />
+                </Button>
               </div>
-            )}
+            </div>
           </div>
         </main>
       </div>
@@ -767,4 +691,4 @@ const CorretorRedacao = () => {
   );
 };
 
-export default CorretorRedacao;
+export default ProfessorCarlinhosChat;
