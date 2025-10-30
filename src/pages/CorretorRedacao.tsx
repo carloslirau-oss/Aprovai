@@ -57,7 +57,6 @@ const CorretorRedacao = () => {
   const [customTimeInput, setCustomTimeInput] = useState({ hours: 3, minutes: 0 });
   const [isProcessingImage, setIsProcessingImage] = useState(false);
   const [webhookResult, setWebhookResult] = useState<any>(null);
-  const [isProcessingText, setIsProcessingText] = useState(false);
 
   const tips = [
     {
@@ -118,7 +117,7 @@ const CorretorRedacao = () => {
         }
       ],
       tema: "A persistência da violência contra a mulher na sociedade brasileira.",
-      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, redija um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
+      instrucoes: "Com base na leitura dos textos motivadores e nos conhecimentos construídos ao longo de sua formação, rediga um texto dissertativo-argumentativo em modalidade escrita formal da língua portuguesa sobre o tema acima.\n\nApresente proposta de intervenção que respeite os direitos humanos.\n\nSelecione, organize e relacione, de forma coerente e coesa, argumentos e fatos para defender seu ponto de vista."
     }
   ];
 
@@ -371,95 +370,6 @@ const CorretorRedacao = () => {
     }
   };
 
-  const processTextWithWebhook = async () => {
-    if (!redacaoText.trim()) {
-      showError('Por favor, escreva sua redação antes de processar.');
-      return;
-    }
-
-    setIsProcessingText(true);
-    
-    try {
-      const webhookUrl = 'https://eopi4fhg5g3mewf.m.pipedream.net';
-      
-      const payload = {
-        text: redacaoText,
-        theme: redacaoTheme.tema,
-        instructions: redacaoTheme.instrucoes,
-        timestamp: new Date().toISOString(),
-        user: user?.user_metadata?.name || 'João da Silva',
-        type: 'redacao_text'
-      };
-
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error('Falha ao processar redação');
-      }
-
-      const result = await response.json();
-      console.log('Resposta do webhook:', result);
-      
-      // Extrair a resposta do webhook
-      let botResponse = '';
-      
-      if (result.response) {
-        botResponse = result.response;
-      } else if (result.message) {
-        botResponse = result.message;
-      } else if (result.content) {
-        botResponse = result.content;
-      } else if (result.text) {
-        botResponse = result.text;
-      } else if (result.data && result.data.response) {
-        botResponse = result.data.response;
-      } else if (typeof result === 'string') {
-        botResponse = result;
-      } else {
-        botResponse = 'Redação recebida com sucesso! Estou analisando seu texto e em breve retornarei com uma correção detalhada para ajudar a melhorar seu desempenho.';
-      }
-      
-      // Processar a resposta para extrair dados de análise
-      const analysisData = {
-        totalScore: 850,
-        competencies: [
-          { name: 'Domínio da Modalidade Escrita Formal', score: 170, max: 200 },
-          { name: 'Compreensão da Tarefa', score: 180, max: 200 },
-          { name: 'Coerência e Coesão', score: 160, max: 200 },
-          { name: 'Seleção de Recursos de Linguagem', score: 170, max: 200 },
-          { name: 'Proposta de Intervenção', score: 170, max: 200 }
-        ],
-        errors: [
-          'Falta de conectivos entre os parágrafos',
-          'Uso incorreto de pontuação em alguns períodos',
-          'Falta de exemplos concretos para sustentar argumentos'
-        ],
-        suggestions: [
-          'Incluir mais dados estatísticos sobre o tema',
-          'Utilizar conectivos como "além disso", "por outro lado" para melhorar a coesão',
-          'Adicionar citações de autores renomados para dar mais credibilidade'
-        ],
-        corrected_text: botResponse
-      };
-      
-      setAnalysisResult(analysisData);
-      setWebhookResult(analysisData);
-      showSuccess('Redação processada com sucesso!');
-      
-    } catch (error) {
-      console.error('Erro ao processar redação:', error);
-      showError('Erro ao processar redação. Tente novamente.');
-    } finally {
-      setIsProcessingText(false);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
@@ -474,7 +384,7 @@ const CorretorRedacao = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -959,19 +869,19 @@ const CorretorRedacao = () => {
               {/* Action Buttons */}
               <div className="flex justify-center space-x-4">
                 <Button
-                  onClick={processTextWithWebhook}
-                  disabled={isProcessingText || !redacaoText.trim() || !hasStartedRedacao}
+                  onClick={analyzeRedacao}
+                  disabled={isAnalyzing || (!redacaoText.trim() && !imageFile) || !hasStartedRedacao}
                   className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
-                  {isProcessingText ? (
+                  {isAnalyzing ? (
                     <>
                       <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                      Processando...
+                      Analisando...
                     </>
                   ) : (
                     <>
-                      <Bot className="h-4 w-4 mr-2" />
-                      Processar com IA
+                      <TrendingUp className="h-4 w-4 mr-2" />
+                      Analisar Redação
                     </>
                   )}
                 </Button>
