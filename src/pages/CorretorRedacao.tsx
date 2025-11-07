@@ -547,7 +547,15 @@ const CorretorRedacao = () => {
                         <textarea
                           value={redacaoText}
                           onChange={(e) => setRedacaoText(e.target.value)}
-                          placeholder="Comece a escrever sua redação aqui..."
+                          placeholder="Comece a escrever sua redação aqui...
+
+Exemplo de estrutura:
+• Introdução: Apresente o tema e sua tese
+• Desenvolvimento: Argumentos e exemplos
+• Proposta de intervenção: Solução concreta
+• Conclusão: Retome a tese e feche o texto
+
+Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as competências do ENEM."
                           className="w-full h-96 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                           disabled={!hasStartedRedacao}
                         />
