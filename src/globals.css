@@ -114,21 +114,14 @@
     border-color: #e5e7eb;
   }
   
-  /* Botões com fundo azul */
+  /* Botões com fundo azul #0071bc */
   .btn-primary {
-    background-color: #3b82f6;
+    background-color: #0071bc;
     color: white;
   }
   
   .btn-primary:hover {
-    background-color: #2563eb;
-  }
-  
-  /* Inputs com fundo branco */
-  .input {
-    background-color: #ffffff;
-    border-color: #d1d5db;
-    color: #1f2937;
+    background-color: #005a9e;
   }
   
   /* Hover states */
@@ -154,7 +147,7 @@
   }
   
   .bg-blue-50 {
-    background-color: #eff6ff;
+    background-color: #f0f8ff;
   }
   
   .bg-green-50 {
@@ -195,7 +188,7 @@
   }
   
   .text-blue-600 {
-    color: #2563eb;
+    color: #0071bc;
   }
   
   .text-green-600 {
@@ -228,7 +221,7 @@
   }
   
   .border-blue-200 {
-    border-color: #93c5fd;
+    border-color: #0071bc;
   }
   
   .border-green-200 {
@@ -274,6 +267,75 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #94a3b8;
   }
+  
+  /* Classes específicas para azul #0071bc */
+  .bg-blue-600 {
+    background-color: #0071bc !important;
+  }
+  
+  .bg-blue-500 {
+    background-color: #0071bc !important;
+  }
+  
+  .bg-blue-700 {
+    background-color: #005a9e !important;
+  }
+  
+  .text-blue-500 {
+    color: #0071bc !important;
+  }
+  
+  .text-blue-400 {
+    color: #0071bc !important;
+  }
+  
+  .border-blue-600 {
+    border-color: #0071bc !important;
+  }
+  
+  .border-blue-500 {
+    border-color: #0071bc !important;
+  }
+  
+  .ring-blue-600 {
+    --tw-ring-color: #0071bc !important;
+  }
+  
+  .ring-blue-500 {
+    --tw-ring-color: #0071bc !important;
+  }
+  
+  .focus\:ring-blue-500:focus {
+    --tw-ring-color: #0071bc !important;
+  }
+  
+  .focus\:ring-blue-600:focus {
+    --tw-ring-color: #0071bc !important;
+  }
+  
+  .hover\:bg-blue-600:hover {
+    background-color: #005a9e !important;
+  }
+  
+  .hover\:bg-blue-500:hover {
+    background-color: #005a9e !important;
+  }
+  
+  .hover\:text-blue-500:hover {
+    color: #0071bc !important;
+  }
+  
+  .hover\:text-blue-400:hover {
+    color: #0071bc !important;
+  }
+  
+  .border-l-blue-500 {
+    border-left-color: #0071bc !important;
+  }
+  
+  .border-l-blue-600 {
+    border-left-color: #0071bc !important;
+  }
 }
 
 /* Estilos específicos para modo escuro */
@@ -296,21 +358,14 @@
     border-color: #334155;
   }
   
-  /* Botões com fundo azul escuro */
+  /* Botões com fundo azul #0071bc */
   .btn-primary {
-    background-color: #3b82f6;
+    background-color: #0071bc;
     color: white;
   }
   
   .btn-primary:hover {
-    background-color: #2563eb;
-  }
-  
-  /* Inputs com fundo azul escuro */
-  .input {
-    background-color: #1e293b;
-    border-color: #334155;
-    color: #f8fafc;
+    background-color: #005a9e;
   }
   
   /* Hover states */
@@ -455,5 +510,74 @@
   
   ::-webkit-scrollbar-thumb:hover {
     background: #64748b;
+  }
+  
+  /* Classes específicas para azul #0071bc no modo escuro */
+  .bg-blue-600 {
+    background-color: #0071bc !important;
+  }
+  
+  .bg-blue-500 {
+    background-color: #0071bc !important;
+  }
+  
+  .bg-blue-700 {
+    background-color: #005a9e !important;
+  }
+  
+  .text-blue-500 {
+    color: #60a5fa !important;
+  }
+  
+  .text-blue-400 {
+    color: #60a5fa !important;
+  }
+  
+  .border-blue-600 {
+    border-color: #60a5fa !important;
+  }
+  
+  .border-blue-500 {
+    border-color: #60a5fa !important;
+  }
+  
+  .ring-blue-600 {
+    --tw-ring-color: #60a5fa !important;
+  }
+  
+  .ring-blue-500 {
+    --tw-ring-color: #60a5fa !important;
+  }
+  
+  .focus\:ring-blue-500:focus {
+    --tw-ring-color: #60a5fa !important;
+  }
+  
+  .focus\:ring-blue-600:focus {
+    --tw-ring-color: #60a5fa !important;
+  }
+  
+  .hover\:bg-blue-600:hover {
+    background-color: #005a9e !important;
+  }
+  
+  .hover\:bg-blue-500:hover {
+    background-color: #005a9e !important;
+  }
+  
+  .hover\:text-blue-500:hover {
+    color: #60a5fa !important;
+  }
+  
+  .hover\:text-blue-400:hover {
+    color: #60a5fa !important;
+  }
+  
+  .border-l-blue-500 {
+    border-left-color: #60a5fa !important;
+  }
+  
+  .border-l-blue-600 {
+    border-left-color: #60a5fa !important;
   }
 }
