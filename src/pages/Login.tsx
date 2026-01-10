@@ -20,6 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
+  const [showRegisterAlert, setShowRegisterAlert] = useState(false);
 
   useEffect(() => {
     clearUserDataFromStorage();
@@ -38,7 +39,14 @@ const Login = () => {
       const { data, error } = await signIn(email, password);
       
       if (error) {
-        throw error;
+        // Se o erro for de usuário não encontrado, mostrar aviso para cadastrar
+        if (error.message?.includes('invalid_credentials') || error.message?.includes('invalid login')) {
+          setShowRegisterAlert(true);
+          showError('Usuário não encontrado. Por favor, cadastre-se primeiro.');
+        } else {
+          throw error;
+        }
+        return;
       }
       
       showSuccess('Login realizado com sucesso!');
@@ -64,15 +72,22 @@ const Login = () => {
       if (data.user) {
         showSuccess('Cadastro realizado com sucesso! Faça login para continuar.');
         setActiveTab('login');
+        setShowRegisterAlert(false);
       } else {
         showSuccess('Cadastro realizado! Faça login para continuar.');
         setActiveTab('login');
+        setShowRegisterAlert(false);
       }
     } catch (error: any) {
       showError(error.message || 'Erro ao criar conta. Tente novamente.');
     } finally {
       setIsLoadingAuth(false);
     }
+  };
+
+  const goToRegister = () => {
+    setActiveTab('register');
+    setShowRegisterAlert(false);
   };
 
   return (
@@ -95,6 +110,34 @@ const Login = () => {
           </div>
           <p className="text-gray-300 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
+
+        {/* Alerta para usuário não cadastrado */}
+        {showRegisterAlert && (
+          <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <div className="flex items-start space-x-3">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-yellow-800">Usuário não encontrado</h3>
+                <p className="text-sm text-yellow-700 mt-1">
+                  Você ainda não tem uma conta. Cadastre-se para começar a treinar redações!
+                </p>
+                <div className="mt-3">
+                  <Button
+                    onClick={goToRegister}
+                    size="sm"
+                    className="bg-yellow-600 hover:bg-yellow-700 text-white"
+                  >
+                    Cadastre-se Agora
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
         <Card className="shadow-lg bg-slate-800 border-slate-700">
           <div className="flex border-b border-slate-700">
