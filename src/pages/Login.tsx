@@ -81,8 +81,8 @@ const Login = () => {
         <div className="text-center mb-2">
           <div className="flex items-center justify-center mb-1">
             <img 
-              src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%201.png" 
-              alt="Logo" 
+              src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20branca.png" 
+              alt="Escreve AI" 
               className="w-60 h-20 object-contain"
               onError={(e) => {
                 e.currentTarget.outerHTML = `
