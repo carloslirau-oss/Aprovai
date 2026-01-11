@@ -153,7 +153,7 @@ const Login = () => {
           <p className="text-gray-300 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
 
-        {/* Alerta para usuário não cadastrado - Melhor contraste */}
+        {/* Alerta para usuário não cadastrado - Sem botão */}
         {showRegisterAlert && (
           <div className="mb-4 p-4 bg-orange-500 border border-orange-600 rounded-lg shadow-lg">
             <div className="flex items-start space-x-3">
@@ -167,15 +167,6 @@ const Login = () => {
                 <p className="text-sm text-orange-100 mt-1">
                   Você ainda não tem uma conta. Cadastre-se para começar a treinar redações!
                 </p>
-                <div className="mt-3">
-                  <Button
-                    onClick={goToRegister}
-                    size="sm"
-                    className="bg-white text-orange-600 hover:bg-orange-50 font-medium"
-                  >
-                    Cadastre-se Agora
-                  </Button>
-                </div>
               </div>
             </div>
           </div>
