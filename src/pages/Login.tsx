@@ -34,13 +34,27 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoadingAuth(true);
+    setShowRegisterAlert(false); // Resetar o alerta a cada tentativa
 
     try {
       const { data, error } = await signIn(email, password);
       
       if (error) {
-        // Se o erro for de usuário não encontrado, mostrar aviso para cadastrar
-        if (error.message?.includes('invalid_credentials') || error.message?.includes('invalid login')) {
+        console.log('Erro de login:', error);
+        console.log('Mensagem do erro:', error.message);
+        
+        // Verifica diferentes tipos de erro de usuário não encontrado
+        const isUserNotFound = error.message?.includes('invalid_credentials') ||
+                              error.message?.includes('invalid login') ||
+                              error.message?.includes('User not found') ||
+                              error.message?.includes('email not found') ||
+                              error.message?.includes('Email not found') ||
+                              error.message?.includes('invalid_grant') ||
+                              error.message?.includes('unauthorized') ||
+                              error.code === '400' ||
+                              error.code === '401';
+        
+        if (isUserNotFound) {
           setShowRegisterAlert(true);
           showError('Usuário não encontrado. Por favor, cadastre-se primeiro.');
         } else {
@@ -52,6 +66,7 @@ const Login = () => {
       showSuccess('Login realizado com sucesso!');
       navigate('/dashboard');
     } catch (error: any) {
+      console.log('Erro capturado:', error);
       showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
     } finally {
       setIsLoadingAuth(false);
