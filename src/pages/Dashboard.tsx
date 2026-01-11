@@ -26,7 +26,13 @@ import {
   PieChart,
   LineChart,
   Activity,
-  RefreshCw
+  RefreshCw,
+  User,
+  Medal,
+  Shield,
+  Star as StarIcon,
+  Flag,
+  ChevronRight
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -85,67 +91,98 @@ const Dashboard = () => {
     }
   };
 
-  // Sistema de patentes com requisitos (agora baseado em XP máximo de 250 por redação)
+  // Sistema de patentes com 7 níveis
   const patentes = [
     {
       level: 1,
-      title: 'Iniciante',
+      title: 'Recruta',
+      emoji: '🎯',
       xpRequired: 0,
-      xpNext: 500,
+      xpNext: 1000,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-200',
-      icon: Star,
-      description: 'Sua jornada começa aqui',
-      professorTip: 'Ninguém nasce pronto, nem eu quando comecei a corrigir. Vamos começar com estilo, futuro 1000.'
+      icon: User,
+      description: 'Começando sua jornada',
+      professorTip: 'Bem-vindo à academia! Cada redação é um passo adiante.'
     },
     {
       level: 2,
-      title: 'Treineiro',
-      xpRequired: 500,
-      xpNext: 2000,
+      title: 'Soldado',
+      emoji: '⚔️',
+      xpRequired: 1000,
+      xpNext: 2500,
       color: 'text-green-600',
       bgColor: 'bg-green-50',
       borderColor: 'border-green-200',
-      icon: Zap,
-      description: 'Você está pegando o ritmo',
-      professorTip: 'Está começando a esquentar! Continua assim que o Inep vai pedir o seu autógrafo.'
+      icon: Shield,
+      description: 'Dominando as técnicas',
+      professorTip: 'Sua escrita está ficando mais forte! Continue treinando.'
     },
     {
       level: 3,
-      title: 'Competente',
-      xpRequired: 2000,
+      title: 'Cabo',
+      emoji: '🏅',
+      xpRequired: 2500,
       xpNext: 5000,
-      color: 'text-purple-600',
-      bgColor: 'bg-purple-50',
-      borderColor: 'border-purple-200',
-      icon: Award,
-      description: 'Você escreve como um verdadeiro competente',
-      professorTip: 'Agora sim, sua introdução está tão boa que eu quase levantei pra aplaudir. Quase.'
-    },
-    {
-      level: 4,
-      title: 'Mestre da Caneta',
-      xpRequired: 5000,
-      xpNext: 10000,
       color: 'text-yellow-600',
       bgColor: 'bg-yellow-50',
       borderColor: 'border-yellow-200',
-      icon: Crown,
-      description: 'Sua caneta vale ouro',
-      professorTip: 'Se escrever mais bonito que isso, o corretor vai querer emoldurar sua redação.'
+      icon: Medal,
+      description: 'Adquirindo experiência',
+      professorTip: 'Você está se destacando! Suas ideias estão mais claras.'
+    },
+    {
+      level: 4,
+      title: 'Sargento',
+      emoji: '🎖️',
+      xpRequired: 5000,
+      xpNext: 10000,
+      color: 'text-orange-600',
+      bgColor: 'bg-orange-50',
+      borderColor: 'border-orange-200',
+      icon: StarIcon,
+      description: 'Liderando o pelotão',
+      professorTip: 'Agora você é referência! Continue inspirando outros.'
     },
     {
       level: 5,
-      title: 'Nota 1000',
+      title: 'Tenente',
+      emoji: '👑',
       xpRequired: 10000,
-      xpNext: null,
+      xpNext: 20000,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      icon: Crown,
+      description: 'Comandando com excelência',
+      professorTip: 'Sua liderança é inspiradora! Você está quase no topo.'
+    },
+    {
+      level: 6,
+      title: 'Capitão',
+      emoji: '🏆',
+      xpRequired: 20000,
+      xpNext: 50000,
       color: 'text-red-600',
       bgColor: 'bg-red-50',
       borderColor: 'border-red-200',
       icon: Trophy,
-      description: 'Você alcançou o ápice da redação',
-      professorTip: 'Agora você é praticamente uma lenda da caneta. Se Platão visse isso, te chamava pra tomar café.'
+      description: 'Mestre da arte',
+      professorTip: 'Você é um mestre! Suas redações são obras de arte.'
+    },
+    {
+      level: 7,
+      title: 'General',
+      emoji: '⭐',
+      xpRequired: 50000,
+      xpNext: null,
+      color: 'text-indigo-600',
+      bgColor: 'bg-indigo-50',
+      borderColor: 'border-indigo-200',
+      icon: Flag,
+      description: 'Lenda da escrita',
+      professorTip: 'Você alcançou o topo! Agora você é uma lenda da redação.'
     }
   ];
 
@@ -156,7 +193,7 @@ const Dashboard = () => {
         return patentes[i];
       }
     }
-    return patentes[0]; // Padrão: Iniciante
+    return patentes[0]; // Padrão: Recruta
   };
 
   // Determinar patente atual e próxima
@@ -295,7 +332,7 @@ const Dashboard = () => {
               </div>
               
               {/* Barra de progresso de patente */}
-              {patenteAtual.level < 5 && patenteProxima && (
+              {patenteAtual.level < 7 && patenteProxima && (
                 <div className="flex-1 max-w-xs">
                   <div className="flex items-center space-x-2">
                     <span className="text-xs text-gray-500">Progresso:</span>
@@ -335,7 +372,7 @@ const Dashboard = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
-                  <p className="text-gray-600">Continue seu treinamento e alcance a nota 1000 no ENEM</p>
+                  <p className="text-gray-600">Continue seu treinamento e alcance o topo da jornada das patentes</p>
                 </div>
                 <Button
                   onClick={handleRefreshData}
@@ -347,6 +384,101 @@ const Dashboard = () => {
                   <span>{isRefreshing ? 'Atualizando...' : 'Atualizar Dados'}</span>
                 </Button>
               </div>
+            </div>
+
+            {/* Jornada das Patentes */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Jornada das Patentes</h3>
+              <Card className="border-2 border-blue-200 bg-blue-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Trophy className="h-5 w-5 mr-2 text-blue-600" />
+                    Sua Posição Atual: {patenteAtual.title} {patenteAtual.emoji}
+                  </CardTitle>
+                  <CardDescription>
+                    Avance através das 7 patentes para se tornar uma lenda da redação
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {/* Progresso da patente atual */}
+                  {patenteAtual.level < 7 && patenteProxima && (
+                    <div className="mb-6">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">
+                          Para {patenteProxima.title} {patenteProxima.emoji}
+                        </span>
+                        <span className="text-sm font-medium text-blue-600">
+                          {Math.round(progressoProximaPatente)}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div 
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500"
+                          style={{ width: `${progressoProximaPatente}%` }}
+                        ></div>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {userProfile?.xp_total?.toLocaleString() || '0'} / {patenteProxima.xpRequired.toLocaleString()} XP
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Linha do tempo das patentes */}
+                  <div className="relative">
+                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                    
+                    <div className="space-y-4">
+                      {patentes.map((patente, index) => {
+                        const isUnlocked = userProfile?.xp_total >= patente.xpRequired;
+                        const isCurrent = patente.title === patenteAtual.title;
+                        
+                        return (
+                          <div key={patente.title} className="relative flex items-center">
+                            <div className={`absolute left-0 w-8 h-8 rounded-full flex items-center justify-center z-10 ${
+                              isCurrent ? 'bg-blue-600 ring-4 ring-blue-300' : 
+                              isUnlocked ? 'bg-green-500' : 'bg-gray-300'
+                            }`}>
+                              <span className="text-white text-lg">{patente.emoji}</span>
+                            </div>
+                            
+                            <div className={`ml-12 flex-1 p-4 rounded-lg border-2 ${
+                              isCurrent ? 'border-blue-500 bg-blue-100 shadow-md' :
+                              isUnlocked ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'
+                            }`}>
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <h4 className={`font-semibold ${
+                                    isCurrent ? 'text-blue-700' : 
+                                    isUnlocked ? 'text-green-700' : 'text-gray-500'
+                                  }`}>
+                                    {patente.title} {patente.emoji}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">{patente.description}</p>
+                                </div>
+                                <div className="text-right">
+                                  <div className={`text-sm font-medium ${
+                                    isCurrent ? 'text-blue-600' : 
+                                    isUnlocked ? 'text-green-600' : 'text-gray-400'
+                                  }`}>
+                                    {isUnlocked ? '✓ Conquistado' : 
+                                     isCurrent ? '🎯 Atual' : 
+                                     `${patente.xpRequired.toLocaleString()} XP`}
+                                  </div>
+                                  {index < patentes.length - 1 && (
+                                    <ChevronRight className={`h-4 w-4 mt-1 ${
+                                      isUnlocked ? 'text-green-500' : 'text-gray-300'
+                                    }`} />
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
             {/* Stats Grid */}
@@ -470,7 +602,7 @@ const Dashboard = () => {
                               <div className="w-20 bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-purple-600 h-2 rounded-full" 
-                                  style={{ width: `${(item.acumulado / 10000) * 100}%` }}
+                                  style={{ width: `${(item.acumulado / 100000) * 100}%` }}
                                 ></div>
                               </div>
                               <span className="text-sm font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
@@ -560,10 +692,10 @@ const Dashboard = () => {
                     </div>
                     <div>
                       <CardTitle className="text-2xl flex items-center">
-                        {patenteAtual.title}
-                        {patenteAtual.level < 5 && (
+                        {patenteAtual.title} {patenteAtual.emoji}
+                        {patenteAtual.level < 7 && (
                           <span className="ml-2 text-sm text-gray-500">
-                            (Patente {patenteAtual.level} de 5)
+                            (Patente {patenteAtual.level} de 7)
                           </span>
                         )}
                       </CardTitle>
@@ -587,11 +719,11 @@ const Dashboard = () => {
                     </div>
 
                     {/* Next Rank Info - Simplificado */}
-                    {patenteAtual.level < 5 && patenteProxima && (
+                    {patenteAtual.level < 7 && patenteProxima && (
                       <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
                         <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
                           <ArrowRight className="h-5 w-5 mr-2" />
-                          Próxima Patente: {patenteProxima.title}
+                          Próxima Patente: {patenteProxima.title} {patenteProxima.emoji}
                         </h4>
                         <p className="text-yellow-700">
                           Para alcançar a patente <strong>{patenteProxima.title}</strong>, acumule <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
