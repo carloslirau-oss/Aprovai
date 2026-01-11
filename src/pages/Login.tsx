@@ -46,20 +46,32 @@ const Login = () => {
         console.log('Mensagem do erro:', error.message);
         console.log('Código do erro:', error.code);
         
-        // Armazena o erro para análise
-        setLoginError(error.message || 'Erro desconhecido');
+        // Traduzir mensagem de erro para português
+        let errorMessage = error.message || 'Erro desconhecido';
+        if (errorMessage.includes('Invalid login credentials')) {
+          errorMessage = 'Credenciais de login inválidas';
+        } else if (errorMessage.includes('invalid_credentials')) {
+          errorMessage = 'Credenciais inválidas';
+        } else if (errorMessage.includes('user not found')) {
+          errorMessage = 'Usuário não encontrado';
+        } else if (errorMessage.includes('email not found')) {
+          errorMessage = 'E-mail não encontrado';
+        }
+        
+        // Armazena o erro traduzido para análise
+        setLoginError(errorMessage);
         
         // Verifica se é erro de usuário não encontrado
-        const errorMessage = error.message?.toLowerCase() || '';
+        const errorLower = errorMessage.toLowerCase();
         const errorCode = error.code || '';
         
         if (
-          errorMessage.includes('invalid_credentials') ||
-          errorMessage.includes('invalid login') ||
-          errorMessage.includes('user not found') ||
-          errorMessage.includes('email not found') ||
-          errorMessage.includes('invalid_grant') ||
-          errorMessage.includes('unauthorized') ||
+          errorLower.includes('invalid') ||
+          errorLower.includes('credenciais') ||
+          errorLower.includes('user not found') ||
+          errorLower.includes('email not found') ||
+          errorLower.includes('invalid_grant') ||
+          errorLower.includes('unauthorized') ||
           errorCode === '400' ||
           errorCode === '401' ||
           errorCode === '422'
@@ -67,7 +79,7 @@ const Login = () => {
           setShowRegisterAlert(true);
           showError('Usuário não encontrado. Por favor, cadastre-se primeiro.');
         } else {
-          showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
+          showError(errorMessage);
         }
         return;
       }
@@ -76,8 +88,12 @@ const Login = () => {
       navigate('/dashboard');
     } catch (error: any) {
       console.log('Erro capturado:', error);
-      setLoginError(error.message || 'Erro desconhecido');
-      showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
+      let errorMessage = error.message || 'Erro desconhecido';
+      if (errorMessage.includes('Invalid login credentials')) {
+        errorMessage = 'Credenciais de login inválidas';
+      }
+      setLoginError(errorMessage);
+      showError(errorMessage);
     } finally {
       setIsLoadingAuth(false);
     }
@@ -137,25 +153,25 @@ const Login = () => {
           <p className="text-gray-300 mt-1">Entre na sua conta e comece a treinar redação</p>
         </div>
 
-        {/* Alerta para usuário não cadastrado */}
+        {/* Alerta para usuário não cadastrado - Melhor contraste */}
         {showRegisterAlert && (
-          <div className="mb-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+          <div className="mb-4 p-4 bg-orange-500 border border-orange-600 rounded-lg shadow-lg">
             <div className="flex items-start space-x-3">
               <div className="flex-shrink-0">
-                <svg className="h-5 w-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                <svg className="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
               </div>
               <div>
-                <h3 className="text-sm font-medium text-yellow-800">Usuário não encontrado</h3>
-                <p className="text-sm text-yellow-700 mt-1">
+                <h3 className="text-sm font-medium text-white">Usuário não encontrado</h3>
+                <p className="text-sm text-orange-100 mt-1">
                   Você ainda não tem uma conta. Cadastre-se para começar a treinar redações!
                 </p>
                 <div className="mt-3">
                   <Button
                     onClick={goToRegister}
                     size="sm"
-                    className="bg-yellow-600 hover:bg-yellow-700 text-white"
+                    className="bg-white text-orange-600 hover:bg-orange-50 font-medium"
                   >
                     Cadastre-se Agora
                   </Button>
@@ -165,10 +181,10 @@ const Login = () => {
           </div>
         )}
 
-        {/* Debug - Mostra o erro para desenvolvimento */}
+        {/* Debug - Mostra o erro traduzido para português */}
         {process.env.NODE_ENV === 'development' && loginError && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-            <div className="text-sm text-red-800">
+          <div className="mb-4 p-4 bg-red-600 border border-red-700 rounded-lg shadow-lg">
+            <div className="text-sm text-white">
               <strong>Debug:</strong> {loginError}
             </div>
           </div>
