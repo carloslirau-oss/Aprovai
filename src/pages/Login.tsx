@@ -21,6 +21,7 @@ const Login = () => {
   const [name, setName] = useState('');
   const [isLoadingAuth, setIsLoadingAuth] = useState(false);
   const [showRegisterAlert, setShowRegisterAlert] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   useEffect(() => {
     clearUserDataFromStorage();
@@ -34,31 +35,39 @@ const Login = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoadingAuth(true);
-    setShowRegisterAlert(false); // Resetar o alerta a cada tentativa
+    setShowRegisterAlert(false);
+    setLoginError(null);
 
     try {
       const { data, error } = await signIn(email, password);
       
       if (error) {
-        console.log('Erro de login:', error);
+        console.log('Erro de login completo:', error);
         console.log('Mensagem do erro:', error.message);
+        console.log('Código do erro:', error.code);
         
-        // Verifica diferentes tipos de erro de usuário não encontrado
-        const isUserNotFound = error.message?.includes('invalid_credentials') ||
-                              error.message?.includes('invalid login') ||
-                              error.message?.includes('User not found') ||
-                              error.message?.includes('email not found') ||
-                              error.message?.includes('Email not found') ||
-                              error.message?.includes('invalid_grant') ||
-                              error.message?.includes('unauthorized') ||
-                              error.code === '400' ||
-                              error.code === '401';
+        // Armazena o erro para análise
+        setLoginError(error.message || 'Erro desconhecido');
         
-        if (isUserNotFound) {
+        // Verifica se é erro de usuário não encontrado
+        const errorMessage = error.message?.toLowerCase() || '';
+        const errorCode = error.code || '';
+        
+        if (
+          errorMessage.includes('invalid_credentials') ||
+          errorMessage.includes('invalid login') ||
+          errorMessage.includes('user not found') ||
+          errorMessage.includes('email not found') ||
+          errorMessage.includes('invalid_grant') ||
+          errorMessage.includes('unauthorized') ||
+          errorCode === '400' ||
+          errorCode === '401' ||
+          errorCode === '422'
+        ) {
           setShowRegisterAlert(true);
           showError('Usuário não encontrado. Por favor, cadastre-se primeiro.');
         } else {
-          throw error;
+          showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
         }
         return;
       }
@@ -67,6 +76,7 @@ const Login = () => {
       navigate('/dashboard');
     } catch (error: any) {
       console.log('Erro capturado:', error);
+      setLoginError(error.message || 'Erro desconhecido');
       showError(error.message || 'E-mail ou senha incorretos. Tente novamente.');
     } finally {
       setIsLoadingAuth(false);
@@ -103,6 +113,7 @@ const Login = () => {
   const goToRegister = () => {
     setActiveTab('register');
     setShowRegisterAlert(false);
+    setLoginError(null);
   };
 
   return (
@@ -150,6 +161,15 @@ const Login = () => {
                   </Button>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Debug - Mostra o erro para desenvolvimento */}
+        {process.env.NODE_ENV === 'development' && loginError && (
+          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div className="text-sm text-red-800">
+              <strong>Debug:</strong> {loginError}
             </div>
           </div>
         )}
