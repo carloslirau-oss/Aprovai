@@ -685,63 +685,6 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
             </div>
-
-            {/* Current Rank Section - Simplificado */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Sua Patente Atual</h3>
-              <Card className={`border-2 ${patenteAtual.borderColor} ${patenteAtual.bgColor}`}>
-                <CardHeader>
-                  <div className="flex items-center space-x-4">
-                    <div className={`p-3 rounded-lg ${patenteAtual.bgColor}`}>
-                      <patenteAtual.icon className={`h-8 w-8 ${patenteAtual.color}`} />
-                    </div>
-                    <div>
-                      <CardTitle className="text-2xl flex items-center">
-                        {patenteAtual.title} {patenteAtual.emoji}
-                        {patenteAtual.level < 7 && (
-                          <span className="ml-2 text-sm text-gray-500">
-                            (Patente {patenteAtual.level} de 7)
-                          </span>
-                        )}
-                      </CardTitle>
-                      <CardDescription className="text-base">{patenteAtual.description}</CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {/* Professor Tip */}
-                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg border-l-4 border-blue-600">
-                      <div className="flex items-start space-x-3">
-                        <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                          <span className="text-white text-sm font-bold">C</span>
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-blue-800 mb-1">Professor Carlinhos:</p>
-                          <p className="text-blue-700 italic">"{patenteAtual.professorTip}"</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Next Rank Info - Tons de azul claro */}
-                    {patenteAtual.level < 7 && patenteProxima && (
-                      <div className="bg-blue-100 p-4 rounded-lg border border-blue-300 shadow-sm">
-                        <h4 className="text-lg font-semibold text-blue-800 mb-2 flex items-center">
-                          <ArrowRight className="h-5 w-5 mr-2 text-blue-600" />
-                          Próxima Patente: {patenteProxima.title} {patenteProxima.emoji}
-                        </h4>
-                        <p className="text-blue-700 mb-2">
-                          Para alcançar a patente <strong className="text-blue-800">{patenteProxima.title}</strong>, acumule <strong className="text-blue-800">{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
-                        </p>
-                        <p className="text-blue-600 text-sm">
-                          Cada redação vale até 250 XP (50 XP por competência). Continue praticando para melhorar seu desempenho!
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </main>
       </div>
