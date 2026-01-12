@@ -468,7 +468,7 @@ const CorretorRedacao = () => {
                         className="h-8 px-2 text-xs"
                       >
                         <Clock className="h-3 w-3 mr-1" />
-                        <span>{Math.floor(selectedTime / 60)}h</span>
+                        <span>{Math.floor(selectedTime / 60)}min</span> {/* CORRIGIDO: "h" para "min" */}
                       </Button>
                       <Button
                         variant="outline"
@@ -545,7 +545,7 @@ const CorretorRedacao = () => {
                         Área de Escrita
                       </CardTitle>
                       <CardDescription className="text-xs">
-                        Você tem {Math.floor(selectedTime / 60)}h {selectedTime % 60}min
+                        Você tem {Math.floor(selectedTime / 60)}min {/* CORRIGIDO: "h" para "min" */}
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0">
