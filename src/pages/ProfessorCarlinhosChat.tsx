@@ -186,13 +186,18 @@ const ProfessorCarlinhosChat = () => {
               </Button>
               
               <div className="flex items-center space-x-2">
-                {/* Logo do Supabase */}
+                {/* Logo do Supabase - Corrigido com fallback */}
                 <img 
                   src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
                   alt="Logo" 
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {
-                    e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJDNi40OCAyIDIgNi40OCAySDEyVjIwSDEyVjIwWiIgZmlsbD0iIzAwMCIvPgo8cGF0aCBkPSJNMTIgMkM3LjQ4IDEgNy40OCA3LjQ4IDEgMTIgMTJDMTIgNy40OCAxMiA3LjQ4IDEyIDEyWiIgZmlsbD0iIzAwMCIvPgo8L3N2Zz4K';
+                    // Fallback para uma logo genérica se a imagem não carregar
+                    e.currentTarget.outerHTML = `
+                      <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                        <span class="text-white text-xs font-bold">A</span>
+                      </div>
+                    `;
                   }}
                 />
                 <div>
