@@ -386,6 +386,106 @@ const Dashboard = () => {
               </div>
             </div>
 
+            {/* Jornada das Patentes */}
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Jornada das Patentes</h3>
+              <Card className="border-2 border-blue-200 bg-blue-50">
+                <CardHeader>
+                  <CardTitle className="flex items-center">
+                    <Trophy className="h-5 w-5 mr-2 text-blue-600" />
+                    Sua Posição Atual: {patenteAtual.title} {patenteAtual.emoji}
+                  </CardTitle>
+                  <CardDescription>
+                    Avance através das 7 patentes para se tornar uma lenda da redação
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {/* Progresso da patente atual */}
+                  {patenteAtual.level < 7 && patenteProxima && (
+                    <div className="mb-6">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm font-medium text-gray-700">
+                          Para {patenteProxima.title} {patenteProxima.emoji}
+                        </span>
+                        <span className="text-sm font-medium text-blue-600">
+                          {Math.round(progressoProximaPatente)}%
+                        </span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-3">
+                        <div 
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500"
+                          style={{ width: `${progressoProximaPatente}%` }}
+                        ></div>
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        {userProfile?.xp_total?.toLocaleString() || '0'} / {patenteProxima.xpRequired.toLocaleString()} XP
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Linha do tempo das patentes */}
+                  <div className="relative">
+                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
+                    
+                    <div className="space-y-4">
+                      {patentes.map((patente, index) => {
+                        const isUnlocked = userProfile?.xp_total >= patente.xpRequired;
+                        const isCurrent = patente.title === patenteAtual.title;
+                        
+                        return (
+                          <div key={patente.title} className="relative flex items-center">
+                            <div className={`absolute left-0 w-8 h-8 rounded-full flex items-center justify-center z-10 ${
+                              isCurrent ? 'bg-blue-600 ring-4 ring-blue-300' : 
+                              isUnlocked ? 'bg-green-500' : 'bg-gray-300'
+                            }`}>
+                              <span className="text-white text-lg">{patente.emoji}</span>
+                            </div>
+                            
+                            <div className={`ml-12 flex-1 p-4 rounded-lg border-2 ${
+                              isCurrent ? 'border-blue-500 bg-blue-100 shadow-md' :
+                              isUnlocked ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'
+                            }`}>
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <h4 className={`font-semibold ${
+                                    isCurrent ? 'text-blue-800' : 
+                                    isUnlocked ? 'text-green-800' : 'text-gray-700'
+                                  }`}>
+                                    {patente.title} {patente.emoji}
+                                  </h4>
+                                  <p className={`text-sm ${
+                                    isCurrent ? 'text-blue-600' : 
+                                    isUnlocked ? 'text-green-600' : 'text-gray-500'
+                                  }`}>
+                                    {patente.description}
+                                  </p>
+                                </div>
+                                <div className="text-right">
+                                  <div className={`text-sm font-medium ${
+                                    isCurrent ? 'text-blue-600' : 
+                                    isUnlocked ? 'text-green-600' : 'text-gray-400'
+                                  }`}>
+                                    {isUnlocked ? '✓ Conquistado' : 
+                                     isCurrent ? '🎯 Atual' : 
+                                     `${patente.xpRequired.toLocaleString()} XP`}
+                                  </div>
+                                  {index < patentes.length - 1 && (
+                                    <ChevronRight className={`h-4 w-4 mt-1 ${
+                                      isUnlocked ? 'text-green-500' : 'text-gray-300'
+                                    }`} />
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               {stats.map((stat, index) => (
