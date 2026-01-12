@@ -33,7 +33,8 @@ import {
   Shield,
   Star as StarIcon,
   Flag,
-  ChevronRight
+  ChevronRight,
+  ChevronDown
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
@@ -302,9 +303,9 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
-        {/* Header */}
+        {/* Header - Otimizado para mobile */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -316,27 +317,30 @@ const Dashboard = () => {
               </Button>
             </div>
             
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-medium">
+            <div className="flex items-center space-x-2 sm:space-x-4">
+              <div className="flex items-center space-x-2 sm:space-x-3">
+                {/* Avatar do usuário - melhorado para mobile */}
+                <div className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-white text-xs sm:text-sm font-medium">
                     {user?.user_metadata?.name?.split(' ').map(n => n[0]).join('') || 'JD'}
                   </span>
                 </div>
-                <div>
-                  <p className="text-sm font-medium text-gray-900">
+                
+                {/* Informações do usuário - melhorado para mobile */}
+                <div className="min-w-0">
+                  <p className="text-sm sm:text-base font-medium text-gray-900 truncate">
                     {user?.user_metadata?.name || 'João da Silva'}
                   </p>
                   <div className="flex items-center space-x-1">
-                    <Award className="h-4 w-4 text-yellow-500" />
-                    <span className="text-xs text-gray-500">{patenteAtual.title}</span>
+                    <Award className="h-3 w-3 text-yellow-500 flex-shrink-0" />
+                    <span className="text-xs text-gray-500 truncate">{patenteAtual.title}</span>
                   </div>
                 </div>
               </div>
               
-              {/* Barra de progresso de patente */}
+              {/* Barra de progresso de patente - escondida em mobile */}
               {patenteAtual.level < 7 && patenteProxima && (
-                <div className="flex-1 max-w-xs">
+                <div className="hidden sm:block flex-1 max-w-xs">
                   <div className="flex items-center space-x-2">
                     <span className="text-xs text-gray-500">Progresso:</span>
                     <div className="flex-1 bg-gray-200 rounded-full h-2">
@@ -355,12 +359,13 @@ const Dashboard = () => {
                 </div>
               )}
               
-              <div className="flex items-center space-x-2">
-                <Button variant="ghost" size="sm" onClick={toggleTheme}>
+              {/* Botões de tema e logout - melhorados para mobile */}
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <Button variant="ghost" size="sm" onClick={toggleTheme} className="p-1 sm:p-2">
                   {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                 </Button>
                 
-                <Button variant="ghost" size="sm" onClick={handleLogout}>
+                <Button variant="ghost" size="sm" onClick={handleLogout} className="p-1 sm:p-2">
                   <LogOut className="h-4 w-4" />
                 </Button>
               </div>
@@ -370,18 +375,23 @@ const Dashboard = () => {
 
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
-          <div className="px-4 sm:px:6 lg:px-8 py-8">
-            <div className="mb-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-2">Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!</h2>
-                  <p className="text-gray-600">Continue seu treinamento e alcance o topo da jornada das patentes</p>
+          <div className="px-4 py-6 sm:px-6 lg:px-8">
+            {/* Welcome Section - Otimizado para mobile */}
+            <div className="mb-6 sm:mb-8">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div className="flex-1">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                    Bem-vindo de volta, {user?.user_metadata?.name?.split(' ')[0] || 'João'}!
+                  </h2>
+                  <p className="text-gray-600 text-sm sm:text-base">
+                    Continue seu treinamento e alcance o topo da jornada das patentes
+                  </p>
                 </div>
                 <Button
                   onClick={handleRefreshData}
                   disabled={isRefreshing}
                   variant="outline"
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 w-full sm:w-auto"
                 >
                   <RefreshCw className={`h-4 w-4 ${isRefreshing ? 'animate-spin' : ''}`} />
                   <span>{isRefreshing ? 'Atualizando...' : 'Atualizar Dados'}</span>
@@ -389,18 +399,18 @@ const Dashboard = () => {
               </div>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            {/* Stats Grid - Otimizado para mobile */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
               {stats.map((stat, index) => (
                 <Card key={index}>
-                  <CardContent className="p-6">
+                  <CardContent className="p-4 sm:p-6">
                     <div className="flex items-center justify-between">
                       <div>
-                        <p className="text-sm font-medium text-gray-600">{stat.title}</p>
-                        <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                        <p className="text-xs sm:text-sm font-medium text-gray-600">{stat.title}</p>
+                        <p className="text-lg sm:text-2xl font-bold text-gray-900">{stat.value}</p>
                       </div>
-                      <div className={`p-3 rounded-lg ${stat.bgColor}`}>
-                        <stat.icon className={`h-6 w-6 ${stat.color}`} />
+                      <div className={`p-2 sm:p-3 rounded-lg ${stat.bgColor}`}>
+                        <stat.icon className={`h-4 w-4 sm:h-6 sm:w-6 ${stat.color}`} />
                       </div>
                     </div>
                   </CardContent>
@@ -408,40 +418,40 @@ const Dashboard = () => {
               ))}
             </div>
 
-            {/* Gráficos de Desempenho */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-              {/* Gráfico de Evolução de Notas (agora com base em 250 pontos) */}
+            {/* Gráficos de Desempenho - Otimizado para mobile */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+              {/* Gráfico de Evolução de Notas */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <LineChart className="h-5 w-5 mr-2 text-blue-600" />
+                  <CardTitle className="flex items-center text-base sm:text-lg">
+                    <LineChart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-blue-600" />
                     Evolução das Notas (XP)
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Sua progressão ao longo das redações (máx. 250 XP por redação)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4 overflow-x-auto">
+                  <div className="space-y-3 sm:space-y-4 overflow-x-auto">
                     {notasData.length > 0 ? (
                       <div className="min-w-max space-y-2">
                         {notasData.map((nota, index) => (
                           <div key={index} className="flex items-center justify-between min-w-max">
-                            <span className="text-sm text-gray-600 whitespace-nowrap">{nota.name}</span>
+                            <span className="text-xs text-gray-600 whitespace-nowrap">{nota.name}</span>
                             <div className="flex items-center space-x-2 min-w-max">
-                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-blue-600 h-2 rounded-full" 
                                   style={{ width: `${(nota.nota / 250) * 100}%` }}
                                 ></div>
                               </div>
-                              <span className="text-sm font-medium text-blue-600 whitespace-nowrap">{nota.nota}</span>
+                              <span className="text-xs font-medium text-blue-600 whitespace-nowrap">{nota.nota}</span>
                             </div>
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 text-center py-4">
+                      <p className="text-gray-500 text-center py-4 text-xs sm:text-sm">
                         Nenhuma redação corrigida ainda. Comece a praticar!
                       </p>
                     )}
@@ -449,24 +459,24 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* Gráfico de Competências (agora com base em 50 pontos) */}
+              {/* Gráfico de Competências */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <BarChart3 className="h-5 w-5 mr-2 text-green-600" />
+                  <CardTitle className="flex items-center text-base sm:text-lg">
+                    <BarChart3 className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-green-600" />
                     Desempenho por Competência
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Média de desempenho em cada competência (máx. 50 XP por competência)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {competenciasData.length > 0 ? (
-                      <div className="space-y-3">
+                      <div className="space-y-2 sm:space-y-3">
                         {competenciasData.map((competencia, index) => (
                           <div key={index}>
-                            <div className="flex justify-between text-sm mb-1">
+                            <div className="flex justify-between text-xs sm:text-sm mb-1">
                               <span className="text-gray-700">{competencia.name}</span>
                               <span className="font-medium">{Math.round(competencia.media)}/{competencia.max}</span>
                             </div>
@@ -480,7 +490,7 @@ const Dashboard = () => {
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 text-center py-4">
+                      <p className="text-gray-500 text-center py-4 text-xs sm:text-sm">
                         Complete redações para ver seu desempenho por competência.
                       </p>
                     )}
@@ -488,38 +498,38 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* Gráfico de XP Acumulado (agora com base em 250) */}
+              {/* Gráfico de XP Acumulado */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Activity className="h-5 w-5 mr-2 text-purple-600" />
+                  <CardTitle className="flex items-center text-base sm:text-lg">
+                    <Activity className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-purple-600" />
                     XP Acumulado
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Seu progresso de experiência ao longo do tempo
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4 overflow-x-auto">
+                  <div className="space-y-3 sm:space-y-4 overflow-x-auto">
                     {evolucaoXP.length > 0 ? (
                       <div className="min-w-max space-y-2">
                         {evolucaoXP.map((item, index) => (
                           <div key={index} className="flex items-center justify-between min-w-max">
-                            <span className="text-sm text-gray-600 whitespace-nowrap">Redação {item.redacao}</span>
+                            <span className="text-xs text-gray-600 whitespace-nowrap">Redação {item.redacao}</span>
                             <div className="flex items-center space-x-2 min-w-max">
-                              <div className="w-20 bg-gray-200 rounded-full h-2">
+                              <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-purple-600 h-2 rounded-full" 
                                   style={{ width: `${(item.acumulado / 100000) * 100}%` }}
                                 ></div>
                               </div>
-                              <span className="text-sm font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
+                              <span className="text-xs font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
                             </div>
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-500 text-center py-4">
+                      <p className="text-gray-500 text-center py-4 text-xs sm:text-sm">
                         Complete redações para ver seu progresso de XP.
                       </p>
                     )}
@@ -527,60 +537,60 @@ const Dashboard = () => {
                 </CardContent>
               </Card>
 
-              {/* Gráfico de Distribuição de Notas (agora com base em 250) */}
+              {/* Gráfico de Distribuição de Notas */}
               <Card>
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <PieChart className="h-5 w-5 mr-2 text-orange-600" />
+                  <CardTitle className="flex items-center text-base sm:text-lg">
+                    <PieChart className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-orange-600" />
                     Distribuição de Notas (XP)
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Faixa de notas mais frequentes (máx. 250 XP por redação)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {notasData.length > 0 ? (
-                      <div className="space-y-3">
+                      <div className="space-y-2 sm:space-y-3">
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">0-150 XP</span>
+                          <span className="text-xs text-gray-600">0-150 XP</span>
                           <div className="flex items-center space-x-2">
-                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                            <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-red-600 h-2 rounded-full" 
                                 style={{ width: `${(notasData.filter(n => n.nota < 150).length / notasData.length) * 100}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm font-medium">{notasData.filter(n => n.nota < 150).length}</span>
+                            <span className="text-xs font-medium">{notasData.filter(n => n.nota < 150).length}</span>
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">150-200 XP</span>
+                          <span className="text-xs text-gray-600">150-200 XP</span>
                           <div className="flex items-center space-x-2">
-                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                            <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-yellow-600 h-2 rounded-full" 
                                 style={{ width: `${(notasData.filter(n => n.nota >= 150 && n.nota < 200).length / notasData.length) * 100}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 150 && n.nota < 200).length}</span>
+                            <span className="text-xs font-medium">{notasData.filter(n => n.nota >= 150 && n.nota < 200).length}</span>
                           </div>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-sm text-gray-600">200-250 XP</span>
+                          <span className="text-xs text-gray-600">200-250 XP</span>
                           <div className="flex items-center space-x-2">
-                            <div className="w-20 bg-gray-200 rounded-full h-2">
+                            <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-green-600 h-2 rounded-full" 
                                 style={{ width: `${(notasData.filter(n => n.nota >= 200).length / notasData.length) * 100}%` }}
                               ></div>
                             </div>
-                            <span className="text-sm font-medium">{notasData.filter(n => n.nota >= 200).length}</span>
+                            <span className="text-xs font-medium">{notasData.filter(n => n.nota >= 200).length}</span>
                           </div>
                         </div>
                       </div>
                     ) : (
-                      <p className="text-gray-500 text-center py-4">
+                      <p className="text-gray-500 text-center py-4 text-xs sm:text-sm">
                         Complete redações para ver a distribuição de notas.
                       </p>
                     )}
@@ -589,34 +599,34 @@ const Dashboard = () => {
               </Card>
             </div>
 
-            {/* Jornada das Patentes - Movida para o final */}
-            <div className="mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Jornada das Patentes</h3>
+            {/* Jornada das Patentes - Otimizado para mobile */}
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Jornada das Patentes</h3>
               <Card className="border-2 border-blue-200 bg-blue-50">
                 <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Trophy className="h-5 w-5 mr-2 text-blue-600" />
+                  <CardTitle className="flex items-center text-base sm:text-lg">
+                    <Trophy className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-blue-600" />
                     Sua Posição Atual: {patenteAtual.title} {patenteAtual.emoji}
                   </CardTitle>
-                  <CardDescription>
+                  <CardDescription className="text-xs sm:text-sm">
                     Avance através das 7 patentes para se tornar uma lenda da redação
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   {/* Progresso da patente atual */}
                   {patenteAtual.level < 7 && patenteProxima && (
-                    <div className="mb-6">
+                    <div className="mb-4 sm:mb-6">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm font-medium text-gray-700">
+                        <span className="text-xs sm:text-sm font-medium text-gray-700">
                           Para {patenteProxima.title} {patenteProxima.emoji}
                         </span>
-                        <span className="text-sm font-medium text-blue-600">
+                        <span className="text-xs sm:text-sm font-medium text-blue-600">
                           {Math.round(progressoProximaPatente)}%
                         </span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-3">
+                      <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3">
                         <div 
-                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full transition-all duration-500"
+                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 sm:h-3 rounded-full transition-all duration-500"
                           style={{ width: `${progressoProximaPatente}%` }}
                         ></div>
                       </div>
@@ -630,7 +640,7 @@ const Dashboard = () => {
                   <div className="relative">
                     <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-300"></div>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-3 sm:space-y-4">
                       {patentes.map((patente, index) => {
                         const isUnlocked = userProfile?.xp_total >= patente.xpRequired;
                         const isCurrent = patente.title === patenteAtual.title;
@@ -644,19 +654,19 @@ const Dashboard = () => {
                               <span className="text-white text-lg">{patente.emoji}</span>
                             </div>
                             
-                            <div className={`ml-12 flex-1 p-4 rounded-lg border-2 ${
+                            <div className={`ml-12 flex-1 p-3 sm:p-4 rounded-lg border-2 ${
                               isCurrent ? 'border-blue-500 bg-blue-100 shadow-md' :
                               isUnlocked ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'
                             }`}>
                               <div className="flex items-center justify-between">
                                 <div>
-                                  <h4 className={`font-semibold ${
+                                  <h4 className={`font-semibold text-sm sm:text-base ${
                                     isCurrent ? 'text-blue-800' : 
                                     isUnlocked ? 'text-green-800' : 'text-gray-700'
                                   }`}>
                                     {patente.title} {patente.emoji}
                                   </h4>
-                                  <p className={`text-sm ${
+                                  <p className={`text-xs sm:text-sm ${
                                     isCurrent ? 'text-blue-600' : 
                                     isUnlocked ? 'text-green-600' : 'text-gray-500'
                                   }`}>
@@ -664,7 +674,7 @@ const Dashboard = () => {
                                   </p>
                                 </div>
                                 <div className="text-right">
-                                  <div className={`text-sm font-medium ${
+                                  <div className={`text-xs sm:text-sm font-medium ${
                                     isCurrent ? 'text-blue-600' : 
                                     isUnlocked ? 'text-green-600' : 'text-gray-400'
                                   }`}>
@@ -673,7 +683,7 @@ const Dashboard = () => {
                                      `${patente.xpRequired.toLocaleString()} XP`}
                                   </div>
                                   {index < patentes.length - 1 && (
-                                    <ChevronRight className={`h-4 w-4 mt-1 ${
+                                    <ChevronRight className={`h-3 w-3 sm:h-4 sm:w-4 mt-1 ${
                                       isUnlocked ? 'text-green-500' : 'text-gray-300'
                                     }`} />
                                   )}
