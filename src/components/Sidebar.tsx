@@ -85,11 +85,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
     );
   };
 
-  // URLs das imagens no Supabase Storage
-  const logoUrls = {
-    light: 'https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20preta.png',
-    dark: 'https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20branca.png'
-  };
+  // URL da imagem "escreve ai branca" do Supabase Storage
+  const logoUrl = 'https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20branca.png';
 
   return (
     <>
@@ -110,9 +107,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
           {/* Header com botão de toggle para desktop */}
           <div className="flex items-center justify-between h-16 px-4 border-b border-slate-700">
             <div className="flex items-center">
-              {/* Logo dinâmica baseada no tema */}
+              {/* Logo branca para ambos os temas */}
               <img 
-                src={theme === 'dark' ? logoUrls.dark : logoUrls.light}
+                src={logoUrl}
                 alt="Escreve AI"
                 className="w-40 h-10 object-contain"
                 onError={(e) => {
