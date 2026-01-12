@@ -568,23 +568,23 @@ Lembre-se de usar linguagem formal e seguir as competências do ENEM."
 
                   {/* Sidebar com dicas e upload - embaixo */}
                   <div className="grid grid-cols-1 gap-2">
-                    {/* Tips - MUDANÇA DE CORES */}
+                    {/* Tips - TONS DE AZUL MAIS CLAROS */}
                     <Card>
                       <CardHeader className="pb-2">
                         <CardTitle className="flex items-center text-sm">
-                          <Lightbulb className="h-3 w-3 mr-2 text-blue-600" />
+                          <Lightbulb className="h-3 w-3 mr-2 text-blue-400" />
                           Dica do Professor
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="pt-0">
                         <div className="p-2 bg-blue-50 rounded">
-                          <h4 className="font-medium text-blue-900 mb-1 text-xs">{currentTip.title}</h4>
-                          <p className="text-blue-800 text-xs">{currentTip.content}</p>
+                          <h4 className="font-medium text-blue-700 mb-1 text-xs">{currentTip.title}</h4>
+                          <p className="text-blue-600 text-xs">{currentTip.content}</p>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={getNewTip}
-                            className="mt-1 text-xs text-blue-600 hover:text-blue-700"
+                            className="mt-1 text-xs text-blue-500 hover:text-blue-600"
                           >
                             Próxima →
                           </Button>
