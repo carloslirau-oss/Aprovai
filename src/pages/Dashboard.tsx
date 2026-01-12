@@ -448,12 +448,17 @@ const Dashboard = () => {
                               <div className="flex items-center justify-between">
                                 <div>
                                   <h4 className={`font-semibold ${
-                                    isCurrent ? 'text-blue-700' : 
-                                    isUnlocked ? 'text-green-700' : 'text-gray-500'
+                                    isCurrent ? 'text-blue-800' : 
+                                    isUnlocked ? 'text-green-800' : 'text-gray-700'
                                   }`}>
                                     {patente.title} {patente.emoji}
                                   </h4>
-                                  <p className="text-sm text-gray-600">{patente.description}</p>
+                                  <p className={`text-sm ${
+                                    isCurrent ? 'text-blue-600' : 
+                                    isUnlocked ? 'text-green-600' : 'text-gray-500'
+                                  }`}>
+                                    {patente.description}
+                                  </p>
                                 </div>
                                 <div className="text-right">
                                   <div className={`text-sm font-medium ${
