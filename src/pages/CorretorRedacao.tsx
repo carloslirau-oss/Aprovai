@@ -285,14 +285,14 @@ const CorretorRedacao = () => {
   };
 
   const timeOptions = [
-    { label: '30 minutos', value: 30 },
-    { label: '1 hora', value: 60 },
+    { label: '30 min', value: 30 },
+    { label: '1h', value: 60 },
     { label: '1h 30min', value: 90 },
-    { label: '2 horas', value: 120 },
+    { label: '2h', value: 120 },
     { label: '2h 30min', value: 150 },
-    { label: '3 horas', value: 180 },
+    { label: '3h', value: 180 },
     { label: '3h 30min', value: 210 },
-    { label: '4 horas', value: 240 }
+    { label: '4h', value: 240 }
   ];
 
   useEffect(() => {
@@ -345,7 +345,7 @@ const CorretorRedacao = () => {
       <div className="flex-1 flex flex-col">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200">
-          <div className="flex items-center justify-between h-16 px-4 sm:px:6 lg:px-8">
+          <div className="flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             {/* Mobile menu button */}
             <div className="lg:hidden">
               <Button
@@ -357,7 +357,7 @@ const CorretorRedacao = () => {
               </Button>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4">
               <Button
                 variant="ghost"
                 size="sm"
@@ -365,7 +365,7 @@ const CorretorRedacao = () => {
                 className="flex items-center space-x-2"
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span>Voltar</span>
+                <span className="hidden sm:inline">Voltar</span>
               </Button>
               
               <div className="flex items-center space-x-2">
@@ -384,7 +384,7 @@ const CorretorRedacao = () => {
                   }}
                 />
                 <div>
-                  <p className="text-sm font-medium text-gray-900">Corretor de Redação</p>
+                  <p className="text-sm font-medium text-gray-900 hidden sm:block">Corretor de Redação</p>
                   <div className="flex items-center space-x-1">
                     <Clock className="h-3 w-3 text-green-500" />
                     <span className="text-xs text-gray-500">Online</span>
@@ -398,126 +398,132 @@ const CorretorRedacao = () => {
         {/* Main Content */}
         <main className="flex-1 flex flex-col">
           <div className="flex-1 overflow-y-auto">
-            <div className="px-4 sm:px:6 lg:px-8 py-8">
-              <div className="mb-8">
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h1>
-                <p className="text-gray-600">Pratique redações e receba feedback instantâneo</p>
+            <div className="px-4 py-6 sm:px-6 lg:px-8">
+              {/* Título principal - melhorado para mobile */}
+              <div className="mb-6 sm:mb-8">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Corretor de Redação</h1>
+                <p className="text-gray-600 text-sm sm:text-base">Pratique redações e receba feedback instantâneo</p>
               </div>
 
-              {/* Theme Selection */}
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900">Tema da Redação</h2>
-                  <div className="flex space-x-2">
+              {/* Theme Selection - melhorado para mobile */}
+              <div className="mb-6 sm:mb-8">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Tema da Redação</h2>
+                  <div className="flex flex-wrap gap-2">
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={goToPreviousTheme}
                       disabled={themeHistory.length === 0}
+                      className="text-xs sm:text-sm"
                     >
-                      <ArrowLeft className="h-4 w-4 mr-2" />
-                      Anterior
+                      <ArrowLeft className="h-4 w-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Anterior</span>
                     </Button>
                     <Button
                       variant="outline"
                       size="sm"
                       onClick={goToRandomTheme}
+                      className="text-xs sm:text-sm"
                     >
-                      <Shuffle className="h-4 w-4 mr-2" />
-                      Aleatório
+                      <Shuffle className="h-4 w-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Aleatório</span>
                     </Button>
                   </div>
                 </div>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <BookOpen className="h-5 w-5 mr-2 text-blue-600" />
-                      {redacaoTheme.tema}
+                <Card className="mb-4">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center text-base sm:text-lg">
+                      <BookOpen className="h-4 w-4 mr-2 sm:mr-3 text-blue-600" />
+                      <span className="break-words">{redacaoTheme.tema}</span>
                     </CardTitle>
-                    <CardDescription>
+                    <CardDescription className="text-xs sm:text-sm">
                       Leia os textos motivadores e prepare sua redação
                     </CardDescription>
                   </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
+                  <CardContent className="pt-0">
+                    <div className="space-y-3 sm:space-y-4">
                       {redacaoTheme.contextualizacao.map((contexto, index) => (
-                        <div key={index} className={`p-4 rounded-lg ${getTextSizeClass(contexto.tamanho)}`}>
-                          <p className="text-gray-700 leading-relaxed">{contexto.texto}</p>
-                          <p className="text-sm text-gray-500 mt-2">Fonte: {contexto.fonte}</p>
+                        <div key={index} className={`p-3 sm:p-4 rounded-lg ${getTextSizeClass(contexto.tamanho)}`}>
+                          <p className="text-gray-700 leading-relaxed text-sm sm:text-base">{contexto.texto}</p>
+                          <p className="text-xs sm:text-sm text-gray-500 mt-2">Fonte: {contexto.fonte}</p>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                      <h4 className="font-medium text-gray-900 mb-2">Instruções:</h4>
-                      <p className="text-gray-700 whitespace-pre-line">{redacaoTheme.instrucoes}</p>
+                    <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-50 rounded-lg">
+                      <h4 className="font-medium text-gray-900 mb-2 text-sm sm:text-base">Instruções:</h4>
+                      <p className="text-gray-700 whitespace-pre-line text-xs sm:text-sm">{redacaoTheme.instrucoes}</p>
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Timer and Controls */}
-              <div className="mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-semibold text-gray-900">Tempo de Prova</h2>
-                  <div className="flex items-center space-x-4">
-                    <div className="text-2xl font-mono font-bold text-blue-600">
+              {/* Timer and Controls - melhorado para mobile */}
+              <div className="mb-6 sm:mb-8">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-2">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900">Tempo de Prova</h2>
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                    <div className="text-xl sm:text-2xl font-mono font-bold text-blue-600">
                       {formatTime(timeRemaining)}
                     </div>
-                    <div className="flex space-x-2">
+                    <div className="flex flex-wrap gap-2">
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => setShowTimeOptions(!showTimeOptions)}
+                        className="text-xs sm:text-sm"
                       >
-                        <Clock className="h-4 w-4 mr-2" />
-                        {Math.floor(selectedTime / 60)}h {selectedTime % 60}min
+                        <Clock className="h-4 w-4 mr-1 sm:mr-2" />
+                        <span className="hidden sm:inline">{Math.floor(selectedTime / 60)}h {selectedTime % 60}min</span>
                       </Button>
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={startRedacao}
                         disabled={hasStartedRedacao}
+                        className="text-xs sm:text-sm"
                       >
-                        <Play className="h-4 w-4 mr-2" />
-                        Iniciar
+                        <Play className="h-4 w-4 mr-1 sm:mr-2" />
+                        <span className="hidden sm:inline">Iniciar</span>
                       </Button>
                     </div>
                   </div>
                 </div>
 
                 {showTimeOptions && (
-                  <div className="mb-4 p-4 bg-gray-50 rounded-lg">
-                    <h4 className="font-medium text-gray-900 mb-3">Selecione o tempo:</h4>
-                    <div className="grid grid-cols-4 gap-2 mb-3">
+                  <div className="mb-4 p-3 sm:p-4 bg-gray-50 rounded-lg">
+                    <h4 className="font-medium text-gray-900 mb-3 text-sm sm:text-base">Selecione o tempo:</h4>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-3">
                       {timeOptions.map((option) => (
                         <Button
                           key={option.value}
                           variant={selectedTime === option.value * 60 ? "default" : "outline"}
                           size="sm"
                           onClick={() => handleTimeChange(option.value)}
+                          className="text-xs h-8"
                         >
                           {option.label}
                         </Button>
                       ))}
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-2">
                       <span className="text-sm text-gray-600">Personalizado:</span>
                       <Input
                         type="number"
                         placeholder="Horas"
                         value={customTimeInput.hours}
                         onChange={(e) => setCustomTimeInput(prev => ({ ...prev, hours: parseInt(e.target.value) || 0 }))}
-                        className="w-20"
+                        className="w-16 sm:w-20"
                         min="0"
                       />
                       <span className="text-sm text-gray-600">:</span>
                       <Input
                         type="number"
-                        placeholder="Minutos"
+                        placeholder="Min"
                         value={customTimeInput.minutes}
                         onChange={(e) => setCustomTimeInput(prev => ({ ...prev, minutes: parseInt(e.target.value) || 0 }))}
-                        className="w-20"
+                        className="w-16 sm:w-20"
                         min="0"
                         max="59"
                       />
@@ -525,6 +531,7 @@ const CorretorRedacao = () => {
                         variant="outline"
                         size="sm"
                         onClick={handleCustomTime}
+                        className="text-xs h-8"
                       >
                         Aplicar
                       </Button>
@@ -533,26 +540,26 @@ const CorretorRedacao = () => {
                 )}
               </div>
 
-              {/* Writing Area */}
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-900 mb-4">Escreva sua Redação</h2>
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  <div className="lg:col-span-2">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Pencil className="h-5 w-5 mr-2 text-green-600" />
-                          Área de Escrita
-                        </CardTitle>
-                        <CardDescription>
-                          Escreva sua redação aqui. Você tem {Math.floor(selectedTime / 60)}h {selectedTime % 60}min.
-                        </CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <textarea
-                          value={redacaoText}
-                          onChange={(e) => setRedacaoText(e.target.value)}
-                          placeholder="Comece a escrever sua redação aqui...
+              {/* Writing Area - melhorado para mobile */}
+              <div className="mb-6 sm:mb-8">
+                <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Escreva sua Redação</h2>
+                <div className="grid grid-cols-1 gap-6">
+                  {/* Área de escrita principal */}
+                  <Card>
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center text-base sm:text-lg">
+                        <Pencil className="h-4 w-4 mr-2 sm:mr-3 text-green-600" />
+                        Área de Escrita
+                      </CardTitle>
+                      <CardDescription className="text-xs sm:text-sm">
+                        Escreva sua redação aqui. Você tem {Math.floor(selectedTime / 60)}h {selectedTime % 60}min.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="pt-0">
+                      <textarea
+                        value={redacaoText}
+                        onChange={(e) => setRedacaoText(e.target.value)}
+                        placeholder="Comece a escrever sua redação aqui...
 
 Exemplo de estrutura:
 • Introdução: Apresente o tema e sua tese
@@ -561,31 +568,31 @@ Exemplo de estrutura:
 • Conclusão: Retome a tese e feche o texto
 
 Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as competências do ENEM."
-                          className="w-full h-96 p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                          disabled={!hasStartedRedacao}
-                        />
-                      </CardContent>
-                    </Card>
-                  </div>
+                        className="w-full h-64 sm:h-96 p-3 sm:p-4 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                        disabled={!hasStartedRedacao}
+                      />
+                    </CardContent>
+                  </Card>
 
-                  <div className="space-y-6">
+                  {/* Sidebar com dicas e upload - melhorado para mobile */}
+                  <div className="grid grid-cols-1 gap-4">
                     {/* Tips */}
                     <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Lightbulb className="h-5 w-5 mr-2 text-yellow-600" />
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center text-base sm:text-lg">
+                          <Lightbulb className="h-4 w-4 mr-2 sm:mr-3 text-yellow-600" />
                           Dica do Professor
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <div className="p-4 bg-yellow-50 rounded-lg">
-                          <h4 className="font-medium text-yellow-800 mb-2">{currentTip.title}</h4>
-                          <p className="text-yellow-700 text-sm">{currentTip.content}</p>
+                      <CardContent className="pt-0">
+                        <div className="p-3 sm:p-4 bg-yellow-50 rounded-lg">
+                          <h4 className="font-medium text-yellow-800 mb-2 text-sm sm:text-base">{currentTip.title}</h4>
+                          <p className="text-yellow-700 text-xs sm:text-sm">{currentTip.content}</p>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={getNewTip}
-                            className="mt-3 text-yellow-600 hover:text-yellow-700"
+                            className="mt-2 sm:mt-3 text-xs sm:text-sm text-yellow-600 hover:text-yellow-700"
                           >
                             Próxima dica →
                           </Button>
@@ -595,13 +602,13 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
 
                     {/* Image Upload */}
                     <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <ImageIcon className="h-5 w-5 mr-2 text-purple-600" />
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center text-base sm:text-lg">
+                          <ImageIcon className="h-4 w-4 mr-2 sm:mr-3 text-purple-600" />
                           Enviar Imagem
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="pt-0">
                         <div className="space-y-3">
                           <Input
                             type="file"
@@ -612,17 +619,17 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
                           />
                           <label
                             htmlFor="image-upload"
-                            className="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-colors"
+                            className="flex items-center justify-center w-full p-3 sm:p-4 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-gray-400 transition-colors"
                           >
                             <div className="text-center">
-                              <Upload className="h-8 w-8 mx-auto text-gray-400 mb-2" />
-                              <p className="text-sm text-gray-600">Clique para enviar imagem</p>
+                              <Upload className="h-6 w-6 mx-auto text-gray-400 mb-2" />
+                              <p className="text-xs sm:text-sm text-gray-600">Clique para enviar imagem</p>
                               <p className="text-xs text-gray-500">PNG, JPG, GIF até 10MB</p>
                             </div>
                           </label>
                           {imageFile && (
                             <div className="p-3 bg-green-50 rounded-lg">
-                              <p className="text-sm text-green-800">
+                              <p className="text-xs sm:text-sm text-green-800">
                                 Imagem enviada: {imageFile.name}
                               </p>
                             </div>
@@ -634,40 +641,40 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
                 </div>
               </div>
 
-              {/* Analysis Results */}
+              {/* Analysis Results - melhorado para mobile */}
               {analysisResult && (
-                <div className="mb-8">
-                  <h2 className="text-xl font-semibold text-gray-900 mb-4">Resultado da Análise</h2>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="mb-6 sm:mb-8">
+                  <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Resultado da Análise</h2>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <TrendingUp className="h-5 w-5 mr-2 text-blue-600" />
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center text-base sm:text-lg">
+                          <TrendingUp className="h-4 w-4 mr-2 sm:mr-3 text-blue-600" />
                           Nota Final
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="pt-0">
                         <div className="text-center">
-                          <div className="text-4xl font-bold text-blue-600 mb-2">
+                          <div className="text-3xl sm:text-4xl font-bold text-blue-600 mb-2">
                             {analysisResult.totalScore}
                           </div>
-                          <p className="text-gray-600">Nota total da redação</p>
+                          <p className="text-gray-600 text-sm sm:text-base">Nota total da redação</p>
                         </div>
                       </CardContent>
                     </Card>
 
                     <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Target className="h-5 w-5 mr-2 text-green-600" />
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center text-base sm:text-lg">
+                          <Target className="h-4 w-4 mr-2 sm:mr-3 text-green-600" />
                           Desempenho por Competência
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <div className="space-y-3">
+                      <CardContent className="pt-0">
+                        <div className="space-y-2 sm:space-y-3">
                           {analysisResult.competencies.map((competencia: any, index: number) => (
                             <div key={index}>
-                              <div className="flex justify-between text-sm mb-1">
+                              <div className="flex justify-between text-xs sm:text-sm mb-1">
                                 <span className="text-gray-700">{competencia.name}</span>
                                 <span className="font-medium">{competencia.score}/{competencia.max}</span>
                               </div>
@@ -684,20 +691,20 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
                     </Card>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-4 sm:mt-6">
                     <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <AlertCircle className="h-5 w-5 mr-2 text-red-600" />
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center text-base sm:text-lg">
+                          <AlertCircle className="h-4 w-4 mr-2 sm:mr-3 text-red-600" />
                           Pontos a Melhorar
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="pt-0">
                         <ul className="space-y-2">
                           {analysisResult.errors.map((error: string, index: number) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <CheckCircle className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-sm text-gray-700">{error}</span>
+                              <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-xs sm:text-sm text-gray-700">{error}</span>
                             </li>
                           ))}
                         </ul>
@@ -705,18 +712,18 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
                     </Card>
 
                     <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Star className="h-5 w-5 mr-2 text-yellow-600" />
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center text-base sm:text-lg">
+                          <Star className="h-4 w-4 mr-2 sm:mr-3 text-yellow-600" />
                           Sugestões de Melhoria
                         </CardTitle>
                       </CardHeader>
-                      <CardContent>
+                      <CardContent className="pt-0">
                         <ul className="space-y-2">
                           {analysisResult.suggestions.map((suggestion: string, index: number) => (
                             <li key={index} className="flex items-start space-x-2">
-                              <Award className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                              <span className="text-sm text-gray-700">{suggestion}</span>
+                              <Award className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                              <span className="text-xs sm:text-sm text-gray-700">{suggestion}</span>
                             </li>
                           ))}
                         </ul>
@@ -726,22 +733,22 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
                 </div>
               )}
 
-              {/* Action Buttons */}
-              <div className="flex justify-center space-x-4">
+              {/* Action Buttons - melhorado para mobile */}
+              <div className="flex justify-center space-x-2 sm:space-x-4">
                 <Button
                   onClick={analyzeRedacao}
                   disabled={isAnalyzing || (!redacaoText.trim() && !imageFile) || !hasStartedRedacao}
-                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                  className="bg-blue-600 hover:bg-blue-700 text-white text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3"
                 >
                   {isAnalyzing ? (
                     <>
-                      <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                      Analisando...
+                      <RefreshCw className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2 animate-spin" />
+                      <span className="hidden sm:inline">Analisando...</span>
                     </>
                   ) : (
                     <>
-                      <TrendingUp className="h-4 w-4 mr-2" />
-                      Analisar Redação
+                      <TrendingUp className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                      <span className="hidden sm:inline">Analisar</span>
                     </>
                   )}
                 </Button>
@@ -749,10 +756,10 @@ Lembre-se de usar linguagem formal, incluir repertório cultural e seguir as com
                 {analysisResult && (
                   <Button
                     onClick={saveRedacao}
-                    className="bg-green-600 hover:bg-green-700 text-white"
+                    className="bg-green-600 hover:bg-green-700 text-white text-xs sm:text-sm px-4 sm:px-6 py-2 sm:py-3"
                   >
-                    <Save className="h-4 w-4 mr-2" />
-                    Salvar Redação
+                    <Save className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                    <span className="hidden sm:inline">Salvar</span>
                   </Button>
                 )}
               </div>
