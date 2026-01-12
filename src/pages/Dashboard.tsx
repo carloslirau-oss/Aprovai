@@ -11,6 +11,7 @@ import {
   Award,
   LogOut,
   Sun,
+  Moon,
   Menu,
   X,
   BookOpen,
@@ -36,6 +37,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
@@ -43,6 +45,7 @@ const Dashboard = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
   const { userProfile, redacoes, isLoading, updateUserStats, fetchUserProfile, fetchRedacoes } = useUserData();
+  const { theme, toggleTheme } = useTheme();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -353,8 +356,8 @@ const Dashboard = () => {
               )}
               
               <div className="flex items-center space-x-2">
-                <Button variant="ghost" size="sm">
-                  <Sun className="h-4 w-4" />
+                <Button variant="ghost" size="sm" onClick={toggleTheme}>
+                  {theme === 'light' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                 </Button>
                 
                 <Button variant="ghost" size="sm" onClick={handleLogout}>
