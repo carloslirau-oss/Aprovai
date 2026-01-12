@@ -468,7 +468,7 @@ const CorretorRedacao = () => {
                         className="h-8 px-2 text-xs"
                       >
                         <Clock className="h-3 w-3 mr-1" />
-                        <span>{Math.floor(selectedTime / 60)}min</span> {/* CORRIGIDO: "h" para "min" */}
+                        <span>{Math.floor(selectedTime / 60)}min</span>
                       </Button>
                       <Button
                         variant="outline"
@@ -545,7 +545,7 @@ const CorretorRedacao = () => {
                         Área de Escrita
                       </CardTitle>
                       <CardDescription className="text-xs">
-                        Você tem {Math.floor(selectedTime / 60)}min {/* CORRIGIDO: "h" para "min" */}
+                        Você tem {Math.floor(selectedTime / 60)}min
                       </CardDescription>
                     </CardHeader>
                     <CardContent className="pt-0">
@@ -568,23 +568,23 @@ Lembre-se de usar linguagem formal e seguir as competências do ENEM."
 
                   {/* Sidebar com dicas e upload - embaixo */}
                   <div className="grid grid-cols-1 gap-2">
-                    {/* Tips */}
+                    {/* Tips - MUDANÇA DE CORES */}
                     <Card>
                       <CardHeader className="pb-2">
                         <CardTitle className="flex items-center text-sm">
-                          <Lightbulb className="h-3 w-3 mr-2 text-yellow-600" />
+                          <Lightbulb className="h-3 w-3 mr-2 text-blue-600" />
                           Dica do Professor
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="pt-0">
-                        <div className="p-2 bg-yellow-50 rounded">
-                          <h4 className="font-medium text-yellow-800 mb-1 text-xs">{currentTip.title}</h4>
-                          <p className="text-yellow-700 text-xs">{currentTip.content}</p>
+                        <div className="p-2 bg-blue-50 rounded">
+                          <h4 className="font-medium text-blue-900 mb-1 text-xs">{currentTip.title}</h4>
+                          <p className="text-blue-800 text-xs">{currentTip.content}</p>
                           <Button
                             variant="ghost"
                             size="sm"
                             onClick={getNewTip}
-                            className="mt-1 text-xs text-yellow-600 hover:text-yellow-700"
+                            className="mt-1 text-xs text-blue-600 hover:text-blue-700"
                           >
                             Próxima →
                           </Button>
