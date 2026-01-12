@@ -723,17 +723,17 @@ const Dashboard = () => {
                       </div>
                     </div>
 
-                    {/* Next Rank Info - Simplificado */}
+                    {/* Next Rank Info - Tons de azul claro */}
                     {patenteAtual.level < 7 && patenteProxima && (
-                      <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
-                        <h4 className="text-lg font-semibold text-yellow-800 mb-2 flex items-center">
-                          <ArrowRight className="h-5 w-5 mr-2" />
+                      <div className="bg-blue-100 p-4 rounded-lg border border-blue-300 shadow-sm">
+                        <h4 className="text-lg font-semibold text-blue-800 mb-2 flex items-center">
+                          <ArrowRight className="h-5 w-5 mr-2 text-blue-600" />
                           Próxima Patente: {patenteProxima.title} {patenteProxima.emoji}
                         </h4>
-                        <p className="text-yellow-700">
-                          Para alcançar a patente <strong>{patenteProxima.title}</strong>, acumule <strong>{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
+                        <p className="text-blue-700 mb-2">
+                          Para alcançar a patente <strong className="text-blue-800">{patenteProxima.title}</strong>, acumule <strong className="text-blue-800">{patenteProxima.xpRequired.toLocaleString()} pontos de XP</strong>.
                         </p>
-                        <p className="text-yellow-600 text-sm mt-2">
+                        <p className="text-blue-600 text-sm">
                           Cada redação vale até 250 XP (50 XP por competência). Continue praticando para melhorar seu desempenho!
                         </p>
                       </div>
