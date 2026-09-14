@@ -44,14 +44,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* No desktop o botão fica sozinho à esquerda do cabeçalho. */}
+      {/* Desktop: botão do menu ocupa sozinho o canto esquerdo do cabeçalho. */}
       {!open && (
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => setInternalOpen(true)}
-          className="fixed left-4 top-3 z-50 hidden h-10 w-10 rounded-md p-0 text-gray-700 hover:bg-gray-100 hover:text-gray-900 lg:flex"
+          className="fixed left-0 top-0 z-50 hidden h-16 w-16 rounded-none p-0 text-gray-700 hover:bg-gray-100 hover:text-gray-900 lg:flex"
           aria-label="Abrir menu"
         >
           <Menu className="h-6 w-6" />
