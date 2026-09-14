@@ -3,16 +3,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import {
-  BookOpen,
-  TrendingUp,
-  Bot,
-  LogOut,
-  Sun,
-  Moon,
-  Menu,
-  X
-} from 'lucide-react';
+import { BookOpen, TrendingUp, Bot, LogOut, Sun, Moon, Menu, X } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface SidebarProps {
@@ -26,142 +17,128 @@ interface MenuItem {
   title: string;
   href: string;
   icon: React.ComponentType<{ className?: string }>;
-  description?: string;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false }) => {
-  const [desktopCollapsed, setDesktopCollapsed] = React.useState(false);
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
+  const [internalOpen, setInternalOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
+  const open = isOpen || internalOpen;
 
   const menuItems: MenuItem[] = [
-    { title: 'Dashboard', href: '/dashboard', icon: TrendingUp, description: 'Visão geral do seu progresso' },
-    { title: 'Redações', href: '/redacoes', icon: BookOpen, description: 'Pratique com temas reais do ENEM' },
-    { title: 'Professor Carlinhos', href: '/professor-carlinhos', icon: Bot, description: 'Converse com o Professor Carlinhos' }
+    { title: 'Dashboard', href: '/dashboard', icon: TrendingUp },
+    { title: 'Redações', href: '/redacoes', icon: BookOpen },
+    { title: 'Professor Carlinhos', href: '/professor-carlinhos', icon: Bot }
   ];
 
-  const handleNavigation = (href: string) => {
-    window.location.href = href;
+  const closeMenu = () => {
+    setInternalOpen(false);
     onClose();
   };
 
-  const renderMenuItem = (item: MenuItem) => {
-    const Icon = item.icon;
-    const active = window.location.pathname === item.href;
-    const collapsed = isDesktop && desktopCollapsed;
-
-    return (
-      <div key={item.title} className="mb-1">
-        <button
-          type="button"
-          title={collapsed ? item.title : undefined}
-          onClick={() => handleNavigation(item.href)}
-          className={cn(
-            "w-full flex items-center rounded-md py-2 text-sm font-medium transition-colors",
-            "hover:bg-slate-700 hover:text-white",
-            collapsed ? "justify-center px-2" : "px-3",
-            active ? "bg-blue-600 text-white" : "text-gray-300"
-          )}
-        >
-          <Icon className={cn("h-5 w-5 flex-shrink-0", !collapsed && "mr-3")} />
-          {!collapsed && <span className="flex-1 text-left truncate">{item.title}</span>}
-        </button>
-      </div>
-    );
+  const handleNavigation = (href: string) => {
+    closeMenu();
+    window.location.href = href;
   };
 
   const logoUrl = 'https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20branca.png';
-  const collapsed = isDesktop && desktopCollapsed;
 
   return (
     <>
-      {isOpen && (
-        <div className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden" onClick={onClose} />
+      {/* Botão do menu: a lateral fica escondida no desktop e no mobile */}
+      {!open && (
+        <Button
+          type="button"
+          variant="ghost"
+          size="sm"
+          onClick={() => setInternalOpen(true)}
+          className="fixed left-4 top-4 z-20 h-9 w-9 rounded-md bg-slate-800/90 p-0 text-gray-200 shadow-md hover:bg-slate-700 hover:text-white"
+          aria-label="Abrir menu"
+        >
+          <Menu className="h-5 w-5" />
+        </Button>
+      )}
+
+      {open && (
+        <div
+          className="fixed inset-0 z-30 bg-black/50"
+          onClick={closeMenu}
+          aria-hidden="true"
+        />
       )}
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-30 w-64 bg-slate-800 shadow-lg transform transition-all duration-300 ease-in-out lg:static lg:inset-auto lg:translate-x-0",
-          isDesktop && (desktopCollapsed ? "lg:w-20" : "lg:w-64"),
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 z-40 flex w-64 flex-col bg-slate-800 shadow-2xl transition-transform duration-300 ease-in-out",
+          open ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-full w-full min-h-0 flex-col">
-          <div className={cn(
-            "flex h-16 items-center border-b border-slate-700",
-            collapsed ? "justify-center px-2" : "justify-between px-4"
-          )}>
-            {!collapsed && (
-              <div className="flex min-w-0 items-center">
-                <img
-                  src={logoUrl}
-                  alt="Escreve AI"
-                  className="h-10 w-40 object-contain"
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                />
-              </div>
-            )}
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={() => setDesktopCollapsed(value => !value)}
-              className="hidden flex-shrink-0 text-gray-400 hover:text-white lg:flex"
-              aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
-            >
-              {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
-            </Button>
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={onClose}
-              className="text-gray-400 hover:text-white lg:hidden"
-              aria-label="Fechar menu"
-            >
-              <X className="h-5 w-5" />
-            </Button>
+        <div className="flex h-16 items-center justify-between border-b border-slate-700 px-4">
+          <div className="flex min-w-0 items-center">
+            <img
+              src={logoUrl}
+              alt="Escreve AI"
+              className="h-10 w-40 object-contain"
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
           </div>
 
-          <nav className={cn(
-            "flex-1 space-y-1 overflow-x-hidden overflow-y-auto px-4 py-6",
-            collapsed && "px-2"
-          )}>
-            {menuItems.map(renderMenuItem)}
-          </nav>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={closeMenu}
+            className="flex-shrink-0 text-gray-400 hover:text-white"
+            aria-label="Fechar menu"
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
 
-          <div className={cn("border-t border-slate-700 p-4", collapsed && "px-2")}>
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={toggleTheme}
-              title={collapsed ? (theme === 'light' ? 'Modo Escuro' : 'Modo Claro') : undefined}
-              className={cn(
-                "mb-2 text-gray-300 hover:text-white",
-                collapsed ? "w-full justify-center px-2" : "w-full justify-start"
-              )}
-            >
-              {theme === 'light' ? <Moon className={cn("h-4 w-4", !collapsed && "mr-3")} /> : <Sun className={cn("h-4 w-4", !collapsed && "mr-3")} />}
-              {!collapsed && (theme === 'light' ? 'Modo Escuro' : 'Modo Claro')}
-            </Button>
+        <nav className="flex-1 space-y-1 overflow-x-hidden overflow-y-auto px-4 py-6">
+          {menuItems.map((item) => {
+            const Icon = item.icon;
+            const active = window.location.pathname === item.href;
 
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={() => { window.location.href = '/login'; }}
-              title={collapsed ? 'Sair' : undefined}
-              className={cn(
-                "text-gray-300 hover:text-white",
-                collapsed ? "w-full justify-center px-2" : "w-full justify-start"
-              )}
-            >
-              <LogOut className={cn("h-4 w-4", !collapsed && "mr-3")} />
-              {!collapsed && 'Sair'}
-            </Button>
-          </div>
+            return (
+              <button
+                key={item.title}
+                type="button"
+                onClick={() => handleNavigation(item.href)}
+                className={cn(
+                  "flex w-full items-center rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "hover:bg-slate-700 hover:text-white",
+                  active ? "bg-blue-600 text-white" : "text-gray-300"
+                )}
+              >
+                <Icon className="mr-3 h-5 w-5 flex-shrink-0" />
+                <span className="text-left">{item.title}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        <div className="border-t border-slate-700 p-4">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={toggleTheme}
+            className="mb-2 w-full justify-start text-gray-300 hover:text-white"
+          >
+            {theme === 'light' ? <Moon className="mr-3 h-4 w-4" /> : <Sun className="mr-3 h-4 w-4" />}
+            {theme === 'light' ? 'Modo Escuro' : 'Modo Claro'}
+          </Button>
+
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => { window.location.href = '/login'; }}
+            className="w-full justify-start text-gray-300 hover:text-white"
+          >
+            <LogOut className="mr-3 h-4 w-4" />
+            Sair
+          </Button>
         </div>
       </aside>
     </>
