@@ -44,14 +44,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* No desktop o menu fica discreto no canto superior direito para não cobrir os dados do usuário. */}
+      {/* No desktop o menu fica discreto no canto superior esquerdo, deixando os dados do usuário à direita. */}
       {!open && (
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => setInternalOpen(true)}
-          className="fixed right-4 top-4 z-50 hidden h-9 w-9 rounded-md bg-slate-800/90 p-0 text-gray-200 shadow-md hover:bg-slate-700 hover:text-white lg:flex"
+          className="fixed left-4 top-4 z-50 hidden h-9 w-9 rounded-md bg-slate-800/90 p-0 text-gray-200 shadow-md hover:bg-slate-700 hover:text-white lg:flex"
           aria-label="Abrir menu"
         >
           <MoreHorizontal className="h-5 w-5" />
