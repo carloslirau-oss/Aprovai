@@ -3,14 +3,10 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { 
-  BookOpen, 
-  TrendingUp, 
-  Target, 
+import {
+  BookOpen,
+  TrendingUp,
   Bot,
-  MessageSquare,
-  ChevronDown,
-  ChevronRight,
   LogOut,
   Sun,
   Moon,
@@ -31,17 +27,11 @@ interface MenuItem {
   href: string;
   icon: React.ComponentType<{ className?: string }>;
   description?: string;
-  children?: MenuItem[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop = false }) => {
-  const [expandedItems, setExpandedItems] = React.useState<Record<string, boolean>>({});
+const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false }) => {
+  const [desktopCollapsed, setDesktopCollapsed] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
-
-  const handleNavigation = (href: string) => {
-    window.location.href = href;
-    onClose();
-  };
 
   const menuItems: MenuItem[] = [
     {
@@ -64,136 +54,148 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, onToggle, isDesktop 
     }
   ];
 
-  const renderMenuItem = (item: MenuItem, level = 0) => {
+  const handleNavigation = (href: string) => {
+    window.location.href = href;
+    onClose();
+  };
+
+  const renderMenuItem = (item: MenuItem) => {
     const Icon = item.icon;
+    const active = window.location.pathname === item.href;
+    const collapsed = isDesktop && desktopCollapsed;
 
     return (
       <div key={item.title} className="mb-1">
         <button
+          type="button"
+          title={collapsed ? item.title : undefined}
           onClick={() => handleNavigation(item.href)}
           className={cn(
-            "w-full flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors",
+            "w-full flex items-center rounded-md py-2 text-sm font-medium transition-colors",
             "hover:bg-slate-700 hover:text-white",
-            level === 0 ? "text-gray-300" : "text-gray-400 ml-4",
-            window.location.pathname === item.href && "bg-blue-600 text-white"
+            collapsed ? "justify-center px-2" : "px-3",
+            active ? "bg-blue-600 text-white" : "text-gray-300"
           )}
         >
-          <Icon className="mr-3 h-5 w-5 flex-shrink-0" />
-          <span className="flex-1 text-left">{item.title}</span>
+          <Icon className={cn("h-5 w-5 flex-shrink-0", !collapsed && "mr-3")} />
+          {!collapsed && <span className="flex-1 text-left truncate">{item.title}</span>}
         </button>
       </div>
     );
   };
 
-  // URL da imagem "escreve ai branca" do Supabase Storage
   const logoUrl = 'https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20branca.png';
+  const collapsed = isDesktop && desktopCollapsed;
 
   return (
     <>
       {isOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
           onClick={onClose}
         />
       )}
-      
-      <div 
+
+      <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-30 w-64 bg-slate-800 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 z-30 bg-slate-800 shadow-lg transform transition-all duration-300 ease-in-out lg:static lg:inset-auto",
+          isDesktop
+            ? "hidden lg:flex lg:translate-x-0"
+            : "w-64",
+          isDesktop && (desktopCollapsed ? "lg:w-20" : "lg:w-64"),
+          !isDesktop && (isOpen ? "translate-x-0" : "-translate-x-full")
         )}
       >
-        <div className="flex flex-col h-full">
-          {/* Header com botão de toggle para desktop */}
-          <div className="flex items-center justify-between h-16 px-4 border-b border-slate-700">
-            <div className="flex items-center">
-              {/* Logo branca para ambos os temas */}
-              <img 
-                src={logoUrl}
-                alt="Escreve AI"
-                className="w-40 h-10 object-contain"
-                onError={(e) => {
-                  // Fallback para uma logo genérica se a imagem não carregar
-                  e.currentTarget.outerHTML = `
-                    <div class="w-40 h-10 bg-blue-600 rounded flex items-center justify-center">
-                      <span class="text-white text-lg font-bold">A</span>
-                    </div>
-                  `;
-                }}
-              />
-            </div>
-            
-            {/* Botão de toggle apenas para desktop */}
-            {isDesktop && onToggle && (
+        <div className="flex h-full w-full flex-col min-h-0">
+          <div className={cn(
+            "flex items-center h-16 border-b border-slate-700",
+            collapsed ? "justify-center px-2" : "justify-between px-4"
+          )}>
+            {!collapsed && (
+              <div className="flex items-center min-w-0">
+                <img
+                  src={logoUrl}
+                  alt="Escreve AI"
+                  className="w-40 h-10 object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
+
+            {isDesktop ? (
               <Button
+                type="button"
                 variant="ghost"
                 size="sm"
-                onClick={onToggle}
-                className="text-gray-400 hover:text-white"
+                onClick={() => setDesktopCollapsed((value) => !value)}
+                className="text-gray-400 hover:text-white flex-shrink-0"
+                aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
               >
-                {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
               </Button>
-            )}
-            
-            {/* Botão de fechar apenas para mobile */}
-            {!isDesktop && (
+            ) : (
               <Button
+                type="button"
                 variant="ghost"
                 size="sm"
                 onClick={onClose}
                 className="text-gray-400 hover:text-white"
+                aria-label="Fechar menu"
               >
-                <ChevronRight className="h-5 w-5" />
+                <X className="h-5 w-5" />
               </Button>
             )}
           </div>
 
-          {/* Conteúdo da sidebar - sempre visível quando isOpen for true */}
           <nav className={cn(
-            "flex-1 px-4 py-6 space-y-1 overflow-y-auto",
-            !isOpen && "hidden" // Esconde apenas quando isOpen for false
+            "flex-1 px-4 py-6 space-y-1 overflow-y-auto overflow-x-hidden",
+            collapsed && "px-2"
           )}>
             {menuItems.map(renderMenuItem)}
           </nav>
 
-          {/* Rodapé com botões - sempre visível quando isOpen for true */}
           <div className={cn(
             "p-4 border-t border-slate-700",
-            !isOpen && "hidden" // Esconde apenas quando isOpen for false
+            collapsed && "px-2"
           )}>
             <Button
+              type="button"
               variant="ghost"
               size="sm"
               onClick={toggleTheme}
-              className="w-full justify-start text-gray-300 hover:text-white mb-2"
+              title={collapsed ? (theme === 'light' ? 'Modo Escuro' : 'Modo Claro') : undefined}
+              className={cn(
+                "text-gray-300 hover:text-white mb-2",
+                collapsed ? "w-full justify-center px-2" : "w-full justify-start"
+              )}
             >
               {theme === 'light' ? (
-                <>
-                  <Moon className="mr-3 h-4 w-4" />
-                  Modo Escuro
-                </>
+                <Moon className={cn("h-4 w-4", !collapsed && "mr-3")} />
               ) : (
-                <>
-                  <Sun className="mr-3 h-4 w-4" />
-                  Modo Claro
-                </>
+                <Sun className={cn("h-4 w-4", !collapsed && "mr-3")} />
               )}
+              {!collapsed && (theme === 'light' ? 'Modo Escuro' : 'Modo Claro')}
             </Button>
-            
+
             <Button
+              type="button"
               variant="ghost"
               size="sm"
-              onClick={() => {
-                window.location.href = '/login';
-              }}
-              className="w-full justify-start text-gray-300 hover:text-white"
+              onClick={() => { window.location.href = '/login'; }}
+              title={collapsed ? 'Sair' : undefined}
+              className={cn(
+                "text-gray-300 hover:text-white",
+                collapsed ? "w-full justify-center px-2" : "w-full justify-start"
+              )}
             >
-              <LogOut className="mr-3 h-4 w-4" />
-              Sair
+              <LogOut className={cn("h-4 w-4", !collapsed && "mr-3")} />
+              {!collapsed && 'Sair'}
             </Button>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 };
