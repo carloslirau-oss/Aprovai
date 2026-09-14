@@ -34,24 +34,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false })
   const { theme, toggleTheme } = useTheme();
 
   const menuItems: MenuItem[] = [
-    {
-      title: 'Dashboard',
-      href: '/dashboard',
-      icon: TrendingUp,
-      description: 'Visão geral do seu progresso'
-    },
-    {
-      title: 'Redações',
-      href: '/redacoes',
-      icon: BookOpen,
-      description: 'Pratique com temas reais do ENEM'
-    },
-    {
-      title: 'Professor Carlinhos',
-      href: '/professor-carlinhos',
-      icon: Bot,
-      description: 'Converse com o Professor Carlinhos'
-    }
+    { title: 'Dashboard', href: '/dashboard', icon: TrendingUp, description: 'Visão geral do seu progresso' },
+    { title: 'Redações', href: '/redacoes', icon: BookOpen, description: 'Pratique com temas reais do ENEM' },
+    { title: 'Professor Carlinhos', href: '/professor-carlinhos', icon: Bot, description: 'Converse com o Professor Carlinhos' }
   ];
 
   const handleNavigation = (href: string) => {
@@ -90,36 +75,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false })
   return (
     <>
       {isOpen && (
-        <div
-          className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden"
-          onClick={onClose}
-        />
+        <div className="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden" onClick={onClose} />
       )}
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-30 bg-slate-800 shadow-lg transform transition-all duration-300 ease-in-out lg:static lg:inset-auto",
-          isDesktop
-            ? "hidden lg:flex lg:translate-x-0"
-            : "w-64",
+          "fixed inset-y-0 left-0 z-30 w-64 bg-slate-800 shadow-lg transform transition-all duration-300 ease-in-out lg:static lg:inset-auto lg:translate-x-0",
           isDesktop && (desktopCollapsed ? "lg:w-20" : "lg:w-64"),
-          !isDesktop && (isOpen ? "translate-x-0" : "-translate-x-full")
+          isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex h-full w-full flex-col min-h-0">
+        <div className="flex h-full w-full min-h-0 flex-col">
           <div className={cn(
-            "flex items-center h-16 border-b border-slate-700",
+            "flex h-16 items-center border-b border-slate-700",
             collapsed ? "justify-center px-2" : "justify-between px-4"
           )}>
             {!collapsed && (
-              <div className="flex items-center min-w-0">
+              <div className="flex min-w-0 items-center">
                 <img
                   src={logoUrl}
                   alt="Escreve AI"
-                  className="w-40 h-10 object-contain"
-                  onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                  }}
+                  className="h-10 w-40 object-contain"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
                 />
               </div>
             )}
@@ -129,8 +106,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false })
                 type="button"
                 variant="ghost"
                 size="sm"
-                onClick={() => setDesktopCollapsed((value) => !value)}
-                className="text-gray-400 hover:text-white flex-shrink-0"
+                onClick={() => setDesktopCollapsed(value => !value)}
+                className="flex-shrink-0 text-gray-400 hover:text-white"
                 aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
               >
                 {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
@@ -150,16 +127,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false })
           </div>
 
           <nav className={cn(
-            "flex-1 px-4 py-6 space-y-1 overflow-y-auto overflow-x-hidden",
+            "flex-1 space-y-1 overflow-x-hidden overflow-y-auto px-4 py-6",
             collapsed && "px-2"
           )}>
             {menuItems.map(renderMenuItem)}
           </nav>
 
-          <div className={cn(
-            "p-4 border-t border-slate-700",
-            collapsed && "px-2"
-          )}>
+          <div className={cn("border-t border-slate-700 p-4", collapsed && "px-2")}>
             <Button
               type="button"
               variant="ghost"
@@ -167,15 +141,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false })
               onClick={toggleTheme}
               title={collapsed ? (theme === 'light' ? 'Modo Escuro' : 'Modo Claro') : undefined}
               className={cn(
-                "text-gray-300 hover:text-white mb-2",
+                "mb-2 text-gray-300 hover:text-white",
                 collapsed ? "w-full justify-center px-2" : "w-full justify-start"
               )}
             >
-              {theme === 'light' ? (
-                <Moon className={cn("h-4 w-4", !collapsed && "mr-3")} />
-              ) : (
-                <Sun className={cn("h-4 w-4", !collapsed && "mr-3")} />
-              )}
+              {theme === 'light' ? <Moon className={cn("h-4 w-4", !collapsed && "mr-3")} /> : <Sun className={cn("h-4 w-4", !collapsed && "mr-3")} />}
               {!collapsed && (theme === 'light' ? 'Modo Escuro' : 'Modo Claro')}
             </Button>
 
