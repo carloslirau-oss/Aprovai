@@ -3,7 +3,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { BookOpen, TrendingUp, Bot, LogOut, Sun, Moon, Menu, X } from 'lucide-react';
+import { BookOpen, TrendingUp, Bot, LogOut, Sun, Moon, Menu, X, MoreHorizontal } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface SidebarProps {
@@ -44,17 +44,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {/* Botão do menu: a lateral fica escondida no desktop e no mobile */}
+      {/* No desktop o menu fica discreto no canto superior direito para não cobrir os dados do usuário. */}
       {!open && (
         <Button
           type="button"
           variant="ghost"
           size="sm"
           onClick={() => setInternalOpen(true)}
-          className="fixed left-4 top-4 z-20 h-9 w-9 rounded-md bg-slate-800/90 p-0 text-gray-200 shadow-md hover:bg-slate-700 hover:text-white"
+          className="fixed right-4 top-4 z-50 hidden h-9 w-9 rounded-md bg-slate-800/90 p-0 text-gray-200 shadow-md hover:bg-slate-700 hover:text-white lg:flex"
           aria-label="Abrir menu"
         >
-          <Menu className="h-5 w-5" />
+          <MoreHorizontal className="h-5 w-5" />
         </Button>
       )}
 
