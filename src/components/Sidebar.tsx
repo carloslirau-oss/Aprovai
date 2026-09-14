@@ -101,29 +101,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose, isDesktop = false })
               </div>
             )}
 
-            {isDesktop ? (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => setDesktopCollapsed(value => !value)}
-                className="flex-shrink-0 text-gray-400 hover:text-white"
-                aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
-              >
-                {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
-              </Button>
-            ) : (
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={onClose}
-                className="text-gray-400 hover:text-white"
-                aria-label="Fechar menu"
-              >
-                <X className="h-5 w-5" />
-              </Button>
-            )}
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={() => setDesktopCollapsed(value => !value)}
+              className="hidden flex-shrink-0 text-gray-400 hover:text-white lg:flex"
+              aria-label={collapsed ? 'Expandir menu' : 'Recolher menu'}
+            >
+              {collapsed ? <Menu className="h-5 w-5" /> : <X className="h-5 w-5" />}
+            </Button>
+
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={onClose}
+              className="text-gray-400 hover:text-white lg:hidden"
+              aria-label="Fechar menu"
+            >
+              <X className="h-5 w-5" />
+            </Button>
           </div>
 
           <nav className={cn(
