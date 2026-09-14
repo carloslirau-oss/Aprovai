@@ -3,10 +3,20 @@
   max-width: 100% !important;
 }
 
-/* Desktop: mantém o botão do menu sozinho à esquerda e as informações do usuário à direita. */
+/* Desktop: reserva o lado esquerdo para o botão do menu e fixa todo o bloco do usuário à direita. */
 @media (min-width: 1024px) {
   .min-h-screen.bg-gray-50.flex > .flex-1.flex.flex-col > header > div {
     justify-content: flex-end !important;
-    padding-left: 4.5rem !important;
+    padding-left: 4rem !important;
+  }
+
+  .min-h-screen.bg-gray-50.flex > .flex-1.flex.flex-col > header > div > div:last-child {
+    margin-left: auto !important;
+    justify-content: flex-end !important;
+    min-width: 0;
+  }
+
+  .min-h-screen.bg-gray-50.flex > .flex-1.flex.flex-col > header > div > div:last-child > div {
+    min-width: 0;
   }
 }
