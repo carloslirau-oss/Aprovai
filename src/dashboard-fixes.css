@@ -1,0 +1,4 @@
+/* Impede que barras de progresso com valores acima do máximo ultrapassem o trilho/card. */
+.bg-green-600[style*="width"] {
+  max-width: 100% !important;
+}
