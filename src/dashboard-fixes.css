@@ -2,3 +2,11 @@
 .bg-green-600[style*="width"] {
   max-width: 100% !important;
 }
+
+/* Desktop: mantém o botão do menu sozinho à esquerda e as informações do usuário à direita. */
+@media (min-width: 1024px) {
+  .min-h-screen.bg-gray-50.flex > .flex-1.flex.flex-col > header > div {
+    justify-content: flex-end !important;
+    padding-left: 4.5rem !important;
+  }
+}
