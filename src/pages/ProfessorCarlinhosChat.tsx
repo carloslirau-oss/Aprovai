@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useTheme } from '@/contexts/ThemeContext';
+import { ICONE_BRANCO, ICONE_PRETO } from '@/assets/logoIcon';
 import { 
   Bot,
   MessageSquare,
@@ -15,6 +17,7 @@ import {
   Bot as BotIcon
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
@@ -28,6 +31,8 @@ interface ChatMessage {
 const ProfessorCarlinhosChat = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { theme } = useTheme();
+  const logoUrl = theme === 'dark' ? ICONE_BRANCO : ICONE_PRETO;
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [isSendingMessage, setIsSendingMessage] = useState(false);
@@ -61,67 +66,36 @@ const ProfessorCarlinhosChat = () => {
     setIsWaitingForResponse(true);
 
     try {
-      // Enviar mensagem para o webhook
-      const webhookUrl = 'https://eopi4fhg5g3mewf.m.pipedream.net';
-      
-      const payload = {
-        message: chatMessage,
-        timestamp: new Date().toISOString(),
-        user: user?.user_metadata?.name || 'João da Silva',
-        type: 'chat_message'
-      };
+      // Chama o Professor Carlinhos de verdade: uma Edge Function no Supabase que usa
+      // a API da Anthropic (Claude), com um prompt focado em redação do ENEM.
+      const historico = messages.slice(-12).map(m => ({ sender: m.sender, content: m.content }));
 
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
+      const { data, error } = await supabase.functions.invoke('professor-carlinhos', {
+        body: { mensagem: chatMessage, historico },
       });
 
-      if (!response.ok) {
+      if (error) {
+        console.error('Erro ao chamar professor-carlinhos:', error);
         throw new Error('Falha ao enviar mensagem');
       }
 
-      // Esperar a resposta do webhook
-      const responseData = await response.json();
-      console.log('Resposta do webhook:', responseData); // Log para depuração
-      
-      // Extrair a resposta do webhook - pode estar em diferentes campos
-      let botResponse = '';
-      
-      // Tenta diferentes campos possíveis para a resposta
-      if (responseData.response) {
-        botResponse = responseData.response;
-      } else if (responseData.message) {
-        botResponse = responseData.message;
-      } else if (responseData.content) {
-        botResponse = responseData.content;
-      } else if (responseData.text) {
-        botResponse = responseData.text;
-      } else if (responseData.data && responseData.data.response) {
-        botResponse = responseData.data.response;
-      } else if (typeof responseData === 'string') {
-        botResponse = responseData;
-      } else {
-        // Se não encontrar resposta, usa uma mensagem padrão
-        botResponse = 'Obrigado pela sua mensagem! Recebi sua dúvida e estou analisando. Em breve retornarei com uma resposta detalhada para te ajudar com sua redação. Continue praticando e não desista!';
+      if (data?.error) {
+        throw new Error(data.error);
       }
-      
-      // Adicionar resposta do bot
+
       const botMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
-        content: botResponse,
+        content: data?.resposta || 'Não consegui pensar em uma resposta agora. Pode reformular a pergunta?',
         sender: 'bot',
         timestamp: new Date()
       };
-      
+
       setMessages(prev => [...prev, botMessage]);
-      
+
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
       showError('Erro ao enviar mensagem. Tente novamente.');
-      
+
       // Adicionar mensagem de erro
       const errorMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
@@ -188,7 +162,7 @@ const ProfessorCarlinhosChat = () => {
               <div className="flex items-center space-x-2">
                 {/* Logo do Supabase - Corrigido com fallback */}
                 <img 
-                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  src={logoUrl} 
                   alt="Logo" 
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {

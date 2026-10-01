@@ -56,8 +56,6 @@ export const updateUserProfile = async (name: string) => {
 
 // Função para enviar e-mail de verificação
 export const sendVerificationEmail = async () => {
-  const { error } = await supabase.auth.reauthenticate({
-    emailRedirectTo: undefined,
-  });
+  const { error } = await supabase.auth.reauthenticate();
   return { error };
 };

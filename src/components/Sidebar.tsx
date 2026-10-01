@@ -3,8 +3,10 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { BookOpen, TrendingUp, Bot, LogOut, Sun, Moon, Menu, X } from 'lucide-react';
+import { BookOpen, TrendingUp, Bot, LogOut, Sun, Moon, Menu, X, Library } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -22,11 +24,15 @@ interface MenuItem {
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const [internalOpen, setInternalOpen] = React.useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const open = isOpen || internalOpen;
 
   const menuItems: MenuItem[] = [
     { title: 'Dashboard', href: '/dashboard', icon: TrendingUp },
     { title: 'Redações', href: '/redacoes', icon: BookOpen },
+    { title: 'Biblioteca', href: '/biblioteca', icon: Library },
     { title: 'Professor Carlinhos', href: '/professor-carlinhos', icon: Bot }
   ];
 
@@ -37,7 +43,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
   const handleNavigation = (href: string) => {
     closeMenu();
-    window.location.href = href;
+    navigate(href);
+  };
+
+  const handleLogout = async () => {
+    closeMenu();
+    await signOut();
+    navigate('/');
   };
 
   const logoUrl = 'https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/escreve%20ai%20branca.png';
@@ -97,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         <nav className="flex-1 space-y-1 overflow-x-hidden overflow-y-auto px-4 py-6">
           {menuItems.map((item) => {
             const Icon = item.icon;
-            const active = window.location.pathname === item.href;
+            const active = location.pathname === item.href;
 
             return (
               <button
@@ -133,7 +145,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
             type="button"
             variant="ghost"
             size="sm"
-            onClick={() => { window.location.href = '/login'; }}
+            onClick={handleLogout}
             className="w-full justify-start text-gray-300 hover:text-white"
           >
             <LogOut className="mr-3 h-4 w-4" />

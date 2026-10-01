@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { useTheme } from '@/contexts/ThemeContext';
+import { ICONE_BRANCO, ICONE_PRETO } from '@/assets/logoIcon';
 import { 
   BookOpen, 
   Upload, 
@@ -34,12 +36,15 @@ import {
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useUserData } from '@/contexts/UserDataContext';
+import { supabase } from '@/integrations/supabase/client';
 import { showSuccess, showError } from '@/utils/toast';
 import Sidebar from '@/components/Sidebar';
 
 const CorretorRedacao = () => {
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
+  const { theme } = useTheme();
+  const logoUrl = theme === 'dark' ? ICONE_BRANCO : ICONE_PRETO;
   const { userProfile, addRedacao } = useUserData();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
@@ -189,57 +194,40 @@ const CorretorRedacao = () => {
       return;
     }
 
+    if (redacaoText.trim().length < 50) {
+      showError('Sua redação está muito curta para ser corrigida. Escreva um pouco mais.');
+      return;
+    }
+
     setIsAnalyzing(true);
-    
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 3000));
-      
-      const result = {
-        totalScore: 820,
-        competencies: [
-          { name: 'Domínio da Modalidade Escrita Formal', score: 180, max: 200 },
-          { name: 'Compreensão da Tarefa', score: 170, max: 200 },
-          { name: 'Coerência e Coesão', score: 160, max: 200 },
-          { name: 'Seleção de Recursos de Linguagem', score: 150, max: 200 },
-          { name: 'Proposta de Intervenção', score: 160, max: 200 }
-        ],
-        errors: [
-          'Falta de conectivos entre os parágrafos',
-          'Uso incorreto de pontuação em alguns períodos',
-          'Falta de exemplos concretos para sustentar argumentos'
-        ],
-        suggestions: [
-          'Incluir mais dados estatísticos sobre o tema',
-          'Utilizar conectivos como "além disso", "por outro lado" para melhorar a coesão',
-          'Adicionar citações de autores renomados para dar mais credibilidade'
-        ],
-        detailedFeedback: [
-          {
-            competency: 'Domínio da Modalidade Escrita Formal',
-            feedback: 'Sua redação demonstra excelente domínio da norma culta! A gramática está impecável e o vocabulário rico. Continue assim que você vai virar o novo Machado de Assis! 😎'
-          },
-          {
-            competency: 'Compreensão da Tarefa',
-            feedback: 'Você entendeu perfeitamente o tema e a proposta de intervenção. A abordagem está direcionada corretamente. Professor Carlinhos aprova! 👏'
-          },
-          {
-            competency: 'Coerência e Coesão',
-            feedback: 'A estrutura está boa, mas poderia melhorar a conexão entre os parágrafos. Tente usar mais conectivos para criar um fluxo mais natural.'
-          },
-          {
-            competency: 'Seleção de Recursos de Linguagem',
-            feedback: 'Seu estilo é único e cativante! A variedade de estruturas sintáticas enriquece o texto. Só faltou um pouquinho mais de figuras de retórica.'
-          },
-          {
-            competency: 'Proposta de Intervenção',
-            feedback: 'Sua proposta é viável e bem fundamentada. Que tal incluir um cronograma de implementação para deixar ainda mais completo?'
-          }
-        ]
-      };
-      
-      setAnalysisResult(result);
+      // Correção de verdade: chama a Edge Function do Supabase, que usa a API da Anthropic (Claude)
+      // para avaliar o texto seguindo os 5 critérios do ENEM.
+      const { data, error } = await supabase.functions.invoke('corrigir-redacao', {
+        body: {
+          tema: redacaoTheme.tema,
+          instrucoes: redacaoTheme.instrucoes,
+          textosMotivadores: redacaoTheme.contextualizacao,
+          texto: redacaoText,
+        },
+      });
+
+      if (error) {
+        console.error('Erro ao chamar corrigir-redacao:', error);
+        showError('Não foi possível corrigir a redação agora. Tente novamente em instantes.');
+        return;
+      }
+
+      if (data?.error) {
+        showError(data.error);
+        return;
+      }
+
+      setAnalysisResult(data);
       showSuccess('Redação analisada com sucesso!');
     } catch (error) {
+      console.error('Erro inesperado ao analisar redação:', error);
       showError('Erro ao analisar a redação. Tente novamente.');
     } finally {
       setIsAnalyzing(false);
@@ -361,7 +349,7 @@ const CorretorRedacao = () => {
               {/* Logo e título */}
               <div className="flex items-center space-x-2">
                 <img 
-                  src="https://ugdpjgftmhyurrmfzdux.supabase.co/storage/v1/object/public/imagens/logo%2001" 
+                  src={logoUrl} 
                   alt="Logo" 
                   className="w-6 h-6 rounded-full object-cover"
                   onError={(e) => {

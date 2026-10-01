@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import { useAuth } from '@/contexts/AuthContext';
 import { showSuccess, showError } from '@/utils/toast';
 
@@ -13,7 +14,14 @@ const Login = () => {
   const navigate = useNavigate();
   const { signIn, signUp } = useAuth();
   const [activeTab, setActiveTab] = useState<'login' | 'register'>('login');
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(() => {
+    if (typeof window === 'undefined') return '';
+    return window.localStorage.getItem('aprovai_lembrar_email') || '';
+  });
+  const [lembrarEmail, setLembrarEmail] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.localStorage.getItem('aprovai_lembrar_email') !== null;
+  });
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
@@ -29,7 +37,13 @@ const Login = () => {
 
     try {
       const { error } = await signIn(email, password);
-      
+
+      if (lembrarEmail) {
+        window.localStorage.setItem('aprovai_lembrar_email', email);
+      } else {
+        window.localStorage.removeItem('aprovai_lembrar_email');
+      }
+
       if (error) {
         console.log('Erro de login completo:', error);
         console.log('Mensagem do erro:', error.message);
@@ -217,6 +231,16 @@ const Login = () => {
                 </div>
 
                 <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="lembrar-email"
+                      checked={lembrarEmail}
+                      onCheckedChange={(checked) => setLembrarEmail(checked === true)}
+                    />
+                    <Label htmlFor="lembrar-email" className="text-sm font-normal text-gray-300 cursor-pointer">
+                      Lembrar meu e-mail
+                    </Label>
+                  </div>
                   <a href="#" className="text-sm text-blue-400 hover:text-blue-300">
                     Esqueci minha senha
                   </a>

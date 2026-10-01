@@ -45,42 +45,42 @@
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 220 47% 7.5%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 220 42% 13%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 220 42% 13%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 84% 4.9%;
+    --primary: 213 94% 68%;
+    --primary-foreground: 220 47% 7.5%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 220 38% 18.5%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 220 38% 18.5%;
+    --muted-foreground: 215 22% 72%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 220 38% 18.5%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 62.8% 40%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 217.2 91.2% 59.8%;
+    --border: 220 33% 24%;
+    --input: 220 33% 24%;
+    --ring: 213 94% 68%;
 
-    --sidebar-background: 217.2 32.6% 17.5%;
+    --sidebar-background: 220 42% 13%;
     --sidebar-foreground: 210 40% 98%;
-    --sidebar-primary: 217.2 91.2% 59.8%;
-    --sidebar-primary-foreground: 222.2 84% 4.9%;
-    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-primary: 213 94% 68%;
+    --sidebar-primary-foreground: 220 47% 7.5%;
+    --sidebar-accent: 220 38% 18.5%;
     --sidebar-accent-foreground: 210 40% 98%;
-    --sidebar-border: 217.2 32.6% 17.5%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-border: 220 33% 24%;
+    --sidebar-ring: 213 94% 68%;
   }
 }
 
@@ -338,245 +338,297 @@
   }
 }
 
-/* Estilos específicos para modo escuro */
+/* Estilos específicos para modo escuro
+   Paleta: fundo da página (#0b1220) < superfície/cards (#131c2f) < elevado (#1c2740).
+   Cores semânticas (verde, azul, etc.) usam TINTAS TRANSLÚCIDAS em vez de cor sólida,
+   para não brigar com o azul-noite e manter o texto sempre legível. */
 .dark {
-  /* Fundo principal - azul escuro profundo */
-  background-color: #0f172a;
-  
-  /* Textos brancos */
-  color: #f8fafc;
-  
-  /* Cards com fundo azul escuro */
+  background-color: #0b1220;
+  color: #f1f5f9;
+
   .card {
-    background-color: #1e293b;
-    border-color: #334155;
+    background-color: #131c2f;
+    border-color: #27344f;
   }
-  
-  /* Sidebar com fundo azul escuro */
+
   .sidebar {
-    background-color: #1e293b;
-    border-color: #334155;
+    background-color: #131c2f;
+    border-color: #27344f;
   }
-  
-  /* Botões com fundo azul #0071bc */
+
   .btn-primary {
     background-color: #0071bc;
     color: white;
   }
-  
+
   .btn-primary:hover {
     background-color: #005a9e;
   }
-  
+
   /* Hover states */
   .hover\:bg-gray-100:hover {
-    background-color: #334155;
+    background-color: #1c2740;
   }
-  
+
   .hover\:bg-gray-200:hover {
-    background-color: #475569;
+    background-color: #27344f;
   }
-  
-  /* Backgrounds específicos */
+
+  /* Fundos neutros */
   .bg-gray-50 {
-    background-color: #1e293b;
+    background-color: #0b1220;
   }
-  
+
   .bg-white {
-    background-color: #1e293b;
+    background-color: #131c2f;
   }
-  
+
   .bg-gray-100 {
-    background-color: #1e293b;
+    background-color: #1c2740;
   }
-  
+
+  /* Trilhas de barra de progresso e marcadores "bloqueados" (antes ficavam brancos) */
+  .bg-gray-200 {
+    background-color: #27344f;
+  }
+
+  .bg-gray-300 {
+    background-color: #3a4a68;
+  }
+
+  .bg-gray-400 {
+    background-color: #52627f;
+  }
+
+  /* Fundos semânticos: tintas translúcidas */
   .bg-blue-50 {
-    background-color: #1e293b;
+    background-color: rgba(96, 165, 250, 0.10);
   }
-  
+
+  .bg-blue-100 {
+    background-color: rgba(96, 165, 250, 0.16);
+  }
+
   .bg-green-50 {
-    background-color: #1e293b;
+    background-color: rgba(52, 211, 153, 0.08);
   }
-  
+
   .bg-yellow-50 {
-    background-color: #1e293b;
+    background-color: rgba(250, 204, 21, 0.09);
   }
-  
+
   .bg-purple-50 {
-    background-color: #1e293b;
+    background-color: rgba(167, 139, 250, 0.10);
   }
-  
+
   .bg-orange-50 {
-    background-color: #1e293b;
+    background-color: rgba(251, 146, 60, 0.10);
   }
-  
+
   .bg-red-50 {
-    background-color: #1e293b;
+    background-color: rgba(248, 113, 113, 0.10);
   }
-  
-  /* Textos específicos */
+
+  /* Textos neutros */
+  .text-gray-500 {
+    color: #94a3b8;
+  }
+
   .text-gray-600 {
-    color: #cbd5e1;
+    color: #b6c2d4;
   }
-  
+
   .text-gray-700 {
-    color: #e2e8f0;
+    color: #d5dde9;
   }
-  
+
   .text-gray-800 {
-    color: #f1f5f9;
+    color: #e8edf5;
   }
-  
+
   .text-gray-900 {
     color: #f8fafc;
   }
-  
+
+  /* Textos semânticos (tons claros = boa leitura no escuro) */
   .text-blue-600 {
-    color: #60a5fa;
+    color: #7cb8fb;
   }
-  
+
+  .text-blue-700 {
+    color: #93c5fd;
+  }
+
+  .text-blue-800 {
+    color: #bfdbfe;
+  }
+
+  .text-green-500 {
+    color: #34d399;
+  }
+
   .text-green-600 {
-    color: #4ade80;
+    color: #5eead4;
   }
-  
+
+  .text-green-800 {
+    color: #a7f3d0;
+  }
+
   .text-purple-600 {
-    color: #a78bfa;
+    color: #b9a5fb;
   }
-  
+
   .text-orange-600 {
-    color: #fb923c;
+    color: #fdab6b;
   }
-  
+
   .text-red-600 {
-    color: #f87171;
+    color: #fca5a5;
   }
-  
+
   .text-yellow-600 {
-    color: #facc15;
+    color: #fcd34d;
   }
-  
-  /* Border específicos */
+
+  /* Bordas */
   .border-gray-200 {
-    border-color: #334155;
+    border-color: #27344f;
   }
-  
+
   .border-gray-300 {
-    border-color: #475569;
+    border-color: #3a4a68;
   }
-  
+
   .border-blue-200 {
-    border-color: #60a5fa;
+    border-color: rgba(96, 165, 250, 0.40);
   }
-  
+
   .border-green-200 {
-    border-color: #4ade80;
+    border-color: rgba(52, 211, 153, 0.30);
   }
-  
+
   .border-purple-200 {
-    border-color: #a78bfa;
+    border-color: rgba(167, 139, 250, 0.35);
   }
-  
+
   .border-yellow-200 {
-    border-color: #facc15;
+    border-color: rgba(250, 204, 21, 0.35);
   }
-  
+
   .border-red-200 {
-    border-color: #f87171;
+    border-color: rgba(248, 113, 113, 0.35);
   }
-  
+
   .border-orange-200 {
-    border-color: #fb923c;
+    border-color: rgba(251, 146, 60, 0.35);
   }
-  
+
   /* Placeholder */
   .placeholder-gray-400::placeholder {
     color: #94a3b8;
   }
-  
+
+  /* Área de escrita da redação: sem isso o navegador usa o cinza padrão de campo desabilitado */
+  & textarea {
+    background-color: #0b1220;
+    color: #f1f5f9;
+  }
+
+  & textarea::placeholder {
+    color: #8496b0;
+  }
+
+  & textarea:disabled {
+    background-color: #0e1526;
+    color: #8496b0;
+    cursor: not-allowed;
+  }
+
   /* Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
-  
+
   ::-webkit-scrollbar-track {
-    background: #1e293b;
+    background: #0b1220;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: #475569;
+    background: #3a4a68;
     border-radius: 4px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
-    background: #64748b;
+    background: #52627f;
   }
-  
-  /* Classes específicas para azul #0071bc no modo escuro */
+
+  /* Azul da marca no modo escuro */
   .bg-blue-600 {
     background-color: #0071bc !important;
   }
-  
+
   .bg-blue-500 {
     background-color: #0071bc !important;
   }
-  
+
   .bg-blue-700 {
     background-color: #005a9e !important;
   }
-  
+
   .text-blue-500 {
     color: #60a5fa !important;
   }
-  
+
   .text-blue-400 {
     color: #60a5fa !important;
   }
-  
+
   .border-blue-600 {
     border-color: #60a5fa !important;
   }
-  
+
   .border-blue-500 {
     border-color: #60a5fa !important;
   }
-  
+
   .ring-blue-600 {
     --tw-ring-color: #60a5fa !important;
   }
-  
+
   .ring-blue-500 {
     --tw-ring-color: #60a5fa !important;
   }
-  
+
   .focus\:ring-blue-500:focus {
     --tw-ring-color: #60a5fa !important;
   }
-  
+
   .focus\:ring-blue-600:focus {
     --tw-ring-color: #60a5fa !important;
   }
-  
+
   .hover\:bg-blue-600:hover {
     background-color: #005a9e !important;
   }
-  
+
   .hover\:bg-blue-500:hover {
     background-color: #005a9e !important;
   }
-  
+
   .hover\:text-blue-500:hover {
     color: #60a5fa !important;
   }
-  
+
   .hover\:text-blue-400:hover {
     color: #60a5fa !important;
   }
-  
+
   .border-l-blue-500 {
     border-left-color: #60a5fa !important;
   }
-  
+
   .border-l-blue-600 {
     border-left-color: #60a5fa !important;
   }

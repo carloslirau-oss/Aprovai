@@ -1,0 +1,11 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Sem isso, atualizar a página em qualquer rota que não seja "/"
+# (ex: /dashboard, /biblioteca) retorna 404, porque o React Router
+# cuida das rotas no navegador, não o servidor.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

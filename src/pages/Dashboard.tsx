@@ -71,15 +71,17 @@ const Dashboard = () => {
       const totalRedacoes = redacoes.length;
       const totalXP = redacoes.reduce((sum, redacao) => sum + (redacao.nota_total || 0), 0);
       const notaMedia = redacoes.reduce((sum, redacao) => sum + (redacao.nota_total || 0), 0) / totalRedacoes;
+      // Arredonda ANTES de comparar: o valor salvo tem 2 casas, então comparar com o valor cru gerava loop infinito de UPDATEs
+      const notaMediaArredondada = parseFloat(notaMedia.toFixed(2));
       
       // Atualizar estatísticas se forem diferentes das salvas
       if (userProfile.redacoes_corrigidas !== totalRedacoes || 
           userProfile.xp_total !== totalXP || 
-          userProfile.nota_media !== notaMedia) {
+          Number(userProfile.nota_media) !== notaMediaArredondada) {
         updateUserStats({
           redacoes_corrigidas: totalRedacoes,
           xp_total: totalXP,
-          nota_media: parseFloat(notaMedia.toFixed(2)),
+          nota_media: notaMediaArredondada,
         });
       }
     }
@@ -250,27 +252,27 @@ const Dashboard = () => {
     {
       name: 'Domínio da Modalidade',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_1 || 0), 0) / redacoes.length,
-      max: 50 // Agora cada competência vale no máximo 50 pontos
+      max: 200 // Escala real do ENEM: cada competência vale até 200 pontos (bate com o que o Corretor salva)
     },
     {
       name: 'Compreensão da Tarefa',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_2 || 0), 0) / redacoes.length,
-      max: 50
+      max: 200
     },
     {
       name: 'Coerência e Coesão',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_3 || 0), 0) / redacoes.length,
-      max: 50
+      max: 200
     },
     {
       name: 'Recursos de Linguagem',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_4 || 0), 0) / redacoes.length,
-      max: 50
+      max: 200
     },
     {
       name: 'Proposta de Intervenção',
       media: redacoes.reduce((sum, r) => sum + (r.competencia_5 || 0), 0) / redacoes.length,
-      max: 50
+      max: 200
     }
   ] : [];
 
@@ -439,13 +441,13 @@ const Dashboard = () => {
                           <div key={index} className="flex items-center justify-between min-w-max">
                             <span className="text-xs text-gray-600 whitespace-nowrap">{nota.name}</span>
                             <div className="flex items-center space-x-2 min-w-max">
-                              <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
+                              <div className="w-16 sm:w-20 flex-shrink-0 overflow-hidden bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-blue-600 h-2 rounded-full" 
-                                  style={{ width: `${(nota.nota / 250) * 100}%` }}
+                                  style={{ width: `${Math.min(100, Math.max(0, (nota.nota / 250) * 100))}%` }}
                                 ></div>
                               </div>
-                              <span className="text-xs font-medium text-blue-600 whitespace-nowrap">{nota.nota}</span>
+                              <span className="min-w-[2.5rem] text-right tabular-nums text-xs font-medium text-blue-600 whitespace-nowrap">{nota.nota}</span>
                             </div>
                           </div>
                         ))}
@@ -467,7 +469,7 @@ const Dashboard = () => {
                     Desempenho por Competência
                   </CardTitle>
                   <CardDescription className="text-xs sm:text-sm">
-                    Média de desempenho em cada competência (máx. 50 XP por competência)
+                    Média de desempenho em cada competência (máx. 200 XP por competência)
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -480,10 +482,10 @@ const Dashboard = () => {
                               <span className="text-gray-700">{competencia.name}</span>
                               <span className="font-medium">{Math.round(competencia.media)}/{competencia.max}</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
+                            <div className="w-full overflow-hidden bg-gray-200 rounded-full h-2">
                               <div 
                                 className="bg-green-600 h-2 rounded-full" 
-                                style={{ width: `${(competencia.media / competencia.max) * 100}%` }}
+                                style={{ width: `${Math.min(100, Math.max(0, (competencia.media / competencia.max) * 100))}%` }}
                               ></div>
                             </div>
                           </div>
@@ -517,13 +519,13 @@ const Dashboard = () => {
                           <div key={index} className="flex items-center justify-between min-w-max">
                             <span className="text-xs text-gray-600 whitespace-nowrap">Redação {item.redacao}</span>
                             <div className="flex items-center space-x-2 min-w-max">
-                              <div className="w-16 sm:w-20 bg-gray-200 rounded-full h-2">
+                              <div className="w-16 sm:w-20 flex-shrink-0 overflow-hidden bg-gray-200 rounded-full h-2">
                                 <div 
                                   className="bg-purple-600 h-2 rounded-full" 
-                                  style={{ width: `${(item.acumulado / 100000) * 100}%` }}
+                                  style={{ width: `${Math.min(100, Math.max(0, (item.acumulado / 100000) * 100))}%` }}
                                 ></div>
                               </div>
-                              <span className="text-xs font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
+                              <span className="min-w-[3rem] text-right tabular-nums text-xs font-medium text-purple-600 whitespace-nowrap">{item.acumulado}</span>
                             </div>
                           </div>
                         ))}
